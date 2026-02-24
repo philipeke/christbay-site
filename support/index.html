@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Get support for ChristBay. Contact OakDev &amp; AI AB — a Swedish app studio based in Uddevalla. We're here to help." />
+  <meta name="robots" content="index, follow" />
+  <title>Support — ChristBay</title>
+  <link rel="icon" type="image/png" href="/assets/icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy:           #1a2744;
+      --navy-light:     #243355;
+      --navy-deep:      #121d35;
+      --gold:           #c9a84c;
+      --gold-light:     #dfc980;
+      --gold-subtle:    #f5edcc;
+      --warm-white:     #f9f7f4;
+      --cream:          #f0ece4;
+      --white:          #ffffff;
+      --text-primary:   #1a2744;
+      --text-secondary: #4a5a7a;
+      --text-muted:     #7a8ba5;
+      --border:         #e0dbd0;
+      --shadow-sm:      0 1px 3px rgba(26,39,68,.08);
+      --shadow-md:      0 4px 16px rgba(26,39,68,.12);
+      --shadow-lg:      0 12px 40px rgba(26,39,68,.16);
+      --radius:         12px;
+      --radius-sm:      8px;
+      --radius-lg:      20px;
+      --transition:     0.25s ease;
+      --max-width:      1100px;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;font-size:16px}
+    body{font-family:'Inter',system-ui,-apple-system,BlinkMacSystemFont,sans-serif;background:var(--warm-white);color:var(--text-primary);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+    img{max-width:100%;height:auto;display:block}
+    a{color:inherit;text-decoration:none}
+    ul{list-style:none}
+    button{font-family:inherit;cursor:pointer}
+
+    /* ============================================================
+       Skip link
+    ============================================================ */
+    .skip-link{position:absolute;top:-120px;left:1rem;background:var(--navy);color:var(--white);padding:.5rem 1rem;border-radius:var(--radius-sm);font-size:.875rem;font-weight:600;z-index:9999;transition:top var(--transition)}
+    .skip-link:focus{top:1rem}
+
+    /* ============================================================
+       Header / Nav
+    ============================================================ */
+    .site-header{position:sticky;top:0;z-index:100;background:rgba(18,29,53,.96);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(201,168,76,.14)}
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px;max-width:var(--max-width);margin:0 auto;padding:0 1.5rem}
+    .nav-brand{display:flex;align-items:center;gap:.625rem}
+    .nav-brand img{width:28px;height:28px;object-fit:contain;border-radius:6px}
+    .nav-brand-name{font-size:1.0625rem;font-weight:600;color:var(--white);letter-spacing:-.01em}
+    .nav-links{display:flex;align-items:center;gap:1.75rem}
+    .nav-links a{font-size:.875rem;font-weight:500;color:rgba(255,255,255,.7);transition:color var(--transition)}
+    .nav-links a:hover{color:var(--white)}
+    .nav-links .nav-cta{background:var(--gold);color:var(--navy-deep);padding:.5rem 1.25rem;border-radius:100px;font-weight:600;font-size:.8125rem;transition:background var(--transition),transform var(--transition)}
+    .nav-links .nav-cta:hover{background:var(--gold-light);transform:translateY(-1px)}
+    @media(max-width:600px){.nav-links{gap:1rem}.nav-links a.nav-text{display:none}}
+
+    /* ============================================================
+       Hero
+    ============================================================ */
+    .hero{background:linear-gradient(155deg,var(--navy-deep) 0%,var(--navy) 55%,var(--navy-light) 100%);color:var(--white);text-align:center;padding:6rem 1.5rem 8rem;position:relative;overflow:hidden}
+    .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 15% 40%,rgba(201,168,76,.08) 0%,transparent 55%),radial-gradient(ellipse 55% 70% at 85% 65%,rgba(201,168,76,.06) 0%,transparent 55%);pointer-events:none}
+    .hero-inner{position:relative;z-index:1;max-width:680px;margin:0 auto}
+    .hero-eyebrow{display:inline-block;font-size:.75rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-light);margin-bottom:1.125rem}
+    .hero h1{font-size:clamp(2.25rem,5vw,3.5rem);font-weight:700;letter-spacing:-.04em;line-height:1.1;margin-bottom:1.25rem}
+    .hero h1 em{font-style:normal;color:var(--gold-light)}
+    .hero-sub{font-size:1.0625rem;color:rgba(255,255,255,.72);line-height:1.7;margin-bottom:2.5rem;max-width:520px;margin-left:auto;margin-right:auto}
+    .hero-actions{display:flex;gap:.875rem;justify-content:center;flex-wrap:wrap}
+    .hero-btn{display:inline-flex;align-items:center;gap:.5rem;padding:.8125rem 1.75rem;border-radius:100px;font-size:.9375rem;font-weight:600;transition:all var(--transition)}
+    .hero-btn svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+    .hero-btn-primary{background:var(--gold);color:var(--navy-deep)}
+    .hero-btn-primary:hover{background:var(--gold-light);transform:translateY(-2px);box-shadow:0 6px 20px rgba(201,168,76,.35)}
+    .hero-btn-ghost{background:rgba(255,255,255,.1);color:var(--white);border:1px solid rgba(255,255,255,.25)}
+    .hero-btn-ghost:hover{background:rgba(255,255,255,.18);transform:translateY(-2px)}
+
+    /* Hero wave */
+    .hero-wave{display:block;width:100%;margin-bottom:-4px;color:var(--warm-white)}
+
+    /* ============================================================
+       Containers / layout
+    ============================================================ */
+    .container{max-width:var(--max-width);margin:0 auto;padding:0 1.5rem}
+
+    /* ============================================================
+       Quick topics
+    ============================================================ */
+    .topics{padding:5rem 0 4rem;background:var(--warm-white)}
+    .section-label{display:block;font-size:.6875rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem;text-align:center}
+    .section-title{font-size:clamp(1.5rem,3vw,2.25rem);font-weight:700;letter-spacing:-.03em;color:var(--navy);text-align:center;margin-bottom:.75rem;line-height:1.2}
+    .section-sub{font-size:1rem;color:var(--text-secondary);text-align:center;max-width:520px;margin:0 auto 3rem;line-height:1.7}
+
+    .topics-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+    @media(max-width:900px){.topics-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:520px){.topics-grid{grid-template-columns:1fr}}
+
+    .topic-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:1.625rem 1.375rem;transition:box-shadow var(--transition),transform var(--transition),border-color var(--transition);cursor:default}
+    .topic-card:hover{box-shadow:var(--shadow-md);transform:translateY(-3px);border-color:rgba(201,168,76,.3)}
+    .topic-icon{width:44px;height:44px;border-radius:var(--radius-sm);background:rgba(26,39,68,.06);display:flex;align-items:center;justify-content:center;margin-bottom:1.125rem}
+    .topic-icon svg{width:22px;height:22px;stroke:var(--navy);fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+    .topic-card h3{font-size:.9375rem;font-weight:700;color:var(--text-primary);margin-bottom:.375rem}
+    .topic-card p{font-size:.8375rem;color:var(--text-secondary);line-height:1.65}
+
+    /* ============================================================
+       Contact + Form section
+    ============================================================ */
+    .contact-section{padding:5rem 0;background:var(--cream)}
+    .contact-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:4rem;align-items:start}
+    @media(max-width:860px){.contact-grid{grid-template-columns:1fr;gap:3rem}}
+
+    /* Left: contact info */
+    .contact-info-title{font-size:clamp(1.375rem,2.5vw,1.875rem);font-weight:700;letter-spacing:-.03em;color:var(--navy);margin-bottom:.75rem;line-height:1.25}
+    .contact-info-lead{font-size:.9375rem;color:var(--text-secondary);line-height:1.75;margin-bottom:2rem}
+
+    .contact-channels{display:flex;flex-direction:column;gap:1rem;margin-bottom:2.5rem}
+    .contact-channel{display:flex;align-items:flex-start;gap:.875rem;padding:1.125rem 1.25rem;background:var(--white);border:1px solid var(--border);border-radius:var(--radius);transition:box-shadow var(--transition),border-color var(--transition)}
+    .contact-channel:hover{box-shadow:var(--shadow-sm);border-color:rgba(201,168,76,.3)}
+    .channel-icon{width:40px;height:40px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .channel-icon-email{background:rgba(26,39,68,.07)}
+    .channel-icon-phone{background:rgba(201,168,76,.12)}
+    .channel-icon svg{width:19px;height:19px;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;fill:none}
+    .channel-icon-email svg{stroke:var(--navy)}
+    .channel-icon-phone svg{stroke:#8a6a10}
+    .channel-label{font-size:.6875rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--text-muted);margin-bottom:.2rem}
+    .channel-value{font-size:.9375rem;font-weight:600;color:var(--text-primary)}
+    .channel-value a{transition:color var(--transition)}
+    .channel-value a:hover{color:var(--gold)}
+    .channel-note{font-size:.8rem;color:var(--text-muted);margin-top:.2rem}
+
+    /* Company card */
+    .company-card{background:linear-gradient(135deg,var(--navy-deep) 0%,var(--navy) 100%);border-radius:var(--radius);padding:1.625rem;color:var(--white)}
+    .company-card-top{display:flex;align-items:center;gap:.875rem;margin-bottom:1.25rem;padding-bottom:1.25rem;border-bottom:1px solid rgba(255,255,255,.1)}
+    .company-logo{width:40px;height:40px;border-radius:var(--radius-sm);background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .company-logo svg{width:22px;height:22px;stroke:var(--gold-light);fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+    .company-name{font-size:1rem;font-weight:700;color:var(--white)}
+    .company-tagline{font-size:.8rem;color:rgba(255,255,255,.55)}
+    .company-details{display:flex;flex-direction:column;gap:.75rem}
+    .company-detail{display:flex;align-items:baseline;gap:.75rem}
+    .company-detail-label{font-size:.6875rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.45);min-width:68px;flex-shrink:0}
+    .company-detail-value{font-size:.875rem;color:rgba(255,255,255,.8);line-height:1.5}
+
+    /* ============================================================
+       Contact form
+    ============================================================ */
+    .form-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:2.5rem;box-shadow:var(--shadow-md)}
+    .form-card-header{margin-bottom:2rem}
+    .form-card-header h3{font-size:1.25rem;font-weight:700;color:var(--navy);margin-bottom:.375rem}
+    .form-card-header p{font-size:.875rem;color:var(--text-secondary);line-height:1.6}
+
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+    @media(max-width:480px){.form-row{grid-template-columns:1fr}}
+    .form-group{display:flex;flex-direction:column;gap:.375rem;margin-bottom:1.125rem}
+    .form-group:last-of-type{margin-bottom:0}
+    .form-label{font-size:.8125rem;font-weight:600;color:var(--text-primary)}
+    .form-label .req{color:var(--gold);margin-left:.125rem}
+    .form-input,.form-select,.form-textarea{width:100%;font-family:inherit;font-size:.9rem;color:var(--text-primary);background:var(--warm-white);border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:.6875rem .875rem;transition:border-color var(--transition),box-shadow var(--transition);outline:none;-webkit-appearance:none;appearance:none}
+    .form-input::placeholder,.form-textarea::placeholder{color:var(--text-muted)}
+    .form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--navy);box-shadow:0 0 0 3px rgba(26,39,68,.09)}
+    .form-select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%237a8ba5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right .75rem center;padding-right:2.5rem}
+    .form-textarea{resize:vertical;min-height:130px;line-height:1.6}
+    .form-hint{font-size:.75rem;color:var(--text-muted);margin-top:.125rem}
+
+    .form-submit{margin-top:1.5rem}
+    .submit-btn{width:100%;display:inline-flex;align-items:center;justify-content:center;gap:.625rem;background:var(--navy);color:var(--white);padding:.875rem 1.75rem;border-radius:100px;font-family:inherit;font-size:.9375rem;font-weight:600;border:none;cursor:pointer;transition:background var(--transition),transform var(--transition),box-shadow var(--transition)}
+    .submit-btn svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+    .submit-btn:hover{background:var(--navy-light);transform:translateY(-1px);box-shadow:0 6px 20px rgba(26,39,68,.22)}
+    .submit-btn:active{transform:translateY(0)}
+    .form-footer-note{font-size:.75rem;color:var(--text-muted);text-align:center;margin-top:.875rem;line-height:1.5}
+    .form-footer-note a{color:var(--text-secondary);text-decoration:underline;text-underline-offset:2px}
+
+    /* Success message (hidden by default) */
+    .form-success{display:none;text-align:center;padding:2.5rem 1rem}
+    .form-success-icon{width:60px;height:60px;border-radius:50%;background:rgba(29,106,58,.12);display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem}
+    .form-success-icon svg{width:28px;height:28px;stroke:#1d6a3a;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+    .form-success h3{font-size:1.125rem;font-weight:700;color:var(--navy);margin-bottom:.5rem}
+    .form-success p{font-size:.9rem;color:var(--text-secondary);line-height:1.65}
+
+    /* ============================================================
+       About strip
+    ============================================================ */
+    .about-section{padding:5.5rem 0;background:var(--warm-white)}
+    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+    @media(max-width:760px){.about-grid{grid-template-columns:1fr;gap:2.5rem}}
+
+    .about-text .section-label{text-align:left}
+    .about-text .section-title{text-align:left;margin-bottom:1rem}
+    .about-text p{font-size:.9375rem;color:var(--text-secondary);line-height:1.8;margin-bottom:1rem}
+    .about-text p:last-child{margin-bottom:0}
+
+    .about-stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
+    .about-stat{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:1.375rem;text-align:center}
+    .about-stat-value{font-size:1.75rem;font-weight:700;color:var(--navy);letter-spacing:-.03em;margin-bottom:.25rem}
+    .about-stat-label{font-size:.8rem;color:var(--text-muted);line-height:1.4}
+    .about-map-link{display:flex;align-items:center;gap:.5rem;font-size:.875rem;font-weight:500;color:var(--text-secondary);text-decoration:underline;text-underline-offset:3px;margin-top:1.5rem;transition:color var(--transition)}
+    .about-map-link svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+    .about-map-link:hover{color:var(--navy)}
+
+    /* ============================================================
+       FAQ
+    ============================================================ */
+    .faq-section{padding:5rem 0;background:var(--cream)}
+    .faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.125rem}
+    @media(max-width:720px){.faq-grid{grid-template-columns:1fr}}
+
+    .faq-item{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+    .faq-question{width:100%;background:transparent;border:none;padding:1.125rem 1.25rem;display:flex;align-items:center;justify-content:space-between;gap:.875rem;cursor:pointer;text-align:left;font-family:inherit;font-size:.9375rem;font-weight:600;color:var(--text-primary);transition:background var(--transition)}
+    .faq-question:hover{background:rgba(240,236,228,.5)}
+    .faq-question[aria-expanded="true"]{background:rgba(26,39,68,.04)}
+    .faq-chevron{flex-shrink:0;width:22px;height:22px;border-radius:50%;background:rgba(26,39,68,.07);display:flex;align-items:center;justify-content:center;transition:background var(--transition)}
+    .faq-chevron svg{width:12px;height:12px;stroke:var(--navy);fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;transition:transform var(--transition)}
+    .faq-question[aria-expanded="true"] .faq-chevron{background:var(--navy)}
+    .faq-question[aria-expanded="true"] .faq-chevron svg{stroke:var(--white);transform:rotate(180deg)}
+    .faq-answer{max-height:0;overflow:hidden;transition:max-height .35s ease}
+    .faq-answer-inner{padding:.125rem 1.25rem 1.25rem;font-size:.875rem;color:var(--text-secondary);line-height:1.75}
+    .faq-answer-inner a{color:var(--navy);font-weight:500;text-decoration:underline;text-underline-offset:2px}
+    .faq-answer-inner a:hover{color:var(--gold)}
+
+    /* ============================================================
+       Response time strip
+    ============================================================ */
+    .response-strip{padding:4rem 0;background:var(--warm-white)}
+    .response-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+    @media(max-width:700px){.response-cards{grid-template-columns:1fr}}
+
+    .response-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:1.75rem 1.5rem;text-align:center}
+    .response-card-icon{width:48px;height:48px;border-radius:50%;margin:0 auto 1rem;display:flex;align-items:center;justify-content:center}
+    .response-card-icon svg{width:22px;height:22px;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+    .rc-blue  .response-card-icon{background:rgba(26,39,68,.07)}
+    .rc-blue  .response-card-icon svg{stroke:var(--navy)}
+    .rc-gold  .response-card-icon{background:rgba(201,168,76,.12)}
+    .rc-gold  .response-card-icon svg{stroke:#8a6a10}
+    .rc-green .response-card-icon{background:rgba(29,106,58,.08)}
+    .rc-green .response-card-icon svg{stroke:#1d6a3a}
+    .response-card-time{font-size:1.375rem;font-weight:700;color:var(--navy);letter-spacing:-.02em;margin-bottom:.25rem}
+    .response-card-label{font-size:.8125rem;font-weight:600;color:var(--text-primary);margin-bottom:.375rem}
+    .response-card-desc{font-size:.8rem;color:var(--text-muted);line-height:1.55}
+
+    /* ============================================================
+       Footer
+    ============================================================ */
+    .site-footer{background:var(--navy-deep);color:rgba(255,255,255,.5);padding:3rem 1.5rem 2.5rem}
+    .footer-inner{max-width:var(--max-width);margin:0 auto}
+    .footer-top{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;padding-bottom:2rem;border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:1.75rem}
+    .footer-brand{display:flex;align-items:center;gap:.625rem}
+    .footer-brand img{width:28px;height:28px;object-fit:contain;border-radius:6px}
+    .footer-brand-name{font-size:1rem;font-weight:600;color:var(--white)}
+    .footer-nav{display:flex;flex-wrap:wrap;gap:.375rem 1.5rem}
+    .footer-nav a{font-size:.875rem;color:rgba(255,255,255,.55);transition:color var(--transition)}
+    .footer-nav a:hover{color:var(--white)}
+    .footer-nav a[aria-current="page"]{color:var(--gold-light);font-weight:500}
+    .footer-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem}
+    .footer-copyright{font-size:.8125rem;color:rgba(255,255,255,.4)}
+    .footer-tagline{font-size:.8125rem;color:rgba(201,168,76,.5);font-style:italic}
+
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}
+    @media print{.site-header,.skip-link{display:none}body{background:white;color:black}}
+  </style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to main content</a>
+
+<!-- ============================================================
+     Header
+============================================================ -->
+<header class="site-header" role="banner">
+  <nav class="nav-inner" aria-label="Primary navigation">
+    <a href="/" class="nav-brand" aria-label="ChristBay — home">
+      <img src="/assets/icon.png" alt="" aria-hidden="true" />
+      <span class="nav-brand-name">ChristBay</span>
+    </a>
+    <div class="nav-links">
+      <a href="/#features" class="nav-text">Features</a>
+      <a href="/#faq" class="nav-text">FAQ</a>
+      <a href="#" class="nav-cta">Download</a>
+    </div>
+  </nav>
+</header>
+
+<main id="main">
+
+  <!-- ============================================================
+       Hero
+  ============================================================ -->
+  <section class="hero" aria-label="Support hero">
+    <div class="hero-inner">
+      <span class="hero-eyebrow">ChristBay Support</span>
+      <h1>We're here to <em>help</em></h1>
+      <p class="hero-sub">Have a question, a billing concern, or just want to say hello? We're a small, personal team and we read every message ourselves.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="hero-btn hero-btn-primary">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Send a Message
+        </a>
+        <a href="#faq" class="hero-btn hero-btn-ghost">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          Browse FAQ
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <svg class="hero-wave" viewBox="0 0 1440 56" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" aria-hidden="true" style="background:var(--navy-light)">
+    <path d="M0 56 C360 0 1080 0 1440 56 L1440 56 L0 56 Z" fill="var(--warm-white)"/>
+  </svg>
+
+  <!-- ============================================================
+       Quick topics
+  ============================================================ -->
+  <section class="topics" aria-labelledby="topics-heading">
+    <div class="container">
+      <span class="section-label">How can we help?</span>
+      <h2 class="section-title" id="topics-heading">What are you looking for?</h2>
+      <p class="section-sub">Find answers quickly or send us a message below — we usually respond within one business day.</p>
+
+      <div class="topics-grid" role="list">
+
+        <div class="topic-card" role="listitem">
+          <div class="topic-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
+          <h3>Getting Started</h3>
+          <p>First launch, setting up your journal, understanding Reflections, and configuring your daily reminder.</p>
+        </div>
+
+        <div class="topic-card" role="listitem">
+          <div class="topic-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          </div>
+          <h3>Billing &amp; Purchases</h3>
+          <p>Questions about the App purchase, the Blessed upgrade, Top-Up Reflection packs, and restoring purchases on a new device.</p>
+        </div>
+
+        <div class="topic-card" role="listitem">
+          <div class="topic-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h3>Privacy &amp; Data</h3>
+          <p>How your journal data is stored, your GDPR rights, and how to request deletion of your account and personal data.</p>
+        </div>
+
+        <div class="topic-card" role="listitem">
+          <div class="topic-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+          </div>
+          <h3>Technical Issues</h3>
+          <p>App crashes, missing Reflections, sync problems, notifications not working, or anything that isn't behaving as expected.</p>
+        </div>
+
+        <div class="topic-card" role="listitem">
+          <div class="topic-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </div>
+          <h3>Blessed Upgrade</h3>
+          <p>Everything about unlocking Blessed — what's included, restoring it after reinstalling, and how it differs from the base App.</p>
+        </div>
+
+        <div class="topic-card" role="listitem">
+          <div class="topic-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <h3>General Feedback</h3>
+          <p>Feature requests, content ideas, scripture suggestions, or just a kind word. We genuinely love hearing from our users.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       Response times
+  ============================================================ -->
+  <section class="response-strip" aria-labelledby="response-heading">
+    <div class="container">
+      <span class="section-label">Response times</span>
+      <h2 class="section-title" id="response-heading" style="margin-bottom:2.5rem">What to expect</h2>
+      <div class="response-cards">
+
+        <div class="response-card rc-blue">
+          <div class="response-card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <p class="response-card-time">1 business day</p>
+          <p class="response-card-label">General support</p>
+          <p class="response-card-desc">Questions about the App, features, Reflections, and general feedback. We aim to reply quickly.</p>
+        </div>
+
+        <div class="response-card rc-gold">
+          <div class="response-card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          </div>
+          <p class="response-card-time">1–2 business days</p>
+          <p class="response-card-label">Billing &amp; purchases</p>
+          <p class="response-card-desc">Purchase and entitlement issues may require us to verify your transaction with Apple. Blessed users receive priority.</p>
+        </div>
+
+        <div class="response-card rc-green">
+          <div class="response-card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <p class="response-card-time">Within 5 business days</p>
+          <p class="response-card-label">Privacy &amp; data requests</p>
+          <p class="response-card-desc">Account deletion and GDPR rights requests. We acknowledge within 5 days and complete within 30 days.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       Contact form + info
+  ============================================================ -->
+  <section class="contact-section" id="contact" aria-labelledby="contact-heading">
+    <div class="container">
+      <span class="section-label">Get in touch</span>
+      <h2 class="section-title" id="contact-heading" style="margin-bottom:.75rem">Send us a message</h2>
+      <p class="section-sub">Fill in the form or reach out directly. There's a real person on the other end.</p>
+
+      <div class="contact-grid">
+
+        <!-- Left: channels + company -->
+        <div class="contact-info">
+          <h3 class="contact-info-title">Reach us directly</h3>
+          <p class="contact-info-lead">Whether it's a quick question or a detailed concern, we want to hear from you. Our support is run by the same people who built ChristBay — no bots, no ticket queues.</p>
+
+          <div class="contact-channels">
+
+            <div class="contact-channel">
+              <div class="channel-icon channel-icon-email" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              </div>
+              <div class="channel-body">
+                <p class="channel-label">Email</p>
+                <p class="channel-value"><a href="mailto:hello@oakdev.app">hello@oakdev.app</a></p>
+                <p class="channel-note">For all support, billing, and privacy enquiries</p>
+              </div>
+            </div>
+
+            <div class="contact-channel">
+              <div class="channel-icon channel-icon-phone" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.28 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6 6l.94-.94a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              </div>
+              <div class="channel-body">
+                <p class="channel-label">Phone</p>
+                <p class="channel-value"><a href="tel:+46708105766">+46 70 810 57 66</a></p>
+                <p class="channel-note">Sweden (CET/CEST) — for urgent matters</p>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Company card -->
+          <div class="company-card" aria-label="OakDev &amp; AI AB company details">
+            <div class="company-card-top">
+              <div class="company-logo" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+              </div>
+              <div>
+                <p class="company-name">OakDev &amp; AI AB</p>
+                <p class="company-tagline">App studio — Uddevalla, Sweden 🇸🇪</p>
+              </div>
+            </div>
+            <div class="company-details">
+              <div class="company-detail">
+                <span class="company-detail-label">Reg. no.</span>
+                <span class="company-detail-value">559431-6787</span>
+              </div>
+              <div class="company-detail">
+                <span class="company-detail-label">Country</span>
+                <span class="company-detail-value">Sweden 🇸🇪</span>
+              </div>
+              <div class="company-detail">
+                <span class="company-detail-label">Address</span>
+                <span class="company-detail-value">Kristevik 633<br>451 96 Uddevalla, Sweden</span>
+              </div>
+              <div class="company-detail">
+                <span class="company-detail-label">Email</span>
+                <span class="company-detail-value"><a href="mailto:hello@oakdev.app" style="color:rgba(255,255,255,.8);text-decoration:underline;text-underline-offset:2px">hello@oakdev.app</a></span>
+              </div>
+              <div class="company-detail">
+                <span class="company-detail-label">Phone</span>
+                <span class="company-detail-value"><a href="tel:+46708105766" style="color:rgba(255,255,255,.8);text-decoration:underline;text-underline-offset:2px">+46 70 810 57 66</a></span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right: form -->
+        <div class="form-card" role="region" aria-labelledby="form-heading">
+          <div class="form-card-header">
+            <h3 id="form-heading">Contact form</h3>
+            <p>We'll get back to you as soon as possible — usually within one business day.</p>
+          </div>
+
+          <!-- The form uses a mailto fallback. To connect a backend, replace the action attribute. -->
+          <form id="support-form" novalidate aria-label="Support contact form">
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="f-name">Name <span class="req" aria-hidden="true">*</span></label>
+                <input class="form-input" type="text" id="f-name" name="name" placeholder="Your name" autocomplete="given-name" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="f-email">Email <span class="req" aria-hidden="true">*</span></label>
+                <input class="form-input" type="email" id="f-email" name="email" placeholder="you@example.com" autocomplete="email" required />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="f-topic">Topic <span class="req" aria-hidden="true">*</span></label>
+              <select class="form-select" id="f-topic" name="topic" required>
+                <option value="" disabled selected>Select a topic…</option>
+                <option value="getting-started">Getting Started</option>
+                <option value="billing">Billing &amp; Purchases</option>
+                <option value="blessed">Blessed Upgrade</option>
+                <option value="reflections">Reflections Balance</option>
+                <option value="technical">Technical Issue / Bug</option>
+                <option value="privacy">Privacy &amp; Data</option>
+                <option value="delete-account">Account Deletion</option>
+                <option value="feedback">Feedback &amp; Feature Request</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="f-order">Apple Transaction ID <span style="font-weight:400;color:var(--text-muted)">(optional)</span></label>
+              <input class="form-input" type="text" id="f-order" name="transaction_id" placeholder="e.g. 740000123456789" autocomplete="off" />
+              <p class="form-hint">Helps us locate your purchase quickly. Find it in your App Store receipt email from Apple.</p>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="f-message">Message <span class="req" aria-hidden="true">*</span></label>
+              <textarea class="form-textarea" id="f-message" name="message" placeholder="Describe your question or issue in as much detail as you like…" required></textarea>
+            </div>
+
+            <div class="form-submit">
+              <button type="submit" class="submit-btn">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                Send Message
+              </button>
+            </div>
+            <p class="form-footer-note">By sending this message you agree to our <a href="/privacy/">Privacy Policy</a>. We use your email only to respond to your enquiry.</p>
+
+          </form>
+
+          <!-- Success state -->
+          <div class="form-success" id="form-success" aria-live="polite" aria-atomic="true">
+            <div class="form-success-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <h3>Message sent!</h3>
+            <p>Thank you for reaching out. We'll reply to your email within one business day. May your day be filled with grace.</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       About OakDev
+  ============================================================ -->
+  <section class="about-section" aria-labelledby="about-heading">
+    <div class="container">
+      <div class="about-grid">
+
+        <div class="about-text">
+          <span class="section-label">About us</span>
+          <h2 class="section-title" id="about-heading">A small studio with<br>a sincere mission</h2>
+          <p>OakDev &amp; AI AB is an independent app studio based in Uddevalla, Sweden. We build focused, purposeful apps — tools that serve a specific need and serve it well, without noise, ads, or distraction.</p>
+          <p>ChristBay is our devotional app for Protestant Christians seeking a quiet, private space for daily scripture and reflection. It's built the same way we run our studio: carefully, honestly, and with respect for the people who use it.</p>
+          <p>When you contact support, you're speaking directly with the people who designed and built ChristBay. There's no outsourced helpdesk. We care about getting things right.</p>
+          <a href="https://www.google.com/maps/search/Kristevik+633,+451+96+Uddevalla,+Sweden" target="_blank" rel="noopener noreferrer" class="about-map-link">
+            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Kristevik 633, 451 96 Uddevalla, Sweden
+          </a>
+        </div>
+
+        <div class="about-stat-grid">
+          <div class="about-stat">
+            <p class="about-stat-value">2026</p>
+            <p class="about-stat-label">Year ChristBay launched</p>
+          </div>
+          <div class="about-stat">
+            <p class="about-stat-value">🇸🇪</p>
+            <p class="about-stat-label">Swedish-built &amp; EU GDPR-native</p>
+          </div>
+          <div class="about-stat">
+            <p class="about-stat-value">0</p>
+            <p class="about-stat-label">Ads in ChristBay — ever</p>
+          </div>
+          <div class="about-stat">
+            <p class="about-stat-value">100%</p>
+            <p class="about-stat-label">Personal replies — no bots</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FAQ
+  ============================================================ -->
+  <section class="faq-section" id="faq" aria-labelledby="faq-heading">
+    <div class="container">
+      <span class="section-label">FAQ</span>
+      <h2 class="section-title" id="faq-heading">Frequently asked questions</h2>
+      <p class="section-sub" style="margin-bottom:2.5rem">Quick answers to the questions we hear most often.</p>
+
+      <div class="faq-grid">
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false" aria-controls="fa1" id="fq1">
+            How do I restore my purchases on a new iPhone?
+            <span class="faq-chevron" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </button>
+          <div class="faq-answer" id="fa1" role="region" aria-labelledby="fq1">
+            <div class="faq-answer-inner">Open ChristBay on your new device and tap <strong>Settings → Restore Purchases</strong>. Make sure you're signed into the same Apple ID that made the original purchase. Reflections from your App purchase, Blessed upgrade, and any Top-Up Packs will be restored via Apple's StoreKit. If restoration fails, contact us at <a href="mailto:hello@oakdev.app">hello@oakdev.app</a> with your Apple transaction ID.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false" aria-controls="fa2" id="fq2">
+            My Reflection balance seems wrong — what should I do?
+            <span class="faq-chevron" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </button>
+          <div class="faq-answer" id="fa2" role="region" aria-labelledby="fq2">
+            <div class="faq-answer-inner">First try tapping <strong>Settings → Restore Purchases</strong> in the App — this re-verifies your purchases with Apple and can correct balance discrepancies. If the balance still looks wrong after restoring, email us at <a href="mailto:hello@oakdev.app">hello@oakdev.app</a> with your Apple transaction ID and we'll investigate manually.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false" aria-controls="fa3" id="fq3">
+            How do I request a refund?
+            <span class="faq-chevron" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </button>
+          <div class="faq-answer" id="fa3" role="region" aria-labelledby="fq3">
+            <div class="faq-answer-inner">All refunds are handled by Apple — we don't process them directly. Visit <strong>reportaproblem.apple.com</strong>, sign in with your Apple ID, find the ChristBay purchase, and select "I'd like to request a refund". If you believe you have a legal right to a refund under Swedish or EU consumer law, email us and we'll be happy to assist.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false" aria-controls="fa4" id="fq4">
+            The App is crashing — how do I report it?
+            <span class="faq-chevron" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </button>
+          <div class="faq-answer" id="fa4" role="region" aria-labelledby="fq4">
+            <div class="faq-answer-inner">Email us at <a href="mailto:hello@oakdev.app">hello@oakdev.app</a> with your iPhone model, iOS version, ChristBay version (visible in <em>Settings → About</em>), and a description of what you were doing when the crash occurred. Screenshots or screen recordings are always helpful. We treat crash reports seriously and aim to ship a fix in the next update.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false" aria-controls="fa5" id="fq5">
+            What is the Blessed upgrade and is it a subscription?
+            <span class="faq-chevron" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </button>
+          <div class="faq-answer" id="fa5" role="region" aria-labelledby="fq5">
+            <div class="faq-answer-inner">Blessed is a <strong>one-time in-app purchase</strong> — no subscription, no auto-renewal. It unlocks additional content categories and features, and adds 300 Reflections to your balance. You pay once and keep access permanently. There are no hidden recurring charges.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false" aria-controls="fa6" id="fq6">
+            How do I delete my account and personal data?
+            <span class="faq-chevron" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </button>
+          <div class="faq-answer" id="fa6" role="region" aria-labelledby="fq6">
+            <div class="faq-answer-inner">You can delete all local data instantly from within the App via <em>Settings → Privacy → Delete Account &amp; Data</em>. For full deletion of any server-side data, visit our <a href="/delete-account/">Delete Account page</a> or email <a href="mailto:hello@oakdev.app">hello@oakdev.app</a> with the subject "Account Deletion Request". We'll confirm deletion within 30 days as required by GDPR.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false" aria-controls="fa7" id="fq7">
+            Is my prayer journal private?
+            <span class="faq-chevron" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </button>
+          <div class="faq-answer" id="fa7" role="region" aria-labelledby="fq7">
+            <div class="faq-answer-inner">Yes, completely. Your journal entries are stored locally on your device only. We never access, read, or process the content of your journal. Your entries are not sent to our servers, not used to train AI models, and not used for any purpose whatsoever other than displaying them back to you. See our <a href="/privacy/">Privacy Policy</a> for full details.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false" aria-controls="fa8" id="fq8">
+            Daily reminders aren't arriving — how do I fix this?
+            <span class="faq-chevron" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+          </button>
+          <div class="faq-answer" id="fa8" role="region" aria-labelledby="fq8">
+            <div class="faq-answer-inner">Check that notifications are enabled in two places: (1) <em>iPhone Settings → Notifications → ChristBay</em> — ensure "Allow Notifications" is on; (2) Within the App at <em>Settings → Notifications</em> — confirm your reminder time is set. If notifications are enabled in both places but still not arriving, try toggling them off and on again in iPhone Settings, then restart the App. If the issue persists, email us.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============================================================
+     Footer
+============================================================ -->
+<footer class="site-footer" role="contentinfo">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="/assets/icon.png" alt="ChristBay" />
+        <span class="footer-brand-name">ChristBay</span>
+      </div>
+      <nav class="footer-nav" aria-label="Footer links">
+        <a href="/privacy/">Privacy Policy</a>
+        <a href="/terms/">Terms of Use</a>
+        <a href="/support/" aria-current="page">Support</a>
+        <a href="/delete-account/">Delete Account</a>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copyright">&copy; 2026 OakDev &amp; AI AB. All rights reserved.</p>
+      <p class="footer-tagline">Walk in the Word. Grow in grace.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+
+  /* ---- FAQ accordion ---- */
+  var faqs = document.querySelectorAll('.faq-question');
+  faqs.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var open = this.getAttribute('aria-expanded') === 'true';
+      faqs.forEach(function(b){
+        b.setAttribute('aria-expanded','false');
+        var a = document.getElementById(b.getAttribute('aria-controls'));
+        if(a) a.style.maxHeight = '0';
+      });
+      if(!open){
+        this.setAttribute('aria-expanded','true');
+        var ans = document.getElementById(this.getAttribute('aria-controls'));
+        if(ans) ans.style.maxHeight = ans.scrollHeight + 'px';
+      }
+    });
+  });
+
+  /* ---- Contact form ---- */
+  var form    = document.getElementById('support-form');
+  var success = document.getElementById('form-success');
+
+  if(form){
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+
+      /* Basic client-side validation */
+      var name    = form.querySelector('#f-name').value.trim();
+      var email   = form.querySelector('#f-email').value.trim();
+      var topic   = form.querySelector('#f-topic').value;
+      var message = form.querySelector('#f-message').value.trim();
+
+      if(!name || !email || !topic || !message){
+        /* Find first empty required field and focus it */
+        var fields = form.querySelectorAll('[required]');
+        for(var i = 0; i < fields.length; i++){
+          if(!fields[i].value.trim()){
+            fields[i].focus();
+            fields[i].style.borderColor = '#c0392b';
+            fields[i].addEventListener('input', function(){
+              this.style.borderColor = '';
+            }, {once: true});
+            break;
+          }
+        }
+        return;
+      }
+
+      /* Build mailto as fallback; swap this for a real API call if desired */
+      var subject = encodeURIComponent('[ChristBay Support] ' + topic);
+      var txn     = form.querySelector('#f-order').value.trim();
+      var body    = encodeURIComponent(
+        'Name: ' + name + '\n' +
+        'Email: ' + email + '\n' +
+        'Topic: ' + topic + '\n' +
+        (txn ? 'Transaction ID: ' + txn + '\n' : '') +
+        '\nMessage:\n' + message
+      );
+      var mailto  = 'mailto:hello@oakdev.app?subject=' + subject + '&body=' + body;
+
+      /* Open mail client */
+      window.location.href = mailto;
+
+      /* Show success state */
+      form.style.display = 'none';
+      success.style.display = 'block';
+    });
+  }
+
+}());
+</script>
+
+</body>
+</html>
