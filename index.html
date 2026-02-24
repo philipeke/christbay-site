@@ -268,8 +268,8 @@
     }
 
     @keyframes logoGlowFilter {
-      0%, 100% { filter: drop-shadow(0 6px 28px rgba(0,0,0,0.45)) drop-shadow(0 0 14px rgba(255,255,255,0.18)) brightness(1.02); }
-      50%       { filter: drop-shadow(0 4px 16px rgba(0,0,0,0.30)) drop-shadow(0 0 44px rgba(255,255,255,0.42)) brightness(1.14); }
+      0%, 100% { filter: brightness(0) invert(1) drop-shadow(0 4px 20px rgba(0,0,0,0.50)) drop-shadow(0 0 18px rgba(255,255,255,0.45)); }
+      50%       { filter: brightness(0) invert(1) drop-shadow(0 2px 14px rgba(0,0,0,0.35)) drop-shadow(0 0 48px rgba(255,255,255,0.85)); }
     }
 
     .hero-eyebrow {
@@ -1055,7 +1055,7 @@
       }
       .hero-logo {
         animation: none;
-        filter: drop-shadow(0 6px 28px rgba(0,0,0,0.35)) drop-shadow(0 0 26px rgba(255,255,255,0.30)) brightness(1.08);
+        filter: brightness(0) invert(1) drop-shadow(0 4px 20px rgba(0,0,0,0.40)) drop-shadow(0 0 32px rgba(255,255,255,0.65));
       }
     }
   </style>
