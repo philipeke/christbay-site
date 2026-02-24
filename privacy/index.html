@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Privacy Policy for ChristBay — how OakDev &amp; AI AB collects, uses, and protects your personal data." />
+  <meta name="robots" content="index, follow" />
+  <title>Privacy Policy — ChristBay</title>
+  <link rel="icon" type="image/png" href="/assets/icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy:           #1a2744;
+      --navy-light:     #243355;
+      --navy-deep:      #121d35;
+      --gold:           #c9a84c;
+      --gold-light:     #dfc980;
+      --gold-subtle:    #f5edcc;
+      --warm-white:     #f9f7f4;
+      --cream:          #f0ece4;
+      --white:          #ffffff;
+      --text-primary:   #1a2744;
+      --text-secondary: #4a5a7a;
+      --text-muted:     #7a8ba5;
+      --border:         #e0dbd0;
+      --shadow-sm:      0 1px 3px rgba(26,39,68,.08);
+      --shadow-md:      0 4px 16px rgba(26,39,68,.10);
+      --radius:         12px;
+      --radius-sm:      8px;
+      --transition:     0.25s ease;
+      --max-width:      1100px;
+      --doc-max-width:  800px;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;font-size:16px}
+    body{font-family:'Inter',system-ui,-apple-system,BlinkMacSystemFont,sans-serif;background:var(--warm-white);color:var(--text-primary);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+    img{max-width:100%;height:auto;display:block}
+    a{color:inherit;text-decoration:none}
+    ul{list-style:none}
+
+    /* Skip link */
+    .skip-link{position:absolute;top:-120px;left:1rem;background:var(--navy);color:var(--white);padding:.5rem 1rem;border-radius:var(--radius-sm);font-size:.875rem;font-weight:600;z-index:9999;transition:top var(--transition)}
+    .skip-link:focus{top:1rem}
+
+    /* Header */
+    .site-header{position:sticky;top:0;z-index:100;background:rgba(18,29,53,.96);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(201,168,76,.14)}
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px;max-width:var(--max-width);margin:0 auto;padding:0 1.5rem}
+    .nav-brand{display:flex;align-items:center;gap:.625rem}
+    .nav-brand img{width:28px;height:28px;object-fit:contain;border-radius:6px}
+    .nav-brand-name{font-size:1.0625rem;font-weight:600;color:var(--white);letter-spacing:-.01em}
+    .nav-links{display:flex;align-items:center;gap:1.75rem}
+    .nav-links a{font-size:.875rem;font-weight:500;color:rgba(255,255,255,.7);transition:color var(--transition)}
+    .nav-links a:hover{color:var(--white)}
+    .nav-links .nav-cta{background:var(--gold);color:var(--navy-deep);padding:.5rem 1.25rem;border-radius:100px;font-weight:600;font-size:.8125rem;transition:background var(--transition),transform var(--transition)}
+    .nav-links .nav-cta:hover{background:var(--gold-light);transform:translateY(-1px)}
+    @media(max-width:600px){.nav-links{gap:1rem}.nav-links a.nav-text{display:none}}
+
+    /* Page hero */
+    .page-hero{background:linear-gradient(155deg,var(--navy-deep) 0%,var(--navy) 55%,var(--navy-light) 100%);color:var(--white);text-align:center;padding:5rem 1.5rem 4rem;position:relative;overflow:hidden}
+    .page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 20% 40%,rgba(201,168,76,.07) 0%,transparent 60%),radial-gradient(ellipse 50% 60% at 80% 60%,rgba(201,168,76,.05) 0%,transparent 60%);pointer-events:none}
+    .page-hero-inner{position:relative;z-index:1;max-width:var(--doc-max-width);margin:0 auto}
+    .page-hero-label{display:inline-block;font-size:.75rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-light);margin-bottom:1rem}
+    .page-hero h1{font-size:clamp(2rem,4vw,3rem);font-weight:700;letter-spacing:-.03em;line-height:1.15;margin-bottom:1.25rem;color:var(--white)}
+    .page-hero-meta{display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem 1.5rem;font-size:.875rem;color:rgba(255,255,255,.65)}
+    .page-hero-meta span{display:flex;align-items:center;gap:.375rem}
+    .dot{width:4px;height:4px;border-radius:50%;background:rgba(201,168,76,.6);display:inline-block}
+
+    /* Document layout */
+    .doc-layout{max-width:var(--max-width);margin:0 auto;padding:4rem 1.5rem 6rem;display:grid;grid-template-columns:260px 1fr;gap:3.5rem;align-items:start}
+    @media(max-width:900px){.doc-layout{grid-template-columns:1fr;gap:2rem;padding:2.5rem 1.5rem 5rem}}
+
+    /* TOC */
+    .toc{position:sticky;top:84px}
+    @media(max-width:900px){.toc{position:static;background:var(--cream);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem}}
+    .toc-title{font-size:.6875rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:1rem}
+    .toc-list{display:flex;flex-direction:column;gap:.125rem}
+    .toc-list a{font-size:.8125rem;font-weight:500;color:var(--text-secondary);padding:.375rem .625rem;border-radius:var(--radius-sm);border-left:2px solid transparent;transition:color var(--transition),border-color var(--transition),background var(--transition);display:block;line-height:1.4}
+    .toc-list a:hover,.toc-list a.active{color:var(--navy);border-left-color:var(--gold);background:rgba(201,168,76,.07)}
+    .toc-list .toc-sub{padding-left:1.25rem;font-size:.75rem;color:var(--text-muted)}
+    .toc-list .toc-sub:hover,.toc-list .toc-sub.active{color:var(--text-secondary)}
+    .toc-contact-box{margin-top:2rem;padding:1rem 1.125rem;background:linear-gradient(135deg,rgba(201,168,76,.10) 0%,rgba(201,168,76,.04) 100%);border:1px solid rgba(201,168,76,.25);border-radius:var(--radius)}
+    .toc-contact-box p{font-size:.75rem;color:var(--text-secondary);line-height:1.5;margin-bottom:.5rem}
+    .toc-contact-box a{font-size:.8125rem;font-weight:600;color:var(--gold);text-decoration:underline;text-underline-offset:2px}
+    @media(max-width:900px){.toc-contact-box{display:none}}
+
+    /* Doc content */
+    .doc-content{min-width:0}
+    .policy-notice{background:linear-gradient(135deg,rgba(201,168,76,.12) 0%,rgba(201,168,76,.04) 100%);border:1px solid rgba(201,168,76,.3);border-left:4px solid var(--gold);border-radius:var(--radius);padding:1.25rem 1.5rem;margin-bottom:3rem}
+    .policy-notice p{font-size:.875rem;color:var(--text-secondary);line-height:1.6}
+    .policy-notice p strong{color:var(--text-primary)}
+    .policy-section{margin-bottom:3.5rem;scroll-margin-top:90px}
+    .policy-section:last-child{margin-bottom:0}
+    .section-number{display:inline-block;font-size:.6875rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem}
+    .policy-section h2{font-size:clamp(1.25rem,2.5vw,1.625rem);font-weight:700;letter-spacing:-.025em;color:var(--navy);margin-bottom:1.25rem;padding-bottom:.75rem;border-bottom:1px solid var(--border);line-height:1.3}
+    .policy-section h3{font-size:1.0625rem;font-weight:600;color:var(--navy);margin-top:2rem;margin-bottom:.75rem;line-height:1.35}
+    .policy-section h4{font-size:.9375rem;font-weight:600;color:var(--text-primary);margin-top:1.5rem;margin-bottom:.5rem}
+    .policy-section p{font-size:.9375rem;color:var(--text-secondary);line-height:1.75;margin-bottom:1rem}
+    .policy-section p:last-child{margin-bottom:0}
+    .policy-section p strong{color:var(--text-primary);font-weight:600}
+    .policy-section p em{font-style:italic;color:var(--text-primary)}
+
+    /* Lists */
+    .policy-list{margin:.75rem 0 1rem;padding-left:0;list-style:none;display:flex;flex-direction:column;gap:.5rem}
+    .policy-list li{font-size:.9375rem;color:var(--text-secondary);line-height:1.7;padding-left:1.375rem;position:relative}
+    .policy-list li::before{content:'';position:absolute;left:0;top:.62em;width:6px;height:6px;border-radius:50%;background:var(--gold)}
+    .policy-list li strong{color:var(--text-primary);font-weight:600}
+    .policy-list-ordered{margin:.75rem 0 1rem;padding-left:0;list-style:none;counter-reset:pol;display:flex;flex-direction:column;gap:.625rem}
+    .policy-list-ordered li{font-size:.9375rem;color:var(--text-secondary);line-height:1.7;padding-left:2rem;position:relative;counter-increment:pol}
+    .policy-list-ordered li::before{content:counter(pol)".";position:absolute;left:0;top:0;font-size:.8125rem;font-weight:700;color:var(--gold);min-width:1.5rem}
+    .policy-list-ordered li strong{color:var(--text-primary);font-weight:600}
+
+    /* Tables */
+    .def-table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.875rem}
+    .def-table th{text-align:left;padding:.625rem 1rem;background:var(--navy);color:var(--white);font-weight:600;font-size:.8125rem;letter-spacing:.02em}
+    .def-table th:first-child{border-radius:var(--radius-sm) 0 0 0}
+    .def-table th:last-child{border-radius:0 var(--radius-sm) 0 0}
+    .def-table td{padding:.625rem 1rem;border-bottom:1px solid var(--border);color:var(--text-secondary);vertical-align:top;line-height:1.6}
+    .def-table td:first-child{font-weight:600;color:var(--text-primary);white-space:nowrap;width:30%}
+    .def-table tr:last-child td{border-bottom:none}
+    .def-table tr:nth-child(odd) td{background:rgba(240,236,228,.35)}
+    @media(max-width:600px){
+      .def-table,.def-table tbody,.def-table tr,.def-table td{display:block;width:100%}
+      .def-table thead{display:none}
+      .def-table td{border-bottom:none;padding:.5rem .75rem}
+      .def-table td:first-child{font-size:.75rem;text-transform:uppercase;letter-spacing:.05em;color:var(--gold);padding-bottom:.125rem;white-space:normal;width:100%}
+      .def-table tr{border:1px solid var(--border);border-radius:var(--radius-sm);margin-bottom:.75rem;overflow:hidden;padding:.25rem 0;background:var(--white)}
+    }
+
+    /* Callouts */
+    .callout{border-radius:var(--radius);padding:1.25rem 1.5rem;margin:1.5rem 0}
+    .callout-info{background:rgba(26,39,68,.04);border:1px solid rgba(26,39,68,.10);border-left:4px solid var(--navy-light)}
+    .callout-important{background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.25);border-left:4px solid var(--gold)}
+    .callout-privacy{background:rgba(26,39,68,.05);border:1px solid rgba(26,39,68,.12);border-left:4px solid var(--navy)}
+    .callout-title{font-size:.8125rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.625rem;color:var(--text-primary)}
+    .callout p{font-size:.875rem;color:var(--text-secondary);line-height:1.7;margin-bottom:0}
+    .callout p strong{color:var(--text-primary)}
+
+    /* Divider */
+    .policy-divider{border:none;border-top:1px solid var(--border);margin:3rem 0}
+
+    /* Links */
+    .doc-link{color:var(--navy);font-weight:500;text-decoration:underline;text-underline-offset:2px;transition:color var(--transition)}
+    .doc-link:hover{color:var(--gold)}
+
+    /* Footer */
+    .site-footer{background:var(--navy-deep);color:rgba(255,255,255,.5);padding:3rem 1.5rem 2.5rem}
+    .footer-inner{max-width:var(--max-width);margin:0 auto}
+    .footer-top{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;padding-bottom:2rem;border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:1.75rem}
+    .footer-brand{display:flex;align-items:center;gap:.625rem}
+    .footer-brand img{width:28px;height:28px;object-fit:contain;border-radius:6px}
+    .footer-brand-name{font-size:1rem;font-weight:600;color:var(--white)}
+    .footer-nav{display:flex;flex-wrap:wrap;gap:.375rem 1.5rem}
+    .footer-nav a{font-size:.875rem;color:rgba(255,255,255,.55);transition:color var(--transition)}
+    .footer-nav a:hover{color:var(--white)}
+    .footer-nav a[aria-current="page"]{color:var(--gold-light);font-weight:500}
+    .footer-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem}
+    .footer-copyright{font-size:.8125rem;color:rgba(255,255,255,.4)}
+    .footer-tagline{font-size:.8125rem;color:rgba(201,168,76,.5);font-style:italic}
+
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}
+    @media print{.site-header,.toc,.skip-link{display:none}.doc-layout{display:block;padding:1rem 0}.policy-section{break-inside:avoid}body{background:white;color:black}}
+  </style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to main content</a>
+
+<header class="site-header" role="banner">
+  <nav class="nav-inner" aria-label="Primary navigation">
+    <a href="/" class="nav-brand" aria-label="ChristBay — home">
+      <img src="/assets/icon.png" alt="" aria-hidden="true" />
+      <span class="nav-brand-name">ChristBay</span>
+    </a>
+    <div class="nav-links">
+      <a href="/#features" class="nav-text">Features</a>
+      <a href="/#faq" class="nav-text">FAQ</a>
+      <a href="#" class="nav-cta">Download</a>
+    </div>
+  </nav>
+</header>
+
+<div class="page-hero" role="banner" aria-label="Privacy Policy header">
+  <div class="page-hero-inner">
+    <span class="page-hero-label">Legal &amp; Data Protection</span>
+    <h1>Privacy Policy</h1>
+    <div class="page-hero-meta">
+      <span><span class="dot" aria-hidden="true"></span>Effective: February&nbsp;24,&nbsp;2026</span>
+      <span><span class="dot" aria-hidden="true"></span>Last updated: February&nbsp;24,&nbsp;2026</span>
+      <span><span class="dot" aria-hidden="true"></span>Version&nbsp;1.0</span>
+    </div>
+  </div>
+</div>
+
+<main id="main">
+  <div class="doc-layout">
+
+    <aside class="toc" aria-label="Table of contents">
+      <p class="toc-title">Contents</p>
+      <nav class="toc-list" aria-label="Policy sections">
+        <a href="#s1">1. Introduction</a>
+        <a href="#s2">2. Data Controller</a>
+        <a href="#s3">3. Definitions</a>
+        <a href="#s4">4. Data We Collect — Overview</a>
+        <a href="#s5" class="toc-sub">5. Device &amp; Technical Data</a>
+        <a href="#s6" class="toc-sub">6. Account Data</a>
+        <a href="#s7" class="toc-sub">7. Usage &amp; Analytics Data</a>
+        <a href="#s8" class="toc-sub">8. Journal &amp; Reflection Data</a>
+        <a href="#s9" class="toc-sub">9. Purchase Data</a>
+        <a href="#s10">10. Legal Bases (GDPR Art. 6)</a>
+        <a href="#s11">11. How We Use Your Data</a>
+        <a href="#s12">12. Data Sharing &amp; Disclosure</a>
+        <a href="#s13">13. Apple &amp; the App Store</a>
+        <a href="#s14">14. Data Retention</a>
+        <a href="#s15">15. International Transfers</a>
+        <a href="#s16">16. Your GDPR Rights</a>
+        <a href="#s17">17. Account Deletion</a>
+        <a href="#s18">18. Children's Privacy</a>
+        <a href="#s19">19. Security</a>
+        <a href="#s20">20. Cookies &amp; Tracking</a>
+        <a href="#s21">21. Push Notifications</a>
+        <a href="#s22">22. Third-Party Services</a>
+        <a href="#s23">23. Links to Other Sites</a>
+        <a href="#s24">24. Changes to This Policy</a>
+        <a href="#s25">25. Governing Law</a>
+        <a href="#s26">26. Contact Us</a>
+        <a href="#s27">27. Supervisory Authority</a>
+      </nav>
+      <div class="toc-contact-box" role="complementary">
+        <p>Questions about your data?</p>
+        <a href="mailto:hello@oakdev.app">hello@oakdev.app</a>
+      </div>
+    </aside>
+
+    <div class="doc-content">
+
+      <div class="policy-notice" role="note">
+        <p><strong>Plain language summary:</strong> ChristBay is built on respect for your faith and your privacy. We collect only what is necessary to deliver the app experience. Your personal prayer journal and reflection entries are yours — we do not read them, sell them, or use them to train AI models. This policy explains everything in full detail.</p>
+      </div>
+
+      <!-- ===== 1. Introduction ===== -->
+      <section class="policy-section" id="s1" aria-labelledby="h1">
+        <span class="section-number">Section 01</span>
+        <h2 id="h1">Introduction</h2>
+
+        <p>This Privacy Policy ("<strong>Policy</strong>") describes how <strong>OakDev &amp; AI AB</strong>, a Swedish limited liability company ("<strong>Company</strong>", "<strong>we</strong>", "<strong>us</strong>", or "<strong>our</strong>"), collects, uses, stores, discloses, and protects personal data in connection with the <strong>ChristBay</strong> mobile application ("<strong>App</strong>") and any related websites, services, features, or content (collectively, the "<strong>Service</strong>").</p>
+
+        <p>By downloading, installing, accessing, or using ChristBay, you acknowledge that you have read, understood, and agree to be bound by this Policy. If you do not agree with any part of this Policy, you must not use the Service.</p>
+
+        <p>This Policy is written in English. In the event of any conflict between a translated version and the English version, the English version shall prevail.</p>
+
+        <h3>1.1 Scope</h3>
+        <p>This Policy applies to all users of the ChristBay iOS application distributed via the Apple App Store, as well as to visitors of any ChristBay-related web pages hosted by OakDev &amp; AI AB. It does not apply to third-party websites or services that may be accessible from within or alongside the App, which are governed by their own privacy policies.</p>
+
+        <h3>1.2 Our Commitment</h3>
+        <p>OakDev &amp; AI AB built ChristBay as a private, personal devotional tool. The nature of the App — daily scripture, guided reflection, and prayer — means that the content you engage with can be deeply personal. We take that seriously.</p>
+        <ul class="policy-list">
+          <li><strong>Minimal collection:</strong> We collect only the data necessary to provide and improve the Service.</li>
+          <li><strong>No advertising:</strong> ChristBay is permanently ad-free. We do not build advertising profiles.</li>
+          <li><strong>No data selling:</strong> We do not sell, rent, or trade your personal data to any third party, ever.</li>
+          <li><strong>No AI training:</strong> Your prayer journal entries and reflection notes are never used to train machine learning or artificial intelligence models.</li>
+          <li><strong>User control:</strong> You have full rights over your personal data, including the right to access, correct, export, and permanently delete it.</li>
+        </ul>
+
+        <h3>1.3 Who This Policy Is For</h3>
+        <p>This Policy applies to all persons who use the ChristBay application, including users who have purchased the base application, users who have upgraded to the "Blessed" tier, and users who have purchased top-up Reflection packs. All categories of users are subject to the same privacy protections described herein.</p>
+
+        <h3>1.4 Age Requirement</h3>
+        <p>ChristBay is intended for users aged 13 and older. We do not knowingly collect personal data from children under the age of 13. Please refer to Section 18 (Children's Privacy) for our full policy regarding minors.</p>
+
+        <h3>1.5 Relationship to Other Policies</h3>
+        <p>This Privacy Policy should be read alongside our Terms of Use (available at <a href="/terms/" class="doc-link">/terms/</a>), which govern your use of the Service. In the event of any conflict between the Terms of Use and this Privacy Policy on matters of data protection, this Privacy Policy shall prevail.</p>
+      </section>
+
+      <!-- ===== 2. Data Controller ===== -->
+      <section class="policy-section" id="s2" aria-labelledby="h2">
+        <span class="section-number">Section 02</span>
+        <h2 id="h2">Data Controller</h2>
+
+        <p>For the purposes of the General Data Protection Regulation (EU) 2016/679 ("<strong>GDPR</strong>") and the Swedish Act Supplementing the EU Data Protection Regulation (2018:218), the data controller is:</p>
+
+        <table class="def-table" aria-label="Data controller details">
+          <thead><tr><th>Field</th><th>Detail</th></tr></thead>
+          <tbody>
+            <tr><td>Legal entity name</td><td>OakDev &amp; AI AB</td></tr>
+            <tr><td>Legal form</td><td>Aktiebolag (AB) — Swedish limited liability company</td></tr>
+            <tr><td>Country of incorporation</td><td>Sweden</td></tr>
+            <tr><td>Registered office</td><td>Sweden (full registered address available upon request)</td></tr>
+            <tr><td>Contact email</td><td><a href="mailto:hello@oakdev.app" class="doc-link">hello@oakdev.app</a></td></tr>
+            <tr><td>Application</td><td>ChristBay (iOS)</td></tr>
+            <tr><td>Lead supervisory authority</td><td>Integritetsskyddsmyndigheten (IMY) — Swedish Authority for Privacy Protection</td></tr>
+          </tbody>
+        </table>
+
+        <p>As a Swedish company, OakDev &amp; AI AB is established within the European Union and is directly subject to the GDPR and applicable Swedish data protection legislation.</p>
+
+        <h3>2.1 Data Protection Contact</h3>
+        <p>All data protection enquiries, rights requests, and concerns should be directed to: <strong><a href="mailto:hello@oakdev.app" class="doc-link">hello@oakdev.app</a></strong></p>
+        <p>We aim to respond to all legitimate requests within <strong>30 days</strong>, and no later than the legally required timeframes under the GDPR (typically within one month, extendable by a further two months for complex or numerous requests).</p>
+
+        <h3>2.2 No DPO Requirement</h3>
+        <p>As a small organisation whose core activities do not involve large-scale processing of special categories of data, OakDev &amp; AI AB is not currently required under Article 37 of the GDPR to appoint a Data Protection Officer (DPO). However, we are fully committed to GDPR compliance and will appoint a DPO if required by applicable law in the future.</p>
+      </section>
+
+      <!-- ===== 3. Definitions ===== -->
+      <section class="policy-section" id="s3" aria-labelledby="h3">
+        <span class="section-number">Section 03</span>
+        <h2 id="h3">Definitions</h2>
+
+        <p>The following definitions apply throughout this Policy:</p>
+
+        <table class="def-table" aria-label="Key definitions">
+          <thead><tr><th>Term</th><th>Meaning</th></tr></thead>
+          <tbody>
+            <tr><td>Personal Data</td><td>Any information relating to an identified or identifiable natural person. An identifiable person is one who can be identified, directly or indirectly, by reference to an identifier such as a name, identification number, location data, online identifier, or one or more factors specific to their identity.</td></tr>
+            <tr><td>Processing</td><td>Any operation or set of operations performed on personal data, whether or not by automated means, including collection, recording, organisation, structuring, storage, adaptation, retrieval, consultation, use, disclosure, dissemination, combination, restriction, erasure, or destruction.</td></tr>
+            <tr><td>Data Subject</td><td>The natural person to whom personal data relates — in the context of this Policy, primarily the user of the ChristBay application.</td></tr>
+            <tr><td>Consent</td><td>A freely given, specific, informed, and unambiguous indication of the data subject's agreement to the processing of their personal data by means of a statement or clear affirmative action.</td></tr>
+            <tr><td>Legitimate Interest</td><td>A legal basis for processing personal data where it is necessary for the purposes of the legitimate interests pursued by the controller or a third party, except where those interests are overridden by the interests or fundamental rights of the data subject.</td></tr>
+            <tr><td>App</td><td>The ChristBay iOS mobile application distributed by OakDev &amp; AI AB via the Apple App Store.</td></tr>
+            <tr><td>Reflections</td><td>The in-app unit used within ChristBay to access guided reflection sessions and scripture-based devotional content.</td></tr>
+            <tr><td>Blessed</td><td>The premium in-app upgrade tier available for purchase within ChristBay, which unlocks additional content categories, features, and provides 300 additional Reflections.</td></tr>
+            <tr><td>Journal</td><td>The personal prayer and reflection journal feature within ChristBay where users may write private notes associated with their devotional sessions.</td></tr>
+            <tr><td>GDPR</td><td>Regulation (EU) 2016/679 of the European Parliament and of the Council of 27 April 2016 on the protection of natural persons with regard to the processing of personal data.</td></tr>
+            <tr><td>Apple / App Store</td><td>Apple Inc. and the Apple App Store platform through which ChristBay is distributed and through which in-app purchases are processed.</td></tr>
+            <tr><td>Third Party</td><td>Any natural or legal person other than the data subject, OakDev &amp; AI AB, or persons under the direct authority of OakDev &amp; AI AB.</td></tr>
+            <tr><td>Special Category Data</td><td>Personal data revealing racial or ethnic origin, political opinions, religious or philosophical beliefs, trade union membership, genetic data, biometric data, health data, sex life, or sexual orientation (GDPR Article 9).</td></tr>
+            <tr><td>IMY</td><td>Integritetsskyddsmyndigheten — the Swedish Authority for Privacy Protection, which serves as the lead supervisory authority for OakDev &amp; AI AB under the GDPR.</td></tr>
+            <tr><td>EEA</td><td>The European Economic Area — the European Union member states plus Norway, Iceland, and Liechtenstein.</td></tr>
+            <tr><td>SCCs</td><td>Standard Contractual Clauses — the European Commission's approved model clauses for transfers of personal data to third countries (Commission Decision 2021/914).</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- ===== 4. Overview ===== -->
+      <section class="policy-section" id="s4" aria-labelledby="h4">
+        <span class="section-number">Section 04</span>
+        <h2 id="h4">Data We Collect — Overview</h2>
+
+        <p>We collect personal data in several ways: data you provide directly, data collected automatically through your use of the App, and data received from Apple in connection with in-app purchases. Detailed descriptions follow in Sections 5–9.</p>
+
+        <table class="def-table" aria-label="Overview of data collected">
+          <thead><tr><th>Category</th><th>Examples</th><th>Source</th></tr></thead>
+          <tbody>
+            <tr><td>Device &amp; technical data</td><td>Device model, OS version, app version, anonymous device identifier, locale, time zone</td><td>Automatically — iOS device</td></tr>
+            <tr><td>Account data</td><td>Optional display name; optional email (if you contact support); Apple ID token (if Sign in with Apple is used)</td><td>You provide it; or Apple Sign-In</td></tr>
+            <tr><td>Usage &amp; analytics data</td><td>Feature interactions, session duration, crash logs — all anonymised or pseudonymised</td><td>Automatically — App telemetry</td></tr>
+            <tr><td>Journal &amp; reflection data</td><td>Personal journal entries, prayer notes, bookmarked scriptures, session history</td><td>You create it directly</td></tr>
+            <tr><td>Purchase data</td><td>Purchase receipt tokens, transaction IDs, product identifiers, entitlement status</td><td>Apple — StoreKit / App Store</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout callout-important">
+          <p class="callout-title">What we do NOT collect</p>
+          <p>We do <strong>not</strong> collect your full name unless you voluntarily provide it. We do <strong>not</strong> collect your physical address, telephone number, government-issued identification numbers, payment card numbers, or bank account details (all payments are handled entirely by Apple). We do <strong>not</strong> collect biometric data, health data, or precise location data.</p>
+        </div>
+      </section>
+
+      <!-- ===== 5. Device Data ===== -->
+      <section class="policy-section" id="s5" aria-labelledby="h5">
+        <span class="section-number">Section 05</span>
+        <h2 id="h5">Device &amp; Technical Data</h2>
+
+        <p>When you install and use ChristBay, we automatically receive certain technical information from your iOS device and operating system. This is necessary to deliver the App reliably and diagnose technical problems.</p>
+
+        <h3>5.1 What Is Collected</h3>
+        <ul class="policy-list">
+          <li><strong>Device model:</strong> e.g., "iPhone 16 Pro". We use an anonymous, app-specific identifier generated by iOS rather than any persistent hardware serial number or IMEI.</li>
+          <li><strong>Operating system version:</strong> The iOS version running on your device, used to ensure compatibility and test updates.</li>
+          <li><strong>Application version and build number:</strong> The specific version of ChristBay installed, used for crash reporting and update management.</li>
+          <li><strong>Locale and language settings:</strong> Your device's configured language and regional format, used to display content appropriately.</li>
+          <li><strong>Time zone:</strong> Used to schedule daily devotional reminders at appropriate local times.</li>
+          <li><strong>Network connectivity type:</strong> Whether the device is on Wi-Fi or cellular (not your IP address or network provider name), used to optimise content loading and offline functionality.</li>
+          <li><strong>Screen resolution and display scale:</strong> Used to render UI assets at the correct resolution for your device.</li>
+          <li><strong>Available storage space:</strong> Accessed to ensure the App can download and cache devotional content without exceeding available storage.</li>
+        </ul>
+
+        <h3>5.2 App-Specific Device Identifier</h3>
+        <p>iOS provides each app with a Vendor Identifier (IDFV — Identifier for Vendor), unique to your device and our specific application. This identifier:</p>
+        <ul class="policy-list">
+          <li>Is generated by iOS and cannot be used to track you across other apps or companies.</li>
+          <li>Resets when you delete and reinstall ChristBay.</li>
+          <li>Is used internally to associate your app data and settings across sessions on the same device.</li>
+          <li>Is <strong>not</strong> shared with advertising networks or data brokers.</li>
+        </ul>
+        <p>We do <strong>not</strong> request or use the Advertising Identifier (IDFA). ChristBay does not participate in any advertising ecosystem.</p>
+
+        <h3>5.3 Crash Logs and Diagnostics</h3>
+        <p>If the App crashes, iOS generates a crash report. Depending on your iOS privacy settings and whether you have enabled "Share with App Developers", Apple may share anonymised crash reports with us. These reports contain stack traces and memory information relevant to the crash — they do not contain your personal data or journal content. Crash reports are used solely to identify and fix technical bugs. You can disable this in <em>iPhone Settings → Privacy &amp; Security → Analytics &amp; Improvements → Share with App Developers</em>.</p>
+
+        <h3>5.4 Performance Metrics</h3>
+        <p>We may collect aggregated, non-personally-identifiable performance metrics such as App launch time and screen render duration. These are used solely to improve App performance and are never associated with your identity.</p>
+      </section>
+
+      <!-- ===== 6. Account Data ===== -->
+      <section class="policy-section" id="s6" aria-labelledby="h6">
+        <span class="section-number">Section 06</span>
+        <h2 id="h6">Account Data</h2>
+
+        <p>ChristBay is designed to be usable without requiring account creation. Certain optional features may involve account functionality for convenience (such as restoring purchases or syncing across devices).</p>
+
+        <h3>6.1 Optional Display Name</h3>
+        <p>You may optionally provide a display name within the App for personalised greetings. This name is stored locally on your device and is not sent to our servers unless you explicitly enable a cloud sync feature. It can be changed or deleted at any time from App settings.</p>
+
+        <h3>6.2 Sign In with Apple</h3>
+        <p>ChristBay may offer optional integration with Sign in with Apple. If you use this feature:</p>
+        <ul class="policy-list">
+          <li>Apple provides us with a unique, stable user identifier and, at your discretion, either your real email address or an Apple-generated relay email address.</li>
+          <li>We use this identifier solely to authenticate you and associate your data with your account.</li>
+          <li>We do <strong>not</strong> use your Apple email address for marketing communications without your explicit, separate consent.</li>
+          <li>You can revoke ChristBay's access to your Apple ID at any time via <em>iPhone Settings → [Your Name] → Sign in with Apple → ChristBay → Stop Using Apple ID</em>.</li>
+        </ul>
+
+        <h3>6.3 Support Contact</h3>
+        <p>If you contact us for support — by email to hello@oakdev.app or through an in-app feedback mechanism — you may provide your email address and any information you choose to include in your message. We use this solely to respond to your enquiry and to improve the Service. Support correspondence is retained for up to 2 years and then permanently deleted.</p>
+
+        <h3>6.4 No Mandatory Registration</h3>
+        <p>You are not required to create an account to use the core features of ChristBay, including daily scripture reading, guided reflections, and the personal prayer journal. Account-based features exist solely to improve continuity across devices and are entirely optional.</p>
+      </section>
+
+      <!-- ===== 7. Usage Data ===== -->
+      <section class="policy-section" id="s7" aria-labelledby="h7">
+        <span class="section-number">Section 07</span>
+        <h2 id="h7">Usage &amp; Analytics Data</h2>
+
+        <p>To understand how the App is used in aggregate and to make meaningful product improvements, we collect anonymised or pseudonymised analytics data.</p>
+
+        <h3>7.1 What We Measure</h3>
+        <ul class="policy-list">
+          <li><strong>Feature engagement:</strong> Which features are used, how often, and for how long — in aggregate, not tied to your identity.</li>
+          <li><strong>Session frequency and duration:</strong> How often users open the App and for how long, to understand engagement patterns.</li>
+          <li><strong>Onboarding completion:</strong> Whether new users complete the initial setup flow, to identify friction points.</li>
+          <li><strong>Reflection balance behaviour:</strong> Aggregate top-up purchasing patterns, to plan content pricing and availability.</li>
+          <li><strong>Notification interaction:</strong> Whether users open the App via a push notification, at the aggregate level only.</li>
+        </ul>
+
+        <h3>7.2 Anonymisation and Pseudonymisation</h3>
+        <p>Where possible, analytics data is fully anonymised before leaving your device — meaning it cannot be linked back to you as an individual. Where an internal session identifier is technically required, we use pseudonymised identifiers that are not linked to your name, Apple ID, or any other directly identifying information. These identifiers are rotated periodically.</p>
+
+        <h3>7.3 Apple App Store Analytics</h3>
+        <p>If you have agreed to Apple's terms regarding app analytics, Apple may provide us with aggregated, anonymised data about how users interact with ChristBay in the App Store. This data is governed by Apple's own privacy policy. You can manage these settings at <em>iPhone Settings → Privacy &amp; Security → Analytics &amp; Improvements</em>.</p>
+
+        <h3>7.4 What We Do Not Do with Analytics</h3>
+        <ul class="policy-list">
+          <li>We do <strong>not</strong> build individual user profiles from analytics data.</li>
+          <li>We do <strong>not</strong> share analytics data with advertising networks.</li>
+          <li>We do <strong>not</strong> use analytics to make automated decisions with significant effects on you.</li>
+          <li>We do <strong>not</strong> use analytics to read or infer the content of your journal entries or reflection notes.</li>
+        </ul>
+      </section>
+
+      <!-- ===== 8. Journal Data ===== -->
+      <section class="policy-section" id="s8" aria-labelledby="h8">
+        <span class="section-number">Section 08</span>
+        <h2 id="h8">Journal &amp; Reflection Data</h2>
+
+        <p>The personal prayer journal and reflection notes feature is at the heart of ChristBay's devotional experience. We treat this category of data with the highest possible level of care.</p>
+
+        <div class="callout callout-privacy">
+          <p class="callout-title">Your journal is private</p>
+          <p>The text you write in your personal prayer journal and any notes attached to reflection sessions belong entirely to you. OakDev &amp; AI AB employees and contractors do <strong>not</strong> read your journal entries. Your entries are <strong>not</strong> used to train machine learning models, generate AI content, target you with messaging, or for any purpose other than displaying your own writing back to you.</p>
+        </div>
+
+        <h3>8.1 Local Storage by Default</h3>
+        <p>By default, all journal entries, prayer notes, bookmarked scriptures, reflection session history, and personal annotations are stored exclusively in the local storage of your iOS device. This data:</p>
+        <ul class="policy-list">
+          <li>Never leaves your device unless you explicitly enable iCloud backup or a future optional cloud sync feature.</li>
+          <li>Is stored in the App's sandboxed container, inaccessible to other apps on your device.</li>
+          <li>Is protected by iOS device encryption tied to your device passcode, Face ID, or Touch ID.</li>
+          <li>Is backed up as part of your iOS iCloud or iTunes backup if you have those features enabled — this backup is managed entirely by Apple and governed by Apple's privacy policy.</li>
+        </ul>
+
+        <h3>8.2 Future Optional Cloud Sync</h3>
+        <p>We may introduce an optional cloud synchronisation feature in a future version of ChristBay. If and when this is introduced:</p>
+        <ul class="policy-list">
+          <li>Participation will be entirely voluntary and will require your explicit consent.</li>
+          <li>Data will be encrypted in transit (TLS 1.2 or higher) and at rest on our servers.</li>
+          <li>You will retain full control to disable sync and request deletion of cloud-stored data at any time.</li>
+          <li>This Policy will be updated prior to the launch of such a feature, and you will be notified.</li>
+        </ul>
+
+        <h3>8.3 Religious Nature of Content — Special Category Data</h3>
+        <p>We recognise that journal entries written in ChristBay may contain information about your religious beliefs, prayer intentions, personal struggles, and faith journey. Under the GDPR, information revealing religious or philosophical beliefs is classified as "special category data" (Article 9), which is afforded heightened protection.</p>
+        <p>OakDev &amp; AI AB processes special category data in your journal only to the strict extent necessary to store your entries and display them back to you. We never process special category data for analytics, profiling, or third-party disclosure. Our legal basis for processing this data, to the extent any processing occurs, is your explicit consent (Article 9(2)(a) GDPR) as expressed by your voluntary use of the journal feature and agreement to this Policy.</p>
+
+        <h3>8.4 Reflection Session History</h3>
+        <p>The App maintains a history of which reflection sessions you have completed, your current Reflection balance, and your progress through available content. This information is stored locally on your device and is not transmitted to our servers except as part of any future optional cloud sync described above.</p>
+
+        <h3>8.5 Bookmarked Scriptures</h3>
+        <p>Scriptures you bookmark within ChristBay are stored locally on your device. We do not collect information about which specific scriptures you have bookmarked.</p>
+      </section>
+
+      <!-- ===== 9. Purchase Data ===== -->
+      <section class="policy-section" id="s9" aria-labelledby="h9">
+        <span class="section-number">Section 09</span>
+        <h2 id="h9">Purchase Data</h2>
+
+        <p>ChristBay is a paid application. All purchases are processed exclusively through the Apple App Store using Apple's StoreKit framework. OakDev &amp; AI AB does <strong>not</strong> collect, store, or process your payment card details, Apple ID credentials, or any payment instrument information.</p>
+
+        <h3>9.1 What Apple Processes</h3>
+        <p>Apple Inc. acts as the merchant of record for all ChristBay purchases, including:</p>
+        <ul class="policy-list">
+          <li>Initial purchase of the ChristBay application from the App Store.</li>
+          <li>In-app purchase of the "Blessed" upgrade tier (which provides 300 additional Reflections and unlocks more categories and features).</li>
+          <li>In-app purchases of top-up Reflection packs (100, 200, or 400 Reflections — one-time purchases, no subscription or auto-renewal).</li>
+        </ul>
+        <p>Apple's handling of payment data is governed by Apple's Privacy Policy.</p>
+
+        <h3>9.2 What We Receive from Apple</h3>
+        <p>Following a successful purchase, Apple provides ChristBay with:</p>
+        <ul class="policy-list">
+          <li><strong>Purchase receipt (Apple-signed):</strong> A cryptographically signed receipt confirming a legitimate purchase, used to verify your entitlements.</li>
+          <li><strong>Transaction identifier:</strong> A unique ID for each transaction, used for de-duplication and refund enquiries.</li>
+          <li><strong>Product identifier:</strong> A code identifying which product was purchased.</li>
+          <li><strong>Purchase date and time:</strong> When the transaction occurred.</li>
+          <li><strong>Original transaction identifier:</strong> Used for restoring previous purchases.</li>
+        </ul>
+        <p>We do <strong>not</strong> receive your name, billing address, email address, or payment method details from Apple in connection with purchases.</p>
+
+        <h3>9.3 Entitlement Verification</h3>
+        <p>To confirm purchase entitlements, the App may send Apple's signed receipt to a secure server-side verification endpoint. This process transmits the receipt to Apple's App Store receipt validation API for verification, and Apple returns confirmation of purchased products. Our server records the verified entitlements against your anonymous device identifier. This is technically necessary to prevent fraudulent modification of local entitlement data.</p>
+
+        <h3>9.4 Purchase Records Retention</h3>
+        <p>We retain purchase transaction records (receipt tokens, transaction IDs, product IDs, and timestamps) for <strong>7 years</strong> from the date of purchase. This retention period is required by Swedish accounting law (Bokföringslagen) and to handle refund, chargeback, or dispute enquiries.</p>
+
+        <h3>9.5 Refund Policy</h3>
+        <p>All refund requests are processed through Apple in accordance with Apple's refund policies. OakDev &amp; AI AB does not process refunds directly. To request a refund, please visit <em>reportaproblem.apple.com</em>.</p>
+      </section>
+
+      <hr class="policy-divider" aria-hidden="true" />
+
+      <!-- ===== 10. Legal Bases ===== -->
+      <section class="policy-section" id="s10" aria-labelledby="h10">
+        <span class="section-number">Section 10</span>
+        <h2 id="h10">Legal Bases for Processing (GDPR Article 6)</h2>
+
+        <p>Under the GDPR, every instance of personal data processing must have a lawful basis. The table below sets out the legal basis we rely upon for each type of processing we perform.</p>
+
+        <table class="def-table" aria-label="Legal bases for data processing">
+          <thead><tr><th>Processing Activity</th><th>Legal Basis (GDPR Art. 6)</th></tr></thead>
+          <tbody>
+            <tr><td>Delivering core App functionality (devotionals, reflections, journal storage)</td><td>Art. 6(1)(b) — Performance of a contract (your purchase of the App)</td></tr>
+            <tr><td>Processing in-app purchase entitlements via Apple StoreKit</td><td>Art. 6(1)(b) — Performance of a contract</td></tr>
+            <tr><td>Crash reporting and technical diagnostics</td><td>Art. 6(1)(f) — Legitimate interests (ensuring technical stability and security of the Service)</td></tr>
+            <tr><td>Anonymised product analytics</td><td>Art. 6(1)(f) — Legitimate interests (improving the App, where processing is fully anonymised or minimised)</td></tr>
+            <tr><td>Responding to support enquiries</td><td>Art. 6(1)(b) — Performance of a contract; or Art. 6(1)(f) — Legitimate interests</td></tr>
+            <tr><td>Sending push notifications (if enabled)</td><td>Art. 6(1)(a) — Consent (you must explicitly grant notification permissions via iOS system prompt)</td></tr>
+            <tr><td>Retaining purchase records for accounting compliance</td><td>Art. 6(1)(c) — Legal obligation (Swedish Bokföringslag; VAT/tax compliance)</td></tr>
+            <tr><td>Displaying stored journal entries back to the user</td><td>Art. 6(1)(b) — Performance of a contract; user-initiated data processing</td></tr>
+          </tbody>
+        </table>
+
+        <h3>10.1 Special Category Data (GDPR Article 9)</h3>
+        <p>Where your journal entries contain information revealing your religious beliefs or prayer intentions, this may constitute special category data under GDPR Article 9. We rely on the following bases:</p>
+        <ul class="policy-list">
+          <li><strong>Art. 9(2)(a) — Explicit consent:</strong> By voluntarily writing in the journal feature and agreeing to this Policy, you consent to the storage and display of your religious content within the App for your personal use.</li>
+          <li><strong>Art. 9(2)(e) — Data manifestly made public by the data subject:</strong> To the extent that you independently choose to enter personal religious reflections into your private journal, this is wholly self-directed.</li>
+        </ul>
+        <p>We do not use special category data for any purpose beyond displaying it back to you.</p>
+
+        <h3>10.2 Legitimate Interests Assessment</h3>
+        <p>Where we rely on legitimate interests under Art. 6(1)(f), we have carried out a balancing test and determined that our interests do not override your fundamental rights and freedoms, particularly because: we only collect minimal, necessary data; we fully anonymise analytics data where possible; we do not share this data with third parties for their own purposes; and you retain the right to object to legitimate-interest processing at any time (see Section 16).</p>
+      </section>
+
+      <!-- ===== 11. How We Use Your Data ===== -->
+      <section class="policy-section" id="s11" aria-labelledby="h11">
+        <span class="section-number">Section 11</span>
+        <h2 id="h11">How We Use Your Data</h2>
+
+        <p>We use the personal data we collect for the following specific purposes only.</p>
+
+        <h3>11.1 Service Delivery</h3>
+        <ul class="policy-list">
+          <li>Displaying daily scripture passages, reflection prompts, and guided devotional content.</li>
+          <li>Tracking your Reflection balance and applying deductions as you engage with content sessions.</li>
+          <li>Storing and displaying your personal journal entries and prayer notes.</li>
+          <li>Enabling the saving, browsing, and retrieval of bookmarked scriptures.</li>
+          <li>Tracking your progress through the devotional content catalogue.</li>
+          <li>Applying and verifying your Blessed upgrade entitlements to unlock expanded features and categories.</li>
+          <li>Restoring your previous purchases when you reinstall the App or move to a new device.</li>
+        </ul>
+
+        <h3>11.2 App Performance and Reliability</h3>
+        <ul class="policy-list">
+          <li>Diagnosing and resolving App crashes, errors, and performance issues.</li>
+          <li>Testing and validating updates before public release.</li>
+          <li>Monitoring App performance to identify regressions or infrastructure issues.</li>
+        </ul>
+
+        <h3>11.3 Product Improvement</h3>
+        <ul class="policy-list">
+          <li>Understanding in aggregate which features are most and least used, to prioritise development work.</li>
+          <li>Identifying usability problems in onboarding or feature discovery.</li>
+          <li>Planning new content categories and reflection series based on aggregate engagement patterns.</li>
+        </ul>
+
+        <h3>11.4 Customer Support</h3>
+        <ul class="policy-list">
+          <li>Responding to support requests, bug reports, and feature enquiries submitted by email or in-app feedback.</li>
+          <li>Verifying purchase entitlements to resolve billing disputes or restore missing purchases.</li>
+        </ul>
+
+        <h3>11.5 Legal and Compliance</h3>
+        <ul class="policy-list">
+          <li>Maintaining purchase and transaction records as required by Swedish accounting legislation.</li>
+          <li>Responding to lawful requests from courts, regulatory authorities, or law enforcement where legally required.</li>
+          <li>Enforcing our Terms of Use and protecting the rights, property, or safety of OakDev &amp; AI AB, our users, or the public.</li>
+        </ul>
+
+        <h3>11.6 What We Do Not Do</h3>
+        <ul class="policy-list">
+          <li>We do <strong>not</strong> use your data for advertising or marketing profiling.</li>
+          <li>We do <strong>not</strong> sell, rent, lease, or license your personal data to any third party.</li>
+          <li>We do <strong>not</strong> use your journal entries or reflection history to train, fine-tune, or evaluate any AI or machine learning model.</li>
+          <li>We do <strong>not</strong> use your data to make automated decisions that produce legal or significant effects on you (no automated profiling within the meaning of GDPR Article 22).</li>
+          <li>We do <strong>not</strong> send unsolicited marketing communications.</li>
+        </ul>
+      </section>
+
+      <!-- ===== 12. Data Sharing ===== -->
+      <section class="policy-section" id="s12" aria-labelledby="h12">
+        <span class="section-number">Section 12</span>
+        <h2 id="h12">Data Sharing and Disclosure</h2>
+
+        <p>OakDev &amp; AI AB does not sell, rent, or trade your personal data. We share personal data only in the limited circumstances described below.</p>
+
+        <h3>12.1 Service Providers (Data Processors)</h3>
+        <p>We may engage carefully selected third-party service providers who process personal data on our behalf and under our instructions. Any such provider is bound by a Data Processing Agreement (DPA) requiring them to:</p>
+        <ul class="policy-list">
+          <li>Process personal data only according to our documented instructions.</li>
+          <li>Implement appropriate technical and organisational security measures.</li>
+          <li>Not engage sub-processors without our prior written consent.</li>
+          <li>Assist us in fulfilling data subject rights requests.</li>
+          <li>Delete or return all personal data upon termination of the agreement.</li>
+        </ul>
+
+        <h3>12.2 Apple Inc.</h3>
+        <p>Apple processes purchase transactions on our behalf and provides verified purchase receipts. Apple also provides device analytics under its own terms. Apple's data practices are governed by Apple's Privacy Policy.</p>
+
+        <h3>12.3 Legal Obligations</h3>
+        <p>We may disclose personal data to courts, law enforcement, or regulatory authorities when required by applicable law. Before doing so — where legally permitted — we will verify the legality of the request, disclose only the minimum necessary data, and notify the affected user unless prohibited by law or a court order.</p>
+
+        <h3>12.4 Protection of Rights</h3>
+        <p>We may disclose personal data where we believe, in good faith, that such disclosure is reasonably necessary to protect the rights, property, or safety of OakDev &amp; AI AB, our users, or the public; or to detect, prevent, or address fraud, security incidents, or technical problems.</p>
+
+        <h3>12.5 Business Transfers</h3>
+        <p>In the event of a merger, acquisition, asset sale, financing, corporate restructuring, or dissolution, personal data we hold may transfer to a successor entity. We will notify users before any such transfer takes effect, and the acquiring party will be required to uphold this Policy or provide adequate alternative privacy protections.</p>
+
+        <h3>12.6 Aggregate and Anonymised Data</h3>
+        <p>We may share aggregated, anonymised statistical data (e.g., aggregate engagement trends) with partners, investors, or the public. Such data does not identify any individual user and is not personal data.</p>
+
+        <h3>12.7 With Your Explicit Consent</h3>
+        <p>Beyond the circumstances above, we will share your personal data with third parties only if you have given us your clear, informed, and freely given consent. You may withdraw such consent at any time.</p>
+      </section>
+
+      <!-- ===== 13. Apple & App Store ===== -->
+      <section class="policy-section" id="s13" aria-labelledby="h13">
+        <span class="section-number">Section 13</span>
+        <h2 id="h13">Apple &amp; the App Store</h2>
+
+        <p>ChristBay is distributed exclusively through the Apple App Store. By using ChristBay, you also agree to and are subject to Apple's terms and policies.</p>
+
+        <h3>13.1 Apple's Role</h3>
+        <ul class="policy-list">
+          <li><strong>App distributor:</strong> Apple distributes the App and may collect download and usage data under its own terms.</li>
+          <li><strong>Payment processor:</strong> Apple processes all financial transactions for App purchases and in-app purchases.</li>
+          <li><strong>Platform provider:</strong> Apple provides iOS, StoreKit, CloudKit, and other platform APIs that ChristBay may use.</li>
+          <li><strong>Crash reporting conduit:</strong> Apple may share anonymised crash diagnostics with us, subject to your device privacy settings.</li>
+        </ul>
+
+        <h3>13.2 App Store Privacy Nutrition Labels</h3>
+        <p>Apple requires all App Store applications to provide a Privacy Nutrition Label disclosing what data the app collects. ChristBay's nutrition label disclosures are maintained on the App's App Store page and are consistent with this Privacy Policy. In the event of any discrepancy, this Policy shall govern.</p>
+
+        <h3>13.3 iCloud</h3>
+        <p>If you have iCloud backup enabled, your ChristBay app data (including journal entries) will be included in your iCloud backup, stored in your personal iCloud account and governed by Apple's iCloud terms. OakDev &amp; AI AB does not have access to your iCloud backup data.</p>
+
+        <h3>13.4 Family Sharing</h3>
+        <p>ChristBay supports Apple's Family Sharing feature. When a family member purchases ChristBay through Family Sharing, the purchase is processed by Apple under the purchasing account holder's Apple ID. We receive the same purchase verification data as for any other purchase.</p>
+      </section>
+
+      <!-- ===== 14. Retention ===== -->
+      <section class="policy-section" id="s14" aria-labelledby="h14">
+        <span class="section-number">Section 14</span>
+        <h2 id="h14">Data Retention</h2>
+
+        <p>We retain personal data only for as long as is necessary for the purposes for which it was collected, to fulfil our legal obligations, or to resolve disputes and enforce agreements.</p>
+
+        <table class="def-table" aria-label="Data retention periods">
+          <thead><tr><th>Data Category</th><th>Retention Period</th><th>Reason</th></tr></thead>
+          <tbody>
+            <tr><td>Journal entries &amp; reflection notes</td><td>Stored locally until deleted by you or until you delete the App</td><td>Entirely user-controlled; we do not hold server copies</td></tr>
+            <tr><td>Purchase receipt tokens</td><td>7 years from purchase date</td><td>Swedish Bokföringslag (accounting law) compliance; dispute resolution</td></tr>
+            <tr><td>Transaction IDs and purchase dates</td><td>7 years from purchase date</td><td>Legal and accounting compliance</td></tr>
+            <tr><td>Support correspondence</td><td>2 years from last contact</td><td>Handling follow-up enquiries; improving support quality</td></tr>
+            <tr><td>Crash and diagnostic logs</td><td>90 days from generation</td><td>Bug diagnosis and resolution</td></tr>
+            <tr><td>Anonymised analytics events</td><td>Up to 24 months in aggregate form</td><td>Long-term product trend analysis; data is not personally identifiable</td></tr>
+            <tr><td>Apple Sign-In identifiers</td><td>Duration of account relationship; deleted upon account deletion request</td><td>Authentication continuity</td></tr>
+            <tr><td>Device identifiers (IDFV)</td><td>Duration of App installation; resets on reinstall</td><td>Session continuity</td></tr>
+          </tbody>
+        </table>
+
+        <h3>14.1 Deletion Upon Request</h3>
+        <p>When you exercise your right to erasure (Section 16.3) or delete your account (Section 17), we will delete your personal data ahead of the standard retention schedules above, except where we are required by law to retain it (e.g., transaction records for tax compliance). In those cases, we will restrict processing so the data is not used for any other purpose during the legally required retention period.</p>
+
+        <h3>14.2 Backup Copies</h3>
+        <p>Encrypted backup copies of server-held data are retained for up to 30 days for disaster recovery purposes. After this period, backups are rotated and permanently overwritten. Deletion of your personal data from our primary systems will be fully reflected in backups within 30 days.</p>
+      </section>
+
+      <!-- ===== 15. International Transfers ===== -->
+      <section class="policy-section" id="s15" aria-labelledby="h15">
+        <span class="section-number">Section 15</span>
+        <h2 id="h15">International Data Transfers</h2>
+
+        <p>OakDev &amp; AI AB is a Swedish company within the EEA. We aim to keep personal data within the EEA wherever possible. However, certain third-party service providers (including Apple) may process data outside the EEA, including in the United States.</p>
+
+        <h3>15.1 Transfers to Apple</h3>
+        <p>Apple Inc. is headquartered in the United States. Any data transferred to Apple in connection with the App Store, StoreKit, or other Apple services is subject to Apple's standard contractual and privacy protections. Apple maintains Standard Contractual Clauses (SCCs) with EEA data subjects.</p>
+
+        <h3>15.2 Other Third-Party Transfers</h3>
+        <p>Where we engage service providers that process personal data outside the EEA, we ensure appropriate GDPR Chapter V transfer safeguards are in place, including:</p>
+        <ul class="policy-list">
+          <li><strong>Standard Contractual Clauses (SCCs):</strong> The European Commission's approved model clauses for data transfers to third countries (Commission Decision 2021/914).</li>
+          <li><strong>Adequacy decisions:</strong> Transfers to countries that the European Commission has determined provide an adequate level of data protection.</li>
+        </ul>
+
+        <h3>15.3 Data Minimisation</h3>
+        <p>Because most of your personal data (particularly journal entries and reflection content) is stored locally on your device and does not leave it, the volume of data subject to international transfer is minimised by design. Server-side data processing is limited to purchase verification and, in the future, optional cloud sync.</p>
+
+        <h3>15.4 Your Rights Regarding Transfers</h3>
+        <p>You have the right to request information about the specific safeguards we rely upon for any international data transfers. Contact us at hello@oakdev.app to exercise this right.</p>
+      </section>
+
+      <!-- ===== 16. GDPR Rights ===== -->
+      <section class="policy-section" id="s16" aria-labelledby="h16">
+        <span class="section-number">Section 16</span>
+        <h2 id="h16">Your Rights Under the GDPR</h2>
+
+        <p>As a data subject under the GDPR, you have the following rights with respect to your personal data. We are committed to facilitating the exercise of these rights promptly and without imposing undue barriers.</p>
+
+        <h3>16.1 Right of Access (Article 15)</h3>
+        <p>You have the right to obtain confirmation of whether we process personal data about you, and if so, to receive a copy of that data together with information about the purposes of processing, categories of data, recipients, retention periods, your other rights, and whether data is subject to automated decision-making.</p>
+
+        <h3>16.2 Right to Rectification (Article 16)</h3>
+        <p>You have the right to require us to correct inaccurate personal data we hold about you, and to have incomplete personal data completed. Data stored locally on your device can be amended directly within the App.</p>
+
+        <h3>16.3 Right to Erasure (Article 17)</h3>
+        <p>You have the right to request that we delete your personal data where: the data is no longer necessary for the purpose it was collected; you withdraw consent on which processing was based and there is no other legal basis; you object and there are no overriding legitimate grounds; the data has been unlawfully processed; or erasure is required by a legal obligation. Erasure requests may be limited where we are legally required to retain certain records (e.g., transaction records). In such cases we will inform you and restrict further use during the required retention period.</p>
+
+        <h3>16.4 Right to Restriction of Processing (Article 18)</h3>
+        <p>You have the right to request restriction of processing in circumstances including: you contest the accuracy of your data; the processing is unlawful but you prefer restriction over erasure; we no longer need the data but you need it for legal claims; or you have objected pending verification of our grounds. During a restriction period, we store the data but do not process it further without your consent.</p>
+
+        <h3>16.5 Right to Data Portability (Article 20)</h3>
+        <p>Where we process your personal data based on consent or a contract, by automated means, you have the right to receive that data in a structured, commonly used, and machine-readable format. For ChristBay this applies primarily to account details and purchase entitlement records. Journal entries stored on your device can be exported directly from the App.</p>
+
+        <h3>16.6 Right to Object (Article 21)</h3>
+        <p>You have the right to object, on grounds relating to your particular situation, to processing based on our legitimate interests. Upon receipt we must stop processing unless we can demonstrate compelling legitimate grounds that override your interests, rights, and freedoms, or unless processing is necessary for legal claims.</p>
+
+        <h3>16.7 Rights Related to Automated Decision-Making (Article 22)</h3>
+        <p>ChristBay does not engage in automated decision-making or profiling that produces legal or similarly significant effects on you. Should this change in a future version, we will update this Policy and obtain any required consent.</p>
+
+        <h3>16.8 Right to Withdraw Consent</h3>
+        <p>Where we process your personal data based on consent (e.g., push notifications), you have the right to withdraw that consent at any time, without affecting the lawfulness of processing carried out before withdrawal. Consent for push notifications can be withdrawn at any time in <em>iPhone Settings → Notifications → ChristBay</em>.</p>
+
+        <h3>16.9 How to Exercise Your Rights</h3>
+        <p>To exercise any of the rights described in this Section, contact us at <strong><a href="mailto:hello@oakdev.app" class="doc-link">hello@oakdev.app</a></strong>. Please include sufficient information to verify your identity. We will respond within <strong>30 days</strong> of receiving a valid request. In complex cases we may extend this by a further two months, notifying you of the extension within the first 30 days. There is no charge for exercising your rights, unless requests are manifestly unfounded, excessive, or repetitive.</p>
+      </section>
+
+      <!-- ===== 17. Account Deletion ===== -->
+      <section class="policy-section" id="s17" aria-labelledby="h17">
+        <span class="section-number">Section 17</span>
+        <h2 id="h17">Account Deletion and Data Removal</h2>
+
+        <h3>17.1 In-App Deletion</h3>
+        <p>You can delete your journal entries and all locally stored App data at any time from within ChristBay via <em>Settings → Privacy → Delete All Data</em>. This immediately and irreversibly removes all locally stored journal entries, reflection history, bookmarks, and personal settings from your device.</p>
+
+        <h3>17.2 Account Deletion Request</h3>
+        <p>If you have created an account or would like all server-side data permanently removed, please visit <a href="/delete-account/" class="doc-link">/delete-account/</a> or email <a href="mailto:hello@oakdev.app" class="doc-link">hello@oakdev.app</a> with the subject line "Account Deletion Request".</p>
+        <p>Upon receiving your verified deletion request, we will:</p>
+        <ol class="policy-list-ordered">
+          <li>Permanently delete your account identifier and authentication data within <strong>30 days</strong>.</li>
+          <li>Delete any personal data associated with your account from our active systems within <strong>30 days</strong>.</li>
+          <li>Ensure your data is removed from backup systems within <strong>60 days</strong>.</li>
+          <li>Confirm deletion to you by email.</li>
+        </ol>
+        <p>We will retain purchase transaction records for the legally required 7-year period under Swedish accounting law, but these records will be restricted from any other processing.</p>
+
+        <h3>17.3 Effect of Deletion</h3>
+        <ul class="policy-list">
+          <li>Your purchased Reflections and Blessed upgrade entitlements will no longer be accessible through our system.</li>
+          <li>Your journal entries will be permanently removed and cannot be recovered.</li>
+          <li>Your faith journey history and session progress will be permanently removed.</li>
+        </ul>
+
+        <h3>17.4 Apple Sign-In Revocation</h3>
+        <p>If you used Sign in with Apple, revoking the App's access to your Apple ID does not automatically delete your data from our servers. You must separately submit a deletion request as described above. To revoke Apple Sign-In access: <em>iPhone Settings → [Your Name] → Sign in with Apple → ChristBay → Stop Using Apple ID</em>.</p>
+
+        <h3>17.5 App Store Compliance</h3>
+        <p>Apple's App Store guidelines require that all apps offering account creation must also provide in-app account deletion. ChristBay complies with this requirement. The account deletion flow is accessible at <em>ChristBay App → Settings → Privacy → Delete Account &amp; Data</em>.</p>
+      </section>
+
+      <!-- ===== 18. Children ===== -->
+      <section class="policy-section" id="s18" aria-labelledby="h18">
+        <span class="section-number">Section 18</span>
+        <h2 id="h18">Children's Privacy</h2>
+
+        <h3>18.1 Age Requirement</h3>
+        <p>ChristBay is intended for users aged <strong>13 and older</strong>. We do not knowingly collect personal data from children under the age of 13. The App Store age rating for ChristBay reflects this age restriction.</p>
+
+        <h3>18.2 Users Between 13 and 16 (GDPR)</h3>
+        <p>In Sweden, the minimum age of consent for information society services is 13. For users between 13 and 16:</p>
+        <ul class="policy-list">
+          <li>We recommend parental supervision for users under 16.</li>
+          <li>Where a guardian purchases the App on behalf of a minor, the guardian accepts this Policy on behalf of the child.</li>
+          <li>Parents or guardians may request access to, correction of, or deletion of data associated with their minor child by contacting us at hello@oakdev.app.</li>
+        </ul>
+
+        <h3>18.3 If We Discover Data from Children Under 13</h3>
+        <p>If we become aware that we have inadvertently collected personal data from a child under the age of 13, we will take immediate steps to delete that information. If you believe we may have collected data from a child under 13, please contact us immediately at hello@oakdev.app.</p>
+
+        <h3>18.4 Family Sharing</h3>
+        <p>ChristBay supports Apple's Family Sharing feature. The family account holder (parent or guardian) is responsible for supervising the use of the App by minor family members.</p>
+
+        <h3>18.5 No Advertising to Minors</h3>
+        <p>ChristBay contains no advertising of any kind. We do not build profiles of users for advertising purposes regardless of age, and this prohibition applies with particular force to users who are minors.</p>
+      </section>
+
+      <!-- ===== 19. Security ===== -->
+      <section class="policy-section" id="s19" aria-labelledby="h19">
+        <span class="section-number">Section 19</span>
+        <h2 id="h19">Security</h2>
+
+        <p>OakDev &amp; AI AB takes reasonable and appropriate technical and organisational measures to protect your personal data against accidental or unlawful destruction, loss, alteration, unauthorised disclosure, or access.</p>
+
+        <h3>19.1 Technical Measures</h3>
+        <ul class="policy-list">
+          <li><strong>Encryption in transit:</strong> All communications between the App and any server-side components use TLS 1.2 or higher. We enforce App Transport Security (ATS) at the iOS layer.</li>
+          <li><strong>Encryption at rest (device):</strong> Data stored on your iOS device is protected by iOS's built-in file system encryption, tied to your device passcode, Face ID, or Touch ID.</li>
+          <li><strong>Encryption at rest (server):</strong> Any personal data stored on our servers is encrypted using industry-standard encryption (AES-256 or equivalent).</li>
+          <li><strong>Access controls:</strong> Access to personal data is restricted to personnel who require it for their duties, subject to role-based access controls and authentication requirements.</li>
+          <li><strong>Secure coding:</strong> ChristBay is developed following iOS security best practices, including use of iOS Keychain for sensitive credentials.</li>
+          <li><strong>Regular reviews:</strong> We conduct regular reviews of our security practices and update them as threats evolve.</li>
+        </ul>
+
+        <h3>19.2 Organisational Measures</h3>
+        <ul class="policy-list">
+          <li>Personnel with access to personal data are bound by confidentiality obligations.</li>
+          <li>Third-party service providers are vetted for security before engagement and contractually required to maintain appropriate security measures.</li>
+          <li>We maintain an internal incident response plan for data security events.</li>
+        </ul>
+
+        <h3>19.3 Data Breach Notification</h3>
+        <p>In the event of a personal data breach likely to result in a risk to your rights and freedoms, we will notify the relevant supervisory authority (IMY) within <strong>72 hours</strong> of becoming aware (GDPR Article 33). Where the breach is likely to result in a <em>high</em> risk to your rights and freedoms, we will also notify you directly without undue delay (GDPR Article 34), including a description of the breach, likely consequences, and measures taken to address it.</p>
+
+        <h3>19.4 No Absolute Guarantee</h3>
+        <p>No method of electronic storage or internet transmission is completely secure. While we strive to protect your personal data, we cannot guarantee absolute security. We encourage you to use a strong device passcode and keep your iOS software up to date.</p>
+      </section>
+
+      <!-- ===== 20. Cookies ===== -->
+      <section class="policy-section" id="s20" aria-labelledby="h20">
+        <span class="section-number">Section 20</span>
+        <h2 id="h20">Cookies &amp; Tracking Technologies</h2>
+
+        <h3>20.1 The App Does Not Use Cookies</h3>
+        <p>ChristBay is a native iOS application. Native iOS apps do not use browser cookies. ChristBay does <strong>not</strong> use cookies, cross-site tracking pixels, or similar web-based tracking mechanisms.</p>
+
+        <h3>20.2 No Advertising SDK</h3>
+        <p>ChristBay does not include any advertising SDKs, ad networks, or third-party marketing trackers. There is no advertising infrastructure of any kind embedded in the App.</p>
+
+        <h3>20.3 No Cross-App Tracking</h3>
+        <p>ChristBay does not request access to the Advertising Identifier (IDFA) and does not participate in cross-app tracking. Enabling "Limit Ad Tracking" or disabling "Allow Apps to Request to Track" in your iOS Privacy settings has no negative impact on ChristBay's functionality.</p>
+
+        <h3>20.4 Website</h3>
+        <p>The ChristBay website may use minimal, privacy-respecting analytics. Any analytics used on the website are disclosed in a separate notice on that site. The website does not use third-party advertising cookies.</p>
+
+        <h3>20.5 App Store Analytics</h3>
+        <p>Apple's App Store platform may use its own analytics in connection with App discovery, downloads, and purchases. This is conducted by Apple under Apple's own privacy policies and is outside our control.</p>
+      </section>
+
+      <!-- ===== 21. Push Notifications ===== -->
+      <section class="policy-section" id="s21" aria-labelledby="h21">
+        <span class="section-number">Section 21</span>
+        <h2 id="h21">Push Notifications</h2>
+
+        <h3>21.1 Consent Required</h3>
+        <p>ChristBay may send you push notifications (e.g., daily devotional reminders). Push notifications require your explicit permission, which iOS will request via a system-level prompt. You may grant or deny permission at that time.</p>
+
+        <h3>21.2 What Notifications We Send</h3>
+        <ul class="policy-list">
+          <li><strong>Daily devotional reminders:</strong> A brief prompt to begin your daily reflection, sent at a time you configure in App settings.</li>
+          <li><strong>Milestone notifications:</strong> Notifications celebrating faith journey milestones (e.g., a devotional streak).</li>
+          <li><strong>New content announcements:</strong> Notifications about new reflection categories or significant content additions.</li>
+        </ul>
+        <p>We do not send promotional or commercial marketing messages via push notifications without your separate consent.</p>
+
+        <h3>21.3 Managing Notifications</h3>
+        <p>You can withdraw permission for push notifications at any time via <em>iPhone Settings → Notifications → ChristBay</em>, or configure notification types within the App at <em>Settings → Notifications</em>. Disabling notifications does not affect your access to any App features.</p>
+
+        <h3>21.4 APNs Token</h3>
+        <p>To deliver push notifications, Apple provides the App with an Apple Push Notification service (APNs) token — a device-specific identifier used solely for routing push messages to your device. This token is not linked to your personal identity, is not shared with advertising networks, and is deleted from our systems when you revoke notification permissions or delete the App.</p>
+      </section>
+
+      <!-- ===== 22. Third-Party Services ===== -->
+      <section class="policy-section" id="s22" aria-labelledby="h22">
+        <span class="section-number">Section 22</span>
+        <h2 id="h22">Third-Party Services</h2>
+
+        <p>ChristBay is designed to minimise reliance on third-party services. Where third-party services are used, they are carefully selected for privacy practices and legally bound to process data only for the purposes we specify.</p>
+
+        <h3>22.1 Current Third-Party Integrations</h3>
+
+        <h4>Apple StoreKit (In-App Purchases)</h4>
+        <p>Apple's StoreKit framework is used for all purchase processing. Data handled: purchase receipts, transaction identifiers, product IDs. Governed by Apple's Privacy Policy.</p>
+
+        <h4>Apple Push Notification Service (APNs)</h4>
+        <p>Used to deliver push notifications to consenting users. Data handled: APNs device token. Governed by Apple's Privacy Policy.</p>
+
+        <h4>Apple Sign In (Optional)</h4>
+        <p>Optional authentication service. Data handled: Apple user identifier, optional relay email address. Governed by Apple's Privacy Policy.</p>
+
+        <h4>Apple CloudKit (Potential — Future Optional Feature)</h4>
+        <p>If a future version of ChristBay introduces optional cloud sync, we may use Apple's CloudKit. Under this model, your journal data would be stored in your own personal iCloud account and governed by Apple's iCloud terms. OakDev &amp; AI AB would not have access to your CloudKit data.</p>
+
+        <h3>22.2 No Social Media SDKs</h3>
+        <p>ChristBay does not integrate with any social media platform's SDK. No social media company tracks your usage of ChristBay.</p>
+
+        <h3>22.3 No Third-Party Analytics SDKs</h3>
+        <p>ChristBay does not currently include third-party analytics SDKs such as Firebase Analytics, Mixpanel, or Amplitude. Any analytics we perform are handled through our own first-party implementation or Apple's platform analytics.</p>
+
+        <h3>22.4 No Advertising Networks</h3>
+        <p>ChristBay does not include any advertising network SDKs. We are committed to keeping the App permanently ad-free.</p>
+
+        <h3>22.5 Scripture Content</h3>
+        <p>ChristBay uses licensed Bible translation text. Scripture content is embedded within the App and served from our own infrastructure. No user data is transmitted to Bible publishers or translation licensors in connection with your use of scripture content.</p>
+
+        <h3>22.6 Future Integrations</h3>
+        <p>We will update this Policy before introducing any new significant third-party data integrations. We will seek your consent where required by law before any new data sharing begins.</p>
+      </section>
+
+      <!-- ===== 23. Links ===== -->
+      <section class="policy-section" id="s23" aria-labelledby="h23">
+        <span class="section-number">Section 23</span>
+        <h2 id="h23">Links to Other Sites</h2>
+
+        <p>ChristBay may contain links to external websites or resources. OakDev &amp; AI AB is not responsible for the privacy practices, content, or data handling of any third-party websites or services. We encourage you to read the privacy policy of any third-party site you visit.</p>
+
+        <p>The inclusion of a link to an external site does not constitute an endorsement of that site or its privacy practices. When you follow a link from ChristBay to an external website, any personal data you provide on that website is subject to the privacy policy of that third party, not this Policy.</p>
+      </section>
+
+      <!-- ===== 24. Changes ===== -->
+      <section class="policy-section" id="s24" aria-labelledby="h24">
+        <span class="section-number">Section 24</span>
+        <h2 id="h24">Changes to This Privacy Policy</h2>
+
+        <p>We may update this Privacy Policy from time to time to reflect changes in our data practices, new features, legal requirements, or regulatory guidance. We are committed to transparency about any such changes.</p>
+
+        <h3>24.1 How We Notify You</h3>
+        <p>When we make material changes to this Policy, we will:</p>
+        <ul class="policy-list">
+          <li>Update the "Last Updated" date at the top of this Policy.</li>
+          <li>Post a prominent notice within the ChristBay App and/or on the ChristBay website.</li>
+          <li>For changes that significantly affect your rights or the way we process your personal data, provide at least <strong>30 days' advance notice</strong> before the changes take effect.</li>
+        </ul>
+
+        <h3>24.2 Minor Changes</h3>
+        <p>For minor, non-material updates (such as clarifications of existing language, typographical corrections, or updates to contact information), we will update the "Last Updated" date but will not necessarily provide advance notice.</p>
+
+        <h3>24.3 Continued Use</h3>
+        <p>Your continued use of ChristBay after the effective date of an updated Policy constitutes your acceptance of the updated Policy. If you do not agree to the updated Policy, you must stop using the Service and may request deletion of your data in accordance with Section 17.</p>
+
+        <h3>24.4 Policy Archive</h3>
+        <p>Previous versions of this Privacy Policy are available upon request. Please contact us at hello@oakdev.app if you require a historical version of this Policy.</p>
+
+        <h3>24.5 Version History</h3>
+        <table class="def-table" aria-label="Privacy Policy version history">
+          <thead><tr><th>Version</th><th>Date</th><th>Summary</th></tr></thead>
+          <tbody>
+            <tr><td>1.0</td><td>February 24, 2026</td><td>Initial publication of Privacy Policy for ChristBay Version 1.0.</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- ===== 25. Governing Law ===== -->
+      <section class="policy-section" id="s25" aria-labelledby="h25">
+        <span class="section-number">Section 25</span>
+        <h2 id="h25">Governing Law and Jurisdiction</h2>
+
+        <p>This Privacy Policy and all matters arising from or related to it are governed by the laws of Sweden, without regard to its conflict of law provisions, and in compliance with applicable EU law including the GDPR.</p>
+
+        <h3>25.1 Applicable Legislation</h3>
+        <ul class="policy-list">
+          <li><strong>Regulation (EU) 2016/679 (GDPR):</strong> The General Data Protection Regulation, directly applicable in Sweden and throughout the EEA.</li>
+          <li><strong>Swedish Act (2018:218) supplementing the EU Data Protection Regulation:</strong> Provides additional national specifications and derogations.</li>
+          <li><strong>Lag (2003:389) om elektronisk kommunikation (Electronic Communications Act):</strong> Governs certain aspects of electronic communications.</li>
+          <li><strong>Bokföringslag (1999:1078) (Accounting Act):</strong> Imposes obligations to retain certain business records for 7 years.</li>
+          <li><strong>Konsumentköplag (2022:260) (Consumer Sales Act):</strong> Governs consumer rights in connection with purchases.</li>
+        </ul>
+
+        <h3>25.2 Dispute Resolution</h3>
+        <p>Any disputes arising from this Policy that cannot be resolved through direct communication with us should be submitted to the competent Swedish courts or to the Swedish Authority for Privacy Protection (IMY), as appropriate. As an EU-based data controller, we are also subject to the jurisdiction of other EU/EEA supervisory authorities where relevant.</p>
+
+        <h3>25.3 Users Outside the EEA</h3>
+        <p>ChristBay is available globally on the App Store. While this Policy is written primarily with GDPR compliance in mind, we extend the same privacy principles and protections to all users worldwide. Users in jurisdictions with local privacy laws (e.g., California CCPA, Australia Privacy Act, Canadian PIPEDA) may have additional rights; contact us at hello@oakdev.app to enquire about your specific rights under local law.</p>
+
+        <h3>25.4 California Privacy Rights (CCPA / CPRA)</h3>
+        <p>To the extent that ChristBay is used by residents of California, USA, the CCPA and CPRA may provide additional rights including rights to know what personal information is collected, to delete personal information, to opt out of the "sale" or "sharing" of personal information, and to non-discrimination for exercising these rights. OakDev &amp; AI AB does not sell or share personal information as defined by the CCPA/CPRA. California residents may exercise their rights by contacting us at hello@oakdev.app.</p>
+      </section>
+
+      <!-- ===== 26. Contact ===== -->
+      <section class="policy-section" id="s26" aria-labelledby="h26">
+        <span class="section-number">Section 26</span>
+        <h2 id="h26">Contact Us</h2>
+
+        <p>If you have any questions, concerns, or requests regarding this Privacy Policy or our data practices, please contact us. We will do our best to respond promptly and helpfully.</p>
+
+        <table class="def-table" aria-label="Contact information">
+          <thead><tr><th>Subject</th><th>Contact</th></tr></thead>
+          <tbody>
+            <tr><td>Privacy &amp; data protection questions</td><td><a href="mailto:hello@oakdev.app" class="doc-link">hello@oakdev.app</a></td></tr>
+            <tr><td>Data subject rights requests</td><td><a href="mailto:hello@oakdev.app" class="doc-link">hello@oakdev.app</a></td></tr>
+            <tr><td>Account deletion requests</td><td><a href="/delete-account/" class="doc-link">/delete-account/</a> or <a href="mailto:hello@oakdev.app" class="doc-link">hello@oakdev.app</a></td></tr>
+            <tr><td>General support</td><td><a href="/support/" class="doc-link">/support/</a> or <a href="mailto:hello@oakdev.app" class="doc-link">hello@oakdev.app</a></td></tr>
+            <tr><td>Security disclosures</td><td><a href="mailto:hello@oakdev.app" class="doc-link">hello@oakdev.app</a> — subject: "Security Disclosure"</td></tr>
+            <tr><td>Legal enquiries</td><td><a href="mailto:hello@oakdev.app" class="doc-link">hello@oakdev.app</a> — subject: "Legal"</td></tr>
+          </tbody>
+        </table>
+
+        <p>Our postal address (for formal legal correspondence) is available upon request. We aim to acknowledge all enquiries within <strong>5 business days</strong> and provide a substantive response within <strong>30 days</strong>.</p>
+
+        <div class="callout callout-important">
+          <p class="callout-title">Preferred contact method</p>
+          <p>Email is the fastest and most reliable way to reach us. When contacting us about a data rights request, please include: the nature of your request, the approximate date of purchase (if relevant), and any other information that may help us locate your records. Do <strong>not</strong> send sensitive payment details in your email.</p>
+        </div>
+      </section>
+
+      <!-- ===== 27. Supervisory Authority ===== -->
+      <section class="policy-section" id="s27" aria-labelledby="h27">
+        <span class="section-number">Section 27</span>
+        <h2 id="h27">Right to Lodge a Complaint with a Supervisory Authority</h2>
+
+        <p>You have the right to lodge a complaint about our processing of your personal data with a data protection supervisory authority. As a Swedish company, our lead supervisory authority is the Swedish Authority for Privacy Protection (IMY):</p>
+
+        <table class="def-table" aria-label="Supervisory authority contact details">
+          <thead><tr><th>Field</th><th>Details</th></tr></thead>
+          <tbody>
+            <tr><td>Authority name</td><td>Integritetsskyddsmyndigheten (IMY) — Swedish Authority for Privacy Protection</td></tr>
+            <tr><td>Website</td><td>imy.se</td></tr>
+            <tr><td>Email</td><td>imy@imy.se</td></tr>
+            <tr><td>Phone</td><td>+46 8 657 61 00</td></tr>
+            <tr><td>Postal address</td><td>Integritetsskyddsmyndigheten, Box 8114, 104 20 Stockholm, Sweden</td></tr>
+          </tbody>
+        </table>
+
+        <p>If you are located in another EU or EEA member state, you also have the right to lodge a complaint with the supervisory authority in your country of residence or place of work. A list of all EU/EEA supervisory authorities is available on the European Data Protection Board (EDPB) website at <em>edpb.europa.eu</em>.</p>
+
+        <p>We ask that you first try to resolve any concern with us directly by contacting hello@oakdev.app. We take all privacy concerns seriously and will do our best to address them promptly and fairly.</p>
+
+        <hr class="policy-divider" aria-hidden="true" />
+
+        <div class="callout callout-info">
+          <p class="callout-title">A final word</p>
+          <p>OakDev &amp; AI AB built ChristBay as an act of faith and craft — a private, dignified space for daily devotion. We believe that respecting your data is an extension of respecting you as a person made in the image of God. This Policy is our written commitment to that belief. If anything in this Policy is unclear, or if you have concerns we haven't addressed, please write to us. We are a small, accessible team, and we will respond personally.</p>
+          <p style="margin-top:.625rem"><em>— OakDev &amp; AI AB</em></p>
+        </div>
+      </section>
+
+    </div><!-- /.doc-content -->
+  </div><!-- /.doc-layout -->
+</main>
+
+<footer class="site-footer" role="contentinfo">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="/assets/icon.png" alt="ChristBay" />
+        <span class="footer-brand-name">ChristBay</span>
+      </div>
+      <nav class="footer-nav" aria-label="Footer links">
+        <a href="/privacy/" aria-current="page">Privacy Policy</a>
+        <a href="/terms/">Terms of Use</a>
+        <a href="/support/">Support</a>
+        <a href="/delete-account/">Delete Account</a>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copyright">&copy; 2026 OakDev &amp; AI AB. All rights reserved.</p>
+      <p class="footer-tagline">Walk in the Word. Grow in grace.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+  var sections = document.querySelectorAll('.policy-section[id]');
+  var tocLinks = document.querySelectorAll('.toc-list a');
+  if('IntersectionObserver' in window && sections.length && tocLinks.length){
+    var obs = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){
+          var id = e.target.getAttribute('id');
+          tocLinks.forEach(function(l){
+            l.classList.toggle('active', l.getAttribute('href')==='#'+id);
+          });
+        }
+      });
+    },{rootMargin:'-20% 0px -70% 0px',threshold:0});
+    sections.forEach(function(s){ obs.observe(s); });
+  }
+  tocLinks.forEach(function(link){
+    link.addEventListener('click',function(e){
+      var id = this.getAttribute('href').replace('#','');
+      var t = document.getElementById(id);
+      if(t){ e.preventDefault(); t.scrollIntoView({behavior:'smooth',block:'start'}); t.setAttribute('tabindex','-1'); t.focus({preventScroll:true}); }
+    });
+  });
+}());
+</script>
+
+</body>
+</html>
