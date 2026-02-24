@@ -231,27 +231,29 @@
 
     .hero-logo-wrap {
       position: relative;
-      display: inline-flex;
+      display: flex;
       align-items: center;
       justify-content: center;
       margin: 0 auto 2rem;
+      width: 100%;
     }
 
     .logo-glow {
       position: absolute;
-      inset: -32px;
+      inset: -48px;
       border-radius: 50%;
       background: radial-gradient(ellipse at center,
-        rgba(201, 168, 76, 0.30) 0%,
-        rgba(201, 168, 76, 0.10) 42%,
-        transparent 68%);
+        rgba(255, 255, 255, 0.22) 0%,
+        rgba(255, 255, 255, 0.10) 32%,
+        rgba(201, 168, 76, 0.07) 52%,
+        transparent 70%);
       animation: logoBreath 3.6s ease-in-out infinite;
       pointer-events: none;
     }
 
     @keyframes logoBreath {
-      0%, 100% { opacity: 0.45; transform: scale(0.90); }
-      50%       { opacity: 1.00; transform: scale(1.10); }
+      0%, 100% { opacity: 0.50; transform: scale(0.86); }
+      50%       { opacity: 1.00; transform: scale(1.14); }
     }
 
     .hero-logo {
@@ -266,8 +268,8 @@
     }
 
     @keyframes logoGlowFilter {
-      0%, 100% { filter: drop-shadow(0 6px 28px rgba(0,0,0,0.40)) drop-shadow(0 0 10px rgba(201,168,76,0.12)) brightness(0.95); }
-      50%       { filter: drop-shadow(0 4px 18px rgba(0,0,0,0.28)) drop-shadow(0 0 36px rgba(201,168,76,0.55)) brightness(1.08); }
+      0%, 100% { filter: drop-shadow(0 6px 28px rgba(0,0,0,0.45)) drop-shadow(0 0 14px rgba(255,255,255,0.18)) brightness(1.02); }
+      50%       { filter: drop-shadow(0 4px 16px rgba(0,0,0,0.30)) drop-shadow(0 0 44px rgba(255,255,255,0.42)) brightness(1.14); }
     }
 
     .hero-eyebrow {
@@ -1053,7 +1055,7 @@
       }
       .hero-logo {
         animation: none;
-        filter: drop-shadow(0 6px 28px rgba(0,0,0,0.35)) drop-shadow(0 0 22px rgba(201,168,76,0.35));
+        filter: drop-shadow(0 6px 28px rgba(0,0,0,0.35)) drop-shadow(0 0 26px rgba(255,255,255,0.30)) brightness(1.08);
       }
     }
   </style>
