@@ -229,14 +229,45 @@
       margin: 0 auto;
     }
 
+    .hero-logo-wrap {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 2rem;
+    }
+
+    .logo-glow {
+      position: absolute;
+      inset: -32px;
+      border-radius: 50%;
+      background: radial-gradient(ellipse at center,
+        rgba(201, 168, 76, 0.30) 0%,
+        rgba(201, 168, 76, 0.10) 42%,
+        transparent 68%);
+      animation: logoBreath 3.6s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes logoBreath {
+      0%, 100% { opacity: 0.45; transform: scale(0.90); }
+      50%       { opacity: 1.00; transform: scale(1.10); }
+    }
+
     .hero-logo {
+      position: relative;
+      z-index: 1;
       width: auto;
       height: auto;
       max-width: 230px;
       max-height: 150px;
-      margin: 0 auto 2rem;
       object-fit: contain;
-      filter: drop-shadow(0 6px 28px rgba(0, 0, 0, 0.35));
+      animation: logoGlowFilter 3.6s ease-in-out infinite;
+    }
+
+    @keyframes logoGlowFilter {
+      0%, 100% { filter: drop-shadow(0 6px 28px rgba(0,0,0,0.40)) drop-shadow(0 0 10px rgba(201,168,76,0.12)) brightness(0.95); }
+      50%       { filter: drop-shadow(0 4px 18px rgba(0,0,0,0.28)) drop-shadow(0 0 36px rgba(201,168,76,0.55)) brightness(1.08); }
     }
 
     .hero-eyebrow {
@@ -1016,6 +1047,14 @@
         transform: none;
         transition: none;
       }
+      .logo-glow {
+        animation: none;
+        opacity: 0.6;
+      }
+      .hero-logo {
+        animation: none;
+        filter: drop-shadow(0 6px 28px rgba(0,0,0,0.35)) drop-shadow(0 0 22px rgba(201,168,76,0.35));
+      }
     }
   </style>
 </head>
@@ -1053,7 +1092,10 @@
       </svg>
 
       <div class="hero-content">
-        <img src="/assets/logo.png" alt="ChristBay" class="hero-logo" />
+        <div class="hero-logo-wrap">
+          <div class="logo-glow" aria-hidden="true"></div>
+          <img src="/assets/logo.png" alt="ChristBay" class="hero-logo" />
+        </div>
         <span class="hero-eyebrow">Available on the App Store</span>
         <h1>Walk in the Word.<br />Grow in grace.</h1>
         <p class="hero-tagline">Daily scripture reading, guided reflection, and private prayer &mdash; a devotional companion rooted in Protestant Christian faith.</p>
@@ -1267,14 +1309,15 @@
             <h2 class="section-title light" id="premium-heading">Blessed &mdash; Go deeper</h2>
             <div class="divider"></div>
             <br />
-            <p class="section-body" style="color: rgba(255,255,255,0.6);">ChristBay is free to use. Blessed is for those who want to go further &mdash; with unlimited reflections and full access to every Reflections Pack.</p>
+            <p class="section-body" style="color: rgba(255,255,255,0.6);">ChristBay comes with 150 reflections included from the start. Upgrade to Blessed to unlock more categories, expanded features, and an additional 300 reflections. Top up any time &mdash; no subscription required.</p>
           </div>
 
           <div class="premium-tiers reveal">
             <div class="tier-card">
-              <h3>Free</h3>
-              <p>A daily devotional practice, available to everyone at no cost.</p>
+              <h3>ChristBay</h3>
+              <p>Everything you need to begin a sincere daily devotional practice, included with your purchase.</p>
               <ul class="tier-features">
+                <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> 150 reflections included</li>
                 <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Daily scripture &amp; reflection</li>
                 <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Prayer journal</li>
                 <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Faith journey tracking</li>
@@ -1284,11 +1327,12 @@
             <div class="tier-card featured">
               <div class="tier-badge">Blessed</div>
               <h3>Blessed</h3>
-              <p>For those committed to a deeper, more sustained daily practice.</p>
+              <p>An in-app upgrade for those called to go further in their daily devotional practice.</p>
               <ul class="tier-features">
-                <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Everything in Free</li>
-                <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Unlimited guided reflections</li>
-                <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Full Reflections Pack access</li>
+                <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Everything in ChristBay</li>
+                <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> 300 additional reflections</li>
+                <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Unlocks more categories</li>
+                <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Expanded features</li>
                 <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Priority support</li>
               </ul>
             </div>
@@ -1296,24 +1340,24 @@
 
           <div class="packs-block reveal">
             <div class="packs-block-header">
-              <p class="packs-title">Reflections Packs</p>
-              <p class="packs-subtitle">Themed devotional series available as one-time in-app purchases. Buy credits once &mdash; no subscription, no auto-renewal.</p>
+              <p class="packs-title">Top-up Reflections</p>
+              <p class="packs-subtitle">Top up your reflections whenever you need more. One-time purchase &mdash; no subscription, no auto-renewal.</p>
             </div>
             <div class="packs-grid">
               <div class="pack-card">
                 <div class="pack-credits">100</div>
-                <div class="pack-label">Credits</div>
-                <p class="pack-desc">A focused pack for exploring a single theme or short devotional series.</p>
+                <div class="pack-label">Reflections</div>
+                <p class="pack-desc">A focused top-up to explore a new theme or keep your daily practice going.</p>
               </div>
               <div class="pack-card">
                 <div class="pack-credits">200</div>
-                <div class="pack-label">Credits</div>
-                <p class="pack-desc">A deeper study &mdash; ideal for a book of the Bible or longer thematic series.</p>
+                <div class="pack-label">Reflections</div>
+                <p class="pack-desc">A deeper reserve &mdash; ideal for sustained study through a book of the Bible.</p>
               </div>
               <div class="pack-card">
                 <div class="pack-credits">400</div>
-                <div class="pack-label">Credits</div>
-                <p class="pack-desc">Extended access for multiple packs or a comprehensive devotional journey.</p>
+                <div class="pack-label">Reflections</div>
+                <p class="pack-desc">Extended depth for those committed to a long-term, comprehensive devotional journey.</p>
               </div>
             </div>
           </div>
@@ -1341,19 +1385,19 @@
             </button>
             <div class="faq-answer" id="faq-answer-1" role="region" aria-labelledby="faq-btn-1">
               <div class="faq-answer-inner">
-                ChristBay has a free tier that includes the daily devotional and prayer journal &mdash; available at no cost. Blessed is an optional premium upgrade for deeper engagement. Reflections Packs are purchased separately using credits, which are a one-time purchase with no recurring charge. There is no subscription required to enjoy the core experience.
+                ChristBay is a one-time purchase that includes 150 reflections from the start. Blessed is a separate in-app upgrade that unlocks more categories, expanded features, and adds 300 more reflections. You can also top up your reflections at any time in bundles of 100, 200, or 400 &mdash; all one-time purchases with no subscription and no auto-renewal.
               </div>
             </div>
           </div>
 
           <div class="faq-item reveal reveal-d1" role="listitem">
             <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-2" id="faq-btn-2">
-              Do reflections cost credits?
+              How do reflections work?
               <svg class="faq-chevron" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
             </button>
             <div class="faq-answer" id="faq-answer-2" role="region" aria-labelledby="faq-btn-2">
               <div class="faq-answer-inner">
-                Daily guided reflections are free. Reflections Packs &mdash; themed devotional series that go deeper on specific books of the Bible or spiritual topics &mdash; are purchased separately using credits. Credits come in bundles of 100, 200, or 400 and are a one-time purchase. There are no recurring charges or automatic renewals.
+                Reflections are the currency of depth in ChristBay. Your purchase includes 150 reflections to get you started. Upgrading to Blessed adds a further 300 reflections and unlocks more of the app. When you need more, you can purchase top-up bundles of 100, 200, or 400 reflections &mdash; each a one-time purchase with no recurring charges or automatic renewals.
               </div>
             </div>
           </div>
