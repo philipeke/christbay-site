@@ -183,6 +183,60 @@
       transform: translateY(-1px);
     }
 
+    .nav-dropdown {
+      position: relative;
+    }
+
+    .nav-cta {
+      border: none;
+      cursor: pointer;
+    }
+
+    .nav-dropdown-menu {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      margin-top: 0.5rem;
+      background: var(--navy-light);
+      border: 1px solid rgba(201, 168, 76, 0.2);
+      border-radius: 8px;
+      min-width: 160px;
+      box-shadow: 0 8px 24px rgba(26, 39, 68, 0.25);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-8px);
+      transition: opacity var(--transition), visibility var(--transition), transform var(--transition);
+      z-index: 1000;
+      overflow: hidden;
+    }
+
+    .nav-dropdown-menu.open {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .nav-dropdown-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem;
+      color: var(--white);
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: background var(--transition), color var(--transition);
+      text-decoration: none;
+    }
+
+    .nav-dropdown-item:hover {
+      background: rgba(201, 168, 76, 0.15);
+      color: var(--gold-light);
+    }
+
+    .nav-dropdown-item svg {
+      flex-shrink: 0;
+    }
+
     @media (max-width: 600px) {
       .nav-links { gap: 1rem; }
       .nav-links a.nav-text { display: none; }
@@ -351,6 +405,24 @@
       font-size: 1rem;
       font-weight: 700;
       letter-spacing: -0.01em;
+    }
+
+    .btn-google-play {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.625rem;
+      background: var(--white);
+      color: var(--navy-deep);
+      padding: 0.8125rem 1.625rem;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      transition: transform var(--transition), box-shadow var(--transition);
+      box-shadow: 0 2px 16px rgba(0, 0, 0, 0.25);
+    }
+
+    .btn-google-play:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 28px rgba(0, 0, 0, 0.3);
     }
 
     .btn-outline {
@@ -1065,7 +1137,26 @@
       <div class="nav-links">
         <a href="#features" class="nav-text">Features</a>
         <a href="#faq" class="nav-text">FAQ</a>
-        <a href="#" class="nav-cta">Download</a>
+        <div class="nav-dropdown">
+          <button class="nav-cta" id="download-toggle" aria-expanded="false" aria-haspopup="true" aria-label="Download options">
+            Download
+          </button>
+          <div class="nav-dropdown-menu" id="download-menu">
+            <a href="https://apps.apple.com/se/app/christbay-daglig-reflektion/id6759575925" class="nav-dropdown-item" aria-label="Download on Apple App Store">
+              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+                <path fill="currentColor" d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+              </svg>
+              App Store
+            </a>
+            <a href="https://play.google.com/store/apps/details?id=com.oakdev.christbay" class="nav-dropdown-item" aria-label="Download on Google Play Store">
+              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+                <path fill="currentColor" d="M3 13.5h8v8H3z M11 3.5h8v8h-8z M3 3.5h8v8H3z M11 13.5h8v8h-8z"/>
+                <path fill="currentColor" d="M3.5 14v7.5c0 .83.67 1.5 1.5 1.5h6v-9H5c-.83 0-1.5.67-1.5 1.5zm7.5-11v9h6V5c0-.83-.67-1.5-1.5-1.5h-4.5zM3.5 4c0-.83.67-1.5 1.5-1.5h6v9H5c-.83 0-1.5-.67-1.5-1.5V4zm16-1.5h-4.5v9H20v-7.5c0-.83-.67-1.5-1.5-1.5zm0 9h-6v9h4.5c.83 0 1.5-.67 1.5-1.5v-7.5z"/>
+              </svg>
+              Play Store
+            </a>
+          </div>
+        </div>
       </div>
     </nav>
   </header>
@@ -1085,7 +1176,7 @@
         <h1>Walk in the Word.<br />Grow in grace.</h1>
         <p class="hero-tagline">Daily scripture reading, guided reflection, and private prayer &mdash; a devotional companion rooted in Protestant Christian faith.</p>
         <div class="hero-ctas">
-          <a href="#" class="btn-app-store" aria-label="Download ChristBay on the App Store">
+          <a href="https://apps.apple.com/se/app/christbay-daglig-reflektion/id6759575925" class="btn-app-store" aria-label="Download ChristBay on the App Store">
             <!-- Apple logo SVG -->
             <svg viewBox="0 0 24 24" width="22" height="27" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
               <path fill="#1a2744" d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
@@ -1093,6 +1184,16 @@
             <div class="btn-app-store-text">
               <span>Download on the</span>
               <span>App Store</span>
+            </div>
+          </a>
+          <a href="https://play.google.com/store/apps/details?id=com.oakdev.christbay" class="btn-google-play" aria-label="Download ChristBay on Google Play Store">
+            <!-- Google Play logo SVG -->
+            <svg viewBox="0 0 24 24" width="22" height="27" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+              <path fill="#1a2744" d="M3.609 1.814L13.792 12 3.609 22.186c-.386.387-.593.916-.593 1.465V1.349c0 .549.207 1.078.593 1.465zm10.908 10.911L21.268 24 3.609 1.814 14.517 12.722z"/>
+            </svg>
+            <div class="btn-app-store-text">
+              <span>Download on</span>
+              <span>Google Play</span>
             </div>
           </a>
           <a href="#about" class="btn-outline" aria-label="Learn more about ChristBay">
@@ -1516,6 +1617,46 @@
           target.focus({ preventScroll: true });
         });
       });
+
+      /* ----------------------------------------------------------
+         Download Dropdown Menu
+      ---------------------------------------------------------- */
+      var downloadToggle = document.getElementById('download-toggle');
+      var downloadMenu = document.getElementById('download-menu');
+
+      if (downloadToggle && downloadMenu) {
+        // Toggle menu on button click
+        downloadToggle.addEventListener('click', function (e) {
+          e.preventDefault();
+          var isOpen = downloadMenu.classList.contains('open');
+          downloadMenu.classList.toggle('open');
+          downloadToggle.setAttribute('aria-expanded', !isOpen);
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function (e) {
+          if (!downloadToggle.contains(e.target) && !downloadMenu.contains(e.target)) {
+            downloadMenu.classList.remove('open');
+            downloadToggle.setAttribute('aria-expanded', 'false');
+          }
+        });
+
+        // Close menu when pressing Escape
+        document.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape') {
+            downloadMenu.classList.remove('open');
+            downloadToggle.setAttribute('aria-expanded', 'false');
+          }
+        });
+
+        // Close menu when clicking on a link
+        downloadMenu.querySelectorAll('a').forEach(function (link) {
+          link.addEventListener('click', function () {
+            downloadMenu.classList.remove('open');
+            downloadToggle.setAttribute('aria-expanded', 'false');
+          });
+        });
+      }
 
     })();
   </script>
