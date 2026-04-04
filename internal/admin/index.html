@@ -153,6 +153,10 @@
       color: var(--navy);
     }
     .btn-secondary .btn-export-tag { background: rgba(255, 255, 255, 0.2); color: var(--white); }
+    .btn-export-tag--pdf {
+      background: rgba(176, 58, 46, 0.12);
+      color: #8b2e22;
+    }
     .pay-export-brand {
       border-left: 3px solid var(--gold);
       padding: 0.75rem 1rem;
@@ -856,6 +860,15 @@
             <div class="toolbar" style="flex-wrap:wrap">
               <button type="button" class="btn btn-secondary btn-sm" id="btn-pay-export-csv"><span class="btn-export-tag">CSV</span> Download pay CSV</button>
               <button type="button" class="btn btn-ghost btn-sm" id="btn-pay-export-json"><span class="btn-export-tag">JSON</span> Download pay JSON</button>
+            </div>
+          </div>
+
+          <div class="card settings-block panel-section">
+            <h3>Sample PDF (layout preview)</h3>
+            <p class="hint">Fictitious codes and numbers — for design review only. Uses the circular ChristBay brand mark from <code class="mono" style="font-size:0.8rem">/assets/brand.png</code>. Not for accounting filing.</p>
+            <div id="pay-pdf-msg"></div>
+            <div class="toolbar" style="flex-wrap:wrap">
+              <button type="button" class="btn btn-secondary btn-sm" id="btn-pay-sample-pdf"><span class="btn-export-tag btn-export-tag--pdf">PDF</span> Download sample PDF</button>
             </div>
           </div>
 
@@ -1599,6 +1612,157 @@ function downloadBlob(blob, name) {
   document.body.appendChild(a); a.click();
   setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
 }
+
+async function downloadSamplePayPdf() {
+  const payPdfMsg = document.getElementById('pay-pdf-msg');
+  if (payPdfMsg) payPdfMsg.innerHTML = '';
+  const { PDFDocument, StandardFonts, rgb } = await import('https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/+esm');
+  const pdfDoc = await PDFDocument.create();
+  const W = 595.28;
+  const H = 841.89;
+  const page = pdfDoc.addPage([W, H]);
+  const navy = rgb(26 / 255, 39 / 255, 68 / 255);
+  const gold = rgb(201 / 255, 168 / 255, 76 / 255);
+  const muted = rgb(0.42, 0.48, 0.58);
+  const line = rgb(0.88, 0.86, 0.82);
+  const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
+  const fontBold = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
+
+  const barH = 34;
+  page.drawRectangle({ x: 0, y: H - barH, width: W, height: barH, color: navy });
+
+  const left = 48;
+  let embedImg = null;
+  const logoUrls = ['/assets/brand.png', '/assets/ChatGPT%20Image%2010%20mars%202026%2020_56_02.png'];
+  for (let u = 0; u < logoUrls.length; u++) {
+    try {
+      const res = await fetch(logoUrls[u]);
+      if (!res.ok) continue;
+      const buf = await res.arrayBuffer();
+      const bytes = new Uint8Array(buf);
+      try {
+        embedImg = await pdfDoc.embedPng(bytes);
+      } catch (_) {
+        try { embedImg = await pdfDoc.embedJpg(bytes); } catch (_) { embedImg = null; }
+      }
+      if (embedImg) break;
+    } catch (_) { /* try next */ }
+  }
+
+  const gapUnderBar = 22;
+  const logoMaxW = 58;
+  let y = H - barH - gapUnderBar;
+
+  if (embedImg) {
+    const lw = logoMaxW;
+    const lh = (embedImg.height / embedImg.width) * lw;
+    const imgY = y - lh;
+    page.drawImage(embedImg, { x: left, y: imgY, width: lw, height: lh });
+    page.drawText('ChristBay', {
+      x: left + lw + 14,
+      y: imgY + lh / 2 - 8,
+      size: 22,
+      font: fontBold,
+      color: navy
+    });
+    y = imgY - 18;
+  } else {
+    page.drawText('ChristBay', { x: left, y: y - 26, size: 22, font: fontBold, color: navy });
+    y -= 40;
+  }
+
+  page.drawText('Pay export — sample report', { x: left, y: y, size: 14, font: fontBold, color: navy });
+  y -= 20;
+  page.drawText('Period: 2026-Q2 · Example data only · Layout & branding preview', { x: left, y: y, size: 9, font, color: muted });
+  y -= 32;
+
+  const kpis = [
+    { label: 'Active codes (sample)', value: '12' },
+    { label: 'Total uses (sample)', value: '148' },
+    { label: 'Package', value: 'Preview' }
+  ];
+  const g = 12;
+  const boxW = (W - left * 2 - g * 2) / 3;
+  const boxH = 50;
+  kpis.forEach(function(k, i) {
+    const x = left + i * (boxW + g);
+    const by = y - boxH;
+    page.drawRectangle({
+      x: x,
+      y: by,
+      width: boxW,
+      height: boxH,
+      color: rgb(0.98, 0.97, 0.95),
+      borderColor: gold,
+      borderWidth: 0.75
+    });
+    page.drawText(k.label, { x: x + 10, y: by + boxH - 14, size: 7, font, color: muted });
+    page.drawText(k.value, { x: x + 10, y: by + 16, size: 17, font: fontBold, color: navy });
+  });
+  y -= boxH + 22;
+
+  page.drawText('Sample referral rows', { x: left, y: y, size: 11, font: fontBold, color: navy });
+  y -= 18;
+
+  const colW = [108, 232, 54, 82];
+  const labels = ['Code', 'Label', 'Uses', 'Status'];
+  const th = 20;
+  const tw = colW[0] + colW[1] + colW[2] + colW[3];
+  page.drawRectangle({ x: left, y: y - th, width: tw, height: th, color: navy });
+  let cx = left;
+  labels.forEach(function(t, i) {
+    page.drawText(t, { x: cx + 6, y: y - th + 6, size: 8, font: fontBold, color: rgb(1, 1, 1) });
+    cx += colW[i];
+  });
+  y -= th;
+
+  const sampleRows = [
+    ['FAITH-2026', 'Spring campaign', '42', 'Active'],
+    ['EASTER-Q2', 'Partner · OakDev', '31', 'Active'],
+    ['GROW-7K2L', 'Organic / social', '18', 'Active'],
+    ['LEGACY-01', 'Archive (sample)', '0', 'Inactive']
+  ];
+  const rh = 17;
+  sampleRows.forEach(function(row, ri) {
+    cx = left;
+    row.forEach(function(cell, ci) {
+      const bg = ri % 2 === 0 ? rgb(1, 1, 1) : rgb(0.985, 0.985, 0.982);
+      page.drawRectangle({ x: cx, y: y - rh, width: colW[ci], height: rh, color: bg });
+      page.drawText(String(cell), { x: cx + 5, y: y - rh + 5, size: 8, font, color: navy });
+      cx += colW[ci];
+    });
+    y -= rh;
+  });
+
+  y -= 18;
+  page.drawLine({ start: { x: left, y: y }, end: { x: W - left, y: y }, thickness: 0.45, color: line });
+  y -= 16;
+  page.drawText('OakDev & AI AB · Internal use only · Sample PDF — not for filing', { x: left, y: y, size: 7.5, font, color: muted });
+  y -= 12;
+  page.drawText('ChristBay — Walk in the Word. Grow in grace.', { x: left, y: y, size: 7.5, font, color: rgb(0.55, 0.6, 0.68) });
+
+  const out = await pdfDoc.save();
+  downloadBlob(new Blob([out], { type: 'application/pdf' }), 'christbay-pay-export-sample.pdf');
+  if (payPdfMsg) {
+    payPdfMsg.innerHTML = '<div class="msg msg-ok">Sample PDF downloaded. Open it to review layout, typography, and logo.</div>';
+  }
+}
+
+document.getElementById('btn-pay-sample-pdf').addEventListener('click', async function() {
+  const btn = this;
+  const payPdfMsg = document.getElementById('pay-pdf-msg');
+  if (payPdfMsg) payPdfMsg.innerHTML = '';
+  btn.disabled = true;
+  const prev = btn.innerHTML;
+  btn.innerHTML = '<span class="btn-export-tag btn-export-tag--pdf">PDF</span> Building\u2026';
+  try {
+    await downloadSamplePayPdf();
+  } catch (err) {
+    if (payPdfMsg) payPdfMsg.innerHTML = '<div class="msg msg-error">' + escapeHtml(err.message || String(err)) + '</div>';
+  }
+  btn.innerHTML = prev;
+  btn.disabled = false;
+});
 
 document.getElementById('btn-export-full').addEventListener('click', async () => {
   const data = await apiFetch('/list?pageSize=200');
