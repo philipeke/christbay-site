@@ -3,24 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="ChristBay is a private, ad-free app for daily scripture reading, guided reflection, and prayer — built for sincere Protestant Christian faith." />
-  <meta property="og:title" content="ChristBay — Walk in the Word. Grow in grace." />
-  <meta property="og:description" content="A private, ad-free devotional app for daily scripture reading, guided reflection, and prayer." />
+  <meta name="description" content="ChristBay 2.0 — A private, ad-free devotional app with 15 curated categories, guided reflections, and prayer journal. Built for sincere Protestant Christian faith." />
+  <meta property="og:title" content="ChristBay 2.0 — Walk in the Word. Grow in grace." />
+  <meta property="og:description" content="15 curated categories, guided reflections, prayer journal, and faith journey tracking — all in a private, ad-free devotional companion." />
   <meta property="og:type" content="website" />
-  <title>ChristBay — Walk in the Word. Grow in grace.</title>
-  <link rel="icon" type="image/png" href="/assets/icon.png" />
+  <title>ChristBay 2.0 — Walk in the Word. Grow in grace.</title>
+  <link rel="icon" type="image/png" href="/assets/brand.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet" />
 
   <style>
-    /* ============================================================
-       CSS Custom Properties
-    ============================================================ */
     :root {
       --navy:           #1a2744;
       --navy-light:     #243355;
       --navy-deep:      #121d35;
+      --navy-darker:    #0d1526;
       --gold:           #c9a84c;
       --gold-light:     #dfc980;
       --gold-subtle:    #f5edcc;
@@ -34,26 +32,16 @@
       --shadow-sm:      0 1px 3px rgba(26, 39, 68, 0.08);
       --shadow-md:      0 4px 16px rgba(26, 39, 68, 0.10);
       --shadow-lg:      0 8px 32px rgba(26, 39, 68, 0.14);
+      --shadow-xl:      0 16px 48px rgba(26, 39, 68, 0.18);
       --radius:         12px;
       --radius-sm:      8px;
+      --radius-lg:      20px;
       --transition:     0.25s ease;
       --max-width:      1100px;
     }
 
-    /* ============================================================
-       Reset & Base
-    ============================================================ */
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-      font-size: 16px;
-    }
-
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
     body {
       font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
       background-color: var(--warm-white);
@@ -63,180 +51,73 @@
       -moz-osx-font-smoothing: grayscale;
       overflow-x: hidden;
     }
-
-    img {
-      max-width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
+    img { max-width: 100%; height: auto; display: block; }
+    a { color: inherit; text-decoration: none; }
     ul { list-style: none; }
 
-    /* ============================================================
-       Skip Link
-    ============================================================ */
     .skip-link {
-      position: absolute;
-      top: -120px;
-      left: 1rem;
-      background: var(--navy);
-      color: var(--white);
-      padding: 0.5rem 1rem;
-      border-radius: var(--radius-sm);
-      font-size: 0.875rem;
-      font-weight: 600;
-      z-index: 9999;
+      position: absolute; top: -120px; left: 1rem;
+      background: var(--navy); color: var(--white);
+      padding: 0.5rem 1rem; border-radius: var(--radius-sm);
+      font-size: 0.875rem; font-weight: 600; z-index: 9999;
       transition: top var(--transition);
     }
-    .skip-link:focus {
-      top: 1rem;
-    }
+    .skip-link:focus { top: 1rem; }
 
-    /* ============================================================
-       Container
-    ============================================================ */
-    .container {
-      width: 100%;
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 0 1.5rem;
-    }
+    .container { width: 100%; max-width: var(--max-width); margin: 0 auto; padding: 0 1.5rem; }
 
     /* ============================================================
        Header / Navigation
     ============================================================ */
     .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(18, 29, 53, 0.96);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border-bottom: 1px solid rgba(201, 168, 76, 0.14);
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(13, 21, 38, 0.92);
+      backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(201, 168, 76, 0.12);
     }
-
     .nav-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 64px;
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 0 1.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px; max-width: var(--max-width); margin: 0 auto; padding: 0 1.5rem;
     }
-
-    .nav-brand {
-      display: flex;
-      align-items: center;
-      gap: 0.625rem;
-    }
-
+    .nav-brand { display: flex; align-items: center; gap: 0.625rem; }
     .nav-brand img {
-      width: 28px;
-      height: 28px;
-      object-fit: contain;
-      border-radius: 6px;
+      width: 32px; height: 32px; object-fit: cover;
+      border-radius: 50%; border: 2px solid rgba(201, 168, 76, 0.3);
     }
-
-    .nav-brand-name {
-      font-size: 1.0625rem;
-      font-weight: 600;
-      color: var(--white);
-      letter-spacing: -0.01em;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 1.75rem;
-    }
-
+    .nav-brand-name { font-size: 1.0625rem; font-weight: 700; color: var(--white); letter-spacing: -0.01em; }
+    .nav-links { display: flex; align-items: center; gap: 1.75rem; }
     .nav-links a {
-      font-size: 0.875rem;
-      font-weight: 500;
-      color: rgba(255, 255, 255, 0.7);
-      transition: color var(--transition);
+      font-size: 0.875rem; font-weight: 500;
+      color: rgba(255, 255, 255, 0.7); transition: color var(--transition);
     }
-
-    .nav-links a:hover {
-      color: var(--white);
-    }
-
-    .nav-links .nav-cta {
-      background: var(--gold);
-      color: var(--navy);
-      padding: 0.5rem 1.25rem;
-      border-radius: 100px;
-      font-weight: 600;
-      font-size: 0.8125rem;
-      color: var(--navy-deep);
+    .nav-links a:hover { color: var(--white); }
+    .nav-dropdown { position: relative; }
+    .nav-cta {
+      background: var(--gold); color: var(--navy-deep);
+      padding: 0.5rem 1.25rem; border-radius: 100px;
+      font-weight: 600; font-size: 0.8125rem;
+      border: none; cursor: pointer;
       transition: background var(--transition), transform var(--transition);
     }
-
-    .nav-links .nav-cta:hover {
-      background: var(--gold-light);
-      transform: translateY(-1px);
-    }
-
-    .nav-dropdown {
-      position: relative;
-    }
-
-    .nav-cta {
-      border: none;
-      cursor: pointer;
-    }
-
+    .nav-cta:hover { background: var(--gold-light); transform: translateY(-1px); }
     .nav-dropdown-menu {
-      position: absolute;
-      top: 100%;
-      right: 0;
-      margin-top: 0.5rem;
-      background: var(--navy-light);
-      border: 1px solid rgba(201, 168, 76, 0.2);
-      border-radius: 8px;
-      min-width: 160px;
+      position: absolute; top: 100%; right: 0; margin-top: 0.5rem;
+      background: var(--navy-light); border: 1px solid rgba(201, 168, 76, 0.2);
+      border-radius: 8px; min-width: 170px;
       box-shadow: 0 8px 24px rgba(26, 39, 68, 0.25);
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(-8px);
+      opacity: 0; visibility: hidden; transform: translateY(-8px);
       transition: opacity var(--transition), visibility var(--transition), transform var(--transition);
-      z-index: 1000;
-      overflow: hidden;
+      z-index: 1000; overflow: hidden;
     }
-
-    .nav-dropdown-menu.open {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0);
-    }
-
+    .nav-dropdown-menu.open { opacity: 1; visibility: visible; transform: translateY(0); }
     .nav-dropdown-item {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      padding: 0.75rem 1rem;
-      color: var(--white);
-      font-size: 0.875rem;
-      font-weight: 500;
+      display: flex; align-items: center; gap: 0.75rem;
+      padding: 0.75rem 1rem; color: var(--white);
+      font-size: 0.875rem; font-weight: 500;
       transition: background var(--transition), color var(--transition);
-      text-decoration: none;
     }
-
-    .nav-dropdown-item:hover {
-      background: rgba(201, 168, 76, 0.15);
-      color: var(--gold-light);
-    }
-
-    .nav-dropdown-item svg {
-      flex-shrink: 0;
-    }
-
+    .nav-dropdown-item:hover { background: rgba(201, 168, 76, 0.15); color: var(--gold-light); }
+    .nav-dropdown-item svg { flex-shrink: 0; }
     @media (max-width: 600px) {
       .nav-links { gap: 1rem; }
       .nav-links a.nav-text { display: none; }
@@ -247,877 +128,425 @@
     ============================================================ */
     .hero {
       position: relative;
-      background: linear-gradient(155deg, var(--navy-deep) 0%, var(--navy) 55%, var(--navy-light) 100%);
-      color: var(--white);
-      text-align: center;
-      padding: 6.5rem 1.5rem 8rem;
-      overflow: hidden;
+      background: linear-gradient(160deg, var(--navy-darker) 0%, var(--navy-deep) 30%, var(--navy) 60%, var(--navy-light) 100%);
+      color: var(--white); text-align: center;
+      padding: 7rem 1.5rem 9rem; overflow: hidden;
     }
-
     .hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
+      content: ''; position: absolute; inset: 0;
       background-image:
-        radial-gradient(ellipse at 25% 15%, rgba(201, 168, 76, 0.07) 0%, transparent 55%),
-        radial-gradient(ellipse at 78% 85%, rgba(201, 168, 76, 0.05) 0%, transparent 50%);
+        radial-gradient(ellipse at 20% 20%, rgba(201, 168, 76, 0.09) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, rgba(201, 168, 76, 0.06) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.02) 0%, transparent 60%);
       pointer-events: none;
     }
-
-
-    .hero-content {
-      position: relative;
-      z-index: 1;
-      max-width: 680px;
-      margin: 0 auto;
+    .hero::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+      height: 120px;
+      background: linear-gradient(to bottom, transparent, var(--warm-white));
+      pointer-events: none;
     }
-
+    .hero-content { position: relative; z-index: 1; max-width: 720px; margin: 0 auto; }
     .hero-logo-wrap {
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 2rem;
-      width: 100%;
+      position: relative; display: flex; align-items: center;
+      justify-content: center; margin: 0 auto 2.5rem; width: 140px; height: 140px;
     }
-
     .logo-glow {
-      position: absolute;
-      inset: -48px;
-      border-radius: 50%;
+      position: absolute; inset: -40px; border-radius: 50%;
       background: radial-gradient(ellipse at center,
-        rgba(255, 255, 255, 0.22) 0%,
-        rgba(255, 255, 255, 0.10) 32%,
-        rgba(201, 168, 76, 0.07) 52%,
+        rgba(201, 168, 76, 0.20) 0%,
+        rgba(201, 168, 76, 0.08) 40%,
         transparent 70%);
-      animation: logoBreath 3.6s ease-in-out infinite;
+      animation: logoBreath 4s ease-in-out infinite;
       pointer-events: none;
     }
-
     @keyframes logoBreath {
-      0%, 100% { opacity: 0.50; transform: scale(0.86); }
-      50%       { opacity: 1.00; transform: scale(1.14); }
+      0%, 100% { opacity: 0.5; transform: scale(0.85); }
+      50%      { opacity: 1;   transform: scale(1.15); }
     }
-
     .hero-logo {
-      position: relative;
-      z-index: 1;
-      width: auto;
-      height: auto;
-      max-width: 230px;
-      max-height: 150px;
-      object-fit: contain;
-      animation: logoGlowFilter 3.6s ease-in-out infinite;
+      position: relative; z-index: 1;
+      width: 120px; height: 120px; object-fit: cover;
+      border-radius: 50%;
+      border: 3px solid rgba(201, 168, 76, 0.4);
+      box-shadow: 0 0 40px rgba(201, 168, 76, 0.2), 0 8px 32px rgba(0, 0, 0, 0.3);
+      animation: logoFloat 4s ease-in-out infinite;
     }
-
-    @keyframes logoGlowFilter {
-      0%, 100% { filter: brightness(0) invert(1) drop-shadow(0 4px 20px rgba(0,0,0,0.50)) drop-shadow(0 0 18px rgba(255,255,255,0.45)); }
-      50%       { filter: brightness(0) invert(1) drop-shadow(0 2px 14px rgba(0,0,0,0.35)) drop-shadow(0 0 48px rgba(255,255,255,0.85)); }
+    @keyframes logoFloat {
+      0%, 100% { transform: translateY(0); }
+      50%      { transform: translateY(-6px); }
     }
-
-    .hero-eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      font-size: 0.6875rem;
-      font-weight: 600;
-      letter-spacing: 0.13em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 1.125rem;
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(201, 168, 76, 0.15); border: 1px solid rgba(201, 168, 76, 0.3);
+      padding: 0.375rem 1rem; border-radius: 100px;
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--gold-light);
+      margin-bottom: 1.5rem;
     }
-
-    .hero-eyebrow::before,
-    .hero-eyebrow::after {
-      content: '';
-      display: block;
-      width: 24px;
-      height: 1px;
-      background: var(--gold);
-      opacity: 0.5;
+    .hero-badge-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--gold); animation: pulse 2s ease-in-out infinite;
     }
-
+    @keyframes pulse {
+      0%, 100% { opacity: 0.4; }
+      50%      { opacity: 1; }
+    }
     .hero h1 {
-      font-size: clamp(2.25rem, 5vw, 3.875rem);
-      font-weight: 700;
-      letter-spacing: -0.025em;
-      line-height: 1.1;
-      color: var(--white);
-      margin-bottom: 1.25rem;
+      font-size: clamp(2.5rem, 5.5vw, 4rem);
+      font-weight: 800; letter-spacing: -0.03em;
+      line-height: 1.08; color: var(--white); margin-bottom: 1.5rem;
     }
-
+    .hero h1 .gold { color: var(--gold-light); }
     .hero-tagline {
       font-size: clamp(1rem, 2.2vw, 1.1875rem);
-      font-weight: 400;
-      color: rgba(255, 255, 255, 0.75);
-      max-width: 530px;
-      margin: 0 auto 2.75rem;
-      line-height: 1.65;
+      font-weight: 400; color: rgba(255, 255, 255, 0.72);
+      max-width: 560px; margin: 0 auto 3rem; line-height: 1.7;
     }
-
-    .hero-ctas {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-
-    @media (max-width: 480px) {
-      .hero { padding: 4.5rem 1.5rem 6rem; }
-    }
-
-    /* ============================================================
-       Buttons
-    ============================================================ */
-    .btn-app-store {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.625rem;
-      background: var(--white);
-      color: var(--navy-deep);
-      padding: 0.8125rem 1.625rem;
-      border-radius: var(--radius-sm);
-      font-weight: 600;
+    .hero-ctas { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-store {
+      display: inline-flex; align-items: center; gap: 0.625rem;
+      background: var(--white); color: var(--navy-deep);
+      padding: 0.8125rem 1.625rem; border-radius: var(--radius-sm);
+      font-weight: 600; box-shadow: 0 2px 16px rgba(0, 0, 0, 0.2);
       transition: transform var(--transition), box-shadow var(--transition);
-      box-shadow: 0 2px 16px rgba(0, 0, 0, 0.25);
     }
-
-    .btn-app-store:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 28px rgba(0, 0, 0, 0.3);
-    }
-
-    .btn-app-store-text {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      line-height: 1.1;
-    }
-
-    .btn-app-store-text span:first-child {
-      font-size: 0.6875rem;
-      font-weight: 400;
-      opacity: 0.65;
-    }
-
-    .btn-app-store-text span:last-child {
-      font-size: 1rem;
-      font-weight: 700;
-      letter-spacing: -0.01em;
-    }
-
-    .btn-google-play {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.625rem;
-      background: var(--white);
-      color: var(--navy-deep);
-      padding: 0.8125rem 1.625rem;
-      border-radius: var(--radius-sm);
-      font-weight: 600;
-      transition: transform var(--transition), box-shadow var(--transition);
-      box-shadow: 0 2px 16px rgba(0, 0, 0, 0.25);
-    }
-
-    .btn-google-play:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 28px rgba(0, 0, 0, 0.3);
-    }
-
+    .btn-store:hover { transform: translateY(-2px); box-shadow: 0 6px 28px rgba(0, 0, 0, 0.25); }
+    .btn-store-text { display: flex; flex-direction: column; align-items: flex-start; line-height: 1.1; }
+    .btn-store-text span:first-child { font-size: 0.6875rem; font-weight: 400; opacity: 0.65; }
+    .btn-store-text span:last-child { font-size: 1rem; font-weight: 700; letter-spacing: -0.01em; }
     .btn-outline {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: transparent;
-      color: rgba(255, 255, 255, 0.85);
-      padding: 0.8125rem 1.5rem;
-      border-radius: var(--radius-sm);
-      border: 1.5px solid rgba(255, 255, 255, 0.3);
-      font-weight: 500;
-      font-size: 0.9375rem;
-      transition: border-color var(--transition), background var(--transition), color var(--transition);
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: transparent; color: rgba(255, 255, 255, 0.85);
+      padding: 0.8125rem 1.5rem; border-radius: var(--radius-sm);
+      border: 1.5px solid rgba(255, 255, 255, 0.25);
+      font-weight: 500; font-size: 0.9375rem;
+      transition: all var(--transition);
     }
-
-    .btn-outline:hover {
-      border-color: rgba(255, 255, 255, 0.65);
-      background: rgba(255, 255, 255, 0.07);
-      color: var(--white);
+    .btn-outline:hover { border-color: rgba(255, 255, 255, 0.5); background: rgba(255, 255, 255, 0.07); color: var(--white); }
+    .hero-stats {
+      display: flex; gap: 3rem; justify-content: center; margin-top: 4rem;
+      padding-top: 2.5rem; border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .hero-stat { text-align: center; }
+    .hero-stat-value { font-size: 1.75rem; font-weight: 800; color: var(--gold); letter-spacing: -0.03em; }
+    .hero-stat-label { font-size: 0.75rem; color: rgba(255, 255, 255, 0.5); font-weight: 500; margin-top: 0.125rem; }
+    @media (max-width: 520px) {
+      .hero { padding: 5rem 1.5rem 7rem; }
+      .hero-stats { gap: 1.5rem; flex-wrap: wrap; }
     }
 
     /* ============================================================
        Section Base
     ============================================================ */
-    section {
-      padding: 5.5rem 1.5rem;
-    }
-
+    section { padding: 6rem 1.5rem; }
     .section-label {
-      display: inline-block;
-      font-size: 0.6875rem;
-      font-weight: 600;
-      letter-spacing: 0.13em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 0.75rem;
+      display: inline-block; font-size: 0.6875rem; font-weight: 700;
+      letter-spacing: 0.13em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 0.75rem;
     }
-
     .section-title {
       font-size: clamp(1.75rem, 3.5vw, 2.5rem);
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      line-height: 1.2;
-      color: var(--text-primary);
-      margin-bottom: 1rem;
+      font-weight: 800; letter-spacing: -0.025em;
+      line-height: 1.15; color: var(--text-primary); margin-bottom: 1rem;
     }
-
     .section-title.light { color: var(--white); }
-
     .section-body {
-      font-size: 1.0625rem;
-      color: var(--text-secondary);
-      line-height: 1.75;
-      max-width: 640px;
+      font-size: 1.0625rem; color: var(--text-secondary);
+      line-height: 1.75; max-width: 640px;
     }
-
     .section-header { margin-bottom: 3.5rem; }
-
-    .section-header.centered {
-      text-align: center;
-    }
-
-    .section-header.centered .section-body {
-      margin: 0 auto;
-    }
-
-    .divider {
-      width: 40px;
-      height: 3px;
-      background: var(--gold);
-      border-radius: 2px;
-      margin: 0.875rem 0 0;
-    }
-
+    .section-header.centered { text-align: center; }
+    .section-header.centered .section-body { margin: 0 auto; }
+    .divider { width: 40px; height: 3px; background: var(--gold); border-radius: 2px; margin: 0.875rem 0 0; }
     .divider.centered { margin: 0.875rem auto 0; }
+
+    /* ============================================================
+       What's New (2.0 Highlights)
+    ============================================================ */
+    .whats-new { background: var(--white); }
+    .new-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .new-card {
+      position: relative; background: var(--warm-white);
+      border: 1px solid var(--border); border-radius: var(--radius-lg);
+      padding: 2.25rem 1.75rem; overflow: hidden;
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+    }
+    .new-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0;
+      height: 4px; background: linear-gradient(90deg, var(--gold), var(--gold-light));
+      opacity: 0; transition: opacity var(--transition);
+    }
+    .new-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: rgba(201, 168, 76, 0.3); }
+    .new-card:hover::before { opacity: 1; }
+    .new-card-icon {
+      width: 52px; height: 52px; background: linear-gradient(135deg, var(--navy), var(--navy-light));
+      border-radius: var(--radius); display: flex; align-items: center;
+      justify-content: center; margin-bottom: 1.5rem;
+      box-shadow: 0 4px 12px rgba(26, 39, 68, 0.15);
+    }
+    .new-card-icon svg { width: 24px; height: 24px; stroke: var(--gold); fill: none; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
+    .new-card h3 { font-size: 1.125rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.625rem; letter-spacing: -0.01em; }
+    .new-card p { font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.65; }
+    .new-card .new-tag {
+      display: inline-block; font-size: 0.625rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      background: rgba(201, 168, 76, 0.15); color: var(--gold);
+      padding: 0.2rem 0.5rem; border-radius: 4px; margin-bottom: 0.75rem;
+    }
+    @media (max-width: 900px) { .new-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 520px) { .new-grid { grid-template-columns: 1fr; } }
 
     /* ============================================================
        About
     ============================================================ */
     .about { background: var(--warm-white); }
-
-    .about-inner {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: center;
-    }
-
+    .about-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
     .about-verse {
-      background: var(--navy);
-      color: var(--white);
-      padding: 2.75rem;
-      border-radius: var(--radius);
-      position: relative;
-      overflow: hidden;
+      background: linear-gradient(135deg, var(--navy-deep), var(--navy));
+      color: var(--white); padding: 2.75rem; border-radius: var(--radius-lg);
+      position: relative; overflow: hidden;
     }
-
     .about-verse::before {
-      content: '\201C';
-      position: absolute;
-      top: -1.5rem;
-      left: 1.25rem;
-      font-size: 9rem;
-      font-weight: 700;
-      color: var(--gold);
-      opacity: 0.12;
-      line-height: 1;
-      font-family: Georgia, serif;
-      pointer-events: none;
+      content: '\201C'; position: absolute; top: -1.5rem; left: 1.25rem;
+      font-size: 9rem; font-weight: 700; color: var(--gold); opacity: 0.12;
+      line-height: 1; font-family: Georgia, serif; pointer-events: none;
     }
-
     .about-verse blockquote {
-      position: relative;
-      z-index: 1;
-      font-size: 1.1875rem;
-      font-style: italic;
-      color: rgba(255, 255, 255, 0.88);
-      line-height: 1.75;
-      margin-bottom: 1.25rem;
+      position: relative; z-index: 1; font-size: 1.1875rem; font-style: italic;
+      color: rgba(255, 255, 255, 0.88); line-height: 1.75; margin-bottom: 1.25rem;
       font-family: Georgia, 'Times New Roman', serif;
     }
-
-    .about-verse cite {
-      font-size: 0.875rem;
-      font-style: normal;
-      color: var(--gold);
-      font-weight: 500;
-      letter-spacing: 0.01em;
-    }
-
+    .about-verse cite { font-size: 0.875rem; font-style: normal; color: var(--gold); font-weight: 500; }
     .about-body p + p { margin-top: 1rem; }
+    @media (max-width: 800px) { .about-inner { grid-template-columns: 1fr; gap: 2.5rem; } }
 
-    @media (max-width: 800px) {
-      .about-inner {
-        grid-template-columns: 1fr;
-        gap: 2.5rem;
-      }
+    /* ============================================================
+       Categories
+    ============================================================ */
+    .categories { background: var(--cream); }
+    .cat-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; }
+    .cat-item {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1.375rem 1rem; text-align: center;
+      transition: all var(--transition); cursor: default;
     }
+    .cat-item:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: rgba(201, 168, 76, 0.35); }
+    .cat-icon {
+      width: 44px; height: 44px; margin: 0 auto 0.875rem;
+      background: linear-gradient(135deg, var(--navy), var(--navy-light));
+      border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center;
+    }
+    .cat-icon svg { width: 20px; height: 20px; stroke: var(--gold); fill: none; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
+    .cat-item h3 { font-size: 0.8125rem; font-weight: 600; color: var(--text-primary); line-height: 1.3; }
+    @media (max-width: 900px) { .cat-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 520px) { .cat-grid { grid-template-columns: repeat(2, 1fr); } }
 
     /* ============================================================
        Features
     ============================================================ */
     .features { background: var(--white); }
-
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.375rem;
-    }
-
+    .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.375rem; }
     .feature-card {
-      background: var(--warm-white);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 2rem;
+      background: var(--warm-white); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 2rem;
       transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
     }
-
-    .feature-card:hover {
-      transform: translateY(-3px);
-      box-shadow: var(--shadow-md);
-      border-color: rgba(201, 168, 76, 0.35);
-    }
-
+    .feature-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: rgba(201, 168, 76, 0.35); }
     .feature-icon {
-      width: 46px;
-      height: 46px;
-      background: var(--navy);
-      border-radius: var(--radius-sm);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 1.25rem;
+      width: 46px; height: 46px; background: var(--navy);
+      border-radius: var(--radius-sm); display: flex; align-items: center;
+      justify-content: center; margin-bottom: 1.25rem;
     }
-
-    .feature-icon svg {
-      width: 22px;
-      height: 22px;
-      stroke: var(--gold);
-      fill: none;
-      stroke-width: 1.75;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-    .feature-card h3 {
-      font-size: 1rem;
-      font-weight: 600;
-      color: var(--text-primary);
-      margin-bottom: 0.5rem;
-      letter-spacing: -0.01em;
-    }
-
-    .feature-card p {
-      font-size: 0.9375rem;
-      color: var(--text-secondary);
-      line-height: 1.65;
-    }
-
-    @media (max-width: 900px) {
-      .features-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (max-width: 520px) {
-      .features-grid { grid-template-columns: 1fr; }
-    }
+    .feature-icon svg { width: 22px; height: 22px; stroke: var(--gold); fill: none; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
+    .feature-card h3 { font-size: 1rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem; }
+    .feature-card p { font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.65; }
+    @media (max-width: 900px) { .features-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 520px) { .features-grid { grid-template-columns: 1fr; } }
 
     /* ============================================================
        How It Works
     ============================================================ */
     .how-it-works { background: var(--cream); }
-
-    .steps {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2.5rem;
-      position: relative;
-    }
-
+    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; position: relative; }
     .steps::before {
-      content: '';
-      position: absolute;
-      top: 27px;
-      left: calc(16.67% + 28px);
-      right: calc(16.67% + 28px);
-      height: 1.5px;
-      background: linear-gradient(to right, rgba(201,168,76,0.4), rgba(201,168,76,0.4));
+      content: ''; position: absolute; top: 27px;
+      left: calc(16.67% + 28px); right: calc(16.67% + 28px);
+      height: 1.5px; background: linear-gradient(to right, var(--gold), rgba(201,168,76,0.3));
       pointer-events: none;
     }
-
     .step { text-align: center; position: relative; }
-
     .step-number {
-      width: 54px;
-      height: 54px;
-      background: var(--navy);
-      color: var(--gold);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.25rem;
-      font-weight: 700;
-      margin: 0 auto 1.5rem;
-      position: relative;
-      z-index: 1;
-      box-shadow: 0 0 0 8px var(--cream);
-      letter-spacing: -0.02em;
+      width: 54px; height: 54px; background: var(--navy); color: var(--gold);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-size: 1.25rem; font-weight: 700; margin: 0 auto 1.5rem;
+      position: relative; z-index: 1; box-shadow: 0 0 0 8px var(--cream);
     }
-
-    .step h3 {
-      font-size: 1.0625rem;
-      font-weight: 600;
-      color: var(--text-primary);
-      margin-bottom: 0.625rem;
-      letter-spacing: -0.01em;
-    }
-
-    .step p {
-      font-size: 0.9375rem;
-      color: var(--text-secondary);
-      line-height: 1.65;
-    }
-
-    @media (max-width: 680px) {
-      .steps { grid-template-columns: 1fr; gap: 2.25rem; }
-      .steps::before { display: none; }
-    }
+    .step h3 { font-size: 1.0625rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.625rem; }
+    .step p { font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.65; }
+    @media (max-width: 680px) { .steps { grid-template-columns: 1fr; gap: 2.25rem; } .steps::before { display: none; } }
 
     /* ============================================================
        Privacy & Trust
     ============================================================ */
     .privacy-section { background: var(--white); }
-
-    .privacy-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1.375rem;
-    }
-
+    .privacy-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.375rem; }
     .privacy-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 1.25rem;
-      padding: 1.75rem;
-      background: var(--warm-white);
-      border-radius: var(--radius);
-      border: 1px solid var(--border);
+      display: flex; align-items: flex-start; gap: 1.25rem;
+      padding: 1.75rem; background: var(--warm-white);
+      border-radius: var(--radius); border: 1px solid var(--border);
     }
-
     .privacy-icon {
-      width: 42px;
-      height: 42px;
-      flex-shrink: 0;
-      background: var(--gold-subtle);
-      border-radius: var(--radius-sm);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      width: 42px; height: 42px; flex-shrink: 0;
+      background: var(--gold-subtle); border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center;
     }
-
-    .privacy-icon svg {
-      width: 20px;
-      height: 20px;
-      stroke: var(--gold);
-      fill: none;
-      stroke-width: 2;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-    .privacy-item h3 {
-      font-size: 0.9375rem;
-      font-weight: 600;
-      color: var(--text-primary);
-      margin-bottom: 0.375rem;
-    }
-
-    .privacy-item p {
-      font-size: 0.875rem;
-      color: var(--text-secondary);
-      line-height: 1.65;
-    }
-
-    @media (max-width: 640px) {
-      .privacy-grid { grid-template-columns: 1fr; }
-    }
+    .privacy-icon svg { width: 20px; height: 20px; stroke: var(--gold); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .privacy-item h3 { font-size: 0.9375rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.375rem; }
+    .privacy-item p { font-size: 0.875rem; color: var(--text-secondary); line-height: 1.65; }
+    @media (max-width: 640px) { .privacy-grid { grid-template-columns: 1fr; } }
 
     /* ============================================================
        Premium (Blessed) Section
     ============================================================ */
     .premium-section {
-      background: var(--navy);
-      color: var(--white);
-      position: relative;
-      overflow: hidden;
+      background: linear-gradient(160deg, var(--navy-darker) 0%, var(--navy-deep) 40%, var(--navy) 100%);
+      color: var(--white); position: relative; overflow: hidden;
     }
-
     .premium-section::before {
-      content: '';
-      position: absolute;
-      inset: 0;
+      content: ''; position: absolute; inset: 0;
       background-image:
         radial-gradient(ellipse at 85% 10%, rgba(201, 168, 76, 0.08) 0%, transparent 50%),
         radial-gradient(ellipse at 15% 90%, rgba(201, 168, 76, 0.05) 0%, transparent 50%);
       pointer-events: none;
     }
-
     .premium-inner { position: relative; z-index: 1; }
-
-    .premium-tiers {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.375rem;
-      margin-bottom: 3.75rem;
-    }
-
+    .premium-tiers { display: grid; grid-template-columns: 1fr 1fr; gap: 1.375rem; margin-bottom: 3.75rem; }
     .tier-card {
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.11);
-      border-radius: var(--radius);
-      padding: 2.25rem;
-    }
-
-    .tier-card.featured {
-      border-color: var(--gold);
-      background: rgba(201, 168, 76, 0.07);
-    }
-
-    .tier-badge {
-      display: inline-block;
-      font-size: 0.6875rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      background: var(--gold);
-      color: var(--navy-deep);
-      padding: 0.25rem 0.625rem;
-      border-radius: 100px;
-      margin-bottom: 1.125rem;
-    }
-
-    .tier-card h3 {
-      font-size: 1.625rem;
-      font-weight: 700;
-      color: var(--white);
-      margin-bottom: 0.5rem;
-      letter-spacing: -0.02em;
-    }
-
-    .tier-card > p {
-      font-size: 0.9375rem;
-      color: rgba(255, 255, 255, 0.6);
-      line-height: 1.6;
-      margin-bottom: 1.625rem;
-    }
-
-    .tier-features {
-      display: flex;
-      flex-direction: column;
-      gap: 0.6875rem;
-    }
-
-    .tier-features li {
-      display: flex;
-      align-items: center;
-      gap: 0.625rem;
-      font-size: 0.9rem;
-      color: rgba(255, 255, 255, 0.8);
-    }
-
-    .tier-features li svg {
-      width: 16px;
-      height: 16px;
-      flex-shrink: 0;
-      stroke: var(--gold);
-      fill: none;
-      stroke-width: 2.5;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-    .packs-block-header { margin-bottom: 1.5rem; }
-
-    .packs-title {
-      font-size: 1.25rem;
-      font-weight: 600;
-      color: var(--white);
-      margin-bottom: 0.375rem;
-      letter-spacing: -0.01em;
-    }
-
-    .packs-subtitle {
-      font-size: 0.9375rem;
-      color: rgba(255, 255, 255, 0.55);
-      line-height: 1.6;
-    }
-
-    .packs-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
-    }
-
-    .pack-card {
-      background: rgba(255, 255, 255, 0.055);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: var(--radius-sm);
-      padding: 1.625rem 1.25rem;
-      text-align: center;
+      background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.11);
+      border-radius: var(--radius-lg); padding: 2.5rem;
       transition: border-color var(--transition), background var(--transition);
     }
-
-    .pack-card:hover {
-      border-color: rgba(201, 168, 76, 0.45);
-      background: rgba(201, 168, 76, 0.06);
+    .tier-card:hover { border-color: rgba(255, 255, 255, 0.2); background: rgba(255, 255, 255, 0.08); }
+    .tier-card.featured { border-color: var(--gold); background: rgba(201, 168, 76, 0.07); }
+    .tier-card.featured:hover { background: rgba(201, 168, 76, 0.10); }
+    .tier-badge {
+      display: inline-block; font-size: 0.6875rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      background: var(--gold); color: var(--navy-deep);
+      padding: 0.25rem 0.625rem; border-radius: 100px; margin-bottom: 1.125rem;
     }
-
-    .pack-credits {
-      font-size: 2.75rem;
-      font-weight: 700;
-      color: var(--gold);
-      letter-spacing: -0.04em;
-      line-height: 1;
-      margin-bottom: 0.25rem;
+    .tier-card h3 { font-size: 1.625rem; font-weight: 700; color: var(--white); margin-bottom: 0.5rem; }
+    .tier-card > p { font-size: 0.9375rem; color: rgba(255, 255, 255, 0.6); line-height: 1.6; margin-bottom: 1.625rem; }
+    .tier-features { display: flex; flex-direction: column; gap: 0.6875rem; }
+    .tier-features li { display: flex; align-items: center; gap: 0.625rem; font-size: 0.9rem; color: rgba(255, 255, 255, 0.8); }
+    .tier-features li svg { width: 16px; height: 16px; flex-shrink: 0; stroke: var(--gold); fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+    .packs-block-header { margin-bottom: 1.5rem; }
+    .packs-title { font-size: 1.25rem; font-weight: 600; color: var(--white); margin-bottom: 0.375rem; }
+    .packs-subtitle { font-size: 0.9375rem; color: rgba(255, 255, 255, 0.55); line-height: 1.6; }
+    .packs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .pack-card {
+      background: rgba(255, 255, 255, 0.055); border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-sm); padding: 1.625rem 1.25rem; text-align: center;
+      transition: border-color var(--transition), background var(--transition);
     }
-
-    .pack-label {
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: rgba(255, 255, 255, 0.4);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: 0.875rem;
-    }
-
-    .pack-desc {
-      font-size: 0.875rem;
-      color: rgba(255, 255, 255, 0.6);
-      line-height: 1.5;
-    }
-
+    .pack-card:hover { border-color: rgba(201, 168, 76, 0.45); background: rgba(201, 168, 76, 0.06); }
+    .pack-credits { font-size: 2.75rem; font-weight: 700; color: var(--gold); letter-spacing: -0.04em; line-height: 1; margin-bottom: 0.25rem; }
+    .pack-label { font-size: 0.75rem; font-weight: 600; color: rgba(255, 255, 255, 0.4); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.875rem; }
+    .pack-desc { font-size: 0.875rem; color: rgba(255, 255, 255, 0.6); line-height: 1.5; }
     @media (max-width: 700px) {
       .premium-tiers { grid-template-columns: 1fr; }
       .packs-grid { grid-template-columns: 1fr; gap: 0.75rem; }
     }
 
     /* ============================================================
+       CTA Banner
+    ============================================================ */
+    .cta-banner {
+      background: linear-gradient(135deg, var(--navy-deep), var(--navy));
+      padding: 5rem 1.5rem; text-align: center; position: relative; overflow: hidden;
+    }
+    .cta-banner::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(circle at 50% 50%, rgba(201, 168, 76, 0.06) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .cta-inner {
+      position: relative; z-index: 1; max-width: 600px; margin: 0 auto;
+    }
+    .cta-inner h2 {
+      font-size: clamp(1.75rem, 3.5vw, 2.25rem); font-weight: 800;
+      color: var(--white); margin-bottom: 1rem; letter-spacing: -0.02em;
+    }
+    .cta-inner p { font-size: 1.0625rem; color: rgba(255, 255, 255, 0.65); margin-bottom: 2rem; line-height: 1.7; }
+    .cta-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    /* ============================================================
        FAQ
     ============================================================ */
     .faq-section { background: var(--warm-white); }
-
-    .faq-list {
-      max-width: 740px;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-    }
-
-    .faq-item {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      overflow: hidden;
-    }
-
+    .faq-list { max-width: 740px; margin: 0 auto; display: flex; flex-direction: column; gap: 0.75rem; }
+    .faq-item { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; }
     .faq-question {
-      width: 100%;
-      background: none;
-      border: none;
-      padding: 1.375rem 1.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      cursor: pointer;
-      text-align: left;
-      font-size: 1rem;
-      font-weight: 600;
-      color: var(--text-primary);
-      font-family: inherit;
-      transition: background var(--transition);
+      width: 100%; background: none; border: none; padding: 1.375rem 1.5rem;
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+      cursor: pointer; text-align: left; font-size: 1rem; font-weight: 600;
+      color: var(--text-primary); font-family: inherit; transition: background var(--transition);
     }
-
-    .faq-question:hover {
-      background: var(--warm-white);
-    }
-
-    .faq-question:focus-visible {
-      outline: 2px solid var(--gold);
-      outline-offset: -2px;
-    }
-
-    .faq-question[aria-expanded="true"] {
-      color: var(--navy);
-    }
-
+    .faq-question:hover { background: var(--warm-white); }
+    .faq-question:focus-visible { outline: 2px solid var(--gold); outline-offset: -2px; }
+    .faq-question[aria-expanded="true"] { color: var(--navy); }
     .faq-chevron {
-      width: 20px;
-      height: 20px;
-      flex-shrink: 0;
-      stroke: var(--text-muted);
-      fill: none;
-      stroke-width: 2;
-      stroke-linecap: round;
-      stroke-linejoin: round;
+      width: 20px; height: 20px; flex-shrink: 0; stroke: var(--text-muted);
+      fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
       transition: transform 0.32s ease, stroke var(--transition);
     }
-
-    .faq-question[aria-expanded="true"] .faq-chevron {
-      transform: rotate(180deg);
-      stroke: var(--gold);
-    }
-
-    .faq-answer {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.38s ease;
-    }
-
+    .faq-question[aria-expanded="true"] .faq-chevron { transform: rotate(180deg); stroke: var(--gold); }
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.38s ease; }
     .faq-answer-inner {
-      padding: 1.25rem 1.5rem 1.5rem;
-      border-top: 1px solid var(--border);
-      font-size: 0.9375rem;
-      color: var(--text-secondary);
-      line-height: 1.75;
+      padding: 1.25rem 1.5rem 1.5rem; border-top: 1px solid var(--border);
+      font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.75;
     }
-
-    .faq-answer-inner a {
-      color: var(--navy);
-      text-decoration: underline;
-      text-underline-offset: 2px;
-    }
-
-    .faq-answer-inner a:hover {
-      color: var(--gold);
-    }
+    .faq-answer-inner a { color: var(--navy); text-decoration: underline; text-underline-offset: 2px; }
+    .faq-answer-inner a:hover { color: var(--gold); }
 
     /* ============================================================
        Footer
     ============================================================ */
-    .site-footer {
-      background: #0f1724;
-      color: rgba(255, 255, 255, 0.5);
-      padding: 4rem 1.5rem 2.5rem;
-    }
-
-    .footer-inner {
-      max-width: var(--max-width);
-      margin: 0 auto;
-    }
-
+    .site-footer { background: #0b1220; color: rgba(255, 255, 255, 0.5); padding: 4.5rem 1.5rem 2.5rem; }
+    .footer-inner { max-width: var(--max-width); margin: 0 auto; }
     .footer-top {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      padding-bottom: 2.5rem;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
-      gap: 2rem;
-      flex-wrap: wrap;
+      display: flex; align-items: flex-start; justify-content: space-between;
+      padding-bottom: 2.5rem; border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+      gap: 2rem; flex-wrap: wrap;
     }
-
-    .footer-brand {
-      display: flex;
-      align-items: center;
-      gap: 0.625rem;
-    }
-
-    .footer-brand img {
-      width: 32px;
-      height: 32px;
-      object-fit: contain;
-      border-radius: 7px;
-      opacity: 0.8;
-    }
-
-    .footer-brand-name {
-      font-size: 1rem;
-      font-weight: 600;
-      color: var(--white);
-      letter-spacing: -0.01em;
-    }
-
-    .footer-nav {
-      display: flex;
-      gap: 0.5rem 2.25rem;
-      flex-wrap: wrap;
-      align-items: center;
-    }
-
-    .footer-nav a {
-      font-size: 0.875rem;
-      color: rgba(255, 255, 255, 0.45);
-      transition: color var(--transition);
-    }
-
-    .footer-nav a:hover {
-      color: var(--white);
-    }
-
+    .footer-brand { display: flex; align-items: center; gap: 0.625rem; }
+    .footer-brand img { width: 36px; height: 36px; object-fit: cover; border-radius: 50%; opacity: 0.85; border: 2px solid rgba(201, 168, 76, 0.2); }
+    .footer-brand-name { font-size: 1rem; font-weight: 700; color: var(--white); }
+    .footer-nav { display: flex; gap: 0.5rem 2.25rem; flex-wrap: wrap; align-items: center; }
+    .footer-nav a { font-size: 0.875rem; color: rgba(255, 255, 255, 0.45); transition: color var(--transition); }
+    .footer-nav a:hover { color: var(--white); }
     .footer-bottom {
-      padding-top: 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 0.75rem;
+      padding-top: 2rem; display: flex; align-items: center;
+      justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;
     }
-
-    .footer-copyright {
-      font-size: 0.8125rem;
-      color: rgba(255, 255, 255, 0.3);
-    }
-
-    .footer-tagline {
-      font-size: 0.8125rem;
-      color: rgba(255, 255, 255, 0.2);
-      font-style: italic;
-    }
+    .footer-copyright { font-size: 0.8125rem; color: rgba(255, 255, 255, 0.3); }
+    .footer-tagline { font-size: 0.8125rem; color: rgba(255, 255, 255, 0.2); font-style: italic; }
 
     /* ============================================================
        Scroll Reveal
     ============================================================ */
-    .reveal {
-      opacity: 0;
-      transform: translateY(22px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .reveal-d1 { transition-delay: 0.1s; }
-    .reveal-d2 { transition-delay: 0.2s; }
-    .reveal-d3 { transition-delay: 0.3s; }
-    .reveal-d4 { transition-delay: 0.4s; }
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-d1 { transition-delay: 0.1s; } .reveal-d2 { transition-delay: 0.2s; }
+    .reveal-d3 { transition-delay: 0.3s; } .reveal-d4 { transition-delay: 0.4s; }
     .reveal-d5 { transition-delay: 0.5s; }
 
     @media (prefers-reduced-motion: reduce) {
-      .reveal {
-        opacity: 1;
-        transform: none;
-        transition: none;
-      }
-      .logo-glow {
-        animation: none;
-        opacity: 0.6;
-      }
-      .hero-logo {
-        animation: none;
-        filter: brightness(0) invert(1) drop-shadow(0 4px 20px rgba(0,0,0,0.40)) drop-shadow(0 0 32px rgba(255,255,255,0.65));
-      }
+      .reveal { opacity: 1; transform: none; transition: none; }
+      .logo-glow { animation: none; opacity: 0.6; }
+      .hero-logo { animation: none; }
+      .hero-badge-dot { animation: none; opacity: 0.7; }
     }
   </style>
 </head>
@@ -1131,12 +560,13 @@
   <header class="site-header" role="banner">
     <nav class="nav-inner" aria-label="Primary navigation">
       <a href="/" class="nav-brand" aria-label="ChristBay — home">
-        <img src="/assets/icon.png" alt="" aria-hidden="true" />
+        <img src="/assets/brand.png" alt="" aria-hidden="true" />
         <span class="nav-brand-name">ChristBay</span>
       </a>
       <div class="nav-links">
         <a href="#features" class="nav-text">Features</a>
-        <a href="#faq" class="nav-text">FAQ</a>
+        <a href="#premium" class="nav-text">Premium</a>
+        <a href="/support/" class="nav-text">Support</a>
         <div class="nav-dropdown">
           <button class="nav-cta" id="download-toggle" aria-expanded="false" aria-haspopup="true" aria-label="Download options">
             Download
@@ -1150,10 +580,9 @@
             </a>
             <a href="https://play.google.com/store/apps/details?id=com.oakdev.christbay" class="nav-dropdown-item" aria-label="Download on Google Play Store">
               <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
-                <path fill="currentColor" d="M3 13.5h8v8H3z M11 3.5h8v8h-8z M3 3.5h8v8H3z M11 13.5h8v8h-8z"/>
-                <path fill="currentColor" d="M3.5 14v7.5c0 .83.67 1.5 1.5 1.5h6v-9H5c-.83 0-1.5.67-1.5 1.5zm7.5-11v9h6V5c0-.83-.67-1.5-1.5-1.5h-4.5zM3.5 4c0-.83.67-1.5 1.5-1.5h6v9H5c-.83 0-1.5-.67-1.5-1.5V4zm16-1.5h-4.5v9H20v-7.5c0-.83-.67-1.5-1.5-1.5zm0 9h-6v9h4.5c.83 0 1.5-.67 1.5-1.5v-7.5z"/>
+                <path fill="currentColor" d="M3.609 1.814L13.792 12 3.609 22.186c-.386.387-.593.916-.593 1.465V1.349c0 .549.207 1.078.593 1.465zm10.908 10.911L21.268 24 3.609 1.814 14.517 12.722z"/>
               </svg>
-              Play Store
+              Google Play
             </a>
           </div>
         </div>
@@ -1167,41 +596,89 @@
          Hero
     ============================================================ -->
     <section class="hero" id="hero" aria-label="Hero">
-<div class="hero-content">
+      <div class="hero-content">
         <div class="hero-logo-wrap">
           <div class="logo-glow" aria-hidden="true"></div>
-          <img src="/assets/logo.png" alt="ChristBay" class="hero-logo" />
+          <img src="/assets/brand.png" alt="ChristBay" class="hero-logo" />
         </div>
-        <span class="hero-eyebrow">Available on the App Store</span>
-        <h1>Walk in the Word.<br />Grow in grace.</h1>
-        <p class="hero-tagline">Daily scripture reading, guided reflection, and private prayer &mdash; a devotional companion rooted in Protestant Christian faith.</p>
+        <div class="hero-badge">
+          <span class="hero-badge-dot" aria-hidden="true"></span>
+          Version 2.0 — Now Available
+        </div>
+        <h1>Walk in the <span class="gold">Word.</span><br />Grow in grace.</h1>
+        <p class="hero-tagline">15 curated devotional categories, guided reflections, a private prayer journal, and faith journey tracking &mdash; all in a clean, ad-free companion built for Protestant Christian faith.</p>
         <div class="hero-ctas">
-          <a href="https://apps.apple.com/se/app/christbay-daglig-reflektion/id6759575925" class="btn-app-store" aria-label="Download ChristBay on the App Store">
-            <!-- Apple logo SVG -->
+          <a href="https://apps.apple.com/se/app/christbay-daglig-reflektion/id6759575925" class="btn-store" aria-label="Download ChristBay on the App Store">
             <svg viewBox="0 0 24 24" width="22" height="27" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
               <path fill="#1a2744" d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
             </svg>
-            <div class="btn-app-store-text">
-              <span>Download on the</span>
-              <span>App Store</span>
-            </div>
+            <div class="btn-store-text"><span>Download on the</span><span>App Store</span></div>
           </a>
-          <a href="https://play.google.com/store/apps/details?id=com.oakdev.christbay" class="btn-google-play" aria-label="Download ChristBay on Google Play Store">
-            <!-- Google Play logo SVG -->
+          <a href="https://play.google.com/store/apps/details?id=com.oakdev.christbay" class="btn-store" aria-label="Download ChristBay on Google Play">
             <svg viewBox="0 0 24 24" width="22" height="27" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
               <path fill="#1a2744" d="M3.609 1.814L13.792 12 3.609 22.186c-.386.387-.593.916-.593 1.465V1.349c0 .549.207 1.078.593 1.465zm10.908 10.911L21.268 24 3.609 1.814 14.517 12.722z"/>
             </svg>
-            <div class="btn-app-store-text">
-              <span>Download on</span>
-              <span>Google Play</span>
-            </div>
+            <div class="btn-store-text"><span>Download on</span><span>Google Play</span></div>
           </a>
           <a href="#about" class="btn-outline" aria-label="Learn more about ChristBay">
             Learn more
-            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/>
-            </svg>
+            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
           </a>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <p class="hero-stat-value">15</p>
+            <p class="hero-stat-label">Devotional Categories</p>
+          </div>
+          <div class="hero-stat">
+            <p class="hero-stat-value">450+</p>
+            <p class="hero-stat-label">Reflections Available</p>
+          </div>
+          <div class="hero-stat">
+            <p class="hero-stat-value">0</p>
+            <p class="hero-stat-label">Ads — Ever</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         What's New in 2.0
+    ============================================================ -->
+    <section class="whats-new" id="whats-new" aria-labelledby="new-heading">
+      <div class="container">
+        <div class="section-header centered">
+          <span class="section-label">What&rsquo;s New</span>
+          <h2 class="section-title" id="new-heading">ChristBay 2.0 &mdash; A Deeper Walk</h2>
+          <div class="divider centered"></div>
+          <br />
+          <p class="section-body">A major update to every part of the experience. More content, more depth, more ways to grow in your daily devotional life.</p>
+        </div>
+        <div class="new-grid">
+          <article class="new-card reveal">
+            <div class="new-card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+            </div>
+            <span class="new-tag">New</span>
+            <h3>15 Curated Categories</h3>
+            <p>From the Psalms and Paul&rsquo;s letters to the Parables of Jesus &mdash; deep, structured devotional series across 15 carefully curated categories.</p>
+          </article>
+          <article class="new-card reveal reveal-d2">
+            <div class="new-card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <span class="new-tag">Enhanced</span>
+            <h3>Smarter Daily Practice</h3>
+            <p>A refined daily experience that learns your rhythm and delivers curated content at the right time, helping you build a lasting devotional habit.</p>
+          </article>
+          <article class="new-card reveal reveal-d4">
+            <div class="new-card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+            </div>
+            <span class="new-tag">New</span>
+            <h3>Cross-Platform</h3>
+            <p>Now available on both iOS and Android. Your faith journey, your way &mdash; on the device you choose.</p>
+          </article>
         </div>
       </div>
     </section>
@@ -1223,13 +700,86 @@
           </div>
           <div class="reveal reveal-d2">
             <figure class="about-verse" aria-label="Scripture verse">
-              <blockquote>
-                &ldquo;Your word is a lamp to my feet and a light to my path.&rdquo;
-              </blockquote>
-              <figcaption>
-                <cite>Psalm 119:105 (ESV)</cite>
-              </figcaption>
+              <blockquote>&ldquo;Your word is a lamp to my feet and a light to my path.&rdquo;</blockquote>
+              <figcaption><cite>Psalm 119:105 (ESV)</cite></figcaption>
             </figure>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         15 Categories
+    ============================================================ -->
+    <section class="categories" id="categories" aria-labelledby="cat-heading">
+      <div class="container">
+        <div class="section-header centered">
+          <span class="section-label">15 Categories</span>
+          <h2 class="section-title" id="cat-heading">Deep, structured devotional series</h2>
+          <div class="divider centered"></div>
+          <br />
+          <p class="section-body">Every category is a curated journey through scripture &mdash; crafted for depth, clarity, and lasting impact on your faith.</p>
+        </div>
+        <div class="cat-grid">
+          <div class="cat-item reveal">
+            <div class="cat-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg></div>
+            <h3>Daily Devotion</h3>
+          </div>
+          <div class="cat-item reveal reveal-d1">
+            <div class="cat-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
+            <h3>The Psalms</h3>
+          </div>
+          <div class="cat-item reveal reveal-d2">
+            <div class="cat-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+            <h3>Paul&rsquo;s Letters</h3>
+          </div>
+          <div class="cat-item reveal reveal-d3">
+            <div class="cat-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+            <h3>The Gospels</h3>
+          </div>
+          <div class="cat-item reveal reveal-d4">
+            <div class="cat-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+            <h3>Proverbs &amp; Wisdom</h3>
+          </div>
+          <div class="cat-item reveal">
+            <div class="cat-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+            <h3>Sermon on the Mount</h3>
+          </div>
+          <div class="cat-item reveal reveal-d1">
+            <div class="cat-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg></div>
+            <h3>Genesis &amp; Creation</h3>
+          </div>
+          <div class="cat-item reveal reveal-d2">
+            <div class="cat-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+            <h3>The Prophets</h3>
+          </div>
+          <div class="cat-item reveal reveal-d3">
+            <div class="cat-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+            <h3>Acts &amp; Early Church</h3>
+          </div>
+          <div class="cat-item reveal reveal-d4">
+            <div class="cat-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+            <h3>Parables of Jesus</h3>
+          </div>
+          <div class="cat-item reveal">
+            <div class="cat-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></div>
+            <h3>Revelation &amp; Hope</h3>
+          </div>
+          <div class="cat-item reveal reveal-d1">
+            <div class="cat-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+            <h3>Prayer &amp; Worship</h3>
+          </div>
+          <div class="cat-item reveal reveal-d2">
+            <div class="cat-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+            <h3>Faith &amp; Grace</h3>
+          </div>
+          <div class="cat-item reveal reveal-d3">
+            <div class="cat-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+            <h3>Love &amp; Compassion</h3>
+          </div>
+          <div class="cat-item reveal reveal-d4">
+            <div class="cat-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg></div>
+            <h3>Courage &amp; Strength</h3>
           </div>
         </div>
       </div>
@@ -1248,55 +798,36 @@
           <p class="section-body">Everything you need for a consistent, meaningful devotional life &mdash; nothing you don&rsquo;t.</p>
         </div>
         <div class="features-grid">
-
           <article class="feature-card reveal">
-            <div class="feature-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-            </div>
+            <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
             <h3>Morning Scripture</h3>
             <p>Begin each day anchored in God&rsquo;s Word. A curated daily verse with brief context to ground your morning in scripture.</p>
           </article>
-
           <article class="feature-card reveal reveal-d2">
-            <div class="feature-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-            </div>
+            <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
             <h3>Guided Reflections</h3>
             <p>Thoughtful, scripture-based prompts that help you meditate on the Word and apply it honestly to your daily life.</p>
           </article>
-
           <article class="feature-card reveal reveal-d3">
-            <div class="feature-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-            </div>
+            <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></div>
             <h3>Prayer Journal</h3>
             <p>A private space to record your prayers, praises, and requests &mdash; and to look back on God&rsquo;s faithfulness over time.</p>
           </article>
-
           <article class="feature-card reveal">
-            <div class="feature-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
-            </div>
-            <h3>Reflections Packs</h3>
-            <p>Themed devotional series for deeper study &mdash; the Psalms, Paul&rsquo;s letters, the Sermon on the Mount, and more.</p>
+            <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></div>
+            <h3>15 Reflections Categories</h3>
+            <p>Themed devotional series for deeper study &mdash; from the Psalms and Paul&rsquo;s letters to the Parables of Jesus and beyond.</p>
           </article>
-
           <article class="feature-card reveal reveal-d2">
-            <div class="feature-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-            </div>
+            <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
             <h3>Faith Journey</h3>
             <p>Track your daily streak, completed reflections, and growth milestones. A simple, honest record of a growing habit.</p>
           </article>
-
           <article class="feature-card reveal reveal-d3">
-            <div class="feature-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            </div>
+            <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
             <h3>No Ads. Ever.</h3>
             <p>ChristBay is completely ad-free and never sells your data. Your faith practice stays between you and God.</p>
           </article>
-
         </div>
       </div>
     </section>
@@ -1314,13 +845,13 @@
         <div class="steps">
           <div class="step reveal">
             <div class="step-number" aria-hidden="true">1</div>
-            <h3>Create your account</h3>
-            <p>Sign up in seconds. Your notes, prayers, and reflections are tied to your private, secure account.</p>
+            <h3>Download &amp; sign up</h3>
+            <p>Get ChristBay from the App Store or Google Play. Create your account in seconds &mdash; your notes, prayers, and reflections are private and secure.</p>
           </div>
           <div class="step reveal reveal-d2">
             <div class="step-number" aria-hidden="true">2</div>
             <h3>Choose your practice</h3>
-            <p>Follow the daily devotional, dive into a Reflections Pack, or open your prayer journal &mdash; on your schedule.</p>
+            <p>Follow the daily devotional, explore one of 15 curated categories, or open your prayer journal &mdash; on your schedule.</p>
           </div>
           <div class="step reveal reveal-d4">
             <div class="step-number" aria-hidden="true">3</div>
@@ -1345,39 +876,31 @@
         </div>
         <div class="privacy-grid">
           <div class="privacy-item reveal">
-            <div class="privacy-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
-            </div>
+            <div class="privacy-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg></div>
             <div>
               <h3>No ads, ever</h3>
               <p>ChristBay is completely ad-free. Your attention and your faith practice are never monetised through advertising.</p>
             </div>
           </div>
           <div class="privacy-item reveal reveal-d1">
-            <div class="privacy-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-            </div>
+            <div class="privacy-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
             <div>
               <h3>No data selling</h3>
               <p>We do not share or sell your personal data, usage patterns, or journal entries to any third party.</p>
             </div>
           </div>
           <div class="privacy-item reveal">
-            <div class="privacy-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-            </div>
+            <div class="privacy-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
             <div>
               <h3>Private journal</h3>
               <p>Your prayer journal and personal notes are encrypted and accessible only through your own account.</p>
             </div>
           </div>
           <div class="privacy-item reveal reveal-d1">
-            <div class="privacy-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
-            </div>
+            <div class="privacy-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg></div>
             <div>
               <h3>Account-based security</h3>
-              <p>Your data is tied to your account, not your device. Access your faith journey securely from any iOS device.</p>
+              <p>Your data is tied to your account, not your device. Access your faith journey securely from any device.</p>
             </div>
           </div>
         </div>
@@ -1395,9 +918,8 @@
             <h2 class="section-title light" id="premium-heading">Blessed &mdash; Go deeper</h2>
             <div class="divider"></div>
             <br />
-            <p class="section-body" style="color: rgba(255,255,255,0.6);">ChristBay comes with 150 reflections included from the start. Upgrade to Blessed to unlock more categories, expanded features, and an additional 300 reflections. Top up any time &mdash; no subscription required.</p>
+            <p class="section-body" style="color: rgba(255,255,255,0.6);">ChristBay comes with 150 reflections included from the start. Upgrade to Blessed to unlock all 15 categories, expanded features, and an additional 300 reflections. Top up any time &mdash; no subscription required.</p>
           </div>
-
           <div class="premium-tiers reveal">
             <div class="tier-card">
               <h3>ChristBay</h3>
@@ -1417,13 +939,12 @@
               <ul class="tier-features">
                 <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Everything in ChristBay</li>
                 <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> 300 additional reflections</li>
-                <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Unlocks more categories</li>
+                <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Unlocks all 15 categories</li>
                 <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Expanded features</li>
                 <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Priority support</li>
               </ul>
             </div>
           </div>
-
           <div class="packs-block reveal">
             <div class="packs-block-header">
               <p class="packs-title">Top-up Reflections</p>
@@ -1461,57 +982,85 @@
           <h2 class="section-title" id="faq-heading">Frequently asked questions</h2>
           <div class="divider centered"></div>
         </div>
-
         <div class="faq-list" role="list">
-
           <div class="faq-item reveal" role="listitem">
             <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-1" id="faq-btn-1">
               Is ChristBay a subscription?
               <svg class="faq-chevron" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
             </button>
             <div class="faq-answer" id="faq-answer-1" role="region" aria-labelledby="faq-btn-1">
-              <div class="faq-answer-inner">
-                ChristBay is a one-time purchase that includes 150 reflections from the start. Blessed is a separate in-app upgrade that unlocks more categories, expanded features, and adds 300 more reflections. You can also top up your reflections at any time in bundles of 100, 200, or 400 &mdash; all one-time purchases with no subscription and no auto-renewal.
-              </div>
+              <div class="faq-answer-inner">ChristBay is a one-time purchase that includes 150 reflections from the start. Blessed is a separate in-app upgrade that unlocks all 15 categories, expanded features, and adds 300 more reflections. You can also top up your reflections at any time in bundles of 100, 200, or 400 &mdash; all one-time purchases with no subscription and no auto-renewal.</div>
             </div>
           </div>
-
           <div class="faq-item reveal reveal-d1" role="listitem">
             <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-2" id="faq-btn-2">
-              How do reflections work?
+              What are the 15 categories?
               <svg class="faq-chevron" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
             </button>
             <div class="faq-answer" id="faq-answer-2" role="region" aria-labelledby="faq-btn-2">
-              <div class="faq-answer-inner">
-                Reflections are the currency of depth in ChristBay. Your purchase includes 150 reflections to get you started. Upgrading to Blessed adds a further 300 reflections and unlocks more of the app. When you need more, you can purchase top-up bundles of 100, 200, or 400 reflections &mdash; each a one-time purchase with no recurring charges or automatic renewals.
-              </div>
+              <div class="faq-answer-inner">ChristBay 2.0 includes 15 curated devotional categories: Daily Devotion, The Psalms, Paul&rsquo;s Letters, The Gospels, Proverbs &amp; Wisdom, Sermon on the Mount, Genesis &amp; Creation, The Prophets, Acts &amp; Early Church, Parables of Jesus, Revelation &amp; Hope, Prayer &amp; Worship, Faith &amp; Grace, Love &amp; Compassion, and Courage &amp; Strength. The base app gives you access to select categories, while Blessed unlocks all 15.</div>
             </div>
           </div>
-
           <div class="faq-item reveal reveal-d2" role="listitem">
             <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-3" id="faq-btn-3">
-              Is my data private?
+              How do reflections work?
               <svg class="faq-chevron" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
             </button>
             <div class="faq-answer" id="faq-answer-3" role="region" aria-labelledby="faq-btn-3">
-              <div class="faq-answer-inner">
-                Yes. ChristBay does not sell your personal data, display advertising, or share your journal entries or reflection notes with any third party. Your prayer journal is private to your account. We follow strict data handling practices &mdash; see our <a href="/privacy/">Privacy Policy</a> for complete details.
-              </div>
+              <div class="faq-answer-inner">Reflections are the currency of depth in ChristBay. Your purchase includes 150 reflections to get you started. Upgrading to Blessed adds a further 300 reflections and unlocks all 15 categories. When you need more, you can purchase top-up bundles of 100, 200, or 400 reflections &mdash; each a one-time purchase with no recurring charges.</div>
             </div>
           </div>
-
           <div class="faq-item reveal" role="listitem">
             <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-4" id="faq-btn-4">
-              Does it replace Bible reading, church, or a pastor?
+              Is my data private?
               <svg class="faq-chevron" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
             </button>
             <div class="faq-answer" id="faq-answer-4" role="region" aria-labelledby="faq-btn-4">
-              <div class="faq-answer-inner">
-                No. ChristBay is a devotional companion &mdash; a tool to support consistent personal reflection &mdash; not a replacement for the full reading of Scripture, corporate worship, or the counsel of a pastor or elder. We actively encourage all users to remain rooted in a local church community, under sound teaching, and to read the Bible in its entirety and fullness.
-              </div>
+              <div class="faq-answer-inner">Yes. ChristBay does not sell your personal data, display advertising, or share your journal entries with any third party. Your prayer journal is private to your account. We follow strict data handling practices &mdash; see our <a href="/privacy/">Privacy Policy</a> for complete details.</div>
             </div>
           </div>
+          <div class="faq-item reveal reveal-d1" role="listitem">
+            <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-5" id="faq-btn-5">
+              Is ChristBay available on Android?
+              <svg class="faq-chevron" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-answer" id="faq-answer-5" role="region" aria-labelledby="faq-btn-5">
+              <div class="faq-answer-inner">Yes! ChristBay 2.0 is available on both iOS (App Store) and Android (Google Play). Download it on the platform you prefer and start your devotional journey today.</div>
+            </div>
+          </div>
+          <div class="faq-item reveal reveal-d2" role="listitem">
+            <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-6" id="faq-btn-6">
+              Does it replace Bible reading, church, or a pastor?
+              <svg class="faq-chevron" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-answer" id="faq-answer-6" role="region" aria-labelledby="faq-btn-6">
+              <div class="faq-answer-inner">No. ChristBay is a devotional companion &mdash; a tool to support consistent personal reflection &mdash; not a replacement for the full reading of Scripture, corporate worship, or the counsel of a pastor or elder. We actively encourage all users to remain rooted in a local church community, under sound teaching, and to read the Bible in its entirety and fullness.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
+    <!-- ============================================================
+         CTA Banner
+    ============================================================ -->
+    <section class="cta-banner" aria-label="Download call to action">
+      <div class="cta-inner">
+        <h2>Begin your daily walk today</h2>
+        <p>Join thousands of Christians who start each morning with ChristBay. Download free, explore, and grow in grace.</p>
+        <div class="cta-buttons">
+          <a href="https://apps.apple.com/se/app/christbay-daglig-reflektion/id6759575925" class="btn-store" aria-label="Download on the App Store">
+            <svg viewBox="0 0 24 24" width="20" height="25" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+              <path fill="#1a2744" d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+            </svg>
+            <div class="btn-store-text"><span>Download on the</span><span>App Store</span></div>
+          </a>
+          <a href="https://play.google.com/store/apps/details?id=com.oakdev.christbay" class="btn-store" aria-label="Download on Google Play">
+            <svg viewBox="0 0 24 24" width="20" height="25" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+              <path fill="#1a2744" d="M3.609 1.814L13.792 12 3.609 22.186c-.386.387-.593.916-.593 1.465V1.349c0 .549.207 1.078.593 1.465zm10.908 10.911L21.268 24 3.609 1.814 14.517 12.722z"/>
+            </svg>
+            <div class="btn-store-text"><span>Download on</span><span>Google Play</span></div>
+          </a>
         </div>
       </div>
     </section>
@@ -1525,7 +1074,7 @@
     <div class="footer-inner">
       <div class="footer-top">
         <div class="footer-brand">
-          <img src="/assets/icon.png" alt="ChristBay" />
+          <img src="/assets/brand.png" alt="ChristBay" />
           <span class="footer-brand-name">ChristBay</span>
         </div>
         <nav class="footer-nav" aria-label="Footer links">
@@ -1543,32 +1092,22 @@
     </div>
   </footer>
 
-  <!-- ============================================================
-       JavaScript
-  ============================================================ -->
   <script>
     (function () {
       'use strict';
 
-      /* ----------------------------------------------------------
-         FAQ Accordion
-      ---------------------------------------------------------- */
+      /* FAQ Accordion */
       var questions = document.querySelectorAll('.faq-question');
-
       questions.forEach(function (btn) {
         btn.addEventListener('click', function () {
           var isExpanded = this.getAttribute('aria-expanded') === 'true';
           var answerId  = this.getAttribute('aria-controls');
           var answer    = document.getElementById(answerId);
-
-          // Close all panels first
           questions.forEach(function (b) {
             var a = document.getElementById(b.getAttribute('aria-controls'));
             b.setAttribute('aria-expanded', 'false');
             if (a) a.style.maxHeight = '0';
           });
-
-          // If this one was closed, open it
           if (!isExpanded && answer) {
             this.setAttribute('aria-expanded', 'true');
             answer.style.maxHeight = answer.scrollHeight + 'px';
@@ -1576,9 +1115,7 @@
         });
       });
 
-      /* ----------------------------------------------------------
-         Scroll Reveal via IntersectionObserver
-      ---------------------------------------------------------- */
+      /* Scroll Reveal */
       if (window.IntersectionObserver) {
         var revealObserver = new IntersectionObserver(
           function (entries) {
@@ -1591,20 +1128,16 @@
           },
           { threshold: 0.1, rootMargin: '0px 0px -36px 0px' }
         );
-
         document.querySelectorAll('.reveal').forEach(function (el) {
           revealObserver.observe(el);
         });
       } else {
-        // Fallback: show all immediately
         document.querySelectorAll('.reveal').forEach(function (el) {
           el.classList.add('visible');
         });
       }
 
-      /* ----------------------------------------------------------
-         Smooth scroll for "Learn more" (enhance native behaviour)
-      ---------------------------------------------------------- */
+      /* Smooth scroll */
       document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
         anchor.addEventListener('click', function (e) {
           var targetId = this.getAttribute('href');
@@ -1613,44 +1146,33 @@
           if (!target) return;
           e.preventDefault();
           target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          // Move focus for accessibility
           target.setAttribute('tabindex', '-1');
           target.focus({ preventScroll: true });
         });
       });
 
-      /* ----------------------------------------------------------
-         Download Dropdown Menu
-      ---------------------------------------------------------- */
+      /* Download Dropdown */
       var downloadToggle = document.getElementById('download-toggle');
       var downloadMenu = document.getElementById('download-menu');
-
       if (downloadToggle && downloadMenu) {
-        // Toggle menu on button click
         downloadToggle.addEventListener('click', function (e) {
           e.preventDefault();
           var isOpen = downloadMenu.classList.contains('open');
           downloadMenu.classList.toggle('open');
           downloadToggle.setAttribute('aria-expanded', !isOpen);
         });
-
-        // Close menu when clicking outside
         document.addEventListener('click', function (e) {
           if (!downloadToggle.contains(e.target) && !downloadMenu.contains(e.target)) {
             downloadMenu.classList.remove('open');
             downloadToggle.setAttribute('aria-expanded', 'false');
           }
         });
-
-        // Close menu when pressing Escape
         document.addEventListener('keydown', function (e) {
           if (e.key === 'Escape') {
             downloadMenu.classList.remove('open');
             downloadToggle.setAttribute('aria-expanded', 'false');
           }
         });
-
-        // Close menu when clicking on a link
         downloadMenu.querySelectorAll('a').forEach(function (link) {
           link.addEventListener('click', function () {
             downloadMenu.classList.remove('open');
@@ -1658,7 +1180,6 @@
           });
         });
       }
-
     })();
   </script>
 

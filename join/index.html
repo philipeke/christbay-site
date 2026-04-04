@@ -6,7 +6,7 @@
   <meta name="description" content="Enter your ChristBay referral code to continue to the app." />
   <meta name="robots" content="index, follow" />
   <title>Join with a referral code — ChristBay</title>
-  <link rel="icon" type="image/png" href="/assets/icon.png" />
+  <link rel="icon" type="image/png" href="/assets/brand.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
@@ -64,7 +64,7 @@
       height: 64px; max-width: var(--max-width); margin: 0 auto; padding: 0 1.5rem;
     }
     .nav-brand { display: flex; align-items: center; gap: 0.625rem; }
-    .nav-brand img { width: 28px; height: 28px; border-radius: 6px; }
+    .nav-brand img { width: 28px; height: 28px; border-radius: 50%; object-fit: cover; }
     .nav-brand-name { font-size: 1.0625rem; font-weight: 600; color: var(--white); }
     .nav-links { display: flex; align-items: center; gap: 1.5rem; }
     .nav-links a {
@@ -266,8 +266,8 @@
     .footer-brand img {
       width: 32px;
       height: 32px;
-      object-fit: contain;
-      border-radius: 7px;
+      border-radius: 50%;
+      object-fit: cover;
       opacity: 0.8;
     }
     .footer-brand-name {
@@ -312,10 +312,10 @@
 <body>
   <a href="#main" class="skip-link">Skip to main content</a>
 
-  <header class="site-header">
+<header class="site-header">
     <div class="nav-inner">
       <a href="/" class="nav-brand" aria-label="ChristBay — home">
-        <img src="/assets/icon.png" alt="" width="28" height="28" />
+        <img src="/assets/brand.png" alt="" width="28" height="28" style="border-radius:50%;object-fit:cover;border:2px solid rgba(201,168,76,0.3)" />
         <span class="nav-brand-name">ChristBay</span>
       </a>
       <nav class="nav-links" aria-label="Primary">
@@ -398,11 +398,11 @@
     </div>
   </main>
 
-  <footer class="site-footer" role="contentinfo">
+<footer class="site-footer" role="contentinfo">
     <div class="footer-inner">
       <div class="footer-top">
         <div class="footer-brand">
-          <img src="/assets/icon.png" alt="ChristBay" />
+          <img src="/assets/brand.png" alt="ChristBay" style="border-radius:50%;object-fit:cover;border:2px solid rgba(201,168,76,0.2)" />
           <span class="footer-brand-name">ChristBay</span>
         </div>
         <nav class="footer-nav" aria-label="Footer links">

@@ -6,7 +6,7 @@
   <meta name="description" content="Get support for ChristBay. Contact OakDev &amp; AI AB — a Swedish app studio based in Uddevalla. We're here to help." />
   <meta name="robots" content="index, follow" />
   <title>Support — ChristBay</title>
-  <link rel="icon" type="image/png" href="/assets/icon.png" />
+  <link rel="icon" type="image/png" href="/assets/brand.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
@@ -54,7 +54,7 @@
     .site-header{position:sticky;top:0;z-index:100;background:rgba(18,29,53,.96);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(201,168,76,.14)}
     .nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px;max-width:var(--max-width);margin:0 auto;padding:0 1.5rem}
     .nav-brand{display:flex;align-items:center;gap:.625rem}
-    .nav-brand img{width:28px;height:28px;object-fit:contain;border-radius:6px}
+    .nav-brand img{width:28px;height:28px;border-radius:50%;object-fit:cover}
     .nav-brand-name{font-size:1.0625rem;font-weight:600;color:var(--white);letter-spacing:-.01em}
     .nav-links{display:flex;align-items:center;gap:1.75rem}
     .nav-links a{font-size:.875rem;font-weight:500;color:rgba(255,255,255,.7);transition:color var(--transition)}
@@ -249,7 +249,7 @@
     .footer-inner{max-width:var(--max-width);margin:0 auto}
     .footer-top{display:flex;align-items:flex-start;justify-content:space-between;padding-bottom:2.5rem;border-bottom:1px solid rgba(255,255,255,.07);gap:2rem;flex-wrap:wrap}
     .footer-brand{display:flex;align-items:center;gap:.625rem}
-    .footer-brand img{width:32px;height:32px;object-fit:contain;border-radius:7px;opacity:.8}
+    .footer-brand img{width:32px;height:32px;border-radius:50%;object-fit:cover;opacity:.8}
     .footer-brand-name{font-size:1rem;font-weight:600;color:var(--white);letter-spacing:-.01em}
     .footer-nav{display:flex;gap:.5rem 2.25rem;flex-wrap:wrap;align-items:center}
     .footer-nav a{font-size:.875rem;color:rgba(255,255,255,.45);transition:color var(--transition)}
@@ -273,13 +273,13 @@
 <header class="site-header" role="banner">
   <nav class="nav-inner" aria-label="Primary navigation">
     <a href="/" class="nav-brand" aria-label="ChristBay — home">
-      <img src="/assets/icon.png" alt="" aria-hidden="true" />
+      <img src="/assets/brand.png" alt="" aria-hidden="true" style="border-radius:50%;object-fit:cover;border:2px solid rgba(201,168,76,0.3)" />
       <span class="nav-brand-name">ChristBay</span>
     </a>
     <div class="nav-links">
       <a href="/#features" class="nav-text">Features</a>
-      <a href="/#faq" class="nav-text">FAQ</a>
-      <a href="#" class="nav-cta">Download</a>
+      <a href="/#premium" class="nav-text">Premium</a>
+      <a href="/support/" class="nav-cta" aria-current="page">Support</a>
     </div>
   </nav>
 </header>
@@ -711,7 +711,7 @@
   <div class="footer-inner">
     <div class="footer-top">
       <div class="footer-brand">
-        <img src="/assets/icon.png" alt="ChristBay" />
+        <img src="/assets/brand.png" alt="ChristBay" style="border-radius:50%;object-fit:cover;border:2px solid rgba(201,168,76,0.2)" />
         <span class="footer-brand-name">ChristBay</span>
       </div>
       <nav class="footer-nav" aria-label="Footer links">
