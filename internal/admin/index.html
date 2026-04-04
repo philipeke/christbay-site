@@ -1,0 +1,1182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="description" content="ChristBay internal referral administration." />
+  <title>Admin — Referrals — ChristBay</title>
+  <link rel="icon" type="image/png" href="/assets/icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy: #1a2744;
+      --navy-light: #243355;
+      --navy-deep: #121d35;
+      --gold: #c9a84c;
+      --gold-light: #dfc980;
+      --warm-white: #f9f7f4;
+      --cream: #f0ece4;
+      --white: #ffffff;
+      --text-primary: #1a2744;
+      --text-secondary: #4a5a7a;
+      --text-muted: #7a8ba5;
+      --border: #e0dbd0;
+      --danger: #b03a2e;
+      --success: #1e6b4a;
+      --shadow-sm: 0 1px 3px rgba(26, 39, 68, 0.08);
+      --shadow-md: 0 4px 16px rgba(26, 39, 68, 0.12);
+      --radius: 12px;
+      --radius-sm: 8px;
+      --transition: 0.25s ease;
+      --sidebar-w: 240px;
+      --max: 1200px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--cream);
+      color: var(--text-primary);
+      line-height: 1.5;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    button, input, select, textarea { font: inherit; }
+    button { cursor: pointer; border: none; background: none; }
+
+    .skip-link {
+      position: absolute; top: -100px; left: 1rem; z-index: 9999;
+      background: var(--navy); color: var(--white); padding: 0.5rem 1rem;
+      border-radius: var(--radius-sm); font-weight: 600;
+    }
+    .skip-link:focus { top: 1rem; }
+
+    /* Gate */
+    .gate {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
+      background: linear-gradient(155deg, var(--navy-deep) 0%, var(--navy) 50%, var(--navy-light) 100%);
+    }
+    .gate-card {
+      width: 100%;
+      max-width: 420px;
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 2rem;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border);
+    }
+    .gate-card h1 {
+      font-size: 1.375rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 0.35rem;
+    }
+    .gate-card p.lead {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      margin-bottom: 1.5rem;
+    }
+    .field { margin-bottom: 1rem; }
+    .field label {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      margin-bottom: 0.35rem;
+    }
+    .field input {
+      width: 100%;
+      padding: 0.65rem 0.85rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: var(--warm-white);
+    }
+    .field input:focus {
+      outline: 2px solid rgba(201, 168, 76, 0.45);
+      border-color: var(--gold);
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      padding: 0.65rem 1.25rem;
+      border-radius: 100px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: background var(--transition), transform var(--transition);
+    }
+    .btn-primary {
+      background: var(--gold);
+      color: var(--navy-deep);
+      width: 100%;
+    }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+    .btn-secondary {
+      background: var(--navy);
+      color: var(--white);
+    }
+    .btn-secondary:hover { background: var(--navy-light); }
+    .btn-ghost {
+      background: transparent;
+      color: var(--text-secondary);
+      border: 1px solid var(--border);
+    }
+    .btn-ghost:hover { border-color: var(--gold); color: var(--navy); }
+    .btn-sm { padding: 0.4rem 0.85rem; font-size: 0.8125rem; }
+    .btn-danger { background: var(--danger); color: var(--white); }
+    .btn-danger:hover { filter: brightness(1.05); }
+
+    .msg {
+      font-size: 0.85rem;
+      padding: 0.65rem 0.85rem;
+      border-radius: var(--radius-sm);
+      margin-bottom: 1rem;
+    }
+    .msg-error { background: #fdecea; color: #7b241c; }
+    .msg-ok { background: #e8f5e9; color: var(--success); }
+
+    /* App shell */
+    .app { display: none; min-height: 100vh; }
+    .app.visible { display: flex; flex-direction: column; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(18, 29, 53, 0.97);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+      color: var(--white);
+    }
+    .topbar-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0.75rem 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .topbar-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 700;
+      font-size: 1rem;
+    }
+    .topbar-brand img { width: 28px; height: 28px; border-radius: 6px; }
+    .topbar-badge {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-left: 0.35rem;
+    }
+    .topbar-actions { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; }
+    .topbar-actions a {
+      font-size: 0.8125rem;
+      color: rgba(255, 255, 255, 0.65);
+    }
+    .topbar-actions a:hover { color: var(--white); }
+
+    .shell {
+      flex: 1;
+      display: flex;
+      max-width: var(--max);
+      width: 100%;
+      margin: 0 auto;
+      align-items: stretch;
+    }
+
+    .sidebar {
+      width: var(--sidebar-w);
+      flex-shrink: 0;
+      background: var(--warm-white);
+      border-right: 1px solid var(--border);
+      padding: 1.25rem 0;
+    }
+    .nav-btn {
+      display: block;
+      width: 100%;
+      text-align: left;
+      padding: 0.65rem 1.25rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      border-left: 3px solid transparent;
+      transition: background var(--transition), color var(--transition), border-color var(--transition);
+    }
+    .nav-btn:hover { background: rgba(201, 168, 76, 0.08); color: var(--navy); }
+    .nav-btn.active {
+      background: rgba(201, 168, 76, 0.12);
+      color: var(--navy);
+      font-weight: 600;
+      border-left-color: var(--gold);
+    }
+
+    .main {
+      flex: 1;
+      min-width: 0;
+      padding: 1.5rem 1.25rem 3rem;
+      background: var(--cream);
+    }
+
+    .panel {
+      display: none;
+    }
+    .panel.active { display: block; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: none; }
+    }
+
+    .page-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: var(--navy);
+      margin-bottom: 0.25rem;
+    }
+    .page-desc {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      margin-bottom: 1.5rem;
+      max-width: 640px;
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .stat-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.125rem 1.25rem;
+      box-shadow: var(--shadow-sm);
+    }
+    .stat-label {
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 0.35rem;
+    }
+    .stat-value { font-size: 1.75rem; font-weight: 700; color: var(--navy); letter-spacing: -0.02em; }
+
+    .card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      margin-bottom: 1.25rem;
+      box-shadow: var(--shadow-sm);
+    }
+    .card-head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+    .card-head h2 { font-size: 1rem; font-weight: 700; color: var(--navy); }
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      align-items: center;
+    }
+    .search-input {
+      padding: 0.45rem 0.75rem;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      font-size: 0.875rem;
+      min-width: 180px;
+      background: var(--warm-white);
+    }
+
+    .table-wrap { overflow-x: auto; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.8125rem;
+    }
+    th, td {
+      text-align: left;
+      padding: 0.65rem 0.5rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+    }
+    th {
+      font-size: 0.6875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      font-weight: 700;
+    }
+    tr:hover td { background: rgba(201, 168, 76, 0.04); }
+    .mono { font-family: ui-monospace, monospace; font-weight: 600; color: var(--navy); }
+    .pill {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 100px;
+      font-size: 0.7rem;
+      font-weight: 600;
+    }
+    .pill-on { background: #e8f5e9; color: var(--success); }
+    .pill-off { background: #f4f4f4; color: var(--text-muted); }
+
+    .row-actions { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+
+    .activity-item {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.875rem;
+    }
+    .activity-item:last-child { border-bottom: none; }
+    .activity-meta { color: var(--text-muted); font-size: 0.8rem; }
+
+    .settings-block { margin-bottom: 1.75rem; }
+    .settings-block h3 {
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--navy);
+    }
+    .settings-block p.hint {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      margin-bottom: 0.75rem;
+      line-height: 1.5;
+    }
+
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(18, 29, 53, 0.55);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: var(--white);
+      border-radius: var(--radius);
+      max-width: 480px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 1.5rem;
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.2);
+    }
+    .modal h3 { font-size: 1.125rem; margin-bottom: 1rem; color: var(--navy); }
+    .modal-actions {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: flex-end;
+      margin-top: 1.25rem;
+      flex-wrap: wrap;
+    }
+    .modal-actions .btn { width: auto; }
+
+    .qr-box {
+      text-align: center;
+      padding: 1rem;
+      background: var(--warm-white);
+      border-radius: var(--radius-sm);
+      margin-top: 0.75rem;
+    }
+    .qr-box img { max-width: 180px; height: auto; margin: 0 auto; }
+
+    @media (max-width: 860px) {
+      .shell { flex-direction: column; }
+      .sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.25rem;
+        padding: 0.75rem;
+      }
+      .nav-btn {
+        border-left: none;
+        border-radius: var(--radius-sm);
+        width: auto;
+      }
+      .nav-btn.active { border-left: none; box-shadow: inset 0 0 0 2px var(--gold); }
+    }
+
+    /* Site footer — same as index.html */
+    .site-footer {
+      background: #0f1724;
+      color: rgba(255, 255, 255, 0.5);
+      padding: 4rem 1.5rem 2.5rem;
+      flex-shrink: 0;
+    }
+    .footer-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+    }
+    .footer-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.625rem;
+    }
+    .footer-brand img {
+      width: 32px;
+      height: 32px;
+      object-fit: contain;
+      border-radius: 7px;
+      opacity: 0.8;
+    }
+    .footer-brand-name {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--white);
+      letter-spacing: -0.01em;
+    }
+    .footer-nav {
+      display: flex;
+      gap: 0.5rem 2.25rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .footer-nav a {
+      font-size: 0.875rem;
+      color: rgba(255, 255, 255, 0.45);
+      transition: color var(--transition);
+    }
+    .footer-nav a:hover {
+      color: var(--white);
+    }
+    .footer-bottom {
+      padding-top: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+    .footer-copyright {
+      font-size: 0.8125rem;
+      color: rgba(255, 255, 255, 0.3);
+    }
+    .footer-tagline {
+      font-size: 0.8125rem;
+      color: rgba(255, 255, 255, 0.2);
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <!-- Login / setup gate -->
+  <div class="gate" id="gate">
+    <div class="gate-card">
+      <h1 id="gate-title">ChristBay referrals</h1>
+      <p class="lead" id="gate-lead">Internal tools. Data is stored in this browser only (localStorage).</p>
+      <div id="gate-msg"></div>
+      <form id="gate-form">
+        <div class="field" id="field-new-wrap" style="display:none">
+          <label for="gate-new">New password (min 10 characters)</label>
+          <input type="password" id="gate-new" name="new" autocomplete="new-password" minlength="10" />
+        </div>
+        <div class="field">
+          <label for="gate-pass" id="gate-pass-label">Password</label>
+          <input type="password" id="gate-pass" name="pass" autocomplete="current-password" required />
+        </div>
+        <button type="submit" class="btn btn-primary" id="gate-submit">Unlock</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Admin app -->
+  <div class="app" id="app" aria-hidden="true">
+    <header class="topbar">
+      <div class="topbar-inner">
+        <div class="topbar-brand">
+          <img src="/assets/icon.png" alt="" width="28" height="28" />
+          <span>ChristBay</span>
+          <span class="topbar-badge">Admin</span>
+        </div>
+        <div class="topbar-actions">
+          <a href="/join/">Open join page</a>
+          <a href="/">Site home</a>
+          <button type="button" class="btn btn-ghost btn-sm" id="btn-logout" style="color:rgba(255,255,255,.85);border-color:rgba(255,255,255,.25)">Sign out</button>
+        </div>
+      </div>
+    </header>
+
+    <div class="shell">
+      <nav class="sidebar" aria-label="Admin sections">
+        <button type="button" class="nav-btn active" data-panel="dashboard">Dashboard</button>
+        <button type="button" class="nav-btn" data-panel="codes">Referral codes</button>
+        <button type="button" class="nav-btn" data-panel="activity">Activity</button>
+        <button type="button" class="nav-btn" data-panel="settings">Settings &amp; backup</button>
+      </nav>
+
+      <main class="main" id="main">
+        <section class="panel active" id="panel-dashboard" aria-labelledby="dash-title">
+          <h1 class="page-title" id="dash-title">Dashboard</h1>
+          <p class="page-desc">Overview of referral codes and redemptions in this browser.</p>
+          <div class="stat-grid">
+            <div class="stat-card">
+              <div class="stat-label">Total codes</div>
+              <div class="stat-value" id="stat-total">0</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Active codes</div>
+              <div class="stat-value" id="stat-active">0</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Redemptions (month)</div>
+              <div class="stat-value" id="stat-month">0</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Total uses</div>
+              <div class="stat-value" id="stat-uses">0</div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-head">
+              <h2>Quick actions</h2>
+            </div>
+            <div class="toolbar">
+              <button type="button" class="btn btn-primary btn-sm" id="qa-add">New code</button>
+              <button type="button" class="btn btn-secondary btn-sm" id="qa-bulk">Bulk generate</button>
+              <button type="button" class="btn btn-ghost btn-sm" id="qa-join">Copy site join URL</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel" id="panel-codes" aria-labelledby="codes-title">
+          <h1 class="page-title" id="codes-title">Referral codes</h1>
+          <p class="page-desc">Create and manage codes. Users redeem them on the public <a href="/join/">/join</a> page.</p>
+          <div class="card">
+            <div class="card-head">
+              <div class="toolbar">
+                <input type="search" class="search-input" id="code-search" placeholder="Search code or label…" autocomplete="off" />
+                <button type="button" class="btn btn-primary btn-sm" id="btn-add-code">Add code</button>
+                <button type="button" class="btn btn-secondary btn-sm" id="btn-bulk-gen">Bulk generate</button>
+              </div>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Code</th>
+                    <th>Label</th>
+                    <th>Uses</th>
+                    <th>Expires</th>
+                    <th>Status</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody id="codes-tbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel" id="panel-activity" aria-labelledby="act-title">
+          <h1 class="page-title" id="act-title">Activity</h1>
+          <p class="page-desc">Recent redemptions (newest first), stored locally in this browser.</p>
+          <div class="card" id="activity-list"></div>
+        </section>
+
+        <section class="panel" id="panel-settings" aria-labelledby="set-title">
+          <h1 class="page-title" id="set-title">Settings &amp; backup</h1>
+          <p class="page-desc">Change the admin password, export data, or merge backups from another device.</p>
+
+          <div class="card settings-block">
+            <h3>Change password</h3>
+            <p class="hint">Requires your current password. Session stays valid in this tab.</p>
+            <div id="pw-msg"></div>
+            <form id="form-pw">
+              <div class="field">
+                <label for="pw-old">Current password</label>
+                <input type="password" id="pw-old" required autocomplete="current-password" />
+              </div>
+              <div class="field">
+                <label for="pw-new">New password (min 10 characters)</label>
+                <input type="password" id="pw-new" required minlength="10" autocomplete="new-password" />
+              </div>
+              <button type="submit" class="btn btn-primary" style="width:auto">Update password</button>
+            </form>
+          </div>
+
+          <div class="card settings-block">
+            <h3>Publish to the website</h3>
+            <p class="hint">So visitors can redeem codes on <strong>/join</strong> after deploy, save the “codes only” JSON as <code class="mono" style="font-size:0.8rem">assets/data/referrals-public.json</code> in this repo and push. Redemption limits are approximate on a static site unless you add a backend.</p>
+          </div>
+
+          <div class="card settings-block">
+            <h3>Export</h3>
+            <p class="hint">Full backup includes hashed admin password and all codes. “Codes only” omits secrets for sharing lists.</p>
+            <div class="toolbar">
+              <button type="button" class="btn btn-secondary btn-sm" id="btn-export-full">Download full backup (JSON)</button>
+              <button type="button" class="btn btn-ghost btn-sm" id="btn-export-public">Download codes only (JSON)</button>
+            </div>
+          </div>
+
+          <div class="card settings-block">
+            <h3>Import</h3>
+            <p class="hint">Merge adds codes and events without removing existing data. Replace overwrites everything (including admin password in file).</p>
+            <div class="field">
+              <label for="import-file">JSON file</label>
+              <input type="file" id="import-file" accept="application/json,.json" />
+            </div>
+            <div class="toolbar">
+              <button type="button" class="btn btn-secondary btn-sm" id="btn-import-merge">Merge import</button>
+              <button type="button" class="btn btn-danger btn-sm" id="btn-import-replace">Replace import</button>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <img src="/assets/icon.png" alt="ChristBay" />
+          <span class="footer-brand-name">ChristBay</span>
+        </div>
+        <nav class="footer-nav" aria-label="Footer links">
+          <a href="/privacy/">Privacy Policy</a>
+          <a href="/terms/">Terms of Use</a>
+          <a href="/support/">Support</a>
+          <a href="/join/">Join with code</a>
+          <a href="/delete-account/">Delete Account</a>
+        </nav>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copyright">&copy; 2026 OakDev &amp; AI AB. All rights reserved.</p>
+        <p class="footer-tagline">Walk in the Word. Grow in grace.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Modal: add / edit code -->
+  <div class="modal-overlay" id="modal-code" role="dialog" aria-modal="true" aria-labelledby="modal-code-title">
+    <div class="modal">
+      <h3 id="modal-code-title">New referral code</h3>
+      <form id="form-code">
+        <input type="hidden" id="edit-id" value="" />
+        <div class="field">
+          <label for="f-code">Code</label>
+          <input type="text" id="f-code" required autocomplete="off" placeholder="e.g. FAITH-2026" />
+        </div>
+        <div class="field">
+          <label for="f-label">Label</label>
+          <input type="text" id="f-label" placeholder="Campaign or partner name" />
+        </div>
+        <div class="field">
+          <label for="f-note">Internal note (optional)</label>
+          <input type="text" id="f-note" placeholder="Not shown to users" />
+        </div>
+        <div class="field">
+          <label for="f-max">Max redemptions (0 = unlimited)</label>
+          <input type="number" id="f-max" min="0" value="0" />
+        </div>
+        <div class="field">
+          <label for="f-exp">Expiry date (optional)</label>
+          <input type="date" id="f-exp" />
+        </div>
+        <div class="field" id="field-active-wrap">
+          <label><input type="checkbox" id="f-active" checked /> Active</label>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-ghost" id="modal-cancel">Cancel</button>
+          <button type="button" class="btn btn-ghost btn-sm" id="btn-suggest-code">Suggest code</button>
+          <button type="submit" class="btn btn-primary" style="width:auto">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: bulk -->
+  <div class="modal-overlay" id="modal-bulk" role="dialog" aria-modal="true" aria-labelledby="modal-bulk-title">
+    <div class="modal">
+      <h3 id="modal-bulk-title">Bulk generate</h3>
+      <div class="field">
+        <label for="bulk-count">Number of codes</label>
+        <input type="number" id="bulk-count" min="1" max="50" value="5" />
+      </div>
+      <div class="field">
+        <label for="bulk-label">Label prefix</label>
+        <input type="text" id="bulk-label" placeholder="e.g. Easter" />
+      </div>
+      <div class="field">
+        <label for="bulk-max">Max redemptions each (0 = unlimited)</label>
+        <input type="number" id="bulk-max" min="0" value="1" />
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-ghost" id="bulk-cancel">Cancel</button>
+        <button type="button" class="btn btn-primary" id="bulk-run" style="width:auto">Generate</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: QR / link -->
+  <div class="modal-overlay" id="modal-qr" role="dialog" aria-modal="true" aria-labelledby="modal-qr-title">
+    <div class="modal">
+      <h3 id="modal-qr-title">Join link</h3>
+      <p class="page-desc" style="margin-bottom:0.75rem;font-size:0.875rem">Share this URL or QR for this code.</p>
+      <p class="mono" id="qr-url" style="word-break:break-all;font-size:0.8rem;margin-bottom:0.75rem"></p>
+      <div class="toolbar">
+        <button type="button" class="btn btn-secondary btn-sm" id="qr-copy">Copy link</button>
+      </div>
+      <div class="qr-box" id="qr-image-wrap">
+        <img id="qr-img" alt="QR code" />
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-primary" id="qr-close" style="width:auto">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/assets/js/christbay-referrals.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js" crossorigin="anonymous"></script>
+  <script>
+(function () {
+  'use strict';
+  var R = window.ChristBayReferrals;
+  if (!R) return;
+
+  var gate = document.getElementById('gate');
+  var app = document.getElementById('app');
+  var gateForm = document.getElementById('gate-form');
+  var gateMsg = document.getElementById('gate-msg');
+  var fieldNewWrap = document.getElementById('field-new-wrap');
+  var gateTitle = document.getElementById('gate-title');
+  var gateLead = document.getElementById('gate-lead');
+  var gatePassLabel = document.getElementById('gate-pass-label');
+  var gateSubmit = document.getElementById('gate-submit');
+
+  function showGateMsg(text, ok) {
+    gateMsg.innerHTML = text ? '<div class="msg ' + (ok ? 'msg-ok' : 'msg-error') + '">' + text + '</div>' : '';
+  }
+
+  function openApp() {
+    if (gate) gate.style.display = 'none';
+    app.classList.add('visible');
+    app.setAttribute('aria-hidden', 'false');
+    refreshAll();
+  }
+
+  function setupGateUi() {
+    var has = R.hasAdminPassword();
+    if (!has) {
+      gateTitle.textContent = 'Create admin password';
+      gateLead.textContent = 'First-time setup for this browser. Choose a strong password; it protects local referral data only.';
+      fieldNewWrap.style.display = 'block';
+      document.getElementById('gate-new').required = true;
+      gatePassLabel.textContent = 'Confirm password';
+      gateSubmit.textContent = 'Create & unlock';
+    } else {
+      fieldNewWrap.style.display = 'none';
+      document.getElementById('gate-new').required = false;
+      gateTitle.textContent = 'ChristBay referrals';
+      gateLead.textContent = 'Internal tools. Data is stored in this browser only (localStorage).';
+      gatePassLabel.textContent = 'Password';
+      gateSubmit.textContent = 'Unlock';
+    }
+  }
+
+  gateForm.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    showGateMsg('');
+    var pass = document.getElementById('gate-pass').value;
+    var newPass = document.getElementById('gate-new').value;
+    if (!R.hasAdminPassword()) {
+      if (newPass.length < 10) {
+        showGateMsg('Use at least 10 characters for the new password.', false);
+        return;
+      }
+      if (pass !== newPass) {
+        showGateMsg('Passwords do not match.', false);
+        return;
+      }
+      await R.setAdminPassword(pass);
+      R.setSession(true);
+      openApp();
+      return;
+    }
+    var ok = await R.verifyAdminPassword(pass);
+    if (!ok) {
+      showGateMsg('Incorrect password.', false);
+      return;
+    }
+    R.setSession(true);
+    openApp();
+  });
+
+  document.getElementById('btn-logout').addEventListener('click', function () {
+    R.setSession(false);
+    window.location.reload();
+  });
+
+  function requireSession() {
+    return R.isSessionValid();
+  }
+
+  /* ---- Navigation ---- */
+  var navBtns = document.querySelectorAll('.nav-btn');
+  var panels = document.querySelectorAll('.panel');
+
+  navBtns.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var id = btn.getAttribute('data-panel');
+      navBtns.forEach(function (b) { b.classList.remove('active'); });
+      panels.forEach(function (p) { p.classList.remove('active'); });
+      btn.classList.add('active');
+      var panel = document.getElementById('panel-' + id);
+      if (panel) panel.classList.add('active');
+      if (id === 'codes') renderCodesTable();
+      if (id === 'activity') renderActivity();
+      if (id === 'dashboard') refreshStats();
+    });
+  });
+
+  function refreshStats() {
+    if (!requireSession()) return;
+    var s = R.getStats();
+    document.getElementById('stat-total').textContent = s.totalCodes;
+    document.getElementById('stat-active').textContent = s.activeCodes;
+    document.getElementById('stat-month').textContent = s.redemptionsThisMonth;
+    document.getElementById('stat-uses').textContent = s.totalUses;
+  }
+
+  function renderCodesTable() {
+    if (!requireSession()) return;
+    var q = (document.getElementById('code-search').value || '').trim().toLowerCase();
+    var rows = R.listCodes().filter(function (c) {
+      if (!q) return true;
+      return (
+        R.normalizeCode(c.code).toLowerCase().indexOf(q) >= 0 ||
+        (c.label || '').toLowerCase().indexOf(q) >= 0
+      );
+    });
+    rows.sort(function (a, b) {
+      return new Date(b.createdAt) - new Date(a.createdAt);
+    });
+    var tb = document.getElementById('codes-tbody');
+    tb.innerHTML = '';
+    rows.forEach(function (c) {
+      var tr = document.createElement('tr');
+      var max = c.maxRedemptions;
+      var uses = (c.usedCount || 0) + (max > 0 ? ' / ' + max : '');
+      var exp = c.expiresAt ? c.expiresAt.slice(0, 10) : '—';
+      tr.innerHTML =
+        '<td class="mono">' + escapeHtml(c.code) + '</td>' +
+        '<td>' + escapeHtml(c.label || '') + '</td>' +
+        '<td>' + uses + '</td>' +
+        '<td>' + exp + '</td>' +
+        '<td><span class="pill ' + (c.active ? 'pill-on' : 'pill-off') + '">' + (c.active ? 'Active' : 'Off') + '</span></td>' +
+        '<td class="row-actions"></td>';
+      var actions = tr.querySelector('.row-actions');
+      actions.appendChild(btn('Copy link', 'btn btn-ghost btn-sm', function () {
+        openQrModal(c.code);
+      }));
+      actions.appendChild(btn('Edit', 'btn btn-secondary btn-sm', function () {
+        openCodeModal(c);
+      }));
+      actions.appendChild(btn('Delete', 'btn btn-danger btn-sm', function () {
+        if (confirm('Delete code ' + c.code + '?')) {
+          R.deleteCode(c.id);
+          renderCodesTable();
+          refreshStats();
+        }
+      }));
+      tb.appendChild(tr);
+    });
+  }
+
+  function btn(label, cls, fn) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = cls;
+    b.textContent = label;
+    b.addEventListener('click', fn);
+    return b;
+  }
+
+  function escapeHtml(s) {
+    var d = document.createElement('div');
+    d.textContent = s;
+    return d.innerHTML;
+  }
+
+  function joinUrlForCode(code) {
+    var u = new URL('/join/', window.location.origin);
+    u.searchParams.set('code', R.normalizeCode(code));
+    return u.toString();
+  }
+
+  function openQrModal(code) {
+    var url = joinUrlForCode(code);
+    document.getElementById('qr-url').textContent = url;
+    document.getElementById('modal-qr').classList.add('open');
+    var wrap = document.getElementById('qr-image-wrap');
+    var img = document.getElementById('qr-img');
+    if (window.QRCode && typeof QRCode.toDataURL === 'function') {
+      QRCode.toDataURL(url, { width: 200, margin: 2, color: { dark: '#1a2744', light: '#ffffff' } })
+        .then(function (dataUrl) { img.src = dataUrl; img.style.display = 'block'; })
+        .catch(function () { wrap.style.display = 'none'; });
+    } else {
+      wrap.style.display = 'none';
+    }
+    document.getElementById('qr-copy').onclick = function () {
+      navigator.clipboard.writeText(url).then(function () {
+        document.getElementById('qr-copy').textContent = 'Copied!';
+        setTimeout(function () { document.getElementById('qr-copy').textContent = 'Copy link'; }, 2000);
+      });
+    };
+  }
+
+  document.getElementById('qr-close').addEventListener('click', function () {
+    document.getElementById('modal-qr').classList.remove('open');
+  });
+
+  document.getElementById('modal-qr').addEventListener('click', function (e) {
+    if (e.target === this) this.classList.remove('open');
+  });
+
+  /* Code modal */
+  var modalCode = document.getElementById('modal-code');
+  var formCode = document.getElementById('form-code');
+
+  function openCodeModal(entry) {
+    document.getElementById('modal-code-title').textContent = entry ? 'Edit referral code' : 'New referral code';
+    document.getElementById('edit-id').value = entry ? entry.id : '';
+    document.getElementById('f-code').value = entry ? entry.code : R.suggestCode();
+    document.getElementById('f-code').readOnly = !!entry;
+    document.getElementById('f-label').value = entry ? entry.label || '' : '';
+    document.getElementById('f-note').value = entry ? entry.note || '' : '';
+    document.getElementById('f-max').value = entry ? entry.maxRedemptions : 0;
+    document.getElementById('f-exp').value = entry && entry.expiresAt ? entry.expiresAt.slice(0, 10) : '';
+    document.getElementById('f-active').checked = entry ? !!entry.active : true;
+    modalCode.classList.add('open');
+  }
+
+  function closeCodeModal() {
+    modalCode.classList.remove('open');
+  }
+
+  document.getElementById('btn-add-code').addEventListener('click', function () { openCodeModal(null); });
+  document.getElementById('qa-add').addEventListener('click', function () {
+    document.querySelector('[data-panel="codes"]').click();
+    openCodeModal(null);
+  });
+  document.getElementById('modal-cancel').addEventListener('click', closeCodeModal);
+  document.getElementById('btn-suggest-code').addEventListener('click', function () {
+    if (!document.getElementById('f-code').readOnly) document.getElementById('f-code').value = R.suggestCode();
+  });
+
+  formCode.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var id = document.getElementById('edit-id').value;
+    var expVal = document.getElementById('f-exp').value;
+    var expiresAt = expVal ? new Date(expVal + 'T23:59:59').toISOString() : null;
+    var payload = {
+      code: document.getElementById('f-code').value,
+      label: document.getElementById('f-label').value,
+      note: document.getElementById('f-note').value,
+      maxRedemptions: parseInt(document.getElementById('f-max').value, 10) || 0,
+      expiresAt: expiresAt,
+      active: document.getElementById('f-active').checked
+    };
+    if (id) {
+      var p = { label: payload.label, note: payload.note, maxRedemptions: payload.maxRedemptions, expiresAt: expiresAt, active: payload.active };
+      R.updateCode(id, p);
+    } else {
+      var r = R.addCode(payload);
+      if (!r.ok) {
+        alert(r.error || 'Could not save');
+        return;
+      }
+    }
+    closeCodeModal();
+    renderCodesTable();
+    refreshStats();
+  });
+
+  modalCode.addEventListener('click', function (e) {
+    if (e.target === modalCode) closeCodeModal();
+  });
+
+  /* Bulk modal */
+  var modalBulk = document.getElementById('modal-bulk');
+  function openBulk() {
+    modalBulk.classList.add('open');
+  }
+  function closeBulk() {
+    modalBulk.classList.remove('open');
+  }
+  document.getElementById('btn-bulk-gen').addEventListener('click', openBulk);
+  document.getElementById('qa-bulk').addEventListener('click', function () {
+    document.querySelector('[data-panel="codes"]').click();
+    openBulk();
+  });
+  document.getElementById('bulk-cancel').addEventListener('click', closeBulk);
+  document.getElementById('bulk-run').addEventListener('click', function () {
+    var n = parseInt(document.getElementById('bulk-count').value, 10) || 1;
+    n = Math.min(50, Math.max(1, n));
+    var prefix = document.getElementById('bulk-label').value.trim();
+    var max = parseInt(document.getElementById('bulk-max').value, 10);
+    if (isNaN(max)) max = 1;
+    var res = R.generateBulk(n, { labelPrefix: prefix, maxRedemptions: max });
+    closeBulk();
+    alert('Generated ' + res.added.length + ' codes.' + (res.errors ? ' Failed: ' + res.errors : ''));
+    renderCodesTable();
+    refreshStats();
+  });
+  modalBulk.addEventListener('click', function (e) {
+    if (e.target === modalBulk) closeBulk();
+  });
+
+  document.getElementById('qa-join').addEventListener('click', function () {
+    var url = new URL('/join/', window.location.origin).toString();
+    navigator.clipboard.writeText(url);
+  });
+
+  document.getElementById('code-search').addEventListener('input', function () {
+    renderCodesTable();
+  });
+
+  function renderActivity() {
+    if (!requireSession()) return;
+    var list = document.getElementById('activity-list');
+    var items = R.getRedemptions(80);
+    if (!items.length) {
+      list.innerHTML = '<p style="padding:1rem;color:var(--text-secondary);font-size:0.9rem">No redemptions yet.</p>';
+      return;
+    }
+    list.innerHTML = items.map(function (r) {
+      return (
+        '<div class="activity-item">' +
+        '<span class="mono">' + escapeHtml(r.codeSnapshot || '') + '</span>' +
+        '<span class="activity-meta">' + escapeHtml(new Date(r.at).toLocaleString()) + '</span>' +
+        '</div>'
+      );
+    }).join('');
+  }
+
+  document.getElementById('form-pw').addEventListener('submit', async function (e) {
+    e.preventDefault();
+    var el = document.getElementById('pw-msg');
+    var oldP = document.getElementById('pw-old').value;
+    var newP = document.getElementById('pw-new').value;
+    if (newP.length < 10) {
+      el.innerHTML = '<div class="msg msg-error">New password must be at least 10 characters.</div>';
+      return;
+    }
+    var ok = await R.changeAdminPassword(oldP, newP);
+    el.innerHTML = ok
+      ? '<div class="msg msg-ok">Password updated.</div>'
+      : '<div class="msg msg-error">Current password incorrect.</div>';
+    if (ok) document.getElementById('form-pw').reset();
+  });
+
+  document.getElementById('btn-export-full').addEventListener('click', function () {
+    var blob = new Blob([R.exportJson()], { type: 'application/json' });
+    downloadBlob(blob, 'christbay-referrals-backup.json');
+  });
+
+  document.getElementById('btn-export-public').addEventListener('click', function () {
+    var blob = new Blob([R.exportCodesPublic()], { type: 'application/json' });
+    downloadBlob(blob, 'christbay-referrals-codes.json');
+  });
+
+  function downloadBlob(blob, name) {
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = name;
+    a.click();
+    URL.revokeObjectURL(a.href);
+  }
+
+  document.getElementById('btn-import-merge').addEventListener('click', function () {
+    runImport(false);
+  });
+  document.getElementById('btn-import-replace').addEventListener('click', function () {
+    if (!confirm('Replace all local referral data with this file?')) return;
+    runImport(true);
+  });
+
+  function runImport(replace) {
+    var f = document.getElementById('import-file').files[0];
+    if (!f) {
+      alert('Choose a JSON file first.');
+      return;
+    }
+    var reader = new FileReader();
+    reader.onload = function () {
+      try {
+        R.importJson(reader.result, replace);
+        alert('Import complete.');
+        refreshAll();
+      } catch (err) {
+        alert('Import failed: ' + (err.message || String(err)));
+      }
+    };
+    reader.readAsText(f);
+  }
+
+  function refreshAll() {
+    var after = function () {
+      refreshStats();
+      renderCodesTable();
+      renderActivity();
+    };
+    if (R.loadPublicManifest) {
+      R.loadPublicManifest().finally(after);
+    } else {
+      after();
+    }
+  }
+
+  /* Boot */
+  setupGateUi();
+  if (R.isSessionValid()) {
+    openApp();
+  }
+})();
+  </script>
+</body>
+</html>

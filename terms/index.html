@@ -145,20 +145,20 @@
     .doc-link{color:var(--navy);font-weight:500;text-decoration:underline;text-underline-offset:2px;transition:color var(--transition)}
     .doc-link:hover{color:var(--gold)}
 
-    /* Footer */
-    .site-footer{background:var(--navy-deep);color:rgba(255,255,255,.5);padding:3rem 1.5rem 2.5rem}
+    /* Footer (aligned with index.html) */
+    .site-footer{background:#0f1724;color:rgba(255,255,255,.5);padding:4rem 1.5rem 2.5rem}
     .footer-inner{max-width:var(--max-width);margin:0 auto}
-    .footer-top{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;padding-bottom:2rem;border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:1.75rem}
+    .footer-top{display:flex;align-items:flex-start;justify-content:space-between;padding-bottom:2.5rem;border-bottom:1px solid rgba(255,255,255,.07);gap:2rem;flex-wrap:wrap}
     .footer-brand{display:flex;align-items:center;gap:.625rem}
-    .footer-brand img{width:28px;height:28px;object-fit:contain;border-radius:6px}
-    .footer-brand-name{font-size:1rem;font-weight:600;color:var(--white)}
-    .footer-nav{display:flex;flex-wrap:wrap;gap:.375rem 1.5rem}
-    .footer-nav a{font-size:.875rem;color:rgba(255,255,255,.55);transition:color var(--transition)}
+    .footer-brand img{width:32px;height:32px;object-fit:contain;border-radius:7px;opacity:.8}
+    .footer-brand-name{font-size:1rem;font-weight:600;color:var(--white);letter-spacing:-.01em}
+    .footer-nav{display:flex;gap:.5rem 2.25rem;flex-wrap:wrap;align-items:center}
+    .footer-nav a{font-size:.875rem;color:rgba(255,255,255,.45);transition:color var(--transition)}
     .footer-nav a:hover{color:var(--white)}
     .footer-nav a[aria-current="page"]{color:var(--gold-light);font-weight:500}
-    .footer-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem}
-    .footer-copyright{font-size:.8125rem;color:rgba(255,255,255,.4)}
-    .footer-tagline{font-size:.8125rem;color:rgba(201,168,76,.5);font-style:italic}
+    .footer-bottom{padding-top:2rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.75rem}
+    .footer-copyright{font-size:.8125rem;color:rgba(255,255,255,.3)}
+    .footer-tagline{font-size:.8125rem;color:rgba(255,255,255,.2);font-style:italic}
 
     @media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}
     @media print{.site-header,.toc,.skip-link{display:none}.doc-layout{display:block;padding:1rem 0}.policy-section{break-inside:avoid}body{background:white;color:black}}
@@ -1055,6 +1055,7 @@
         <a href="/privacy/">Privacy Policy</a>
         <a href="/terms/" aria-current="page">Terms of Use</a>
         <a href="/support/">Support</a>
+        <a href="/join/">Join with code</a>
         <a href="/delete-account/">Delete Account</a>
       </nav>
     </div>
