@@ -782,6 +782,20 @@ const API_BASE = 'https://us-central1-christbay-app.cloudfunctions.net/adminRefe
 const app  = initializeApp(FIREBASE_CONFIG);
 const auth = getAuth(app);
 
+function apiErrorMessage(status, text) {
+  let msg = 'API error ' + status;
+  if (!text) return msg;
+  try {
+    const j = JSON.parse(text);
+    if (j.error !== undefined && j.error !== null) {
+      return typeof j.error === 'string' ? j.error : JSON.stringify(j.error);
+    }
+    if (j.message) return String(j.message);
+    if (j.details) return typeof j.details === 'string' ? j.details : JSON.stringify(j.details);
+  } catch (_) { /* not JSON */ }
+  return msg + ': ' + text;
+}
+
 async function apiFetch(path, opts = {}) {
   const user = auth.currentUser;
   if (!user) return null;
@@ -791,15 +805,15 @@ async function apiFetch(path, opts = {}) {
     headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json', ...(opts.headers || {}) },
     body:    opts.body ? JSON.stringify(opts.body) : undefined
   });
+  const text = await res.text();
   if (res.status === 403) {
-    let body = '';
-    try { body = await res.text(); } catch (_) {}
-    console.error('[admin] 403', body);
-    showAppError('Åtkomst nekad (403). UID: ' + (user.uid || '?') + ' — Email: ' + (user.email || '?') + (body ? ' — Svar: ' + body : ''));
+    console.error('[admin] 403', text);
+    showAppError('Åtkomst nekad (403). UID: ' + (user.uid || '?') + ' — Email: ' + (user.email || '?') + (text ? ' — Svar: ' + text : ''));
     return null;
   }
-  if (!res.ok) throw new Error('API error ' + res.status);
-  return res.json();
+  if (!res.ok) throw new Error(apiErrorMessage(res.status, text));
+  if (!text) return {};
+  try { return JSON.parse(text); } catch (_) { return {}; }
 }
 
 function showAppError(text) {
@@ -1040,21 +1054,32 @@ document.getElementById('btn-suggest-code').addEventListener('click', function()
 
 document.getElementById('form-code').addEventListener('submit', async function(e) {
   e.preventDefault();
-  const id       = document.getElementById('edit-id').value;
-  const expVal   = document.getElementById('f-exp').value;
-  const expiresAt = expVal ? new Date(expVal + 'T23:59:59').getTime() : null;
-  const payload  = {
-    code:     document.getElementById('f-code').value,
-    label:    document.getElementById('f-label').value,
-    maxUses:  parseInt(document.getElementById('f-max').value, 10) || 0,
-    expiresAt,
-    active:   document.getElementById('f-active').checked
-  };
+  const id     = document.getElementById('edit-id').value;
+  const expVal = document.getElementById('f-exp').value;
+  const expiresAtMs = expVal ? new Date(expVal + 'T23:59:59').getTime() : null;
+  const noteVal = (document.getElementById('f-note').value || '').trim();
   try {
     if (id) {
-      await apiFetch('/' + encodeURIComponent(id), { method: 'PATCH', body: { label: payload.label, maxUses: payload.maxUses, expiresAt: payload.expiresAt, active: payload.active } });
+      await apiFetch('/' + encodeURIComponent(id), {
+        method: 'PATCH',
+        body: {
+          label:     (document.getElementById('f-label').value || '').trim(),
+          maxUses:   parseInt(document.getElementById('f-max').value, 10) || 0,
+          active:    document.getElementById('f-active').checked,
+          note:      noteVal,
+          expiresAt: expiresAtMs
+        }
+      });
     } else {
-      const r = await apiFetch('/create', { method: 'POST', body: payload });
+      const createBody = {
+        code:    normalizeCode(document.getElementById('f-code').value),
+        label:   (document.getElementById('f-label').value || '').trim(),
+        maxUses: parseInt(document.getElementById('f-max').value, 10) || 0,
+        active:  document.getElementById('f-active').checked,
+        note:    noteVal
+      };
+      if (expiresAtMs !== null) createBody.expiresAt = expiresAtMs;
+      const r = await apiFetch('/create', { method: 'POST', body: createBody });
       if (!r) return;
     }
     closeCodeModal();
@@ -1072,7 +1097,18 @@ document.getElementById('bulk-run').addEventListener('click', async function() {
   const ch = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789', seg = l => { let s = '', b = new Uint8Array(l); crypto.getRandomValues(b); for (let i = 0; i < l; i++) s += ch[b[i] % ch.length]; return s; };
   let errs = 0;
   for (let i = 0; i < n; i++) {
-    try { await apiFetch('/create', { method: 'POST', body: { code: seg(4) + '-' + seg(4), label: (prefix ? prefix + ' ' : '') + 'Batch #' + (i + 1), maxUses: max, active: true } }); }
+    try {
+      await apiFetch('/create', {
+        method: 'POST',
+        body: {
+          code:    normalizeCode(seg(4) + '-' + seg(4)),
+          label:   (prefix ? prefix + ' ' : '') + 'Batch #' + (i + 1),
+          maxUses: max,
+          active:  true,
+          note:    ''
+        }
+      });
+    }
     catch (_) { errs++; }
   }
   document.getElementById('modal-bulk').classList.remove('open');
