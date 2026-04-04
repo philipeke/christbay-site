@@ -6,7 +6,7 @@
   <meta name="robots" content="noindex, nofollow" />
   <meta name="description" content="ChristBay internal referral administration." />
   <title>Admin — Referrals — ChristBay</title>
-  <link rel="icon" type="image/png" href="/assets/icon.png" />
+  <link rel="icon" type="image/png" href="/assets/brand.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
@@ -169,6 +169,96 @@
       margin-bottom: 0.25rem;
     }
     .pay-export-brand p { font-size: 0.875rem; color: var(--text-secondary); line-height: 1.55; margin: 0; }
+
+    .sidebar-group-label {
+      padding: 0.5rem 1.25rem 0.25rem;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .sidebar-group-label:first-child { padding-top: 0; }
+
+    .panel-section {
+      margin-bottom: 1.75rem;
+    }
+    .panel-section:last-child { margin-bottom: 0; }
+    .panel-section-title {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 0.75rem;
+      padding-bottom: 0.35rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .field-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    @media (max-width: 640px) {
+      .field-row { grid-template-columns: 1fr; }
+    }
+    .preset-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.35rem;
+    }
+    .preset-row .btn { width: auto; padding: 0.35rem 0.75rem; font-size: 0.75rem; }
+    .pay-preview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+    .pay-preview-card {
+      background: var(--warm-white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 0.85rem 1rem;
+    }
+    .pay-preview-card .lbl {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 0.25rem;
+    }
+    .pay-preview-card .val {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--navy);
+      letter-spacing: -0.02em;
+    }
+    .pay-preview-meta {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      margin-bottom: 0.75rem;
+    }
+    .checklist {
+      margin: 0;
+      padding-left: 1.15rem;
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      line-height: 1.65;
+    }
+    .checklist li { margin-bottom: 0.35rem; }
+    .column-ref {
+      width: 100%;
+      font-size: 0.78rem;
+      border-collapse: collapse;
+    }
+    .column-ref th, .column-ref td {
+      text-align: left;
+      padding: 0.45rem 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .column-ref th { color: var(--text-muted); font-weight: 600; width: 28%; }
 
     .msg {
       font-size: 0.85rem;
@@ -564,7 +654,7 @@
     <header class="topbar">
       <div class="topbar-inner">
         <div class="topbar-brand">
-          <img src="/assets/icon.png" alt="" width="28" height="28" />
+          <img src="/assets/brand.png" alt="" width="28" height="28" />
           <span>ChristBay</span>
           <span class="topbar-badge">Admin</span>
         </div>
@@ -579,17 +669,21 @@
     <div id="app-error" style="display:none;background:#fdecea;color:#7b241c;padding:1rem 1.25rem;font-size:0.875rem;font-weight:500;border-bottom:2px solid #b03a2e;word-break:break-all"></div>
     <div class="shell">
       <nav class="sidebar" aria-label="Admin sections">
+        <div class="sidebar-group-label" id="nav-grp-overview">Overview</div>
         <button type="button" class="nav-btn active" data-panel="dashboard">Dashboard</button>
+        <div class="sidebar-group-label" id="nav-grp-referrals">Referrals</div>
         <button type="button" class="nav-btn" data-panel="codes">Referral codes</button>
         <button type="button" class="nav-btn" data-panel="activity">Activity</button>
+        <div class="sidebar-group-label" id="nav-grp-finance">Finance</div>
         <button type="button" class="nav-btn" data-panel="pay-export">Pay export</button>
+        <div class="sidebar-group-label" id="nav-grp-system">System</div>
         <button type="button" class="nav-btn" data-panel="settings">Settings &amp; backup</button>
       </nav>
 
       <main class="main" id="main">
         <section class="panel active" id="panel-dashboard" aria-labelledby="dash-title">
           <h1 class="page-title" id="dash-title">Dashboard</h1>
-          <p class="page-desc">Overview of referral codes and redemptions in this browser.</p>
+          <p class="page-desc">High-level metrics from the live API. Use the sidebar to move between overview, codes, finance export, and settings.</p>
           <div class="stat-grid">
             <div class="stat-card">
               <div class="stat-label">Total codes</div>
@@ -658,26 +752,129 @@
 
         <section class="panel" id="panel-pay-export" aria-labelledby="pay-title">
           <h1 class="page-title" id="pay-title">Pay export</h1>
-          <p class="page-desc">Machine-readable CSV for finance and reconciliation — same referral data as the live list, generated in your browser (inspired by Nuria’s payout export flow).</p>
+          <p class="page-desc">Finance-ready exports from the live referral API — CSV or JSON, with filters and a clear filing period. Nothing leaves your session except the file you download.</p>
 
           <div class="pay-export-brand">
             <p class="pay-export-eyebrow">Close package</p>
-            <p>Download a single UTF-8 CSV with comment headers, then column headers, then one row per code. Use the period label for filenames and internal filing.</p>
+            <p>Use a period label that matches your books (e.g. <span class="mono">2026-04</span>). Refresh the snapshot before month-end close so totals match what you file.</p>
           </div>
 
-          <div class="card settings-block">
-            <h3>Export options</h3>
-            <p class="hint">Excludes inactive codes unless you enable it below. Data is fetched from the same API as Referral codes.</p>
-            <div id="pay-msg"></div>
+          <div class="panel-section">
+            <h2 class="panel-section-title">Before you export</h2>
+            <ol class="checklist">
+              <li>Confirm the <strong>period label</strong> matches the month or quarter you are closing.</li>
+              <li>Click <strong>Refresh snapshot</strong> to load the latest codes from the server.</li>
+              <li>Choose filters (inactive codes, minimum uses), then download <strong>CSV</strong> (Excel) or <strong>JSON</strong> (systems).</li>
+              <li>Store the file in your internal archive; do not commit pay exports to the public site repo.</li>
+            </ol>
+          </div>
+
+          <div class="card settings-block panel-section">
+            <h3>Live snapshot</h3>
+            <p class="hint">Same data source as <strong>Referral codes</strong>. Refresh pulls <code class="mono" style="font-size:0.8rem">GET /list</code> again.</p>
+            <div class="pay-preview-grid" role="group" aria-label="Export preview figures">
+              <div class="pay-preview-card">
+                <div class="lbl">Rows (after filters)</div>
+                <div class="val" id="pay-preview-rows">—</div>
+              </div>
+              <div class="pay-preview-card">
+                <div class="lbl">Sum of uses</div>
+                <div class="val" id="pay-preview-uses">—</div>
+              </div>
+              <div class="pay-preview-card">
+                <div class="lbl">Codes in API</div>
+                <div class="val" id="pay-preview-total">—</div>
+              </div>
+            </div>
+            <p class="pay-preview-meta" id="pay-preview-fetched">Not loaded yet.</p>
+            <div class="toolbar">
+              <button type="button" class="btn btn-secondary btn-sm" id="btn-pay-refresh">Refresh snapshot</button>
+            </div>
+          </div>
+
+          <div class="card settings-block panel-section">
+            <h3>Period &amp; filing</h3>
             <div class="field">
-              <label for="pay-period">Period label (used in filename)</label>
+              <label for="pay-period">Period label (filename &amp; CSV header)</label>
               <input type="text" id="pay-period" placeholder="2026-04" autocomplete="off" />
+            </div>
+            <div class="preset-row" aria-label="Quick period presets">
+              <button type="button" class="btn btn-ghost btn-sm pay-preset" data-pay-preset="month" type="button">This month</button>
+              <button type="button" class="btn btn-ghost btn-sm pay-preset" data-pay-preset="prev-month" type="button">Last month</button>
+              <button type="button" class="btn btn-ghost btn-sm pay-preset" data-pay-preset="quarter" type="button">This quarter (label)</button>
+            </div>
+          </div>
+
+          <div class="card settings-block panel-section">
+            <h3>Filters &amp; sort</h3>
+            <div class="field-row">
+              <div class="field" style="margin-bottom:0">
+                <label for="pay-sort">Row order in file</label>
+                <select id="pay-sort" style="width:100%;padding:0.65rem 0.85rem;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--warm-white)">
+                  <option value="code">Code (A–Z)</option>
+                  <option value="created">Newest first (created)</option>
+                  <option value="uses">Most uses first</option>
+                </select>
+              </div>
+              <div class="field" style="margin-bottom:0">
+                <label for="pay-min-uses">Minimum uses</label>
+                <select id="pay-min-uses" style="width:100%;padding:0.65rem 0.85rem;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--warm-white)">
+                  <option value="0">Any</option>
+                  <option value="1">At least 1</option>
+                </select>
+              </div>
             </div>
             <div class="field">
               <label><input type="checkbox" id="pay-include-inactive" /> Include inactive codes</label>
             </div>
-            <div class="toolbar">
-              <button type="button" class="btn btn-secondary btn-sm" id="btn-pay-export-csv"><span class="btn-export-tag">CSV</span> Download pay export</button>
+          </div>
+
+          <div class="card settings-block panel-section">
+            <h3>File format</h3>
+            <div class="field-row">
+              <div class="field" style="margin-bottom:0">
+                <label for="pay-delimiter">CSV delimiter</label>
+                <select id="pay-delimiter" style="width:100%;padding:0.65rem 0.85rem;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--warm-white)">
+                  <option value=",">Comma (default)</option>
+                  <option value=";">Semicolon (some EU Excel)</option>
+                </select>
+              </div>
+              <div class="field" style="margin-bottom:0">
+                <label for="pay-bom">Excel UTF-8</label>
+                <select id="pay-bom" style="width:100%;padding:0.65rem 0.85rem;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--warm-white)">
+                  <option value="yes">BOM on (recommended for Excel)</option>
+                  <option value="no">No BOM (plain UTF-8)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="card settings-block panel-section">
+            <h3>Download</h3>
+            <p class="hint">Applies filters and sort above. JSON mirrors the same rows for integrations.</p>
+            <div id="pay-msg"></div>
+            <div class="toolbar" style="flex-wrap:wrap">
+              <button type="button" class="btn btn-secondary btn-sm" id="btn-pay-export-csv"><span class="btn-export-tag">CSV</span> Download pay CSV</button>
+              <button type="button" class="btn btn-ghost btn-sm" id="btn-pay-export-json"><span class="btn-export-tag">JSON</span> Download pay JSON</button>
+            </div>
+          </div>
+
+          <div class="card settings-block panel-section">
+            <h3>Column reference</h3>
+            <div class="table-wrap">
+              <table class="column-ref">
+                <thead>
+                  <tr><th>Column</th><th>Meaning</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td class="mono">Code</td><td>Referral code (normalized).</td></tr>
+                  <tr><td class="mono">Uses</td><td>Redemption count from the server.</td></tr>
+                  <tr><td class="mono">Max uses / Unlimited</td><td>Cap if any; “unlimited” when no cap.</td></tr>
+                  <tr><td class="mono">Expires</td><td>UTC timestamp if set.</td></tr>
+                  <tr><td class="mono">Internal note</td><td>Admin-only note from the API.</td></tr>
+                  <tr><td class="mono">Created</td><td>Code creation time if provided.</td></tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </section>
@@ -728,7 +925,7 @@
     <div class="footer-inner">
       <div class="footer-top">
         <div class="footer-brand">
-          <img src="/assets/icon.png" alt="ChristBay" />
+          <img src="/assets/brand.png" alt="ChristBay" />
           <span class="footer-brand-name">ChristBay</span>
         </div>
         <nav class="footer-nav" aria-label="Footer links">
@@ -895,9 +1092,11 @@ function escapeHtml(s) {
 }
 function joinUrl(code) { return new URL('/join/?code=' + encodeURIComponent(code), window.location.origin).toString(); }
 
-function csvCell(v) {
+function csvCell(v, delim) {
+  delim = delim || ',';
   const s = v == null ? '' : String(v);
-  if (/[",\n\r]/.test(s)) return '"' + s.replace(/"/g, '""') + '"';
+  const needsQuote = /[",\n\r]/.test(s) || (delim !== ',' && s.indexOf(delim) >= 0);
+  if (needsQuote) return '"' + s.replace(/"/g, '""') + '"';
   return s;
 }
 function sanitizePayPeriodFilename(s) {
@@ -912,7 +1111,9 @@ function formatCodeCreatedIso(c) {
   if (!c || c.createdAt == null) return '';
   try { return new Date(c.createdAt).toISOString(); } catch (_) { return String(c.createdAt); }
 }
-function buildPayExportCsv(codes, periodLabel) {
+function buildPayExportCsv(codes, periodLabel, delim) {
+  delim = delim || ',';
+  const joinCells = function(cells) { return cells.map(function(x) { return csvCell(x, delim); }).join(delim); };
   const gen = new Date().toISOString();
   const pl = periodLabel || gen.slice(0, 7);
   const lines = [];
@@ -922,23 +1123,82 @@ function buildPayExportCsv(codes, periodLabel) {
   lines.push('# Period label: ' + pl);
   lines.push('# Publisher: OakDev & AI AB — ChristBay (internal)');
   lines.push('');
-  lines.push(['Code', 'Label', 'Uses', 'Max uses', 'Unlimited', 'Active', 'Expires (UTC)', 'Internal note', 'Created (UTC)'].map(csvCell).join(','));
+  lines.push(joinCells(['Code', 'Label', 'Uses', 'Max uses', 'Unlimited', 'Active', 'Expires (UTC)', 'Internal note', 'Created (UTC)']));
   (codes || []).forEach(function(c) {
     const maxU = c.maxUses || 0;
     const unlimited = maxU === 0;
-    lines.push([
-      csvCell(c.code),
-      csvCell(c.label || ''),
-      csvCell(c.useCount ?? 0),
-      csvCell(unlimited ? '' : maxU),
-      csvCell(unlimited ? 'yes' : 'no'),
-      csvCell(c.active ? 'yes' : 'no'),
-      csvCell(formatCodeExpiresIso(c)),
-      csvCell(c.note || ''),
-      csvCell(formatCodeCreatedIso(c))
-    ].join(','));
+    lines.push(joinCells([
+      c.code,
+      c.label || '',
+      c.useCount ?? 0,
+      unlimited ? '' : maxU,
+      unlimited ? 'yes' : 'no',
+      c.active ? 'yes' : 'no',
+      formatCodeExpiresIso(c),
+      c.note || '',
+      formatCodeCreatedIso(c)
+    ]));
   });
   return lines.join('\r\n');
+}
+
+function buildPayExportJson(codes, periodLabel) {
+  const pl = periodLabel || new Date().toISOString().slice(0, 7);
+  return JSON.stringify({
+    version: 1,
+    kind: 'christbay_pay_export',
+    periodLabel: pl,
+    generatedAt: new Date().toISOString(),
+    publisher: 'OakDev & AI AB — ChristBay (internal)',
+    rowCount: (codes || []).length,
+    codes: (codes || []).map(function(c) {
+      const maxU = c.maxUses || 0;
+      return {
+        code: c.code,
+        label: c.label || '',
+        useCount: c.useCount ?? 0,
+        maxUses: maxU,
+        unlimited: maxU === 0,
+        active: !!c.active,
+        expiresAt: formatCodeExpiresIso(c) || null,
+        note: c.note || '',
+        createdAt: formatCodeCreatedIso(c) || null
+      };
+    })
+  }, null, 2);
+}
+
+let _payExportSnapshot = { codes: [], fetchedAt: null };
+
+function applyPayFiltersSort(codes) {
+  let list = (codes || []).slice();
+  if (!document.getElementById('pay-include-inactive').checked) {
+    list = list.filter(function(c) { return c.active; });
+  }
+  const minU = parseInt(document.getElementById('pay-min-uses').value, 10) || 0;
+  if (minU > 0) list = list.filter(function(c) { return (c.useCount || 0) >= minU; });
+  const sort = document.getElementById('pay-sort').value;
+  if (sort === 'code') {
+    list.sort(function(a, b) { return normalizeCode(a.code).localeCompare(normalizeCode(b.code)); });
+  } else if (sort === 'created') {
+    list.sort(function(a, b) { return (b.createdAt || 0) - (a.createdAt || 0); });
+  } else if (sort === 'uses') {
+    list.sort(function(a, b) { return (b.useCount || 0) - (a.useCount || 0); });
+  }
+  return list;
+}
+
+function updatePayPreviewFromSnapshot() {
+  const codes = _payExportSnapshot.codes || [];
+  const filtered = applyPayFiltersSort(codes);
+  const uses = filtered.reduce(function(s, c) { return s + (c.useCount || 0); }, 0);
+  document.getElementById('pay-preview-rows').textContent = String(filtered.length);
+  document.getElementById('pay-preview-uses').textContent = String(uses);
+  document.getElementById('pay-preview-total').textContent = String(codes.length);
+  const t = _payExportSnapshot.fetchedAt;
+  document.getElementById('pay-preview-fetched').textContent = t
+    ? 'Last snapshot: ' + t.toLocaleString() + ' — ' + codes.length + ' code(s) from API. Preview uses filters below.'
+    : 'Not loaded yet. Click “Refresh snapshot”.';
 }
 function friendlyAuthError(err) {
   const code = err.code || '';
@@ -1086,6 +1346,9 @@ document.querySelectorAll('.nav-btn[data-panel]').forEach(function(btn) {
     this.classList.add('active');
     const panel = document.getElementById('panel-' + this.dataset.panel);
     if (panel) panel.classList.add('active');
+    if (this.dataset.panel === 'pay-export' && !_payExportSnapshot.fetchedAt) {
+      document.getElementById('btn-pay-refresh').click();
+    }
   });
 });
 
@@ -1099,27 +1362,87 @@ document.getElementById('qa-pay').addEventListener('click', function() {
   if (el && !el.value) el.value = new Date().toISOString().slice(0, 7);
 })();
 
-document.getElementById('btn-pay-export-csv').addEventListener('click', async function() {
-  const payMsg = document.getElementById('pay-msg');
-  payMsg.innerHTML = '';
+function wirePayExportFilters() {
+  ['pay-sort', 'pay-min-uses', 'pay-include-inactive'].forEach(function(id) {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener('change', function() { updatePayPreviewFromSnapshot(); });
+  });
+}
+wirePayExportFilters();
+
+document.getElementById('btn-pay-refresh').addEventListener('click', async function() {
   const btn = this;
   btn.disabled = true;
+  const prev = btn.textContent;
+  btn.textContent = 'Loading\u2026';
   try {
     const data = await apiFetch('/list?pageSize=500');
     if (!data) return;
-    let codes = data.codes || [];
-    if (!document.getElementById('pay-include-inactive').checked) {
-      codes = codes.filter(function(c) { return c.active; });
+    _payExportSnapshot.codes = data.codes || [];
+    _payExportSnapshot.fetchedAt = new Date();
+    updatePayPreviewFromSnapshot();
+  } catch (err) {
+    document.getElementById('pay-msg').innerHTML = '<div class="msg msg-error">' + escapeHtml(err.message) + '</div>';
+  }
+  btn.textContent = prev;
+  btn.disabled = false;
+});
+
+document.querySelectorAll('.pay-preset').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    const d = new Date();
+    let label = '';
+    if (btn.dataset.payPreset === 'month') {
+      label = d.toISOString().slice(0, 7);
+    } else if (btn.dataset.payPreset === 'prev-month') {
+      d.setMonth(d.getMonth() - 1);
+      label = d.toISOString().slice(0, 7);
+    } else if (btn.dataset.payPreset === 'quarter') {
+      label = d.getFullYear() + '-Q' + (Math.floor(d.getMonth() / 3) + 1);
     }
+    document.getElementById('pay-period').value = label;
+  });
+});
+
+async function runPayExport(kind) {
+  const payMsg = document.getElementById('pay-msg');
+  payMsg.innerHTML = '';
+  try {
+    const data = await apiFetch('/list?pageSize=500');
+    if (!data) return;
+    _payExportSnapshot.codes = data.codes || [];
+    _payExportSnapshot.fetchedAt = new Date();
+    updatePayPreviewFromSnapshot();
+    const codes = applyPayFiltersSort(_payExportSnapshot.codes);
     const periodInput = document.getElementById('pay-period').value.trim();
     const periodLabel = periodInput || new Date().toISOString().slice(0, 7);
-    const csv = buildPayExportCsv(codes, periodLabel);
-    const fn = 'christbay-pay-export-' + sanitizePayPeriodFilename(periodLabel) + '.csv';
-    downloadBlob(new Blob(['\ufeff' + csv], { type: 'text/csv;charset=utf-8' }), fn);
-    payMsg.innerHTML = '<div class="msg msg-ok">Exported ' + codes.length + ' row(s) to <span class="mono">' + escapeHtml(fn) + '</span>.</div>';
+    const base = 'christbay-pay-export-' + sanitizePayPeriodFilename(periodLabel);
+    const delim = document.getElementById('pay-delimiter').value === ';' ? ';' : ',';
+    const useBom = document.getElementById('pay-bom').value !== 'no';
+    if (kind === 'csv') {
+      const csv = buildPayExportCsv(codes, periodLabel, delim);
+      const body = useBom ? '\ufeff' + csv : csv;
+      downloadBlob(new Blob([body], { type: 'text/csv;charset=utf-8' }), base + '.csv');
+    } else {
+      const json = buildPayExportJson(codes, periodLabel);
+      downloadBlob(new Blob([json], { type: 'application/json;charset=utf-8' }), base + '.json');
+    }
+    payMsg.innerHTML = '<div class="msg msg-ok">Exported <strong>' + codes.length + '</strong> row(s) to <span class="mono">' + escapeHtml(base + (kind === 'csv' ? '.csv' : '.json')) + '</span>.</div>';
   } catch (err) {
     payMsg.innerHTML = '<div class="msg msg-error">' + escapeHtml(err.message) + '</div>';
   }
+}
+
+document.getElementById('btn-pay-export-csv').addEventListener('click', async function() {
+  const btn = this;
+  btn.disabled = true;
+  await runPayExport('csv');
+  btn.disabled = false;
+});
+document.getElementById('btn-pay-export-json').addEventListener('click', async function() {
+  const btn = this;
+  btn.disabled = true;
+  await runPayExport('json');
   btn.disabled = false;
 });
 
