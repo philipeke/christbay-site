@@ -769,8 +769,16 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js';
 import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail, onAuthStateChanged, signOut }
   from 'https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js';
-import { getFirestore, doc, getDoc }
-  from 'https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js';
+
+const _log = [];
+function dbg(msg) {
+  _log.push('[' + new Date().toLocaleTimeString() + '] ' + msg);
+  const el = document.getElementById('app-error');
+  if (el) { el.style.display = 'block'; el.textContent = _log.join('\n'); }
+  console.log('[admin]', msg);
+}
+
+dbg('Script loaded');
 
 const FIREBASE_CONFIG = {
   apiKey: 'AIzaSyD85ILJj4ln1BF9q8LtvIkfcHkPIps0zlk',
@@ -783,34 +791,34 @@ const FIREBASE_CONFIG = {
 const API_BASE = 'https://us-central1-christbay-app.cloudfunctions.net/adminReferralApi';
 const app  = initializeApp(FIREBASE_CONFIG);
 const auth = getAuth(app);
-const db   = getFirestore(app);
 
-// ── Helpers ───────────────────────────────────────────────────────────────────
+dbg('Firebase initialized');
 
 async function apiFetch(path, opts = {}) {
-  const token = await auth.currentUser.getIdToken();
+  const user = auth.currentUser;
+  if (!user) { dbg('apiFetch: no user'); return null; }
+  dbg('apiFetch: ' + (opts.method || 'GET') + ' ' + path);
+  const token = await user.getIdToken();
   const res   = await fetch(API_BASE + path, {
     method:  opts.method || 'GET',
     headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json', ...(opts.headers || {}) },
     body:    opts.body ? JSON.stringify(opts.body) : undefined
   });
+  dbg('apiFetch: status=' + res.status);
   if (res.status === 403) {
     let body = '';
     try { body = await res.text(); } catch (_) {}
-    console.error('[apiFetch 403]', 'uid=' + auth.currentUser?.uid, 'email=' + auth.currentUser?.email, 'body=' + body);
-    showAppError('Åtkomst nekad (403). UID: ' + (auth.currentUser?.uid || '?') + ' — Email: ' + (auth.currentUser?.email || '?') + (body ? ' — Svar: ' + body : ''));
+    dbg('403 body: ' + body);
+    showAppError('Åtkomst nekad (403). UID: ' + (user.uid || '?') + ' — Email: ' + (user.email || '?') + (body ? ' — Svar: ' + body : ''));
     return null;
   }
-  if (!res.ok) throw new Error('API error ' + res.status);
+  if (!res.ok) { dbg('API error ' + res.status); throw new Error('API error ' + res.status); }
   return res.json();
 }
 
 function showAppError(text) {
   const el = document.getElementById('app-error');
-  if (el) {
-    el.style.display = 'block';
-    el.textContent = text;
-  }
+  if (el) { el.style.display = 'block'; el.textContent = text; }
 }
 
 function normalizeCode(s) { return (s || '').trim().toUpperCase().replace(/[^A-Z0-9-]/g, ''); }
@@ -827,13 +835,9 @@ function friendlyAuthError(err) {
   return err.message || 'An error occurred.';
 }
 
-// ── Gate ─────────────────────────────────────────────────────────────────────
-
 const gateEl  = document.getElementById('gate');
 const appEl   = document.getElementById('app');
 const gateMsg = document.getElementById('gate-msg');
-
-let _pendingMsg = null; // { text, ok, email } — survives the signOut→onAuthStateChanged race
 
 function showGateMsg(text, ok) {
   gateMsg.innerHTML = text ? '<div class="msg ' + (ok ? 'msg-ok' : 'msg-error') + '">' + escapeHtml(text) + '</div>' : '';
@@ -841,10 +845,11 @@ function showGateMsg(text, ok) {
 
 function showGate(view, prefillEmail) {
   view         = view || 'login';
-  prefillEmail = prefillEmail || (_pendingMsg && _pendingMsg.email) || '';
+  prefillEmail = prefillEmail || '';
   gateEl.style.display = '';
   appEl.style.display  = 'none';
   appEl.setAttribute('aria-hidden', 'true');
+  showGateMsg('', true);
 
   const titleEl = document.getElementById('gate-title');
   const leadEl  = document.getElementById('gate-lead');
@@ -871,7 +876,6 @@ function showGate(view, prefillEmail) {
       e.preventDefault();
       showGate('reset', document.getElementById('gate-email').value);
     });
-
   } else if (view === 'reset') {
     titleEl.textContent = 'Reset password';
     leadEl.textContent  = 'Enter your admin email and we\'ll send a reset link.';
@@ -890,14 +894,6 @@ function showGate(view, prefillEmail) {
       showGate('login', document.getElementById('gate-email').value);
     });
   }
-
-  // Flush any message that survived a signOut→onAuthStateChanged cycle
-  if (_pendingMsg) {
-    showGateMsg(_pendingMsg.text, _pendingMsg.ok);
-    _pendingMsg = null;
-  } else {
-    showGateMsg('', true);
-  }
 }
 
 async function handleLogin(e) {
@@ -908,10 +904,12 @@ async function handleLogin(e) {
   btn.disabled    = true;
   btn.textContent = 'Signing in\u2026';
   showGateMsg('', true);
+  dbg('handleLogin: ' + email);
   try {
     await signInWithEmailAndPassword(auth, email, pass);
-    // onAuthStateChanged verifies admin access and opens the app
+    dbg('signIn OK');
   } catch (err) {
+    dbg('signIn error: ' + (err.code || err.message));
     showGateMsg(friendlyAuthError(err), false);
     btn.disabled    = false;
     btn.textContent = 'Sign in';
@@ -936,6 +934,7 @@ async function handlePasswordReset(e) {
 }
 
 function openApp(user) {
+  dbg('openApp: ' + user.email + ' uid=' + user.uid);
   gateEl.style.display = 'none';
   appEl.style.display  = '';
   appEl.removeAttribute('aria-hidden');
@@ -944,25 +943,13 @@ function openApp(user) {
   refreshAll();
 }
 
-onAuthStateChanged(auth, async function(user) {
+onAuthStateChanged(auth, function(user) {
+  dbg('onAuthStateChanged: ' + (user ? user.email : 'null'));
   if (!user) { showGate('login'); return; }
-  try {
-    const snap = await getDoc(doc(db, 'christbay_admins', user.email.toLowerCase()));
-    if (snap.exists() && snap.data().active === false) {
-      _pendingMsg = { text: 'Your account has been deactivated. Contact OakDev.', ok: false, email: user.email };
-      await signOut(auth);
-      return;
-    }
-    // No document = not yet provisioned; Cloud Function will enforce access via 403
-  } catch (err) {
-    console.warn('Firestore admin check:', err.code || err.message);
-  }
   openApp(user);
 });
 
-document.getElementById('btn-logout').addEventListener('click', () => signOut(auth));
-
-// ── Settings: account / password reset ────────────────────────────────────────
+document.getElementById('btn-logout').addEventListener('click', () => { dbg('logout clicked'); signOut(auth); });
 
 document.getElementById('btn-send-reset').addEventListener('click', async function() {
   const user = auth.currentUser;
