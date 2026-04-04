@@ -822,6 +822,13 @@ function showAppError(text) {
 }
 
 function normalizeCode(s) { return (s || '').trim().toUpperCase().replace(/[^A-Z0-9-]/g, ''); }
+/** UI: 0 = unlimited. API requires a positive integer — omit field when unlimited. */
+function maxUsesForApi(raw) {
+  const n = parseInt(raw, 10);
+  if (!Number.isFinite(n) || n < 0) return undefined;
+  if (n === 0) return undefined;
+  return n;
+}
 function escapeHtml(s) {
   return String(s || '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
 }
@@ -1060,24 +1067,24 @@ document.getElementById('form-code').addEventListener('submit', async function(e
   const noteVal = (document.getElementById('f-note').value || '').trim();
   try {
     if (id) {
-      await apiFetch('/' + encodeURIComponent(id), {
-        method: 'PATCH',
-        body: {
-          label:     (document.getElementById('f-label').value || '').trim(),
-          maxUses:   parseInt(document.getElementById('f-max').value, 10) || 0,
-          active:    document.getElementById('f-active').checked,
-          note:      noteVal,
-          expiresAt: expiresAtMs
-        }
-      });
+      const patchBody = {
+        label:     (document.getElementById('f-label').value || '').trim(),
+        active:    document.getElementById('f-active').checked,
+        note:      noteVal,
+        expiresAt: expiresAtMs
+      };
+      const mPatch = maxUsesForApi(document.getElementById('f-max').value);
+      if (mPatch !== undefined) patchBody.maxUses = mPatch;
+      await apiFetch('/' + encodeURIComponent(id), { method: 'PATCH', body: patchBody });
     } else {
       const createBody = {
-        code:    normalizeCode(document.getElementById('f-code').value),
-        label:   (document.getElementById('f-label').value || '').trim(),
-        maxUses: parseInt(document.getElementById('f-max').value, 10) || 0,
-        active:  document.getElementById('f-active').checked,
-        note:    noteVal
+        code:   normalizeCode(document.getElementById('f-code').value),
+        label:  (document.getElementById('f-label').value || '').trim(),
+        active: document.getElementById('f-active').checked,
+        note:   noteVal
       };
+      const mCreate = maxUsesForApi(document.getElementById('f-max').value);
+      if (mCreate !== undefined) createBody.maxUses = mCreate;
       if (expiresAtMs !== null) createBody.expiresAt = expiresAtMs;
       const r = await apiFetch('/create', { method: 'POST', body: createBody });
       if (!r) return;
@@ -1098,16 +1105,15 @@ document.getElementById('bulk-run').addEventListener('click', async function() {
   let errs = 0;
   for (let i = 0; i < n; i++) {
     try {
-      await apiFetch('/create', {
-        method: 'POST',
-        body: {
-          code:    normalizeCode(seg(4) + '-' + seg(4)),
-          label:   (prefix ? prefix + ' ' : '') + 'Batch #' + (i + 1),
-          maxUses: max,
-          active:  true,
-          note:    ''
-        }
-      });
+      const bulkBody = {
+        code:   normalizeCode(seg(4) + '-' + seg(4)),
+        label:  (prefix ? prefix + ' ' : '') + 'Batch #' + (i + 1),
+        active: true,
+        note:   ''
+      };
+      const mBulk = maxUsesForApi(String(max));
+      if (mBulk !== undefined) bulkBody.maxUses = mBulk;
+      await apiFetch('/create', { method: 'POST', body: bulkBody });
     }
     catch (_) { errs++; }
   }
