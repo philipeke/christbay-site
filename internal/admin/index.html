@@ -770,16 +770,6 @@ import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.6.0/firebas
 import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail, onAuthStateChanged, signOut }
   from 'https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js';
 
-const _log = [];
-function dbg(msg) {
-  _log.push('[' + new Date().toLocaleTimeString() + '] ' + msg);
-  const el = document.getElementById('app-error');
-  if (el) { el.style.display = 'block'; el.textContent = _log.join('\n'); }
-  console.log('[admin]', msg);
-}
-
-dbg('Script loaded');
-
 const FIREBASE_CONFIG = {
   apiKey: 'AIzaSyD85ILJj4ln1BF9q8LtvIkfcHkPIps0zlk',
   authDomain: 'christbay-app.firebaseapp.com',
@@ -792,27 +782,23 @@ const API_BASE = 'https://us-central1-christbay-app.cloudfunctions.net/adminRefe
 const app  = initializeApp(FIREBASE_CONFIG);
 const auth = getAuth(app);
 
-dbg('Firebase initialized');
-
 async function apiFetch(path, opts = {}) {
   const user = auth.currentUser;
-  if (!user) { dbg('apiFetch: no user'); return null; }
-  dbg('apiFetch: ' + (opts.method || 'GET') + ' ' + path);
+  if (!user) return null;
   const token = await user.getIdToken();
   const res   = await fetch(API_BASE + path, {
     method:  opts.method || 'GET',
     headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json', ...(opts.headers || {}) },
     body:    opts.body ? JSON.stringify(opts.body) : undefined
   });
-  dbg('apiFetch: status=' + res.status);
   if (res.status === 403) {
     let body = '';
     try { body = await res.text(); } catch (_) {}
-    dbg('403 body: ' + body);
+    console.error('[admin] 403', body);
     showAppError('Åtkomst nekad (403). UID: ' + (user.uid || '?') + ' — Email: ' + (user.email || '?') + (body ? ' — Svar: ' + body : ''));
     return null;
   }
-  if (!res.ok) { dbg('API error ' + res.status); throw new Error('API error ' + res.status); }
+  if (!res.ok) throw new Error('API error ' + res.status);
   return res.json();
 }
 
@@ -904,12 +890,9 @@ async function handleLogin(e) {
   btn.disabled    = true;
   btn.textContent = 'Signing in\u2026';
   showGateMsg('', true);
-  dbg('handleLogin: ' + email);
   try {
     await signInWithEmailAndPassword(auth, email, pass);
-    dbg('signIn OK');
   } catch (err) {
-    dbg('signIn error: ' + (err.code || err.message));
     showGateMsg(friendlyAuthError(err), false);
     btn.disabled    = false;
     btn.textContent = 'Sign in';
@@ -934,7 +917,6 @@ async function handlePasswordReset(e) {
 }
 
 function openApp(user) {
-  dbg('openApp: ' + user.email + ' uid=' + user.uid);
   gateEl.style.display = 'none';
   appEl.classList.add('visible');
   appEl.removeAttribute('aria-hidden');
@@ -944,12 +926,11 @@ function openApp(user) {
 }
 
 onAuthStateChanged(auth, function(user) {
-  dbg('onAuthStateChanged: ' + (user ? user.email : 'null'));
   if (!user) { showGate('login'); return; }
   openApp(user);
 });
 
-document.getElementById('btn-logout').addEventListener('click', () => { dbg('logout clicked'); signOut(auth); });
+document.getElementById('btn-logout').addEventListener('click', () => signOut(auth));
 
 document.getElementById('btn-send-reset').addEventListener('click', async function() {
   const user = auth.currentUser;
