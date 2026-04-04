@@ -133,6 +133,22 @@
       border: 1px solid var(--border);
     }
     .btn-ghost:hover { border-color: var(--gold); color: var(--navy); }
+    .btn-link {
+      background: none;
+      color: var(--text-secondary);
+      font-size: 0.8125rem;
+      font-weight: 600;
+      text-decoration: underline;
+      text-underline-offset: 0.15em;
+      padding: 0.35rem 0;
+      width: 100%;
+    }
+    .btn-link:hover { color: var(--navy); }
+    .gate-loading {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      margin-bottom: 1rem;
+    }
     .btn-sm { padding: 0.4rem 0.85rem; font-size: 0.8125rem; }
     .btn-danger { background: var(--danger); color: var(--white); }
     .btn-danger:hover { filter: brightness(1.05); }
@@ -503,22 +519,24 @@
 <body>
   <a href="#main" class="skip-link">Skip to content</a>
 
-  <!-- Login / setup gate -->
+  <!-- Login gate (Firebase Auth + Firestore allowlist) -->
   <div class="gate" id="gate">
     <div class="gate-card">
       <h1 id="gate-title">ChristBay referrals</h1>
-      <p class="lead" id="gate-lead">Internal tools. Data is stored in this browser only (localStorage).</p>
+      <p class="lead" id="gate-lead">Sign in with your admin email. Use “Send password reset email” to set or change your password (check your inbox). You must be listed in Firestore and in Firebase Authentication.</p>
+      <div id="gate-loading" class="gate-loading" aria-live="polite">Checking session…</div>
       <div id="gate-msg"></div>
-      <form id="gate-form">
-        <div class="field" id="field-new-wrap" style="display:none">
-          <label for="gate-new">New password (min 10 characters)</label>
-          <input type="password" id="gate-new" name="new" autocomplete="new-password" minlength="10" />
+      <form id="gate-form" style="display:none">
+        <div class="field">
+          <label for="gate-email">Email</label>
+          <input type="email" id="gate-email" name="email" autocomplete="username" required />
         </div>
         <div class="field">
-          <label for="gate-pass" id="gate-pass-label">Password</label>
+          <label for="gate-pass">Password</label>
           <input type="password" id="gate-pass" name="pass" autocomplete="current-password" required />
         </div>
-        <button type="submit" class="btn btn-primary" id="gate-submit">Unlock</button>
+        <button type="submit" class="btn btn-primary" id="gate-submit">Sign in</button>
+        <button type="button" class="btn btn-link" id="gate-reset">Send password reset email</button>
       </form>
     </div>
   </div>
@@ -619,23 +637,13 @@
 
         <section class="panel" id="panel-settings" aria-labelledby="set-title">
           <h1 class="page-title" id="set-title">Settings &amp; backup</h1>
-          <p class="page-desc">Change the admin password, export data, or merge backups from another device.</p>
+          <p class="page-desc">Account password is managed via Firebase (reset link). Export or merge referral data for this browser.</p>
 
           <div class="card settings-block">
-            <h3>Change password</h3>
-            <p class="hint">Requires your current password. Session stays valid in this tab.</p>
+            <h3>Account</h3>
+            <p class="hint">Signed in as <span id="account-email" class="mono" style="font-size:0.85rem"></span>. To set a new password, use the link we email you.</p>
             <div id="pw-msg"></div>
-            <form id="form-pw">
-              <div class="field">
-                <label for="pw-old">Current password</label>
-                <input type="password" id="pw-old" required autocomplete="current-password" />
-              </div>
-              <div class="field">
-                <label for="pw-new">New password (min 10 characters)</label>
-                <input type="password" id="pw-new" required minlength="10" autocomplete="new-password" />
-              </div>
-              <button type="submit" class="btn btn-primary" style="width:auto">Update password</button>
-            </form>
+            <button type="button" class="btn btn-secondary btn-sm" id="btn-account-reset">Send password reset email</button>
           </div>
 
           <div class="card settings-block">
@@ -645,7 +653,7 @@
 
           <div class="card settings-block">
             <h3>Export</h3>
-            <p class="hint">Full backup includes hashed admin password and all codes. “Codes only” omits secrets for sharing lists.</p>
+            <p class="hint">Full backup includes all referral data stored in this browser. “Codes only” is safe to publish for <strong>/join</strong>.</p>
             <div class="toolbar">
               <button type="button" class="btn btn-secondary btn-sm" id="btn-export-full">Download full backup (JSON)</button>
               <button type="button" class="btn btn-ghost btn-sm" id="btn-export-public">Download codes only (JSON)</button>
@@ -654,7 +662,7 @@
 
           <div class="card settings-block">
             <h3>Import</h3>
-            <p class="hint">Merge adds codes and events without removing existing data. Replace overwrites everything (including admin password in file).</p>
+            <p class="hint">Merge adds codes and events without removing existing data. Replace overwrites all local referral data.</p>
             <div class="field">
               <label for="import-file">JSON file</label>
               <input type="file" id="import-file" accept="application/json,.json" />
@@ -770,89 +778,185 @@
     </div>
   </div>
 
+  <script src="/assets/js/christbay-firebase-admin.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
   <script src="/assets/js/christbay-referrals.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js" crossorigin="anonymous"></script>
   <script>
 (function () {
   'use strict';
   var R = window.ChristBayReferrals;
-  if (!R) return;
+  var FB = window.ChristBayFirebaseAdmin;
+  if (!R || !FB) return;
+
+  var cfg = FB.config;
+  var firebaseReady = !!(cfg && cfg.apiKey && cfg.apiKey.indexOf('YOUR_') !== 0);
+  var auth = null;
+  var db = null;
+  var ADMINS = FB.adminsCollection || 'christbay_admins';
 
   var gate = document.getElementById('gate');
   var app = document.getElementById('app');
   var gateForm = document.getElementById('gate-form');
   var gateMsg = document.getElementById('gate-msg');
-  var fieldNewWrap = document.getElementById('field-new-wrap');
-  var gateTitle = document.getElementById('gate-title');
-  var gateLead = document.getElementById('gate-lead');
-  var gatePassLabel = document.getElementById('gate-pass-label');
-  var gateSubmit = document.getElementById('gate-submit');
+  var gateLoading = document.getElementById('gate-loading');
+  var firebaseUser = null;
+
+  if (!firebaseReady) {
+    gateLoading.textContent = '';
+    gateMsg.innerHTML =
+      '<div class="msg msg-error">Firebase is not configured. Edit <code class="mono" style="font-size:0.8rem">assets/js/christbay-firebase-admin.js</code> with your web app config.</div>';
+    gateForm.style.display = 'none';
+  } else {
+    if (!firebase.apps.length) {
+      firebase.initializeApp(cfg);
+    }
+    auth = firebase.auth();
+    db = firebase.firestore();
+  }
 
   function showGateMsg(text, ok) {
     gateMsg.innerHTML = text ? '<div class="msg ' + (ok ? 'msg-ok' : 'msg-error') + '">' + text + '</div>' : '';
   }
 
-  function openApp() {
+  function showLoginForm() {
+    gateLoading.style.display = 'none';
+    gateForm.style.display = 'block';
+  }
+
+  function openApp(user) {
+    firebaseUser = user || firebaseUser;
     if (gate) gate.style.display = 'none';
     app.classList.add('visible');
     app.setAttribute('aria-hidden', 'false');
+    var el = document.getElementById('account-email');
+    if (el && firebaseUser && firebaseUser.email) el.textContent = firebaseUser.email;
     refreshAll();
   }
 
-  function setupGateUi() {
-    var has = R.hasAdminPassword();
-    if (!has) {
-      gateTitle.textContent = 'Create admin password';
-      gateLead.textContent = 'First-time setup for this browser. Choose a strong password; it protects local referral data only.';
-      fieldNewWrap.style.display = 'block';
-      document.getElementById('gate-new').required = true;
-      gatePassLabel.textContent = 'Confirm password';
-      gateSubmit.textContent = 'Create & unlock';
-    } else {
-      fieldNewWrap.style.display = 'none';
-      document.getElementById('gate-new').required = false;
-      gateTitle.textContent = 'ChristBay referrals';
-      gateLead.textContent = 'Internal tools. Data is stored in this browser only (localStorage).';
-      gatePassLabel.textContent = 'Password';
-      gateSubmit.textContent = 'Unlock';
-    }
+  function closeApp() {
+    firebaseUser = null;
+    app.classList.remove('visible');
+    app.setAttribute('aria-hidden', 'true');
+    if (gate) gate.style.display = 'flex';
   }
 
-  gateForm.addEventListener('submit', async function (e) {
-    e.preventDefault();
-    showGateMsg('');
-    var pass = document.getElementById('gate-pass').value;
-    var newPass = document.getElementById('gate-new').value;
-    if (!R.hasAdminPassword()) {
-      if (newPass.length < 10) {
-        showGateMsg('Use at least 10 characters for the new password.', false);
-        return;
-      }
-      if (pass !== newPass) {
-        showGateMsg('Passwords do not match.', false);
-        return;
-      }
-      await R.setAdminPassword(pass);
-      R.setSession(true);
-      openApp();
-      return;
-    }
-    var ok = await R.verifyAdminPassword(pass);
-    if (!ok) {
-      showGateMsg('Incorrect password.', false);
-      return;
-    }
-    R.setSession(true);
-    openApp();
-  });
+  function adminDocId(email) {
+    return String(email || '').trim().toLowerCase();
+  }
 
-  document.getElementById('btn-logout').addEventListener('click', function () {
-    R.setSession(false);
-    window.location.reload();
-  });
+  function ensureAdminAllowed(user) {
+    if (!user || !user.email || !db) return Promise.resolve(false);
+    return db
+      .collection(ADMINS)
+      .doc(adminDocId(user.email))
+      .get()
+      .then(function (snap) {
+        return snap.exists;
+      })
+      .catch(function () {
+        return false;
+      });
+  }
+
+  if (firebaseReady && auth) {
+    auth.setPersistence(firebase.auth.Auth.Persistence.SESSION).catch(function () {});
+
+    auth.onAuthStateChanged(async function (user) {
+      gateMsg.innerHTML = '';
+      if (!user) {
+        firebaseUser = null;
+        closeApp();
+        showLoginForm();
+        return;
+      }
+      var allowed = await ensureAdminAllowed(user);
+      if (!allowed) {
+        firebaseUser = null;
+        try {
+          await auth.signOut();
+        } catch (e) {}
+        showLoginForm();
+        showGateMsg(
+          'This account is signed in to Firebase but is not listed in Firestore collection <code class="mono" style="font-size:0.75rem">' +
+            ADMINS +
+            '</code> for this email (document id = lowercase email).',
+          false
+        );
+        return;
+      }
+      firebaseUser = user;
+      gateLoading.style.display = 'none';
+      gateForm.style.display = 'none';
+      openApp(user);
+    });
+
+    gateForm.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      showGateMsg('');
+      var email = document.getElementById('gate-email').value.trim();
+      var pass = document.getElementById('gate-pass').value;
+      try {
+        await auth.signInWithEmailAndPassword(email, pass);
+      } catch (err) {
+        var msg = (err && err.message) || 'Sign-in failed.';
+        if (err && err.code === 'auth/invalid-credential') {
+          msg = 'Wrong email or password, or this email is not registered in Firebase Authentication yet.';
+        }
+        if (err && err.code === 'auth/too-many-requests') msg = 'Too many attempts. Try again later.';
+        showGateMsg(msg, false);
+      }
+    });
+
+    document.getElementById('gate-reset').addEventListener('click', async function () {
+      showGateMsg('');
+      var email = document.getElementById('gate-email').value.trim();
+      if (!email) {
+        showGateMsg('Enter your email first.', false);
+        return;
+      }
+      try {
+        await auth.sendPasswordResetEmail(email, {
+          url: window.location.href.split('#')[0].split('?')[0],
+          handleCodeInApp: false
+        });
+        showGateMsg('If an account exists for that email, a reset link has been sent. Check your inbox.', true);
+      } catch (err) {
+        var msg = (err && err.message) || 'Could not send email.';
+        if (err && err.code === 'auth/user-not-found') {
+          msg = 'No Firebase user with that email. Add the user in Firebase Authentication (Console) first.';
+        }
+        showGateMsg(msg, false);
+      }
+    });
+
+    document.getElementById('btn-logout').addEventListener('click', function () {
+      auth.signOut().finally(function () {
+        window.location.reload();
+      });
+    });
+
+    document.getElementById('btn-account-reset').addEventListener('click', async function () {
+      var el = document.getElementById('pw-msg');
+      if (!firebaseUser || !firebaseUser.email) return;
+      try {
+        await auth.sendPasswordResetEmail(firebaseUser.email, {
+          url: window.location.href.split('#')[0].split('?')[0],
+          handleCodeInApp: false
+        });
+        el.innerHTML = '<div class="msg msg-ok">If your account exists, a reset link has been sent.</div>';
+      } catch (err) {
+        el.innerHTML =
+          '<div class="msg msg-error">' + ((err && err.message) || 'Could not send email.') + '</div>';
+      }
+    });
+  }
 
   function requireSession() {
-    return R.isSessionValid();
+    if (!firebaseReady) return false;
+    return !!firebaseUser;
   }
 
   /* ---- Navigation ---- */
@@ -1097,22 +1201,6 @@
     }).join('');
   }
 
-  document.getElementById('form-pw').addEventListener('submit', async function (e) {
-    e.preventDefault();
-    var el = document.getElementById('pw-msg');
-    var oldP = document.getElementById('pw-old').value;
-    var newP = document.getElementById('pw-new').value;
-    if (newP.length < 10) {
-      el.innerHTML = '<div class="msg msg-error">New password must be at least 10 characters.</div>';
-      return;
-    }
-    var ok = await R.changeAdminPassword(oldP, newP);
-    el.innerHTML = ok
-      ? '<div class="msg msg-ok">Password updated.</div>'
-      : '<div class="msg msg-error">Current password incorrect.</div>';
-    if (ok) document.getElementById('form-pw').reset();
-  });
-
   document.getElementById('btn-export-full').addEventListener('click', function () {
     var blob = new Blob([R.exportJson()], { type: 'application/json' });
     downloadBlob(blob, 'christbay-referrals-backup.json');
@@ -1171,11 +1259,6 @@
     }
   }
 
-  /* Boot */
-  setupGateUi();
-  if (R.isSessionValid()) {
-    openApp();
-  }
 })();
   </script>
 </body>
