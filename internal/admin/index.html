@@ -543,6 +543,7 @@
       </div>
     </header>
 
+    <div id="app-error" style="display:none;background:#fdecea;color:#7b241c;padding:1rem 1.25rem;font-size:0.875rem;font-weight:500;border-bottom:2px solid #b03a2e;word-break:break-all"></div>
     <div class="shell">
       <nav class="sidebar" aria-label="Admin sections">
         <button type="button" class="nav-btn active" data-panel="dashboard">Dashboard</button>
@@ -794,12 +795,22 @@ async function apiFetch(path, opts = {}) {
     body:    opts.body ? JSON.stringify(opts.body) : undefined
   });
   if (res.status === 403) {
-    _pendingMsg = { text: 'Ditt konto saknar admin-åtkomst. Skapa dokument i Firestore christbay_admins/{din-email}.', ok: false, email: auth.currentUser?.email || '' };
-    signOut(auth);
+    let body = '';
+    try { body = await res.text(); } catch (_) {}
+    console.error('[apiFetch 403]', 'uid=' + auth.currentUser?.uid, 'email=' + auth.currentUser?.email, 'body=' + body);
+    showAppError('Åtkomst nekad (403). UID: ' + (auth.currentUser?.uid || '?') + ' — Email: ' + (auth.currentUser?.email || '?') + (body ? ' — Svar: ' + body : ''));
     return null;
   }
   if (!res.ok) throw new Error('API error ' + res.status);
   return res.json();
+}
+
+function showAppError(text) {
+  const el = document.getElementById('app-error');
+  if (el) {
+    el.style.display = 'block';
+    el.textContent = text;
+  }
 }
 
 function normalizeCode(s) { return (s || '').trim().toUpperCase().replace(/[^A-Z0-9-]/g, ''); }
