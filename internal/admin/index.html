@@ -847,7 +847,7 @@ function showGate(view, prefillEmail) {
   view         = view || 'login';
   prefillEmail = prefillEmail || '';
   gateEl.style.display = '';
-  appEl.style.display  = 'none';
+  appEl.classList.remove('visible');
   appEl.setAttribute('aria-hidden', 'true');
   showGateMsg('', true);
 
@@ -936,7 +936,7 @@ async function handlePasswordReset(e) {
 function openApp(user) {
   dbg('openApp: ' + user.email + ' uid=' + user.uid);
   gateEl.style.display = 'none';
-  appEl.style.display  = '';
+  appEl.classList.add('visible');
   appEl.removeAttribute('aria-hidden');
   const emailEl = document.getElementById('account-email');
   if (emailEl) emailEl.textContent = user.email || '';
