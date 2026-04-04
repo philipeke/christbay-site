@@ -510,15 +510,18 @@
       <p class="lead" id="gate-lead">Internal tools. Data is stored in this browser only (localStorage).</p>
       <div id="gate-msg"></div>
       <form id="gate-form">
-        <div class="field" id="field-new-wrap" style="display:none">
-          <label for="gate-new">New password (min 10 characters)</label>
-          <input type="password" id="gate-new" name="new" autocomplete="new-password" minlength="10" />
+        <div class="field">
+          <label for="gate-email">Email</label>
+          <input type="email" id="gate-email" name="email" autocomplete="email" required />
         </div>
         <div class="field">
-          <label for="gate-pass" id="gate-pass-label">Password</label>
+          <label for="gate-pass">Password</label>
           <input type="password" id="gate-pass" name="pass" autocomplete="current-password" required />
         </div>
-        <button type="submit" class="btn btn-primary" id="gate-submit">Unlock</button>
+        <button type="submit" class="btn btn-primary" id="gate-submit">Sign in</button>
+        <p style="text-align:center;margin-top:1rem;font-size:0.85rem">
+          <a href="#" id="link-forgot" style="color:var(--gold)">Forgot password?</a>
+        </p>
       </form>
     </div>
   </div>
@@ -622,20 +625,10 @@
           <p class="page-desc">Change the admin password, export data, or merge backups from another device.</p>
 
           <div class="card settings-block">
-            <h3>Change password</h3>
-            <p class="hint">Requires your current password. Session stays valid in this tab.</p>
+            <h3>Account</h3>
+            <p class="hint">Signed in as: <strong id="account-email"></strong></p>
             <div id="pw-msg"></div>
-            <form id="form-pw">
-              <div class="field">
-                <label for="pw-old">Current password</label>
-                <input type="password" id="pw-old" required autocomplete="current-password" />
-              </div>
-              <div class="field">
-                <label for="pw-new">New password (min 10 characters)</label>
-                <input type="password" id="pw-new" required minlength="10" autocomplete="new-password" />
-              </div>
-              <button type="submit" class="btn btn-primary" style="width:auto">Update password</button>
-            </form>
+            <button type="button" class="btn btn-secondary btn-sm" id="btn-send-reset">Send password reset email</button>
           </div>
 
           <div class="card settings-block">
@@ -773,8 +766,10 @@
   <!-- Firebase SDK -->
 <script type="module">
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js';
-import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut }
+import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail, onAuthStateChanged, signOut }
   from 'https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js';
+import { getFirestore, doc, getDoc }
+  from 'https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js';
 
 const FIREBASE_CONFIG = {
   apiKey: 'AIzaSyD85ILJj4ln1BF9q8LtvIkfcHkPIps0zlk',
@@ -787,87 +782,353 @@ const FIREBASE_CONFIG = {
 const API_BASE = 'https://us-central1-christbay-app.cloudfunctions.net/adminReferralApi';
 const app  = initializeApp(FIREBASE_CONFIG);
 const auth = getAuth(app);
-const provider = new GoogleAuthProvider();
+const db   = getFirestore(app);
+
+// ── Helpers ───────────────────────────────────────────────────────────────────
 
 async function apiFetch(path, opts = {}) {
   const token = await auth.currentUser.getIdToken();
   const res   = await fetch(API_BASE + path, {
     method:  opts.method || 'GET',
-    headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json', ...(opts.headers||{}) },
+    headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json', ...(opts.headers || {}) },
     body:    opts.body ? JSON.stringify(opts.body) : undefined
   });
   if (res.status === 403) { showGateMsg('Your account does not have admin access. Contact OakDev to be added.', false); signOut(auth); return null; }
   if (!res.ok) throw new Error('API error ' + res.status);
   return res.json();
 }
-function normalizeCode(s){return (s||''). trim().toUpperCase().replace(/[^A-Z0-9-]/g,'');}
-function escapeHtml(s){return String(s||''). replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>":'&gt;','"':'&quot;','\'':'&#39;'})[c]);}
-function joinUrl(code){return new URL('/join/?code='+encodeURIComponent(code),window.location.origin).toString();}
 
-const gateEl=document.getElementById('gate'),appEl=document.getElementById('app'),gateMsg=document.getElementById('gate-msg');
-function showGateMsg(text,ok){gateMsg.innerHTML=text?'<div class="msg '+(ok?'msg-ok':'msg-error')+'">'+escapeHtml(text)+'</div>':''}
-function showGate(){
-  gateEl.style.display='';appEl.style.display='none';appEl.setAttribute('aria-hidden','true');
-  document.getElementById('gate-title').textContent='ChristBay Admin';
-  document.getElementById('gate-lead').textContent='Sign in with your Google account to continue.';
-  document.getElementById('gate-form').innerHTML='<button type="button" class="btn btn-primary" id="btn-google-signin">Sign in with Google</button>';
-  document.getElementById('btn-google-signin').addEventListener('click',function(){this.disabled=true;this.textContent='Signing in\u2026';signInWithPopup(auth,provider).catch(err=>{showGateMsg('Sign-in failed: '+err.message,false);this.disabled=false;this.textContent='Sign in with Google';});});
+function normalizeCode(s) { return (s || '').trim().toUpperCase().replace(/[^A-Z0-9-]/g, ''); }
+function escapeHtml(s) {
+  return String(s || '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
 }
-function openApp(user){gateEl.style.display='none';appEl.style.display='';appEl.removeAttribute('aria-hidden');refreshAll();}
-onAuthStateChanged(auth,user=>user?openApp(user):showGate());
-document.getElementById('btn-logout').addEventListener('click',()=>signOut(auth));
+function joinUrl(code) { return new URL('/join/?code=' + encodeURIComponent(code), window.location.origin).toString(); }
+function friendlyAuthError(err) {
+  const code = err.code || '';
+  if (code === 'auth/user-not-found' || code === 'auth/wrong-password' || code === 'auth/invalid-credential') return 'Incorrect email or password.';
+  if (code === 'auth/invalid-email') return 'Enter a valid email address.';
+  if (code === 'auth/too-many-requests') return 'Too many attempts. Try again later or reset your password.';
+  if (code === 'auth/user-disabled') return 'This account has been disabled.';
+  return err.message || 'An error occurred.';
+}
 
-let _cache=[];
-function refreshStats(){let a=0,u=0;_cache.forEach(c=>{if(c.active)a++;u+=c.useCount||0;});document.getElementById('stat-total').textContent=_cache.length;document.getElementById('stat-active').textContent=a;document.getElementById('stat-uses').textContent=u;document.getElementById('stat-month').textContent='\u2014';}
-function renderCodesTable(codes){
-  const q=(document.getElementById('code-search').value||'').trim().toLowerCase(),tb=document.getElementById('codes-tbody');
-  let rows=(codes||_cache).filter(c=>!q||normalizeCode(c.code).toLowerCase().includes(q)||(c.label||'').toLowerCase().includes(q));
-  rows.sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));
-  if(!rows.length){tb.innerHTML='<tr><td colspan="6" style="text-align:center;color:var(--text-muted)">No codes yet.</td></tr>';return;}
-  tb.innerHTML='';
-  rows.forEach(c=>{
-    const max=c.maxUses||0,uses=(c.useCount||0)+(max>0?' / '+max:''),exp=c.expiresAt?new Date(c.expiresAt).toLocaleDateString():'\u2014';
-    const tr=document.createElement('tr');
-    tr.innerHTML='<td class="mono">'+escapeHtml(c.code)+'</td><td>'+escapeHtml(c.label||'')+'</td><td>'+uses+'</td><td>'+exp+'</td><td><span class="pill '+(c.active?'pill-on':'pill-off')+'">'+( c.active?'Active':'Inactive')+'</span></td>';
-    const td=document.createElement('td');td.className='row-actions';
-    const mkBtn=(l,cl,fn)=>{const b=document.createElement('button');b.type='button';b.className=cl;b.textContent=l;b.addEventListener('click',fn);return b;};
-    td.appendChild(mkBtn('Copy link','btn btn-ghost btn-sm',()=>openQrModal(c.code)));
-    td.appendChild(mkBtn('Edit','btn btn-secondary btn-sm',()=>openCodeModal(c)));
-    td.appendChild(mkBtn('Deactivate','btn btn-danger btn-sm',()=>{if(confirm('Deactivate '+c.code+'?'))apiFetch('/'+encodeURIComponent(c.code)+'?mode=deactivate',{method:'DELETE'}).then(()=>loadAndRender());}));
-    tr.appendChild(td);tb.appendChild(tr);
+// ── Gate ─────────────────────────────────────────────────────────────────────
+
+const gateEl  = document.getElementById('gate');
+const appEl   = document.getElementById('app');
+const gateMsg = document.getElementById('gate-msg');
+
+function showGateMsg(text, ok) {
+  gateMsg.innerHTML = text ? '<div class="msg ' + (ok ? 'msg-ok' : 'msg-error') + '">' + escapeHtml(text) + '</div>' : '';
+}
+
+function showGate(view, prefillEmail) {
+  view         = view || 'login';
+  prefillEmail = prefillEmail || '';
+  gateEl.style.display = '';
+  appEl.style.display  = 'none';
+  appEl.setAttribute('aria-hidden', 'true');
+  showGateMsg('', true);
+
+  const titleEl = document.getElementById('gate-title');
+  const leadEl  = document.getElementById('gate-lead');
+  const formEl  = document.getElementById('gate-form');
+
+  if (view === 'login') {
+    titleEl.textContent = 'ChristBay Admin';
+    leadEl.textContent  = 'Sign in with your email and password.';
+    formEl.innerHTML =
+      '<div class="field">' +
+        '<label for="gate-email">Email</label>' +
+        '<input type="email" id="gate-email" name="email" autocomplete="email" required value="' + escapeHtml(prefillEmail) + '" />' +
+      '</div>' +
+      '<div class="field">' +
+        '<label for="gate-pass">Password</label>' +
+        '<input type="password" id="gate-pass" name="pass" autocomplete="current-password" required />' +
+      '</div>' +
+      '<button type="submit" class="btn btn-primary" id="gate-submit">Sign in</button>' +
+      '<p style="text-align:center;margin-top:1rem;font-size:0.85rem">' +
+        '<a href="#" id="link-forgot" style="color:var(--gold)">Forgot password?</a>' +
+      '</p>';
+    formEl.onsubmit = handleLogin;
+    document.getElementById('link-forgot').addEventListener('click', function(e) {
+      e.preventDefault();
+      showGate('reset', document.getElementById('gate-email').value);
+    });
+
+  } else if (view === 'reset') {
+    titleEl.textContent = 'Reset password';
+    leadEl.textContent  = 'Enter your admin email and we\'ll send a reset link.';
+    formEl.innerHTML =
+      '<div class="field">' +
+        '<label for="gate-email">Email</label>' +
+        '<input type="email" id="gate-email" name="email" autocomplete="email" required value="' + escapeHtml(prefillEmail) + '" />' +
+      '</div>' +
+      '<button type="submit" class="btn btn-primary" id="gate-submit">Send reset link</button>' +
+      '<p style="text-align:center;margin-top:1rem;font-size:0.85rem">' +
+        '<a href="#" id="link-back" style="color:var(--gold)">Back to sign in</a>' +
+      '</p>';
+    formEl.onsubmit = handlePasswordReset;
+    document.getElementById('link-back').addEventListener('click', function(e) {
+      e.preventDefault();
+      showGate('login', document.getElementById('gate-email').value);
+    });
+  }
+}
+
+async function handleLogin(e) {
+  e.preventDefault();
+  const email = document.getElementById('gate-email').value.trim();
+  const pass  = document.getElementById('gate-pass').value;
+  const btn   = document.getElementById('gate-submit');
+  btn.disabled    = true;
+  btn.textContent = 'Signing in\u2026';
+  showGateMsg('', true);
+  try {
+    await signInWithEmailAndPassword(auth, email, pass);
+    // onAuthStateChanged verifies admin access and opens the app
+  } catch (err) {
+    showGateMsg(friendlyAuthError(err), false);
+    btn.disabled    = false;
+    btn.textContent = 'Sign in';
+  }
+}
+
+async function handlePasswordReset(e) {
+  e.preventDefault();
+  const email = document.getElementById('gate-email').value.trim();
+  const btn   = document.getElementById('gate-submit');
+  btn.disabled    = true;
+  btn.textContent = 'Sending\u2026';
+  showGateMsg('', true);
+  try {
+    await sendPasswordResetEmail(auth, email);
+    showGateMsg('Reset link sent! Check your inbox.', true);
+  } catch (err) {
+    showGateMsg(friendlyAuthError(err), false);
+  }
+  btn.disabled    = false;
+  btn.textContent = 'Send reset link';
+}
+
+function openApp(user) {
+  gateEl.style.display = 'none';
+  appEl.style.display  = '';
+  appEl.removeAttribute('aria-hidden');
+  const emailEl = document.getElementById('account-email');
+  if (emailEl) emailEl.textContent = user.email || '';
+  refreshAll();
+}
+
+onAuthStateChanged(auth, async function(user) {
+  if (!user) { showGate('login'); return; }
+  try {
+    const snap = await getDoc(doc(db, 'christbay_admins', user.email.toLowerCase()));
+    if (!snap.exists()) {
+      showGateMsg('Your account does not have admin access. Contact OakDev to be added.', false);
+      await signOut(auth);
+      showGate('login', user.email);
+      return;
+    }
+  } catch (err) {
+    // Firestore check failed — backend will still enforce access via 403
+    console.warn('Firestore admin check:', err.code || err.message);
+  }
+  openApp(user);
+});
+
+document.getElementById('btn-logout').addEventListener('click', () => signOut(auth));
+
+// ── Settings: account / password reset ────────────────────────────────────────
+
+document.getElementById('btn-send-reset').addEventListener('click', async function() {
+  const user = auth.currentUser;
+  if (!user) return;
+  this.disabled    = true;
+  this.textContent = 'Sending\u2026';
+  const pwMsg = document.getElementById('pw-msg');
+  pwMsg.innerHTML  = '';
+  try {
+    await sendPasswordResetEmail(auth, user.email);
+    pwMsg.innerHTML = '<div class="msg msg-ok">Reset link sent to ' + escapeHtml(user.email) + '. Check your inbox.</div>';
+  } catch (err) {
+    pwMsg.innerHTML = '<div class="msg msg-error">' + escapeHtml(err.message) + '</div>';
+  }
+  this.disabled    = false;
+  this.textContent = 'Send password reset email';
+});
+
+// ── Nav panel switching ────────────────────────────────────────────────────────
+
+document.querySelectorAll('.nav-btn[data-panel]').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.nav-btn[data-panel]').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    this.classList.add('active');
+    const panel = document.getElementById('panel-' + this.dataset.panel);
+    if (panel) panel.classList.add('active');
+  });
+});
+
+// ── Codes & activity ──────────────────────────────────────────────────────────
+
+let _cache = [];
+
+function refreshStats() {
+  let a = 0, u = 0;
+  _cache.forEach(c => { if (c.active) a++; u += c.useCount || 0; });
+  document.getElementById('stat-total').textContent  = _cache.length;
+  document.getElementById('stat-active').textContent = a;
+  document.getElementById('stat-uses').textContent   = u;
+  document.getElementById('stat-month').textContent  = '\u2014';
+}
+
+function renderCodesTable(codes) {
+  const q  = (document.getElementById('code-search').value || '').trim().toLowerCase();
+  const tb = document.getElementById('codes-tbody');
+  let rows = (codes || _cache).filter(c => !q || normalizeCode(c.code).toLowerCase().includes(q) || (c.label || '').toLowerCase().includes(q));
+  rows.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+  if (!rows.length) { tb.innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--text-muted)">No codes yet.</td></tr>'; return; }
+  tb.innerHTML = '';
+  rows.forEach(c => {
+    const max  = c.maxUses || 0;
+    const uses = (c.useCount || 0) + (max > 0 ? ' / ' + max : '');
+    const exp  = c.expiresAt ? new Date(c.expiresAt).toLocaleDateString() : '\u2014';
+    const tr   = document.createElement('tr');
+    tr.innerHTML = '<td class="mono">' + escapeHtml(c.code) + '</td><td>' + escapeHtml(c.label || '') + '</td><td>' + uses + '</td><td>' + exp + '</td><td><span class="pill ' + (c.active ? 'pill-on' : 'pill-off') + '">' + (c.active ? 'Active' : 'Inactive') + '</span></td>';
+    const td = document.createElement('td');
+    td.className = 'row-actions';
+    const mkBtn = (l, cl, fn) => { const b = document.createElement('button'); b.type = 'button'; b.className = cl; b.textContent = l; b.addEventListener('click', fn); return b; };
+    td.appendChild(mkBtn('Copy link', 'btn btn-ghost btn-sm', () => openQrModal(c.code)));
+    td.appendChild(mkBtn('Edit',      'btn btn-secondary btn-sm', () => openCodeModal(c)));
+    td.appendChild(mkBtn('Deactivate','btn btn-danger btn-sm',    () => { if (confirm('Deactivate ' + c.code + '?')) apiFetch('/' + encodeURIComponent(c.code) + '?mode=deactivate', { method: 'DELETE' }).then(() => loadAndRender()); }));
+    tr.appendChild(td);
+    tb.appendChild(tr);
   });
 }
-document.getElementById('code-search').addEventListener('input',()=>renderCodesTable(_cache));
 
-function openQrModal(code){const url=joinUrl(code);document.getElementById('modal-qr-title').textContent=code;document.getElementById('qr-url').textContent=url;document.getElementById('qr-image-wrap').innerHTML='';document.getElementById('modal-qr').classList.add('open');}
-document.getElementById('qr-copy').addEventListener('click',function(){navigator.clipboard.writeText(document.getElementById('qr-url').textContent).then(()=>{this.textContent='Copied!';setTimeout(()=>this.textContent='Copy link',2000);});});
-document.getElementById('qr-close').addEventListener('click',()=>document.getElementById('modal-qr').classList.remove('open'));
+document.getElementById('code-search').addEventListener('input', () => renderCodesTable(_cache));
 
-const modalCode=document.getElementById('modal-code');
-function openCodeModal(entry){document.getElementById('modal-code-title').textContent=entry?'Edit code':'New referral code';document.getElementById('edit-id').value=entry?(entry.code||''):'';document.getElementById('f-code').value=entry?(entry.code||''):'';document.getElementById('f-code').readOnly=!!entry;document.getElementById('f-label').value=entry?(entry.label||''):'';document.getElementById('f-note').value=entry?(entry.note||''):'';document.getElementById('f-max').value=entry?(entry.maxUses||0):0;document.getElementById('f-exp').value=entry&&entry.expiresAt?new Date(entry.expiresAt).toISOString().slice(0,10):'';document.getElementById('f-active').checked=entry?!!entry.active:true;document.getElementById('field-active-wrap').style.display=entry?'1':'none';modalCode.classList.add('open');}
-function closeCodeModal(){modalCode.classList.remove('open');}
-document.getElementById('btn-add-code').addEventListener('click',()=>openCodeModal(null));
-document.getElementById('qa-add').addEventListener('click',()=>openCodeModal(null));
-document.getElementById('modal-cancel').addEventListener('click',closeCodeModal);
-modalCode.addEventListener('click',e=>{if(e.target===modalCode)closeCodeModal();});
-document.getElementById('btn-suggest-code').addEventListener('click',function(){if(!document.getElementById('f-code').readOnly){const ch='ABCDEFGHJKLMNPQRSTUVWXYZ23456789',seg=n=>{let s='',b=new Uint8Array(n);crypto.getRandomValues(b);for(let i=0;i<n;i++)s+=ch[b[i]%ch.length];return s;};document.getElementById('f-code').value=seg(4)+'-'+seg(4);}});
+function openQrModal(code) {
+  const url = joinUrl(code);
+  document.getElementById('modal-qr-title').textContent = code;
+  document.getElementById('qr-url').textContent         = url;
+  document.getElementById('qr-image-wrap').innerHTML    = '';
+  document.getElementById('modal-qr').classList.add('open');
+}
+document.getElementById('qr-copy').addEventListener('click', function() {
+  navigator.clipboard.writeText(document.getElementById('qr-url').textContent).then(() => { this.textContent = 'Copied!'; setTimeout(() => this.textContent = 'Copy link', 2000); });
+});
+document.getElementById('qr-close').addEventListener('click', () => document.getElementById('modal-qr').classList.remove('open'));
 
-document.getElementById('form-code').addEventListener('submit',async function(e){e.preventDefault();const id=document.getElementById('edit-id').value,expVal=document.getElementById('f-exp').value,expiresAt=expVal?new Date(expVal+'T23:59:59').getTime():null,payload={code:document.getElementById('f-code').value,label:document.getElementById('f-label').value,maxUses:parseInt(document.getElementById('f-max').value,10)||0,expiresAt,active:document.getElementById('f-active').checked};try{if(id){await apiFetch('/'+encodeURIComponent(id),{method:'PATCH',body:{label:payload.label,maxUses:payload.maxUses,expiresAt:payload.expiresAt,active:payload.active}});}else{const r=await apiFetch('/create',{method:'POST',body:payload});if(!r)return;}closeCodeModal();await loadAndRender();}catch(err){alert('Could not save: '+err.message);}});
-document.getElementById('qa-bulk').addEventListener('click',()=>document.getElementById('modal-bulk').classList.add('open'));
-document.getElementById('btn-bulk-gen').addEventListener('click',()=>document.getElementById('modal-bulk').classList.add('open'));
-document.getElementById('bulk-cancel').addEventListener('click',()=>document.getElementById('modal-bulk').classList.remove('open'));
-document.getElementById('bulk-run').addEventListener('click',async function(){const n=parseInt(document.getElementById('bulk-count').value,10)||1,prefix=document.getElementById('bulk-label').value.trim(),max=parseInt(document.getElementById('bulk-max').value,10)||0;const ch='ABCDEFGHJKLMNPQRSTUVWXYZ23456789',seg=l=>{let s='',b=new Uint8Array(l);crypto.getRandomValues(b);for(let i=0;i<l;i++)s+=ch[b[i]%ch.length];return s;};let errs=0;for(let i=0;i<n;i++){try{await apiFetch('/create',{method:'POST',body:{code:seg(4)+'-'+seg(4),label:(prefix?prefix+' ':'')+('Batch #'+(i+1)),maxUses:max,active:true}});}catch(_){errs++;}}document.getElementById('modal-bulk').classList.remove('open');await loadAndRender();if(errs)alert(errs+' code(s) could not be created.');});
-document.getElementById('qa-join').addEventListener('click',function(){navigator.clipboard.writeText(new URL('/join/',window.location.origin).toString()).then(()=>{this.textContent='Copied!';setTimeout(()=>this.textContent='Copy site join URL',2000);});});
+const modalCode = document.getElementById('modal-code');
+function openCodeModal(entry) {
+  document.getElementById('modal-code-title').textContent = entry ? 'Edit code' : 'New referral code';
+  document.getElementById('edit-id').value     = entry ? (entry.code  || '') : '';
+  document.getElementById('f-code').value      = entry ? (entry.code  || '') : '';
+  document.getElementById('f-code').readOnly   = !!entry;
+  document.getElementById('f-label').value     = entry ? (entry.label || '') : '';
+  document.getElementById('f-note').value      = entry ? (entry.note  || '') : '';
+  document.getElementById('f-max').value       = entry ? (entry.maxUses || 0) : 0;
+  document.getElementById('f-exp').value       = entry && entry.expiresAt ? new Date(entry.expiresAt).toISOString().slice(0, 10) : '';
+  document.getElementById('f-active').checked  = entry ? !!entry.active : true;
+  document.getElementById('field-active-wrap').style.display = entry ? '' : 'none';
+  modalCode.classList.add('open');
+}
+function closeCodeModal() { modalCode.classList.remove('open'); }
+document.getElementById('btn-add-code').addEventListener('click', () => openCodeModal(null));
+document.getElementById('qa-add').addEventListener('click',       () => openCodeModal(null));
+document.getElementById('modal-cancel').addEventListener('click', closeCodeModal);
+modalCode.addEventListener('click', e => { if (e.target === modalCode) closeCodeModal(); });
+document.getElementById('btn-suggest-code').addEventListener('click', function() {
+  if (!document.getElementById('f-code').readOnly) {
+    const ch = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789', seg = n => { let s = '', b = new Uint8Array(n); crypto.getRandomValues(b); for (let i = 0; i < n; i++) s += ch[b[i] % ch.length]; return s; };
+    document.getElementById('f-code').value = seg(4) + '-' + seg(4);
+  }
+});
 
-function renderActivity(){document.getElementById('activity-list').innerHTML='<p style="color:var(--text-muted);padding:16px 0">Activity feed coming soon \u2014 individual code stats via GET /:code/stats.</p>';}
-document.getElementById('form-pw').style.display='none';
-document.getElementById('pw-msg').innerHTML='<div class="msg msg-ok">Password management is handled by Google Sign-in.</div>';
-function downloadBlob(blob,name){const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},1000);}
-document.getElementById('btn-export-full').addEventListener('click',async()=>{const data=await apiFetch('/list?pageSize=200');if(!data)return;downloadBlob(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}),'christbay-referrals-backup.json');});
-document.getElementById('btn-export-public').addEventListener('click',async()=>{const data=await apiFetch('/list?pageSize=200');if(!data)return;const pub={version:1,exportedAt:new Date().toISOString(),codes:(data.codes||[]).map(c=>({code:c.code,label:c.label,maxUses:c.maxUses,useCount:c.useCount,expiresAt:c.expiresAt,active:c.active}))};downloadBlob(new Blob([JSON.stringify(pub,null,2)],{type:'application/json'}),'referrals-public.json');});
-['btn-import-merge','btn-import-replace','import-file'].forEach(id=>{const el=document.getElementById(id);if(el)el.style.display='none';});
-async function loadAndRender(){try{const data=await apiFetch('/list?pageSize=200');if(!data)return;_cache=data.codes||[];refreshStats();renderCodesTable(_cache);renderActivity();}catch(err){console.error('loadAndRender:',err);}}
-function refreshAll(){loadAndRender();}
+document.getElementById('form-code').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const id       = document.getElementById('edit-id').value;
+  const expVal   = document.getElementById('f-exp').value;
+  const expiresAt = expVal ? new Date(expVal + 'T23:59:59').getTime() : null;
+  const payload  = {
+    code:     document.getElementById('f-code').value,
+    label:    document.getElementById('f-label').value,
+    maxUses:  parseInt(document.getElementById('f-max').value, 10) || 0,
+    expiresAt,
+    active:   document.getElementById('f-active').checked
+  };
+  try {
+    if (id) {
+      await apiFetch('/' + encodeURIComponent(id), { method: 'PATCH', body: { label: payload.label, maxUses: payload.maxUses, expiresAt: payload.expiresAt, active: payload.active } });
+    } else {
+      const r = await apiFetch('/create', { method: 'POST', body: payload });
+      if (!r) return;
+    }
+    closeCodeModal();
+    await loadAndRender();
+  } catch (err) { alert('Could not save: ' + err.message); }
+});
+
+document.getElementById('qa-bulk').addEventListener('click',   () => document.getElementById('modal-bulk').classList.add('open'));
+document.getElementById('btn-bulk-gen').addEventListener('click', () => document.getElementById('modal-bulk').classList.add('open'));
+document.getElementById('bulk-cancel').addEventListener('click',  () => document.getElementById('modal-bulk').classList.remove('open'));
+document.getElementById('bulk-run').addEventListener('click', async function() {
+  const n      = parseInt(document.getElementById('bulk-count').value, 10) || 1;
+  const prefix = document.getElementById('bulk-label').value.trim();
+  const max    = parseInt(document.getElementById('bulk-max').value, 10) || 0;
+  const ch = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789', seg = l => { let s = '', b = new Uint8Array(l); crypto.getRandomValues(b); for (let i = 0; i < l; i++) s += ch[b[i] % ch.length]; return s; };
+  let errs = 0;
+  for (let i = 0; i < n; i++) {
+    try { await apiFetch('/create', { method: 'POST', body: { code: seg(4) + '-' + seg(4), label: (prefix ? prefix + ' ' : '') + 'Batch #' + (i + 1), maxUses: max, active: true } }); }
+    catch (_) { errs++; }
+  }
+  document.getElementById('modal-bulk').classList.remove('open');
+  await loadAndRender();
+  if (errs) alert(errs + ' code(s) could not be created.');
+});
+
+document.getElementById('qa-join').addEventListener('click', function() {
+  navigator.clipboard.writeText(new URL('/join/', window.location.origin).toString()).then(() => { this.textContent = 'Copied!'; setTimeout(() => this.textContent = 'Copy site join URL', 2000); });
+});
+
+function renderActivity() {
+  document.getElementById('activity-list').innerHTML = '<p style="color:var(--text-muted);padding:16px 0">Activity feed coming soon \u2014 individual code stats via GET /:code/stats.</p>';
+}
+
+function downloadBlob(blob, name) {
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name;
+  document.body.appendChild(a); a.click();
+  setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+}
+
+document.getElementById('btn-export-full').addEventListener('click', async () => {
+  const data = await apiFetch('/list?pageSize=200');
+  if (!data) return;
+  downloadBlob(new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' }), 'christbay-referrals-backup.json');
+});
+document.getElementById('btn-export-public').addEventListener('click', async () => {
+  const data = await apiFetch('/list?pageSize=200');
+  if (!data) return;
+  const pub = { version: 1, exportedAt: new Date().toISOString(), codes: (data.codes || []).map(c => ({ code: c.code, label: c.label, maxUses: c.maxUses, useCount: c.useCount, expiresAt: c.expiresAt, active: c.active })) };
+  downloadBlob(new Blob([JSON.stringify(pub, null, 2)], { type: 'application/json' }), 'referrals-public.json');
+});
+
+['btn-import-merge', 'btn-import-replace', 'import-file'].forEach(id => { const el = document.getElementById(id); if (el) el.style.display = 'none'; });
+
+async function loadAndRender() {
+  try {
+    const data = await apiFetch('/list?pageSize=200');
+    if (!data) return;
+    _cache = data.codes || [];
+    refreshStats();
+    renderCodesTable(_cache);
+    renderActivity();
+  } catch (err) { console.error('loadAndRender:', err); }
+}
+
+function refreshAll() { loadAndRender(); }
 </script>
 </body>
 </html>
