@@ -770,413 +770,104 @@
     </div>
   </div>
 
-  <script src="/assets/js/christbay-referrals.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js" crossorigin="anonymous"></script>
-  <script>
-(function () {
-  'use strict';
-  var R = window.ChristBayReferrals;
-  if (!R) return;
+  <!-- Firebase SDK -->
+<script type="module">
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js';
+import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut }
+  from 'https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js';
 
-  var gate = document.getElementById('gate');
-  var app = document.getElementById('app');
-  var gateForm = document.getElementById('gate-form');
-  var gateMsg = document.getElementById('gate-msg');
-  var fieldNewWrap = document.getElementById('field-new-wrap');
-  var gateTitle = document.getElementById('gate-title');
-  var gateLead = document.getElementById('gate-lead');
-  var gatePassLabel = document.getElementById('gate-pass-label');
-  var gateSubmit = document.getElementById('gate-submit');
+const FIREBASE_CONFIG = {
+  apiKey: 'AIzaSyD85ILJj4ln1BF9q8LtvIkfcHkPIps0zlk',
+  authDomain: 'christbay-app.firebaseapp.com',
+  projectId: 'christbay-app',
+  storageBucket: 'christbay-app.firebasestorage.app',
+  messagingSenderId: '322257363412',
+  appId: '1:322257363412:web:34b86ac5f8e5fa23db3641'
+};
+const API_BASE = 'https://us-central1-christbay-app.cloudfunctions.net/adminReferralApi';
+const app  = initializeApp(FIREBASE_CONFIG);
+const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
 
-  function showGateMsg(text, ok) {
-    gateMsg.innerHTML = text ? '<div class="msg ' + (ok ? 'msg-ok' : 'msg-error') + '">' + text + '</div>' : '';
-  }
-
-  function openApp() {
-    if (gate) gate.style.display = 'none';
-    app.classList.add('visible');
-    app.setAttribute('aria-hidden', 'false');
-    refreshAll();
-  }
-
-  function setupGateUi() {
-    var has = R.hasAdminPassword();
-    if (!has) {
-      gateTitle.textContent = 'Create admin password';
-      gateLead.textContent = 'First-time setup for this browser. Choose a strong password; it protects local referral data only.';
-      fieldNewWrap.style.display = 'block';
-      document.getElementById('gate-new').required = true;
-      gatePassLabel.textContent = 'Confirm password';
-      gateSubmit.textContent = 'Create & unlock';
-    } else {
-      fieldNewWrap.style.display = 'none';
-      document.getElementById('gate-new').required = false;
-      gateTitle.textContent = 'ChristBay referrals';
-      gateLead.textContent = 'Internal tools. Data is stored in this browser only (localStorage).';
-      gatePassLabel.textContent = 'Password';
-      gateSubmit.textContent = 'Unlock';
-    }
-  }
-
-  gateForm.addEventListener('submit', async function (e) {
-    e.preventDefault();
-    showGateMsg('');
-    var pass = document.getElementById('gate-pass').value;
-    var newPass = document.getElementById('gate-new').value;
-    if (!R.hasAdminPassword()) {
-      if (newPass.length < 10) {
-        showGateMsg('Use at least 10 characters for the new password.', false);
-        return;
-      }
-      if (pass !== newPass) {
-        showGateMsg('Passwords do not match.', false);
-        return;
-      }
-      await R.setAdminPassword(pass);
-      R.setSession(true);
-      openApp();
-      return;
-    }
-    var ok = await R.verifyAdminPassword(pass);
-    if (!ok) {
-      showGateMsg('Incorrect password.', false);
-      return;
-    }
-    R.setSession(true);
-    openApp();
+async function apiFetch(path, opts = {}) {
+  const token = await auth.currentUser.getIdToken();
+  const res   = await fetch(API_BASE + path, {
+    method:  opts.method || 'GET',
+    headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json', ...(opts.headers||{}) },
+    body:    opts.body ? JSON.stringify(opts.body) : undefined
   });
+  if (res.status === 403) { showGateMsg('Your account does not have admin access. Contact OakDev to be added.', false); signOut(auth); return null; }
+  if (!res.ok) throw new Error('API error ' + res.status);
+  return res.json();
+}
+function normalizeCode(s){return (s||''). trim().toUpperCase().replace(/[^A-Z0-9-]/g,'');}
+function escapeHtml(s){return String(s||''). replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>":'&gt;','"':'&quot;','\'':'&#39;'})[c]);}
+function joinUrl(code){return new URL('/join/?code='+encodeURIComponent(code),window.location.origin).toString();}
 
-  document.getElementById('btn-logout').addEventListener('click', function () {
-    R.setSession(false);
-    window.location.reload();
+const gateEl=document.getElementById('gate'),appEl=document.getElementById('app'),gateMsg=document.getElementById('gate-msg');
+function showGateMsg(text,ok){gateMsg.innerHTML=text?'<div class="msg '+(ok?'msg-ok':'msg-error')+'">'+escapeHtml(text)+'</div>':''}
+function showGate(){
+  gateEl.style.display='';appEl.style.display='none';appEl.setAttribute('aria-hidden','true');
+  document.getElementById('gate-title').textContent='ChristBay Admin';
+  document.getElementById('gate-lead').textContent='Sign in with your Google account to continue.';
+  document.getElementById('gate-form').innerHTML='<button type="button" class="btn btn-primary" id="btn-google-signin">Sign in with Google</button>';
+  document.getElementById('btn-google-signin').addEventListener('click',function(){this.disabled=true;this.textContent='Signing in\u2026';signInWithPopup(auth,provider).catch(err=>{showGateMsg('Sign-in failed: '+err.message,false);this.disabled=false;this.textContent='Sign in with Google';});});
+}
+function openApp(user){gateEl.style.display='none';appEl.style.display='';appEl.removeAttribute('aria-hidden');refreshAll();}
+onAuthStateChanged(auth,user=>user?openApp(user):showGate());
+document.getElementById('btn-logout').addEventListener('click',()=>signOut(auth));
+
+let _cache=[];
+function refreshStats(){let a=0,u=0;_cache.forEach(c=>{if(c.active)a++;u+=c.useCount||0;});document.getElementById('stat-total').textContent=_cache.length;document.getElementById('stat-active').textContent=a;document.getElementById('stat-uses').textContent=u;document.getElementById('stat-month').textContent='\u2014';}
+function renderCodesTable(codes){
+  const q=(document.getElementById('code-search').value||'').trim().toLowerCase(),tb=document.getElementById('codes-tbody');
+  let rows=(codes||_cache).filter(c=>!q||normalizeCode(c.code).toLowerCase().includes(q)||(c.label||'').toLowerCase().includes(q));
+  rows.sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));
+  if(!rows.length){tb.innerHTML='<tr><td colspan="6" style="text-align:center;color:var(--text-muted)">No codes yet.</td></tr>';return;}
+  tb.innerHTML='';
+  rows.forEach(c=>{
+    const max=c.maxUses||0,uses=(c.useCount||0)+(max>0?' / '+max:''),exp=c.expiresAt?new Date(c.expiresAt).toLocaleDateString():'\u2014';
+    const tr=document.createElement('tr');
+    tr.innerHTML='<td class="mono">'+escapeHtml(c.code)+'</td><td>'+escapeHtml(c.label||'')+'</td><td>'+uses+'</td><td>'+exp+'</td><td><span class="pill '+(c.active?'pill-on':'pill-off')+'">'+( c.active?'Active':'Inactive')+'</span></td>';
+    const td=document.createElement('td');td.className='row-actions';
+    const mkBtn=(l,cl,fn)=>{const b=document.createElement('button');b.type='button';b.className=cl;b.textContent=l;b.addEventListener('click',fn);return b;};
+    td.appendChild(mkBtn('Copy link','btn btn-ghost btn-sm',()=>openQrModal(c.code)));
+    td.appendChild(mkBtn('Edit','btn btn-secondary btn-sm',()=>openCodeModal(c)));
+    td.appendChild(mkBtn('Deactivate','btn btn-danger btn-sm',()=>{if(confirm('Deactivate '+c.code+'?'))apiFetch('/'+encodeURIComponent(c.code)+'?mode=deactivate',{method:'DELETE'}).then(()=>loadAndRender());}));
+    tr.appendChild(td);tb.appendChild(tr);
   });
+}
+document.getElementById('code-search').addEventListener('input',()=>renderCodesTable(_cache));
 
-  function requireSession() {
-    return R.isSessionValid();
-  }
+function openQrModal(code){const url=joinUrl(code);document.getElementById('modal-qr-title').textContent=code;document.getElementById('qr-url').textContent=url;document.getElementById('qr-image-wrap').innerHTML='';document.getElementById('modal-qr').classList.add('open');}
+document.getElementById('qr-copy').addEventListener('click',function(){navigator.clipboard.writeText(document.getElementById('qr-url').textContent).then(()=>{this.textContent='Copied!';setTimeout(()=>this.textContent='Copy link',2000);});});
+document.getElementById('qr-close').addEventListener('click',()=>document.getElementById('modal-qr').classList.remove('open'));
 
-  /* ---- Navigation ---- */
-  var navBtns = document.querySelectorAll('.nav-btn');
-  var panels = document.querySelectorAll('.panel');
+const modalCode=document.getElementById('modal-code');
+function openCodeModal(entry){document.getElementById('modal-code-title').textContent=entry?'Edit code':'New referral code';document.getElementById('edit-id').value=entry?(entry.code||''):'';document.getElementById('f-code').value=entry?(entry.code||''):'';document.getElementById('f-code').readOnly=!!entry;document.getElementById('f-label').value=entry?(entry.label||''):'';document.getElementById('f-note').value=entry?(entry.note||''):'';document.getElementById('f-max').value=entry?(entry.maxUses||0):0;document.getElementById('f-exp').value=entry&&entry.expiresAt?new Date(entry.expiresAt).toISOString().slice(0,10):'';document.getElementById('f-active').checked=entry?!!entry.active:true;document.getElementById('field-active-wrap').style.display=entry?'1':'none';modalCode.classList.add('open');}
+function closeCodeModal(){modalCode.classList.remove('open');}
+document.getElementById('btn-add-code').addEventListener('click',()=>openCodeModal(null));
+document.getElementById('qa-add').addEventListener('click',()=>openCodeModal(null));
+document.getElementById('modal-cancel').addEventListener('click',closeCodeModal);
+modalCode.addEventListener('click',e=>{if(e.target===modalCode)closeCodeModal();});
+document.getElementById('btn-suggest-code').addEventListener('click',function(){if(!document.getElementById('f-code').readOnly){const ch='ABCDEFGHJKLMNPQRSTUVWXYZ23456789',seg=n=>{let s='',b=new Uint8Array(n);crypto.getRandomValues(b);for(let i=0;i<n;i++)s+=ch[b[i]%ch.length];return s;};document.getElementById('f-code').value=seg(4)+'-'+seg(4);}});
 
-  navBtns.forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      var id = btn.getAttribute('data-panel');
-      navBtns.forEach(function (b) { b.classList.remove('active'); });
-      panels.forEach(function (p) { p.classList.remove('active'); });
-      btn.classList.add('active');
-      var panel = document.getElementById('panel-' + id);
-      if (panel) panel.classList.add('active');
-      if (id === 'codes') renderCodesTable();
-      if (id === 'activity') renderActivity();
-      if (id === 'dashboard') refreshStats();
-    });
-  });
+document.getElementById('form-code').addEventListener('submit',async function(e){e.preventDefault();const id=document.getElementById('edit-id').value,expVal=document.getElementById('f-exp').value,expiresAt=expVal?new Date(expVal+'T23:59:59').getTime():null,payload={code:document.getElementById('f-code').value,label:document.getElementById('f-label').value,maxUses:parseInt(document.getElementById('f-max').value,10)||0,expiresAt,active:document.getElementById('f-active').checked};try{if(id){await apiFetch('/'+encodeURIComponent(id),{method:'PATCH',body:{label:payload.label,maxUses:payload.maxUses,expiresAt:payload.expiresAt,active:payload.active}});}else{const r=await apiFetch('/create',{method:'POST',body:payload});if(!r)return;}closeCodeModal();await loadAndRender();}catch(err){alert('Could not save: '+err.message);}});
+document.getElementById('qa-bulk').addEventListener('click',()=>document.getElementById('modal-bulk').classList.add('open'));
+document.getElementById('btn-bulk-gen').addEventListener('click',()=>document.getElementById('modal-bulk').classList.add('open'));
+document.getElementById('bulk-cancel').addEventListener('click',()=>document.getElementById('modal-bulk').classList.remove('open'));
+document.getElementById('bulk-run').addEventListener('click',async function(){const n=parseInt(document.getElementById('bulk-count').value,10)||1,prefix=document.getElementById('bulk-label').value.trim(),max=parseInt(document.getElementById('bulk-max').value,10)||0;const ch='ABCDEFGHJKLMNPQRSTUVWXYZ23456789',seg=l=>{let s='',b=new Uint8Array(l);crypto.getRandomValues(b);for(let i=0;i<l;i++)s+=ch[b[i]%ch.length];return s;};let errs=0;for(let i=0;i<n;i++){try{await apiFetch('/create',{method:'POST',body:{code:seg(4)+'-'+seg(4),label:(prefix?prefix+' ':'')+('Batch #'+(i+1)),maxUses:max,active:true}});}catch(_){errs++;}}document.getElementById('modal-bulk').classList.remove('open');await loadAndRender();if(errs)alert(errs+' code(s) could not be created.');});
+document.getElementById('qa-join').addEventListener('click',function(){navigator.clipboard.writeText(new URL('/join/',window.location.origin).toString()).then(()=>{this.textContent='Copied!';setTimeout(()=>this.textContent='Copy site join URL',2000);});});
 
-  function refreshStats() {
-    if (!requireSession()) return;
-    var s = R.getStats();
-    document.getElementById('stat-total').textContent = s.totalCodes;
-    document.getElementById('stat-active').textContent = s.activeCodes;
-    document.getElementById('stat-month').textContent = s.redemptionsThisMonth;
-    document.getElementById('stat-uses').textContent = s.totalUses;
-  }
-
-  function renderCodesTable() {
-    if (!requireSession()) return;
-    var q = (document.getElementById('code-search').value || '').trim().toLowerCase();
-    var rows = R.listCodes().filter(function (c) {
-      if (!q) return true;
-      return (
-        R.normalizeCode(c.code).toLowerCase().indexOf(q) >= 0 ||
-        (c.label || '').toLowerCase().indexOf(q) >= 0
-      );
-    });
-    rows.sort(function (a, b) {
-      return new Date(b.createdAt) - new Date(a.createdAt);
-    });
-    var tb = document.getElementById('codes-tbody');
-    tb.innerHTML = '';
-    rows.forEach(function (c) {
-      var tr = document.createElement('tr');
-      var max = c.maxRedemptions;
-      var uses = (c.usedCount || 0) + (max > 0 ? ' / ' + max : '');
-      var exp = c.expiresAt ? c.expiresAt.slice(0, 10) : '—';
-      tr.innerHTML =
-        '<td class="mono">' + escapeHtml(c.code) + '</td>' +
-        '<td>' + escapeHtml(c.label || '') + '</td>' +
-        '<td>' + uses + '</td>' +
-        '<td>' + exp + '</td>' +
-        '<td><span class="pill ' + (c.active ? 'pill-on' : 'pill-off') + '">' + (c.active ? 'Active' : 'Off') + '</span></td>' +
-        '<td class="row-actions"></td>';
-      var actions = tr.querySelector('.row-actions');
-      actions.appendChild(btn('Copy link', 'btn btn-ghost btn-sm', function () {
-        openQrModal(c.code);
-      }));
-      actions.appendChild(btn('Edit', 'btn btn-secondary btn-sm', function () {
-        openCodeModal(c);
-      }));
-      actions.appendChild(btn('Delete', 'btn btn-danger btn-sm', function () {
-        if (confirm('Delete code ' + c.code + '?')) {
-          R.deleteCode(c.id);
-          renderCodesTable();
-          refreshStats();
-        }
-      }));
-      tb.appendChild(tr);
-    });
-  }
-
-  function btn(label, cls, fn) {
-    var b = document.createElement('button');
-    b.type = 'button';
-    b.className = cls;
-    b.textContent = label;
-    b.addEventListener('click', fn);
-    return b;
-  }
-
-  function escapeHtml(s) {
-    var d = document.createElement('div');
-    d.textContent = s;
-    return d.innerHTML;
-  }
-
-  function joinUrlForCode(code) {
-    var u = new URL('/join/', window.location.origin);
-    u.searchParams.set('code', R.normalizeCode(code));
-    return u.toString();
-  }
-
-  function openQrModal(code) {
-    var url = joinUrlForCode(code);
-    document.getElementById('qr-url').textContent = url;
-    document.getElementById('modal-qr').classList.add('open');
-    var wrap = document.getElementById('qr-image-wrap');
-    var img = document.getElementById('qr-img');
-    if (window.QRCode && typeof QRCode.toDataURL === 'function') {
-      QRCode.toDataURL(url, { width: 200, margin: 2, color: { dark: '#1a2744', light: '#ffffff' } })
-        .then(function (dataUrl) { img.src = dataUrl; img.style.display = 'block'; })
-        .catch(function () { wrap.style.display = 'none'; });
-    } else {
-      wrap.style.display = 'none';
-    }
-    document.getElementById('qr-copy').onclick = function () {
-      navigator.clipboard.writeText(url).then(function () {
-        document.getElementById('qr-copy').textContent = 'Copied!';
-        setTimeout(function () { document.getElementById('qr-copy').textContent = 'Copy link'; }, 2000);
-      });
-    };
-  }
-
-  document.getElementById('qr-close').addEventListener('click', function () {
-    document.getElementById('modal-qr').classList.remove('open');
-  });
-
-  document.getElementById('modal-qr').addEventListener('click', function (e) {
-    if (e.target === this) this.classList.remove('open');
-  });
-
-  /* Code modal */
-  var modalCode = document.getElementById('modal-code');
-  var formCode = document.getElementById('form-code');
-
-  function openCodeModal(entry) {
-    document.getElementById('modal-code-title').textContent = entry ? 'Edit referral code' : 'New referral code';
-    document.getElementById('edit-id').value = entry ? entry.id : '';
-    document.getElementById('f-code').value = entry ? entry.code : R.suggestCode();
-    document.getElementById('f-code').readOnly = !!entry;
-    document.getElementById('f-label').value = entry ? entry.label || '' : '';
-    document.getElementById('f-note').value = entry ? entry.note || '' : '';
-    document.getElementById('f-max').value = entry ? entry.maxRedemptions : 0;
-    document.getElementById('f-exp').value = entry && entry.expiresAt ? entry.expiresAt.slice(0, 10) : '';
-    document.getElementById('f-active').checked = entry ? !!entry.active : true;
-    modalCode.classList.add('open');
-  }
-
-  function closeCodeModal() {
-    modalCode.classList.remove('open');
-  }
-
-  document.getElementById('btn-add-code').addEventListener('click', function () { openCodeModal(null); });
-  document.getElementById('qa-add').addEventListener('click', function () {
-    document.querySelector('[data-panel="codes"]').click();
-    openCodeModal(null);
-  });
-  document.getElementById('modal-cancel').addEventListener('click', closeCodeModal);
-  document.getElementById('btn-suggest-code').addEventListener('click', function () {
-    if (!document.getElementById('f-code').readOnly) document.getElementById('f-code').value = R.suggestCode();
-  });
-
-  formCode.addEventListener('submit', function (e) {
-    e.preventDefault();
-    var id = document.getElementById('edit-id').value;
-    var expVal = document.getElementById('f-exp').value;
-    var expiresAt = expVal ? new Date(expVal + 'T23:59:59').toISOString() : null;
-    var payload = {
-      code: document.getElementById('f-code').value,
-      label: document.getElementById('f-label').value,
-      note: document.getElementById('f-note').value,
-      maxRedemptions: parseInt(document.getElementById('f-max').value, 10) || 0,
-      expiresAt: expiresAt,
-      active: document.getElementById('f-active').checked
-    };
-    if (id) {
-      var p = { label: payload.label, note: payload.note, maxRedemptions: payload.maxRedemptions, expiresAt: expiresAt, active: payload.active };
-      R.updateCode(id, p);
-    } else {
-      var r = R.addCode(payload);
-      if (!r.ok) {
-        alert(r.error || 'Could not save');
-        return;
-      }
-    }
-    closeCodeModal();
-    renderCodesTable();
-    refreshStats();
-  });
-
-  modalCode.addEventListener('click', function (e) {
-    if (e.target === modalCode) closeCodeModal();
-  });
-
-  /* Bulk modal */
-  var modalBulk = document.getElementById('modal-bulk');
-  function openBulk() {
-    modalBulk.classList.add('open');
-  }
-  function closeBulk() {
-    modalBulk.classList.remove('open');
-  }
-  document.getElementById('btn-bulk-gen').addEventListener('click', openBulk);
-  document.getElementById('qa-bulk').addEventListener('click', function () {
-    document.querySelector('[data-panel="codes"]').click();
-    openBulk();
-  });
-  document.getElementById('bulk-cancel').addEventListener('click', closeBulk);
-  document.getElementById('bulk-run').addEventListener('click', function () {
-    var n = parseInt(document.getElementById('bulk-count').value, 10) || 1;
-    n = Math.min(50, Math.max(1, n));
-    var prefix = document.getElementById('bulk-label').value.trim();
-    var max = parseInt(document.getElementById('bulk-max').value, 10);
-    if (isNaN(max)) max = 1;
-    var res = R.generateBulk(n, { labelPrefix: prefix, maxRedemptions: max });
-    closeBulk();
-    alert('Generated ' + res.added.length + ' codes.' + (res.errors ? ' Failed: ' + res.errors : ''));
-    renderCodesTable();
-    refreshStats();
-  });
-  modalBulk.addEventListener('click', function (e) {
-    if (e.target === modalBulk) closeBulk();
-  });
-
-  document.getElementById('qa-join').addEventListener('click', function () {
-    var url = new URL('/join/', window.location.origin).toString();
-    navigator.clipboard.writeText(url);
-  });
-
-  document.getElementById('code-search').addEventListener('input', function () {
-    renderCodesTable();
-  });
-
-  function renderActivity() {
-    if (!requireSession()) return;
-    var list = document.getElementById('activity-list');
-    var items = R.getRedemptions(80);
-    if (!items.length) {
-      list.innerHTML = '<p style="padding:1rem;color:var(--text-secondary);font-size:0.9rem">No redemptions yet.</p>';
-      return;
-    }
-    list.innerHTML = items.map(function (r) {
-      return (
-        '<div class="activity-item">' +
-        '<span class="mono">' + escapeHtml(r.codeSnapshot || '') + '</span>' +
-        '<span class="activity-meta">' + escapeHtml(new Date(r.at).toLocaleString()) + '</span>' +
-        '</div>'
-      );
-    }).join('');
-  }
-
-  document.getElementById('form-pw').addEventListener('submit', async function (e) {
-    e.preventDefault();
-    var el = document.getElementById('pw-msg');
-    var oldP = document.getElementById('pw-old').value;
-    var newP = document.getElementById('pw-new').value;
-    if (newP.length < 10) {
-      el.innerHTML = '<div class="msg msg-error">New password must be at least 10 characters.</div>';
-      return;
-    }
-    var ok = await R.changeAdminPassword(oldP, newP);
-    el.innerHTML = ok
-      ? '<div class="msg msg-ok">Password updated.</div>'
-      : '<div class="msg msg-error">Current password incorrect.</div>';
-    if (ok) document.getElementById('form-pw').reset();
-  });
-
-  document.getElementById('btn-export-full').addEventListener('click', function () {
-    var blob = new Blob([R.exportJson()], { type: 'application/json' });
-    downloadBlob(blob, 'christbay-referrals-backup.json');
-  });
-
-  document.getElementById('btn-export-public').addEventListener('click', function () {
-    var blob = new Blob([R.exportCodesPublic()], { type: 'application/json' });
-    downloadBlob(blob, 'christbay-referrals-codes.json');
-  });
-
-  function downloadBlob(blob, name) {
-    var a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = name;
-    a.click();
-    URL.revokeObjectURL(a.href);
-  }
-
-  document.getElementById('btn-import-merge').addEventListener('click', function () {
-    runImport(false);
-  });
-  document.getElementById('btn-import-replace').addEventListener('click', function () {
-    if (!confirm('Replace all local referral data with this file?')) return;
-    runImport(true);
-  });
-
-  function runImport(replace) {
-    var f = document.getElementById('import-file').files[0];
-    if (!f) {
-      alert('Choose a JSON file first.');
-      return;
-    }
-    var reader = new FileReader();
-    reader.onload = function () {
-      try {
-        R.importJson(reader.result, replace);
-        alert('Import complete.');
-        refreshAll();
-      } catch (err) {
-        alert('Import failed: ' + (err.message || String(err)));
-      }
-    };
-    reader.readAsText(f);
-  }
-
-  function refreshAll() {
-    var after = function () {
-      refreshStats();
-      renderCodesTable();
-      renderActivity();
-    };
-    if (R.loadPublicManifest) {
-      R.loadPublicManifest().finally(after);
-    } else {
-      after();
-    }
-  }
-
-  /* Boot */
-  setupGateUi();
-  if (R.isSessionValid()) {
-    openApp();
-  }
-})();
-  </script>
+function renderActivity(){document.getElementById('activity-list').innerHTML='<p style="color:var(--text-muted);padding:16px 0">Activity feed coming soon \u2014 individual code stats via GET /:code/stats.</p>';}
+document.getElementById('form-pw').style.display='none';
+document.getElementById('pw-msg').innerHTML='<div class="msg msg-ok">Password management is handled by Google Sign-in.</div>';
+function downloadBlob(blob,name){const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},1000);}
+document.getElementById('btn-export-full').addEventListener('click',async()=>{const data=await apiFetch('/list?pageSize=200');if(!data)return;downloadBlob(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}),'christbay-referrals-backup.json');});
+document.getElementById('btn-export-public').addEventListener('click',async()=>{const data=await apiFetch('/list?pageSize=200');if(!data)return;const pub={version:1,exportedAt:new Date().toISOString(),codes:(data.codes||[]).map(c=>({code:c.code,label:c.label,maxUses:c.maxUses,useCount:c.useCount,expiresAt:c.expiresAt,active:c.active}))};downloadBlob(new Blob([JSON.stringify(pub,null,2)],{type:'application/json'}),'referrals-public.json');});
+['btn-import-merge','btn-import-replace','import-file'].forEach(id=>{const el=document.getElementById(id);if(el)el.style.display='none';});
+async function loadAndRender(){try{const data=await apiFetch('/list?pageSize=200');if(!data)return;_cache=data.codes||[];refreshStats();renderCodesTable(_cache);renderActivity();}catch(err){console.error('loadAndRender:',err);}}
+function refreshAll(){loadAndRender();}
+</script>
 </body>
 </html>
