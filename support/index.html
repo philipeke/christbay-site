@@ -49,18 +49,25 @@
     .skip-link:focus{top:1rem}
 
     /* ============================================================
-       Header / Nav
+       Header / Nav (aligned with index.html landing)
     ============================================================ */
-    .site-header{position:sticky;top:0;z-index:100;background:rgba(18,29,53,.96);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(201,168,76,.14)}
+    .site-header{position:sticky;top:0;z-index:100;background:rgba(13,21,38,.92);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid rgba(201,168,76,.12)}
     .nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px;max-width:var(--max-width);margin:0 auto;padding:0 1.5rem}
     .nav-brand{display:flex;align-items:center;gap:.625rem}
-    .nav-brand img{width:28px;height:28px;border-radius:50%;object-fit:cover}
-    .nav-brand-name{font-size:1.0625rem;font-weight:600;color:var(--white);letter-spacing:-.01em}
+    .nav-brand img{width:32px;height:32px;object-fit:cover;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px rgba(0,0,0,.15)}
+    .nav-brand-name{font-size:1.0625rem;font-weight:700;color:var(--white);letter-spacing:-.01em}
     .nav-links{display:flex;align-items:center;gap:1.75rem}
     .nav-links a{font-size:.875rem;font-weight:500;color:rgba(255,255,255,.7);transition:color var(--transition)}
     .nav-links a:hover{color:var(--white)}
-    .nav-links .nav-cta{background:var(--gold);color:var(--navy-deep);padding:.5rem 1.25rem;border-radius:100px;font-weight:600;font-size:.8125rem;transition:background var(--transition),transform var(--transition)}
-    .nav-links .nav-cta:hover{background:var(--gold-light);transform:translateY(-1px)}
+    .nav-links a.nav-text[aria-current="page"]{color:var(--white);font-weight:600}
+    .nav-dropdown{position:relative}
+    .nav-cta{background:var(--gold);color:var(--navy-deep);padding:.5rem 1.25rem;border-radius:100px;font-weight:600;font-size:.8125rem;border:none;cursor:pointer;font-family:inherit;transition:background var(--transition),transform var(--transition)}
+    .nav-cta:hover{background:var(--gold-light);transform:translateY(-1px)}
+    .nav-dropdown-menu{position:absolute;top:100%;right:0;margin-top:.5rem;background:var(--navy-light);border:1px solid rgba(201,168,76,.2);border-radius:8px;min-width:170px;box-shadow:0 8px 24px rgba(26,39,68,.25);opacity:0;visibility:hidden;transform:translateY(-8px);transition:opacity var(--transition),visibility var(--transition),transform var(--transition);z-index:1000;overflow:hidden}
+    .nav-dropdown-menu.open{opacity:1;visibility:visible;transform:translateY(0)}
+    .nav-dropdown-item{display:flex;align-items:center;gap:.75rem;padding:.75rem 1rem;color:var(--white);font-size:.875rem;font-weight:500;transition:background var(--transition),color var(--transition)}
+    .nav-dropdown-item:hover{background:rgba(201,168,76,.15);color:var(--gold-light)}
+    .nav-dropdown-item svg{flex-shrink:0}
     @media(max-width:600px){.nav-links{gap:1rem}.nav-links a.nav-text{display:none}}
 
     /* ============================================================
@@ -175,6 +182,17 @@
     .form-footer-note{font-size:.75rem;color:var(--text-muted);text-align:center;margin-top:.875rem;line-height:1.5}
     .form-footer-note a{color:var(--text-secondary);text-decoration:underline;text-underline-offset:2px}
 
+    .submit-btn:disabled{opacity:.65;cursor:not-allowed;transform:none;box-shadow:none}
+    .submit-btn:disabled:hover{background:var(--navy);transform:none;box-shadow:none}
+    .visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+    .form-error{display:none;font-size:.8125rem;color:#6b2a2a;background:rgba(163,39,39,.08);border:1px solid rgba(163,39,39,.22);border-radius:var(--radius-sm);padding:1rem 1.125rem;margin-bottom:1.25rem;line-height:1.55}
+    .form-error p{margin:0 0 .5rem}
+    .form-error p:last-child{margin-bottom:0}
+    .form-error-actions{font-size:.8125rem;margin-top:.625rem !important;padding-top:.625rem;border-top:1px solid rgba(163,39,39,.15)}
+    .form-error-link{color:var(--navy);font-weight:600;text-decoration:underline;text-underline-offset:2px}
+    .form-error-link:hover{color:var(--gold)}
+
     /* Success message (hidden by default) */
     .form-success{display:none;text-align:center;padding:2.5rem 1rem}
     .form-success-icon{width:60px;height:60px;border-radius:50%;background:rgba(29,106,58,.12);display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem}
@@ -243,18 +261,17 @@
     .response-card-desc{font-size:.8rem;color:var(--text-muted);line-height:1.55}
 
     /* ============================================================
-       Footer (aligned with index.html)
+       Footer (same as index.html)
     ============================================================ */
-    .site-footer{background:#0f1724;color:rgba(255,255,255,.5);padding:4rem 1.5rem 2.5rem}
+    .site-footer{background:#0b1220;color:rgba(255,255,255,.5);padding:4.5rem 1.5rem 2.5rem}
     .footer-inner{max-width:var(--max-width);margin:0 auto}
     .footer-top{display:flex;align-items:flex-start;justify-content:space-between;padding-bottom:2.5rem;border-bottom:1px solid rgba(255,255,255,.07);gap:2rem;flex-wrap:wrap}
     .footer-brand{display:flex;align-items:center;gap:.625rem}
-    .footer-brand img{width:32px;height:32px;border-radius:50%;object-fit:cover;opacity:.8}
-    .footer-brand-name{font-size:1rem;font-weight:600;color:var(--white);letter-spacing:-.01em}
+    .footer-brand img{width:36px;height:36px;object-fit:cover;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px rgba(0,0,0,.2);opacity:1}
+    .footer-brand-name{font-size:1rem;font-weight:700;color:var(--white)}
     .footer-nav{display:flex;gap:.5rem 2.25rem;flex-wrap:wrap;align-items:center}
     .footer-nav a{font-size:.875rem;color:rgba(255,255,255,.45);transition:color var(--transition)}
     .footer-nav a:hover{color:var(--white)}
-    .footer-nav a[aria-current="page"]{color:var(--gold-light);font-weight:500}
     .footer-bottom{padding-top:2rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.75rem}
     .footer-copyright{font-size:.8125rem;color:rgba(255,255,255,.3)}
     .footer-tagline{font-size:.8125rem;color:rgba(255,255,255,.2);font-style:italic}
@@ -273,13 +290,26 @@
 <header class="site-header" role="banner">
   <nav class="nav-inner" aria-label="Primary navigation">
     <a href="/" class="nav-brand" aria-label="ChristBay — home">
-      <img src="/assets/brand.png" alt="" aria-hidden="true" style="border-radius:50%;object-fit:cover;border:2px solid rgba(201,168,76,0.3)" />
+      <img src="/assets/brand.png" alt="" aria-hidden="true" />
       <span class="nav-brand-name">ChristBay</span>
     </a>
     <div class="nav-links">
       <a href="/#features" class="nav-text">Features</a>
       <a href="/#premium" class="nav-text">Premium</a>
-      <a href="/support/" class="nav-cta" aria-current="page">Support</a>
+      <a href="/support/" class="nav-text" aria-current="page">Support</a>
+      <div class="nav-dropdown">
+        <button type="button" class="nav-cta" id="download-toggle" aria-expanded="false" aria-haspopup="true" aria-label="Download options">Download</button>
+        <div class="nav-dropdown-menu" id="download-menu">
+          <a href="https://apps.apple.com/se/app/christbay-daglig-reflektion/id6759575925" class="nav-dropdown-item" aria-label="Download on Apple App Store">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+            App Store
+          </a>
+          <a href="https://play.google.com/store/apps/details?id=com.oakdev.christbay" class="nav-dropdown-item" aria-label="Download on Google Play Store">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M3.609 1.814L13.792 12 3.609 22.186c-.386.387-.593.916-.593 1.465V1.349c0 .549.207 1.078.593 1.465zm10.908 10.911L21.268 24 3.609 1.814 14.517 12.722z"/></svg>
+            Google Play
+          </a>
+        </div>
+      </div>
     </div>
   </nav>
 </header>
@@ -500,8 +530,10 @@
             <p>We'll get back to you as soon as possible — usually within one business day.</p>
           </div>
 
-          <!-- The form uses a mailto fallback. To connect a backend, replace the action attribute. -->
+          <!-- Submissions POST to FormSubmit (delivers to hello@oakdev.app). First-time use: confirm the activation email sent to that inbox. Falls back to mailto if the request fails. -->
           <form id="support-form" novalidate aria-label="Support contact form">
+
+            <input type="text" name="_gotcha" class="visually-hidden" tabindex="-1" autocomplete="off" aria-hidden="true" />
 
             <div class="form-row">
               <div class="form-group">
@@ -541,10 +573,12 @@
               <textarea class="form-textarea" id="f-message" name="message" placeholder="Describe your question or issue in as much detail as you like…" required></textarea>
             </div>
 
+            <div class="form-error" id="form-error" role="alert" aria-live="assertive"></div>
+
             <div class="form-submit">
-              <button type="submit" class="submit-btn">
+              <button type="submit" class="submit-btn" id="form-submit-btn">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-                Send Message
+                <span class="submit-btn-label">Send Message</span>
               </button>
             </div>
             <p class="form-footer-note">By sending this message you agree to our <a href="/privacy/">Privacy Policy</a>. We use your email only to respond to your enquiry.</p>
@@ -552,12 +586,12 @@
           </form>
 
           <!-- Success state -->
-          <div class="form-success" id="form-success" aria-live="polite" aria-atomic="true">
+          <div class="form-success" id="form-success" aria-live="polite" aria-atomic="true" tabindex="-1">
             <div class="form-success-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
             </div>
-            <h3>Message sent!</h3>
-            <p>Thank you for reaching out. We'll reply to your email within one business day. May your day be filled with grace.</p>
+            <h3 id="form-success-title">Message sent!</h3>
+            <p id="form-success-body">Thank you for reaching out. We'll reply to your email within one business day. May your day be filled with grace.</p>
           </div>
 
         </div>
@@ -711,7 +745,7 @@
   <div class="footer-inner">
     <div class="footer-top">
       <div class="footer-brand">
-        <img src="/assets/brand.png" alt="ChristBay" style="border-radius:50%;object-fit:cover;border:2px solid rgba(201,168,76,0.2)" />
+        <img src="/assets/brand.png" alt="ChristBay" />
         <span class="footer-brand-name">ChristBay</span>
       </div>
       <nav class="footer-nav" aria-label="Footer links">
@@ -752,21 +786,98 @@
   });
 
   /* ---- Contact form ---- */
-  var form    = document.getElementById('support-form');
-  var success = document.getElementById('form-success');
+  var form       = document.getElementById('support-form');
+  var success    = document.getElementById('form-success');
+  var submitBtn  = document.getElementById('form-submit-btn');
+  var submitLabel = submitBtn ? submitBtn.querySelector('.submit-btn-label') : null;
+  var errBox     = document.getElementById('form-error');
+  var successTitle = document.getElementById('form-success-title');
+  var successBody  = document.getElementById('form-success-body');
+
+  var SUPPORT_EMAIL = 'hello@oakdev.app';
+  var FORMSUBMIT_URL = 'https://formsubmit.co/ajax/' + encodeURIComponent(SUPPORT_EMAIL);
+  var BTN_TEXT_SEND = 'Send Message';
+  var BTN_TEXT_WAIT = 'Sending…';
+
+  var TOPIC_LABELS = {
+    'getting-started': 'Getting Started',
+    'billing': 'Billing & Purchases',
+    'blessed': 'Blessed Upgrade',
+    'reflections': 'Reflections Balance',
+    'technical': 'Technical Issue / Bug',
+    'privacy': 'Privacy & Data',
+    'delete-account': 'Account Deletion',
+    'feedback': 'Feedback & Feature Request',
+    'other': 'Other'
+  };
+
+  function buildMailtoUrl(name, email, topicKey, topicLabel, txn, message){
+    var subject = encodeURIComponent('[ChristBay Support] ' + topicLabel);
+    var body = encodeURIComponent(
+      'Name: ' + name + '\n' +
+      'Email: ' + email + '\n' +
+      'Topic: ' + topicLabel + ' (' + topicKey + ')\n' +
+      (txn ? 'Transaction ID: ' + txn + '\n' : '') +
+      '\nMessage:\n' + message
+    );
+    return 'mailto:' + SUPPORT_EMAIL + '?subject=' + subject + '&body=' + body;
+  }
+
+  function escapeHtml(str){
+    var d = document.createElement('div');
+    d.textContent = str;
+    return d.innerHTML;
+  }
+
+  function hideFormError(){
+    if(!errBox) return;
+    errBox.style.display = 'none';
+    errBox.innerHTML = '';
+  }
+
+  function showFormError(message, mailtoUrl){
+    if(!errBox) return;
+    var p1 = '<p>' + escapeHtml(message) + '</p>';
+    var p2 = '<p class="form-error-actions">You can still reach us: <a class="form-error-link" href="' + mailtoUrl + '">open this draft in your email app</a>, or write to <a class="form-error-link" href="mailto:' + SUPPORT_EMAIL + '">' + escapeHtml(SUPPORT_EMAIL) + '</a>.</p>';
+    errBox.innerHTML = p1 + p2;
+    errBox.style.display = 'block';
+    errBox.focus();
+  }
+
+  function formSubmitOk(data){
+    if(!data || typeof data !== 'object') return false;
+    if(data.success === true || data.success === 'true') return true;
+    if(data.success === false || data.success === 'false') return false;
+    return data.ok === true;
+  }
+
+  function parseResponseJson(res){
+    return res.text().then(function(text){
+      if(!text || !text.trim()) return { res: res, data: null };
+      try {
+        return { res: res, data: JSON.parse(text) };
+      } catch(e) {
+        return { res: res, data: null, parseError: true, raw: text };
+      }
+    });
+  }
 
   if(form){
     form.addEventListener('submit', function(e){
       e.preventDefault();
+      hideFormError();
 
-      /* Basic client-side validation */
+      var gotcha = form.querySelector('input[name="_gotcha"]');
+      if(gotcha && gotcha.value) return;
+
       var name    = form.querySelector('#f-name').value.trim();
-      var email   = form.querySelector('#f-email').value.trim();
+      var emailEl = form.querySelector('#f-email');
+      var email   = emailEl.value.trim();
       var topic   = form.querySelector('#f-topic').value;
       var message = form.querySelector('#f-message').value.trim();
+      var txn     = form.querySelector('#f-order').value.trim();
 
       if(!name || !email || !topic || !message){
-        /* Find first empty required field and focus it */
         var fields = form.querySelectorAll('[required]');
         for(var i = 0; i < fields.length; i++){
           if(!fields[i].value.trim()){
@@ -781,28 +892,115 @@
         return;
       }
 
-      /* Build mailto as fallback; swap this for a real API call if desired */
-      var subject = encodeURIComponent('[ChristBay Support] ' + topic);
-      var txn     = form.querySelector('#f-order').value.trim();
-      var body    = encodeURIComponent(
-        'Name: ' + name + '\n' +
-        'Email: ' + email + '\n' +
-        'Topic: ' + topic + '\n' +
-        (txn ? 'Transaction ID: ' + txn + '\n' : '') +
-        '\nMessage:\n' + message
-      );
-      var mailto  = 'mailto:hello@oakdev.app?subject=' + subject + '&body=' + body;
+      if(!emailEl.checkValidity()){
+        emailEl.focus();
+        emailEl.style.borderColor = '#c0392b';
+        emailEl.addEventListener('input', function(){
+          this.style.borderColor = '';
+        }, {once: true});
+        return;
+      }
 
-      /* Open mail client */
-      window.location.href = mailto;
+      var topicLabel = TOPIC_LABELS[topic] || topic;
+      var mailtoFallback = buildMailtoUrl(name, email, topic, topicLabel, txn, message);
 
-      /* Show success state */
-      form.style.display = 'none';
-      success.style.display = 'block';
+      if(submitBtn){
+        submitBtn.disabled = true;
+        submitBtn.setAttribute('aria-busy', 'true');
+      }
+      if(submitLabel) submitLabel.textContent = BTN_TEXT_WAIT;
+
+      var payload = {
+        name: name,
+        email: email,
+        topic: topicLabel,
+        transaction_id: txn || '(not provided)',
+        message: message,
+        _subject: '[ChristBay Support] ' + topicLabel,
+        _replyto: email,
+        _gotcha: ''
+      };
+
+      fetch(FORMSUBMIT_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      })
+        .then(parseResponseJson)
+        .then(function(result){
+          var data = result.data;
+          var apiMsg = data && data.message ? String(data.message) : '';
+
+          if(result.res.ok && formSubmitOk(data)){
+            if(successTitle) successTitle.textContent = 'Message sent!';
+            if(successBody) successBody.textContent = 'Thank you for reaching out. We\'ll reply to your email within one business day. May your day be filled with grace.';
+            form.style.display = 'none';
+            success.style.display = 'block';
+            success.focus();
+            success.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            return;
+          }
+
+          if(!result.res.ok && data && (data.success === false || data.success === 'false') && apiMsg){
+            throw new Error(apiMsg);
+          }
+          if(result.parseError || (result.res.ok && !formSubmitOk(data))){
+            throw new Error(apiMsg || 'We could not send your message right now. Please use the links below.');
+          }
+          throw new Error(apiMsg || 'We could not send your message right now. Please use the links below.');
+        })
+        .catch(function(err){
+          var msg = (err && err.message) ? err.message : 'Something went wrong. Please try again or use email.';
+          showFormError(msg, mailtoFallback);
+          var y = errBox ? errBox.getBoundingClientRect().top + window.scrollY - 24 : 0;
+          window.scrollTo({ top: y, behavior: 'smooth' });
+        })
+        .finally(function(){
+          if(submitBtn){
+            submitBtn.disabled = false;
+            submitBtn.removeAttribute('aria-busy');
+          }
+          if(submitLabel) submitLabel.textContent = BTN_TEXT_SEND;
+        });
     });
   }
 
 }());
+</script>
+<script>
+(function () {
+  var downloadToggle = document.getElementById('download-toggle');
+  var downloadMenu = document.getElementById('download-menu');
+  if (downloadToggle && downloadMenu) {
+    downloadToggle.addEventListener('click', function (e) {
+      e.preventDefault();
+      var isOpen = downloadMenu.classList.contains('open');
+      downloadMenu.classList.toggle('open');
+      downloadToggle.setAttribute('aria-expanded', !isOpen);
+    });
+    document.addEventListener('click', function (e) {
+      if (!downloadToggle.contains(e.target) && !downloadMenu.contains(e.target)) {
+        downloadMenu.classList.remove('open');
+        downloadToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        downloadMenu.classList.remove('open');
+        downloadToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+    downloadMenu.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', function () {
+        downloadMenu.classList.remove('open');
+        downloadToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+})();
 </script>
 
 </body>

@@ -82,7 +82,8 @@
     .nav-brand { display: flex; align-items: center; gap: 0.625rem; }
     .nav-brand img {
       width: 32px; height: 32px; object-fit: cover;
-      border-radius: 50%; border: 2px solid rgba(201, 168, 76, 0.3);
+      border-radius: 50%; border: 2px solid #ffffff;
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15);
     }
     .nav-brand-name { font-size: 1.0625rem; font-weight: 700; color: var(--white); letter-spacing: -0.01em; }
     .nav-links { display: flex; align-items: center; gap: 1.75rem; }
@@ -335,6 +336,109 @@
     @media (max-width: 800px) { .about-inner { grid-template-columns: 1fr; gap: 2.5rem; } }
 
     /* ============================================================
+       App showcase (device mockup)
+    ============================================================ */
+    .app-showcase {
+      background: linear-gradient(180deg, var(--white) 0%, var(--warm-white) 100%);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .app-showcase-inner {
+      display: grid;
+      grid-template-columns: 1fr 1.08fr;
+      gap: 3rem 3.5rem;
+      align-items: center;
+    }
+    .app-showcase-device {
+      margin: 0;
+      justify-self: center;
+    }
+    .app-showcase-device img {
+      width: 100%;
+      max-width: min(400px, 100%);
+      margin: 0 auto;
+      border-radius: 12px;
+      filter: drop-shadow(0 28px 56px rgba(26, 39, 68, 0.2));
+    }
+    .app-showcase-copy .section-body { max-width: none; }
+    .app-showcase-lead {
+      font-size: 1.0625rem;
+      color: var(--text-secondary);
+      line-height: 1.75;
+      margin-bottom: 1rem;
+    }
+    .app-showcase-list {
+      margin-top: 1.375rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.875rem;
+    }
+    .app-showcase-list li {
+      font-size: 0.9375rem;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      padding-left: 1.5rem;
+      position: relative;
+    }
+    .app-showcase-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.55em;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--gold);
+    }
+    @media (max-width: 900px) {
+      .app-showcase-inner { grid-template-columns: 1fr; text-align: center; }
+      .app-showcase-list { text-align: left; max-width: 540px; margin-left: auto; margin-right: auto; }
+    }
+
+    /* ============================================================
+       Feature narrative (long-form)
+    ============================================================ */
+    .feature-narrative { background: var(--cream); }
+    .narrative-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.75rem 2rem;
+    }
+    .narrative-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2rem 1.875rem;
+      transition: box-shadow var(--transition), border-color var(--transition);
+    }
+    .narrative-card:hover {
+      box-shadow: var(--shadow-md);
+      border-color: rgba(201, 168, 76, 0.25);
+    }
+    .narrative-card h3 {
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.02em;
+    }
+    .narrative-card p {
+      font-size: 0.9375rem;
+      color: var(--text-secondary);
+      line-height: 1.72;
+      margin-bottom: 0.875rem;
+    }
+    .narrative-card p:last-child { margin-bottom: 0; }
+    .narrative-card a {
+      color: var(--navy);
+      font-weight: 600;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    .narrative-card a:hover { color: var(--gold); }
+    @media (max-width: 768px) { .narrative-grid { grid-template-columns: 1fr; } }
+
+    /* ============================================================
        Devotional library (series grid)
     ============================================================ */
     .categories { background: var(--cream); }
@@ -534,7 +638,12 @@
       gap: 2rem; flex-wrap: wrap;
     }
     .footer-brand { display: flex; align-items: center; gap: 0.625rem; }
-    .footer-brand img { width: 36px; height: 36px; object-fit: cover; border-radius: 50%; opacity: 0.85; border: 2px solid rgba(201, 168, 76, 0.2); }
+    .footer-brand img {
+      width: 36px; height: 36px; object-fit: cover; border-radius: 50%;
+      border: 2px solid #ffffff;
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);
+      opacity: 1;
+    }
     .footer-brand-name { font-size: 1rem; font-weight: 700; color: var(--white); }
     .footer-nav { display: flex; gap: 0.5rem 2.25rem; flex-wrap: wrap; align-items: center; }
     .footer-nav a { font-size: 0.875rem; color: rgba(255, 255, 255, 0.45); transition: color var(--transition); }
@@ -669,7 +778,7 @@
           <h2 class="section-title" id="new-heading">ChristBay 2.0 &mdash; A Deeper Walk</h2>
           <div class="divider centered"></div>
           <br />
-          <p class="section-body">A major update to every part of the experience. More content, more depth, more ways to grow in your daily devotional life.</p>
+          <p class="section-body">Version 2.0 refines the whole stack: how you move between scripture and prayer, how Reflections and Blessed work together, and how the library grows with you. Three headlines below &mdash; each one unpacks a bigger story on the rest of this page.</p>
         </div>
         <div class="new-grid">
           <article class="new-card reveal">
@@ -678,7 +787,7 @@
             </div>
             <span class="new-tag">New</span>
             <h3>Cross-Platform</h3>
-            <p>Now available on both iOS and Android. Your faith journey, your way &mdash; on the device you choose.</p>
+            <p>ChristBay ships on <strong>iOS and Android</strong> with the same ethos: no ads, no feed, just the Word and your journal. Purchases and restores go through the store you already use; your account ties it together when you switch phones.</p>
           </article>
           <article class="new-card reveal reveal-d2">
             <div class="new-card-icon" aria-hidden="true">
@@ -686,7 +795,7 @@
             </div>
             <span class="new-tag">Enhanced</span>
             <h3>Structured Daily Practice</h3>
-            <p>A refined daily flow with reminders and clear next steps, so you can build a lasting devotional habit without noise or clutter.</p>
+            <p>Reminders, streaks, and a clear home path mean you spend seconds getting to scripture &mdash; not hunting through menus. The App nudges you toward consistency without turning faith into a scoreboard.</p>
           </article>
           <article class="new-card reveal reveal-d4">
             <div class="new-card-icon" aria-hidden="true">
@@ -694,7 +803,7 @@
             </div>
             <span class="new-tag">Library</span>
             <h3>Deeper devotional library</h3>
-            <p>Structured series across scripture &mdash; from the Psalms and Paul&rsquo;s letters to the Parables of Jesus. One part of a much broader 2.0 experience.</p>
+            <p>Fifteen curated series thread through law and gospel, poetry, epistles, and the words of Christ. Starter access on the free tier; the full shelf opens with Blessed &mdash; see the grid below for every category name.</p>
           </article>
         </div>
       </div>
@@ -711,15 +820,49 @@
             <h2 class="section-title" id="about-heading">A quiet companion for your daily walk with God</h2>
             <div class="divider"></div>
             <br />
-            <p class="section-body">ChristBay is a private devotional app for Christians who want a disciplined, intentional daily practice rooted in scripture. Each morning, open a curated Bible verse, work through a guided reflection, and spend a few minutes in the prayer journal &mdash; all in a clean, ad-free environment.</p>
+            <p class="section-body">ChristBay is a private devotional app for Christians who want a disciplined, intentional daily practice rooted in scripture. Each morning you can open a curated verse, follow a guided reflection that spends Reflections clearly, jot in your prayer journal, or ask a pressing question through Ask Father ChristBay when you subscribe to Blessed &mdash; all in one calm, ad-free shell.</p>
             <br />
-            <p class="section-body">Grounded in Protestant conviction &mdash; the sufficiency of Scripture, grace through faith, and the call to daily sanctification &mdash; ChristBay is not a social platform. It is a personal tool for those who take their daily walk with God seriously.</p>
+            <p class="section-body">Grounded in Protestant conviction &mdash; the sufficiency of Scripture, grace through faith in Christ alone, and the call to daily sanctification &mdash; ChristBay is not a social network or a popularity contest. It is a personal tool for those who take their walk with God seriously, including pastors, parents, students, and anyone who wants Scripture first when they unlock their phone.</p>
           </div>
           <div class="reveal reveal-d2">
             <figure class="about-verse" aria-label="Scripture verse">
               <blockquote>&ldquo;Your word is a lamp to my feet and a light to my path.&rdquo;</blockquote>
               <figcaption><cite>Psalm 119:105 (ESV)</cite></figcaption>
             </figure>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         App preview (device mockup)
+    ============================================================ -->
+    <section class="app-showcase" id="app-preview" aria-labelledby="preview-heading">
+      <div class="container">
+        <div class="app-showcase-inner">
+          <figure class="app-showcase-device reveal">
+            <img
+              src="/assets/e92c86b7-f65b-4afa-86b3-941351bbbb13.png"
+              alt="ChristBay on iPhone — daily scripture, reflections, and journal in one calm screen"
+              width="900"
+              height="1800"
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
+          <div class="app-showcase-copy reveal reveal-d2">
+            <span class="section-label">In your hand</span>
+            <h2 class="section-title" id="preview-heading">The same quiet focus, pocket-sized</h2>
+            <div class="divider"></div>
+            <br />
+            <p class="app-showcase-lead">ChristBay is built for the in-between moments &mdash; before the house wakes up, on the commute, or when you need ten minutes to reset your heart. Open the App, see where you left off, and step straight into scripture, a guided reflection, or a line in your journal &mdash; no feeds, no noise.</p>
+            <p class="app-showcase-lead">The home experience keeps the essentials upfront: your Reflection balance, today&rsquo;s verse, paths into the devotional library, shortcuts to Ask Father ChristBay (with Blessed), and your prayer journal. Settings stay out of the way until you need them.</p>
+            <ul class="app-showcase-list">
+              <li><strong>Readable at a glance.</strong> Generous type, calm spacing, and contrast tuned for early mornings and bedside reading.</li>
+              <li><strong>One-handed flow.</strong> Large touch targets and predictable navigation so you can stay in prayer without fiddling with the UI.</li>
+              <li><strong>Offline-friendly habits.</strong> Journal and revisit saved passages; the App syncs subscription status and fresh content when you&rsquo;re back online.</li>
+              <li><strong>Your platform.</strong> Download on the App Store or Google Play &mdash; same ChristBay identity, store-native purchases and restore flows.</li>
+            </ul>
           </div>
         </div>
       </div>
@@ -812,53 +955,94 @@
           <h2 class="section-title" id="features-heading">Built for your daily walk with God</h2>
           <div class="divider centered"></div>
           <br />
-          <p class="section-body">Morning scripture, guided Reflections, Ask Father ChristBay, a private journal, faith journey tracking, and bookmarks &mdash; with a clear Reflection balance so you always know what each experience costs. A rich devotional library ties it together.</p>
+          <p class="section-body">Every pillar of ChristBay &mdash; scripture, Reflections, Ask Father ChristBay, journal, bookmarks, streaks, and the 15-category library &mdash; is designed to keep you in the Word without clutter. Below is a quick map; scroll on for a deeper walk through each area.</p>
         </div>
         <div class="features-grid">
           <article class="feature-card reveal">
             <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
             <h3>Morning Scripture</h3>
-            <p>Begin each day anchored in God&rsquo;s Word. A curated daily verse with brief context to ground your morning in scripture.</p>
+            <p>Start the day with a single, curated passage from licensed translations &mdash; not an endless scroll. Short context helps you place the verse in its book and theme, so even five minutes feels anchored. Return anytime; it&rsquo;s the steady &ldquo;north star&rdquo; before you choose a longer reflection or journal entry.</p>
           </article>
           <article class="feature-card reveal reveal-d2">
             <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
             <h3>Guided Reflections</h3>
-            <p>Structured devotional sessions that draw from your Reflection balance. Each path shows the cost before you begin, so you stay in control.</p>
+            <p>Each guided path combines scripture, prompts, and space to respond inwardly &mdash; more than a verse-of-the-day, less than a seminary course. Reflections are drawn from your balance only when you start an eligible session; the cost is shown up front. Complete a path and you can revisit it without paying again, so your library becomes a record of growth.</p>
           </article>
           <article class="feature-card reveal reveal-d3">
             <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
             <h3>Ask Father ChristBay</h3>
-            <p>An in-app spiritual Q&amp;A companion: ask questions in faith, receive scripture-grounded guidance and follow-up prompts. Uses Reflections per conversation &mdash; availability and limits are shown in the App.</p>
+            <p>Bring honest questions of faith into a guided, scripture-shaped conversation. Responses point you back to the text with follow-up prompts &mdash; a companion for study hall and sleepless nights, not a replacement for your pastor or local church. Included with Blessed; Reflection use and limits are clear before you send.</p>
           </article>
           <article class="feature-card reveal">
             <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></div>
             <h3>Prayer Journal</h3>
-            <p>A private space to record your prayers, praises, and requests &mdash; and to look back on God&rsquo;s faithfulness over time.</p>
+            <p>Write prayers, thanksgivings, and short notes tied to days or sessions. The journal is yours: searchable in spirit (by scrolling seasons), not mined for ads. Many users keep one running thread of requests and answered prayer &mdash; a private testimony you can export or keep only on device, per your settings.</p>
           </article>
           <article class="feature-card reveal reveal-d2">
             <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg></div>
             <h3>Scripture Bookmarks</h3>
-            <p>Save and organise passages for later. Quick return to verses that shaped a season of prayer or study.</p>
+            <p>Tag verses that convicted you in a reflection, a sermon prep, or family devotions. Bookmarks stay organised by your own rhythm &mdash; return before a meeting, a hospital visit, or a hard conversation. No social sharing layer; it&rsquo;s a toolbox for your walk, not a feed.</p>
           </article>
           <article class="feature-card reveal reveal-d3">
             <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
             <h3>Faith Journey</h3>
-            <p>Track your streak, completed reflections, and milestones &mdash; an honest record of a growing habit.</p>
+            <p>See streaks, completed reflections, and milestones without gamifying your soul. The goal is honesty: some seasons are rich, some are thin &mdash; ChristBay records both. Use it to notice patterns (mornings vs evenings, travel weeks) and to thank God for persistence, not performance.</p>
           </article>
           <article class="feature-card reveal">
             <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 18V6"/></svg></div>
             <h3>Reflections &amp; Top-Ups</h3>
-            <p>Free accounts start with <strong>12 Reflections</strong>. Blessed adds <strong>100 Reflections each billing month</strong> while subscribed. Need more anytime? Optional top-up packs add to your balance in one-time purchases.</p>
+            <p><strong>12 Reflections</strong> let every new user try depth experiences. <strong>Blessed</strong> adds <strong>100 Reflections each billing month</strong> while you&rsquo;re subscribed. When you need more headroom &mdash; a busy month of study or extra Ask Father conversations &mdash; optional top-up packs add balance in one-time purchases through the App Store or Google Play.</p>
           </article>
           <article class="feature-card reveal reveal-d2">
             <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></div>
             <h3>Devotional library</h3>
-            <p>Themed series across the Bible &mdash; Psalms, Paul&rsquo;s letters, Parables, and more. One of many ways to go deeper; full library access with Blessed, starter set on the free tier.</p>
+            <p>Fifteen themed series cover law and gospel, wisdom, prophecy, the early church, and the words of Jesus &mdash; always pointing back to Christ. Free accounts taste a starter set; <strong>Blessed</strong> unlocks the full catalogue so you can stay in one book of the Bible or roam across the canon as the Spirit leads.</p>
           </article>
           <article class="feature-card reveal reveal-d3">
             <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
             <h3>No Ads. Ever.</h3>
-            <p>ChristBay is completely ad-free and never sells your data. Your faith practice stays between you and God.</p>
+            <p>No banners, no &ldquo;sponsored&rdquo; devotionals, no auction for your attention. We don&rsquo;t sell journal content or build profiles for advertisers. Revenue comes from optional subscriptions and Reflection packs &mdash; aligned with a tool you choose to pay for, not a product you become.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         Feature narrative (long-form)
+    ============================================================ -->
+    <section class="feature-narrative" id="features-deep" aria-labelledby="features-deep-heading">
+      <div class="container">
+        <div class="section-header centered">
+          <span class="section-label">Go deeper</span>
+          <h2 class="section-title" id="features-deep-heading">How the pieces fit together</h2>
+          <div class="divider centered"></div>
+          <br />
+          <p class="section-body">A fuller picture of what you&rsquo;re building when ChristBay becomes part of your week.</p>
+        </div>
+        <div class="narrative-grid">
+          <article class="narrative-card reveal">
+            <h3>Daily rhythm, not daily noise</h3>
+            <p>Morning scripture orients you; the library lets you go wide across genres and books when you have more time. Ask Father ChristBay is there when a question won&rsquo;t let go &mdash; always secondary to the ordinary means: Word, prayer, and fellowship in the body of Christ.</p>
+          </article>
+          <article class="narrative-card reveal reveal-d1">
+            <h3>Reflections: clarity before you spend</h3>
+            <p>Reflections keep premium depth experiences sustainable to run and honest to use: you always see the cost before a session or conversation begins. Free users start with 12; Blessed subscribers receive a monthly grant while active; top-ups exist for seasons when you want more margin.</p>
+          </article>
+          <article class="narrative-card reveal reveal-d2">
+            <h3>Blessed: the full toolbox</h3>
+            <p>Subscribing to Blessed unlocks every feature marked premium in the App &mdash; the complete 15-category library, Ask Father ChristBay, and anything else we ship behind the lock for free accounts. Cancel anytime in your store settings; your journal and local notes remain yours.</p>
+          </article>
+          <article class="narrative-card reveal">
+            <h3>Privacy as a feature</h3>
+            <p>Your journal and prayer notes aren&rsquo;t input for ads. Technical details live in our <a href="/privacy/">Privacy Policy</a>; the short version is that ChristBay is built to keep your devotional life between you, the Lord, and the people you choose to share with in the real world.</p>
+          </article>
+          <article class="narrative-card reveal reveal-d1">
+            <h3>Protestant convictions, on purpose</h3>
+            <p>ChristBay assumes the sufficiency of Scripture and salvation by grace through faith in Christ alone. We don&rsquo;t replace your church, your elders, or the full counsel of God&rsquo;s Word &mdash; we equip the quiet minutes around them.</p>
+          </article>
+          <article class="narrative-card reveal reveal-d2">
+            <h3>Two platforms, one standard</h3>
+            <p>Whether you use an iPhone or Android, you get the same ChristBay: ad-free, account-based restore flows, and store-native billing. Feature flags and library access follow your Blessed status, not your device brand.</p>
           </article>
         </div>
       </div>

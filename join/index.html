@@ -55,23 +55,59 @@
 
     .site-header {
       position: sticky; top: 0; z-index: 100;
-      background: rgba(18, 29, 53, 0.96);
-      backdrop-filter: blur(14px);
-      border-bottom: 1px solid rgba(201, 168, 76, 0.14);
+      background: rgba(13, 21, 38, 0.92);
+      backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(201, 168, 76, 0.12);
     }
     .nav-inner {
       display: flex; align-items: center; justify-content: space-between;
       height: 64px; max-width: var(--max-width); margin: 0 auto; padding: 0 1.5rem;
     }
     .nav-brand { display: flex; align-items: center; gap: 0.625rem; }
-    .nav-brand img { width: 28px; height: 28px; border-radius: 50%; object-fit: cover; }
-    .nav-brand-name { font-size: 1.0625rem; font-weight: 600; color: var(--white); }
-    .nav-links { display: flex; align-items: center; gap: 1.5rem; }
+    .nav-brand img {
+      width: 32px; height: 32px; object-fit: cover;
+      border-radius: 50%; border: 2px solid #ffffff;
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15);
+    }
+    .nav-brand-name { font-size: 1.0625rem; font-weight: 700; color: var(--white); letter-spacing: -0.01em; }
+    .nav-links { display: flex; align-items: center; gap: 1.75rem; }
     .nav-links a {
-      font-size: 0.875rem; font-weight: 500; color: rgba(255, 255, 255, 0.7);
-      transition: color var(--transition);
+      font-size: 0.875rem; font-weight: 500;
+      color: rgba(255, 255, 255, 0.7); transition: color var(--transition);
     }
     .nav-links a:hover { color: var(--white); }
+    .nav-links a.nav-text[aria-current="page"] { color: var(--white); font-weight: 600; }
+    .nav-dropdown { position: relative; }
+    .nav-cta {
+      background: var(--gold); color: var(--navy-deep);
+      padding: 0.5rem 1.25rem; border-radius: 100px;
+      font-weight: 600; font-size: 0.8125rem;
+      border: none; cursor: pointer; font-family: inherit;
+      transition: background var(--transition), transform var(--transition);
+    }
+    .nav-cta:hover { background: var(--gold-light); transform: translateY(-1px); }
+    .nav-dropdown-menu {
+      position: absolute; top: 100%; right: 0; margin-top: 0.5rem;
+      background: var(--navy-light); border: 1px solid rgba(201, 168, 76, 0.2);
+      border-radius: 8px; min-width: 170px;
+      box-shadow: 0 8px 24px rgba(26, 39, 68, 0.25);
+      opacity: 0; visibility: hidden; transform: translateY(-8px);
+      transition: opacity var(--transition), visibility var(--transition), transform var(--transition);
+      z-index: 1000; overflow: hidden;
+    }
+    .nav-dropdown-menu.open { opacity: 1; visibility: visible; transform: translateY(0); }
+    .nav-dropdown-item {
+      display: flex; align-items: center; gap: 0.75rem;
+      padding: 0.75rem 1rem; color: var(--white);
+      font-size: 0.875rem; font-weight: 500;
+      transition: background var(--transition), color var(--transition);
+    }
+    .nav-dropdown-item:hover { background: rgba(201, 168, 76, 0.15); color: var(--gold-light); }
+    .nav-dropdown-item svg { flex-shrink: 0; }
+    @media (max-width: 600px) {
+      .nav-links { gap: 1rem; }
+      .nav-links a.nav-text { display: none; }
+    }
 
     .hero {
       background: linear-gradient(155deg, var(--navy-deep) 0%, var(--navy) 55%, var(--navy-light) 100%);
@@ -239,90 +275,71 @@
       line-height: 1.55;
     }
 
-    /* Footer — matches site-wide footer */
+    /* Footer (same as index.html) */
     .site-footer {
-      background: #0f1724;
+      background: #0b1220;
       color: rgba(255, 255, 255, 0.5);
-      padding: 4rem 1.5rem 2.5rem;
+      padding: 4.5rem 1.5rem 2.5rem;
     }
-    .footer-inner {
-      max-width: var(--max-width);
-      margin: 0 auto;
-    }
+    .footer-inner { max-width: var(--max-width); margin: 0 auto; }
     .footer-top {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      padding-bottom: 2.5rem;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
-      gap: 2rem;
-      flex-wrap: wrap;
+      display: flex; align-items: flex-start; justify-content: space-between;
+      padding-bottom: 2.5rem; border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+      gap: 2rem; flex-wrap: wrap;
     }
-    .footer-brand {
-      display: flex;
-      align-items: center;
-      gap: 0.625rem;
-    }
+    .footer-brand { display: flex; align-items: center; gap: 0.625rem; }
     .footer-brand img {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      object-fit: cover;
-      opacity: 0.8;
+      width: 36px; height: 36px; object-fit: cover; border-radius: 50%;
+      border: 2px solid #ffffff;
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);
+      opacity: 1;
     }
-    .footer-brand-name {
-      font-size: 1rem;
-      font-weight: 600;
-      color: var(--white);
-      letter-spacing: -0.01em;
-    }
-    .footer-nav {
-      display: flex;
-      gap: 0.5rem 2.25rem;
-      flex-wrap: wrap;
-      align-items: center;
-    }
-    .footer-nav a {
-      font-size: 0.875rem;
-      color: rgba(255, 255, 255, 0.45);
-      transition: color var(--transition);
-    }
-    .footer-nav a:hover {
-      color: var(--white);
-    }
+    .footer-brand-name { font-size: 1rem; font-weight: 700; color: var(--white); }
+    .footer-nav { display: flex; gap: 0.5rem 2.25rem; flex-wrap: wrap; align-items: center; }
+    .footer-nav a { font-size: 0.875rem; color: rgba(255, 255, 255, 0.45); transition: color var(--transition); }
+    .footer-nav a:hover { color: var(--white); }
     .footer-bottom {
-      padding-top: 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 0.75rem;
+      padding-top: 2rem; display: flex; align-items: center;
+      justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;
     }
-    .footer-copyright {
-      font-size: 0.8125rem;
-      color: rgba(255, 255, 255, 0.3);
-    }
-    .footer-tagline {
-      font-size: 0.8125rem;
-      color: rgba(255, 255, 255, 0.2);
-      font-style: italic;
-    }
+    .footer-copyright { font-size: 0.8125rem; color: rgba(255, 255, 255, 0.3); }
+    .footer-tagline { font-size: 0.8125rem; color: rgba(255, 255, 255, 0.2); font-style: italic; }
   </style>
 </head>
 <body>
   <a href="#main" class="skip-link">Skip to main content</a>
 
-<header class="site-header">
-    <div class="nav-inner">
+<header class="site-header" role="banner">
+    <nav class="nav-inner" aria-label="Primary navigation">
       <a href="/" class="nav-brand" aria-label="ChristBay — home">
-        <img src="/assets/brand.png" alt="" width="28" height="28" style="border-radius:50%;object-fit:cover;border:2px solid rgba(201,168,76,0.3)" />
+        <img src="/assets/brand.png" alt="" aria-hidden="true" />
         <span class="nav-brand-name">ChristBay</span>
       </a>
-      <nav class="nav-links" aria-label="Primary">
-        <a href="/">Home</a>
-        <a href="/support/">Support</a>
-      </nav>
-    </div>
+      <div class="nav-links">
+        <a href="/#features" class="nav-text">Features</a>
+        <a href="/#premium" class="nav-text">Premium</a>
+        <a href="/support/" class="nav-text">Support</a>
+        <div class="nav-dropdown">
+          <button type="button" class="nav-cta" id="download-toggle" aria-expanded="false" aria-haspopup="true" aria-label="Download options">
+            Download
+          </button>
+          <div class="nav-dropdown-menu" id="download-menu">
+            <a href="https://apps.apple.com/se/app/christbay-daglig-reflektion/id6759575925" class="nav-dropdown-item" aria-label="Download on Apple App Store">
+              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+                <path fill="currentColor" d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+              </svg>
+              App Store
+            </a>
+            <a href="https://play.google.com/store/apps/details?id=com.oakdev.christbay" class="nav-dropdown-item" aria-label="Download on Google Play Store">
+              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+                <path fill="currentColor" d="M3.609 1.814L13.792 12 3.609 22.186c-.386.387-.593.916-.593 1.465V1.349c0 .549.207 1.078.593 1.465zm10.908 10.911L21.268 24 3.609 1.814 14.517 12.722z"/>
+              </svg>
+              Google Play
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
   </header>
 
   <section class="hero" aria-hidden="false">
@@ -402,7 +419,7 @@
     <div class="footer-inner">
       <div class="footer-top">
         <div class="footer-brand">
-          <img src="/assets/brand.png" alt="ChristBay" style="border-radius:50%;object-fit:cover;border:2px solid rgba(201,168,76,0.2)" />
+          <img src="/assets/brand.png" alt="ChristBay" />
           <span class="footer-brand-name">ChristBay</span>
         </div>
         <nav class="footer-nav" aria-label="Footer links">
@@ -500,6 +517,38 @@
     xhr.send(JSON.stringify({ code: raw }));
   });
 }());
+</script>
+<script>
+(function () {
+  var downloadToggle = document.getElementById('download-toggle');
+  var downloadMenu = document.getElementById('download-menu');
+  if (downloadToggle && downloadMenu) {
+    downloadToggle.addEventListener('click', function (e) {
+      e.preventDefault();
+      var isOpen = downloadMenu.classList.contains('open');
+      downloadMenu.classList.toggle('open');
+      downloadToggle.setAttribute('aria-expanded', !isOpen);
+    });
+    document.addEventListener('click', function (e) {
+      if (!downloadToggle.contains(e.target) && !downloadMenu.contains(e.target)) {
+        downloadMenu.classList.remove('open');
+        downloadToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        downloadMenu.classList.remove('open');
+        downloadToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+    downloadMenu.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', function () {
+        downloadMenu.classList.remove('open');
+        downloadToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+})();
 </script>
 </body>
 </html>
