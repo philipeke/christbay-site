@@ -420,81 +420,86 @@
     </div>
   </footer>
 
-  <script src="/assets/js/christbay-referrals.js"></script>
   <script>
 (function () {
   'use strict';
-  var R = window.ChristBayReferrals;
-  if (!R) return;
 
-  var input = document.getElementById('code-input');
-  var form = document.getElementById('join-form');
-  var formMsg = document.getElementById('form-msg');
-  var panelForm = document.getElementById('panel-form');
+  var VALIDATE_URL = 'https://us-central1-christbay-app.cloudfunctions.net/publicReferralValidate';
+
+  var form         = document.getElementById('join-form');
+  var input        = document.getElementById('code-input');
+  var submitBtn    = document.getElementById('btn-submit');
+  var formMsg      = document.getElementById('form-msg');
+  var panelForm    = document.getElementById('panel-form');
   var panelSuccess = document.getElementById('panel-success');
-  var btnSubmit = document.getElementById('btn-submit');
-
-  function readySubmit() {
-    btnSubmit.disabled = false;
-    btnSubmit.textContent = 'Redeem & continue';
-  }
-
-  if (R.loadPublicManifest) {
-    R.loadPublicManifest().finally(readySubmit);
-  } else {
-    readySubmit();
-  }
+  var successText  = document.getElementById('success-text');
 
   function reasonText(reason) {
     switch (reason) {
-      case 'empty':
-        return 'Enter a referral code.';
-      case 'unknown':
-        return 'That code is not recognized. Check for typos, or ask your contact for a new code.';
-      case 'expired':
-        return 'This code has expired.';
-      case 'limit':
-        return 'This code has reached its redemption limit.';
-      case 'inactive':
-        return 'This code is no longer active.';
-      default:
-        return 'This code could not be used.';
+      case 'empty'    : return 'Enter a referral code.';
+      case 'not_found': return 'That code was not recognised. Check for typos, or ask your contact for a new code.';
+      case 'expired'  : return 'This code has expired.';
+      case 'exhausted': return 'This code has reached its usage limit.';
+      case 'inactive' : return 'This code is no longer active.';
+      default         : return 'This code could not be used.';
     }
   }
 
-  function showError(text) {
-    formMsg.innerHTML = '<div class="msg msg-error">' + text + '</div>';
-  }
-  function clearMsg() {
-    formMsg.innerHTML = '';
+  function setMsg(html, ok) {
+    formMsg.innerHTML = html ? '<div class="msg ' + (ok ? 'msg-ok' : 'msg-error') + '">' + html + '</div>' : '';
   }
 
-  /* Prefill ?code= */
+  function setLoading(on) {
+    submitBtn.disabled = on;
+    submitBtn.textContent = on ? 'Checking\u2026' : 'Redeem \u0026 continue';
+  }
+
+  // Enable button immediately (no manifest needed)
+  submitBtn.disabled = false;
+  submitBtn.textContent = 'Redeem \u0026 continue';
+
+  // Pre-fill from ?code= query param
   var params = new URLSearchParams(window.location.search);
   var pre = params.get('code');
   if (pre) input.value = pre;
 
-  input.addEventListener('input', function () {
-    clearMsg();
-  });
+  input.addEventListener('input', function () { setMsg(''); });
 
   form.addEventListener('submit', function (e) {
     e.preventDefault();
-    clearMsg();
-    var raw = input.value;
-    var result = R.redeemCode(raw);
-    if (!result.ok) {
-      showError(reasonText(result.reason));
-      return;
-    }
-    panelForm.classList.add('hidden');
-    panelSuccess.classList.add('visible');
-    var label = result.entry && result.entry.label ? ' (' + result.entry.label + ')' : '';
-    document.getElementById('success-text').textContent =
-      'Your referral code was accepted' + label + '. Download ChristBay below.';
-    panelSuccess.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    setMsg('');
+    var raw = input.value.trim().toUpperCase();
+    if (!raw) { setMsg('Enter a referral code.', false); input.focus(); return; }
+    setLoading(true);
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', VALIDATE_URL, true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.timeout = 15000;
+
+    xhr.onload = function () {
+      setLoading(false);
+      var data;
+      try { data = JSON.parse(xhr.responseText); } catch (_) {
+        setMsg('Unexpected response. Please try again.', false); return;
+      }
+      if (data.valid) {
+        var label = data.label ? ' (' + data.label + ')' : '';
+        successText.textContent = 'Your referral code was accepted' + label + '. Download ChristBay below.';
+        panelForm.classList.add('hidden');
+        panelSuccess.classList.add('visible');
+        panelSuccess.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else {
+        setMsg(reasonText(data.reason), false);
+      }
+    };
+
+    xhr.onerror   = function () { setLoading(false); setMsg('Could not reach the server. Please try again.', false); };
+    xhr.ontimeout = function () { setLoading(false); setMsg('Could not reach the server. Please try again.', false); };
+
+    xhr.send(JSON.stringify({ code: raw }));
   });
-})();
-  </script>
+}());
+</script>
 </body>
 </html>
