@@ -793,7 +793,11 @@ async function apiFetch(path, opts = {}) {
     headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json', ...(opts.headers || {}) },
     body:    opts.body ? JSON.stringify(opts.body) : undefined
   });
-  if (res.status === 403) { showGateMsg('Your account does not have admin access. Contact OakDev to be added.', false); signOut(auth); return null; }
+  if (res.status === 403) {
+    _pendingMsg = { text: 'Ditt konto saknar admin-åtkomst. Skapa dokument i Firestore christbay_admins/{din-email}.', ok: false, email: auth.currentUser?.email || '' };
+    signOut(auth);
+    return null;
+  }
   if (!res.ok) throw new Error('API error ' + res.status);
   return res.json();
 }
