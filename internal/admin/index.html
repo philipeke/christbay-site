@@ -137,6 +137,39 @@
     .btn-danger { background: var(--danger); color: var(--white); }
     .btn-danger:hover { filter: brightness(1.05); }
 
+    .btn-export-tag {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 2rem;
+      padding: 0.1rem 0.45rem;
+      margin-right: 0.35rem;
+      border-radius: 4px;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      background: rgba(26, 39, 68, 0.12);
+      color: var(--navy);
+    }
+    .btn-secondary .btn-export-tag { background: rgba(255, 255, 255, 0.2); color: var(--white); }
+    .pay-export-brand {
+      border-left: 3px solid var(--gold);
+      padding: 0.75rem 1rem;
+      margin-bottom: 1.25rem;
+      background: rgba(201, 168, 76, 0.08);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    }
+    .pay-export-brand .pay-export-eyebrow {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 0.25rem;
+    }
+    .pay-export-brand p { font-size: 0.875rem; color: var(--text-secondary); line-height: 1.55; margin: 0; }
+
     .msg {
       font-size: 0.85rem;
       padding: 0.65rem 0.85rem;
@@ -549,6 +582,7 @@
         <button type="button" class="nav-btn active" data-panel="dashboard">Dashboard</button>
         <button type="button" class="nav-btn" data-panel="codes">Referral codes</button>
         <button type="button" class="nav-btn" data-panel="activity">Activity</button>
+        <button type="button" class="nav-btn" data-panel="pay-export">Pay export</button>
         <button type="button" class="nav-btn" data-panel="settings">Settings &amp; backup</button>
       </nav>
 
@@ -582,6 +616,7 @@
               <button type="button" class="btn btn-primary btn-sm" id="qa-add">New code</button>
               <button type="button" class="btn btn-secondary btn-sm" id="qa-bulk">Bulk generate</button>
               <button type="button" class="btn btn-ghost btn-sm" id="qa-join">Copy site join URL</button>
+              <button type="button" class="btn btn-ghost btn-sm" id="qa-pay">Pay export</button>
             </div>
           </div>
         </section>
@@ -619,6 +654,32 @@
           <h1 class="page-title" id="act-title">Activity</h1>
           <p class="page-desc">Recent redemptions (newest first), stored locally in this browser.</p>
           <div class="card" id="activity-list"></div>
+        </section>
+
+        <section class="panel" id="panel-pay-export" aria-labelledby="pay-title">
+          <h1 class="page-title" id="pay-title">Pay export</h1>
+          <p class="page-desc">Machine-readable CSV for finance and reconciliation — same referral data as the live list, generated in your browser (inspired by Nuria’s payout export flow).</p>
+
+          <div class="pay-export-brand">
+            <p class="pay-export-eyebrow">Close package</p>
+            <p>Download a single UTF-8 CSV with comment headers, then column headers, then one row per code. Use the period label for filenames and internal filing.</p>
+          </div>
+
+          <div class="card settings-block">
+            <h3>Export options</h3>
+            <p class="hint">Excludes inactive codes unless you enable it below. Data is fetched from the same API as Referral codes.</p>
+            <div id="pay-msg"></div>
+            <div class="field">
+              <label for="pay-period">Period label (used in filename)</label>
+              <input type="text" id="pay-period" placeholder="2026-04" autocomplete="off" />
+            </div>
+            <div class="field">
+              <label><input type="checkbox" id="pay-include-inactive" /> Include inactive codes</label>
+            </div>
+            <div class="toolbar">
+              <button type="button" class="btn btn-secondary btn-sm" id="btn-pay-export-csv"><span class="btn-export-tag">CSV</span> Download pay export</button>
+            </div>
+          </div>
         </section>
 
         <section class="panel" id="panel-settings" aria-labelledby="set-title">
@@ -833,6 +894,52 @@ function escapeHtml(s) {
   return String(s || '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
 }
 function joinUrl(code) { return new URL('/join/?code=' + encodeURIComponent(code), window.location.origin).toString(); }
+
+function csvCell(v) {
+  const s = v == null ? '' : String(v);
+  if (/[",\n\r]/.test(s)) return '"' + s.replace(/"/g, '""') + '"';
+  return s;
+}
+function sanitizePayPeriodFilename(s) {
+  const t = String(s || '').trim();
+  return t ? t.replace(/[^0-9A-Za-z_-]/g, '-') : new Date().toISOString().slice(0, 7);
+}
+function formatCodeExpiresIso(c) {
+  if (!c || c.expiresAt == null) return '';
+  try { return new Date(c.expiresAt).toISOString(); } catch (_) { return String(c.expiresAt); }
+}
+function formatCodeCreatedIso(c) {
+  if (!c || c.createdAt == null) return '';
+  try { return new Date(c.createdAt).toISOString(); } catch (_) { return String(c.createdAt); }
+}
+function buildPayExportCsv(codes, periodLabel) {
+  const gen = new Date().toISOString();
+  const pl = periodLabel || gen.slice(0, 7);
+  const lines = [];
+  lines.push('# ChristBay Referral Pay Export');
+  lines.push('#');
+  lines.push('# Generated: ' + gen);
+  lines.push('# Period label: ' + pl);
+  lines.push('# Publisher: OakDev & AI AB — ChristBay (internal)');
+  lines.push('');
+  lines.push(['Code', 'Label', 'Uses', 'Max uses', 'Unlimited', 'Active', 'Expires (UTC)', 'Internal note', 'Created (UTC)'].map(csvCell).join(','));
+  (codes || []).forEach(function(c) {
+    const maxU = c.maxUses || 0;
+    const unlimited = maxU === 0;
+    lines.push([
+      csvCell(c.code),
+      csvCell(c.label || ''),
+      csvCell(c.useCount ?? 0),
+      csvCell(unlimited ? '' : maxU),
+      csvCell(unlimited ? 'yes' : 'no'),
+      csvCell(c.active ? 'yes' : 'no'),
+      csvCell(formatCodeExpiresIso(c)),
+      csvCell(c.note || ''),
+      csvCell(formatCodeCreatedIso(c))
+    ].join(','));
+  });
+  return lines.join('\r\n');
+}
 function friendlyAuthError(err) {
   const code = err.code || '';
   if (code === 'auth/user-not-found' || code === 'auth/wrong-password' || code === 'auth/invalid-credential') return 'Incorrect email or password.';
@@ -980,6 +1087,40 @@ document.querySelectorAll('.nav-btn[data-panel]').forEach(function(btn) {
     const panel = document.getElementById('panel-' + this.dataset.panel);
     if (panel) panel.classList.add('active');
   });
+});
+
+document.getElementById('qa-pay').addEventListener('click', function() {
+  const b = document.querySelector('.nav-btn[data-panel="pay-export"]');
+  if (b) b.click();
+});
+
+(function initPayExportDefaults() {
+  const el = document.getElementById('pay-period');
+  if (el && !el.value) el.value = new Date().toISOString().slice(0, 7);
+})();
+
+document.getElementById('btn-pay-export-csv').addEventListener('click', async function() {
+  const payMsg = document.getElementById('pay-msg');
+  payMsg.innerHTML = '';
+  const btn = this;
+  btn.disabled = true;
+  try {
+    const data = await apiFetch('/list?pageSize=500');
+    if (!data) return;
+    let codes = data.codes || [];
+    if (!document.getElementById('pay-include-inactive').checked) {
+      codes = codes.filter(function(c) { return c.active; });
+    }
+    const periodInput = document.getElementById('pay-period').value.trim();
+    const periodLabel = periodInput || new Date().toISOString().slice(0, 7);
+    const csv = buildPayExportCsv(codes, periodLabel);
+    const fn = 'christbay-pay-export-' + sanitizePayPeriodFilename(periodLabel) + '.csv';
+    downloadBlob(new Blob(['\ufeff' + csv], { type: 'text/csv;charset=utf-8' }), fn);
+    payMsg.innerHTML = '<div class="msg msg-ok">Exported ' + codes.length + ' row(s) to <span class="mono">' + escapeHtml(fn) + '</span>.</div>';
+  } catch (err) {
+    payMsg.innerHTML = '<div class="msg msg-error">' + escapeHtml(err.message) + '</div>';
+  }
+  btn.disabled = false;
 });
 
 // ── Codes & activity ──────────────────────────────────────────────────────────
