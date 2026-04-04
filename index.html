@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="ChristBay 2.0 — A private, ad-free devotional app with 15 curated categories, guided reflections, and prayer journal. Built for sincere Protestant Christian faith." />
+  <meta name="description" content="ChristBay 2.0 — Private, ad-free devotionals with 15 categories, Reflections-based sessions, Ask Father ChristBay, and Blessed subscription (100 Reflections/month)." />
   <meta property="og:title" content="ChristBay 2.0 — Walk in the Word. Grow in grace." />
-  <meta property="og:description" content="15 curated categories, guided reflections, prayer journal, and faith journey tracking — all in a private, ad-free devotional companion." />
+  <meta property="og:description" content="12 free Reflections, Blessed subscription with 100 Reflections/month, 15 categories, prayer journal, and Ask Father ChristBay — ad-free." />
   <meta property="og:type" content="website" />
   <title>ChristBay 2.0 — Walk in the Word. Grow in grace.</title>
   <link rel="icon" type="image/png" href="/assets/brand.png" />
@@ -149,7 +149,8 @@
     .hero-content { position: relative; z-index: 1; max-width: 720px; margin: 0 auto; }
     .hero-logo-wrap {
       position: relative; display: flex; align-items: center;
-      justify-content: center; margin: 0 auto 2.5rem; width: 140px; height: 140px;
+      justify-content: center; margin: 0 auto 2.5rem;
+      width: auto; max-width: min(360px, 92vw); min-height: 72px;
     }
     .logo-glow {
       position: absolute; inset: -40px; border-radius: 50%;
@@ -164,12 +165,18 @@
       0%, 100% { opacity: 0.5; transform: scale(0.85); }
       50%      { opacity: 1;   transform: scale(1.15); }
     }
+    /* Hero uses the white wordmark asset (logo.png), not the circular brand photo */
     .hero-logo {
       position: relative; z-index: 1;
-      width: 120px; height: 120px; object-fit: cover;
-      border-radius: 50%;
-      border: 3px solid rgba(201, 168, 76, 0.4);
-      box-shadow: 0 0 40px rgba(201, 168, 76, 0.2), 0 8px 32px rgba(0, 0, 0, 0.3);
+      display: block;
+      width: auto; height: auto;
+      max-width: min(320px, 90vw);
+      max-height: 128px;
+      object-fit: contain;
+      border-radius: 0;
+      border: none;
+      box-shadow: none;
+      filter: drop-shadow(0 4px 24px rgba(0, 0, 0, 0.25));
       animation: logoFloat 4s ease-in-out infinite;
     }
     @keyframes logoFloat {
@@ -225,10 +232,10 @@
     }
     .btn-outline:hover { border-color: rgba(255, 255, 255, 0.5); background: rgba(255, 255, 255, 0.07); color: var(--white); }
     .hero-stats {
-      display: flex; gap: 3rem; justify-content: center; margin-top: 4rem;
+      display: flex; gap: 2rem 2.5rem; flex-wrap: wrap; justify-content: center; margin-top: 4rem;
       padding-top: 2.5rem; border-top: 1px solid rgba(255, 255, 255, 0.08);
     }
-    .hero-stat { text-align: center; }
+    .hero-stat { text-align: center; flex: 0 1 auto; min-width: 7.5rem; max-width: 11rem; }
     .hero-stat-value { font-size: 1.75rem; font-weight: 800; color: var(--gold); letter-spacing: -0.03em; }
     .hero-stat-label { font-size: 0.75rem; color: rgba(255, 255, 255, 0.5); font-weight: 500; margin-top: 0.125rem; }
     @media (max-width: 520px) {
@@ -599,14 +606,14 @@
       <div class="hero-content">
         <div class="hero-logo-wrap">
           <div class="logo-glow" aria-hidden="true"></div>
-          <img src="/assets/brand.png" alt="ChristBay" class="hero-logo" />
+          <img src="/assets/logo.png" alt="ChristBay" class="hero-logo" />
         </div>
         <div class="hero-badge">
           <span class="hero-badge-dot" aria-hidden="true"></span>
           Version 2.0 — Now Available
         </div>
         <h1>Walk in the <span class="gold">Word.</span><br />Grow in grace.</h1>
-        <p class="hero-tagline">15 curated devotional categories, guided reflections, a private prayer journal, and faith journey tracking &mdash; all in a clean, ad-free companion built for Protestant Christian faith.</p>
+        <p class="hero-tagline">Fifteen curated devotional categories, guided reflections that use your Reflection balance, Ask Father ChristBay, a private prayer journal, and faith journey tracking &mdash; all in a clean, ad-free companion built for Protestant Christian faith.</p>
         <div class="hero-ctas">
           <a href="https://apps.apple.com/se/app/christbay-daglig-reflektion/id6759575925" class="btn-store" aria-label="Download ChristBay on the App Store">
             <svg viewBox="0 0 24 24" width="22" height="27" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
@@ -631,8 +638,12 @@
             <p class="hero-stat-label">Devotional Categories</p>
           </div>
           <div class="hero-stat">
-            <p class="hero-stat-value">450+</p>
-            <p class="hero-stat-label">Reflections Available</p>
+            <p class="hero-stat-value">12</p>
+            <p class="hero-stat-label">Free Reflections</p>
+          </div>
+          <div class="hero-stat">
+            <p class="hero-stat-value">100</p>
+            <p class="hero-stat-label">Reflections / Month (Blessed)</p>
           </div>
           <div class="hero-stat">
             <p class="hero-stat-value">0</p>
@@ -668,8 +679,8 @@
               <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
             </div>
             <span class="new-tag">Enhanced</span>
-            <h3>Smarter Daily Practice</h3>
-            <p>A refined daily experience that learns your rhythm and delivers curated content at the right time, helping you build a lasting devotional habit.</p>
+            <h3>Structured Daily Practice</h3>
+            <p>A refined daily flow with reminders and clear next steps, so you can build a lasting devotional habit without noise or clutter.</p>
           </article>
           <article class="new-card reveal reveal-d4">
             <div class="new-card-icon" aria-hidden="true">
@@ -718,7 +729,7 @@
           <h2 class="section-title" id="cat-heading">Deep, structured devotional series</h2>
           <div class="divider centered"></div>
           <br />
-          <p class="section-body">Every category is a curated journey through scripture &mdash; crafted for depth, clarity, and lasting impact on your faith.</p>
+          <p class="section-body">Every category is a curated journey through scripture &mdash; crafted for depth, clarity, and lasting impact on your faith. Free accounts explore a starter set; <strong>Blessed</strong> unlocks the full library.</p>
         </div>
         <div class="cat-grid">
           <div class="cat-item reveal">
@@ -795,7 +806,7 @@
           <h2 class="section-title" id="features-heading">Built for your daily walk with God</h2>
           <div class="divider centered"></div>
           <br />
-          <p class="section-body">Everything you need for a consistent, meaningful devotional life &mdash; nothing you don&rsquo;t.</p>
+          <p class="section-body">Daily scripture, guided sessions, a private journal, spiritual Q&amp;A, and fifteen categories &mdash; with a clear Reflection balance so you always know what each experience costs.</p>
         </div>
         <div class="features-grid">
           <article class="feature-card reveal">
@@ -806,22 +817,37 @@
           <article class="feature-card reveal reveal-d2">
             <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
             <h3>Guided Reflections</h3>
-            <p>Thoughtful, scripture-based prompts that help you meditate on the Word and apply it honestly to your daily life.</p>
+            <p>Structured devotional sessions that draw from your Reflection balance. Each path shows the cost before you begin, so you stay in control.</p>
           </article>
           <article class="feature-card reveal reveal-d3">
+            <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+            <h3>Ask Father ChristBay</h3>
+            <p>An in-app spiritual Q&amp;A companion: ask questions in faith, receive scripture-grounded guidance and follow-up prompts. Uses Reflections per conversation &mdash; availability and limits are shown in the App.</p>
+          </article>
+          <article class="feature-card reveal">
             <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></div>
             <h3>Prayer Journal</h3>
             <p>A private space to record your prayers, praises, and requests &mdash; and to look back on God&rsquo;s faithfulness over time.</p>
           </article>
-          <article class="feature-card reveal">
-            <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></div>
-            <h3>15 Reflections Categories</h3>
-            <p>Themed devotional series for deeper study &mdash; from the Psalms and Paul&rsquo;s letters to the Parables of Jesus and beyond.</p>
-          </article>
           <article class="feature-card reveal reveal-d2">
+            <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></div>
+            <h3>15 Devotional Categories</h3>
+            <p>Themed series across the Bible &mdash; from the Psalms and Paul&rsquo;s letters to the Parables of Jesus. Full library access is included with Blessed; the free tier includes a starter set.</p>
+          </article>
+          <article class="feature-card reveal reveal-d3">
+            <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg></div>
+            <h3>Scripture Bookmarks</h3>
+            <p>Save and organise passages for later. Quick return to verses that shaped a season of prayer or study.</p>
+          </article>
+          <article class="feature-card reveal">
             <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
             <h3>Faith Journey</h3>
-            <p>Track your daily streak, completed reflections, and growth milestones. A simple, honest record of a growing habit.</p>
+            <p>Track your streak, completed reflections, and milestones &mdash; an honest record of a growing habit.</p>
+          </article>
+          <article class="feature-card reveal reveal-d2">
+            <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 18V6"/></svg></div>
+            <h3>Reflections &amp; Top-Ups</h3>
+            <p>Free accounts start with <strong>12 Reflections</strong>. Blessed adds <strong>100 Reflections each billing month</strong> while subscribed. Need more anytime? Optional top-up packs add to your balance in one-time purchases.</p>
           </article>
           <article class="feature-card reveal reveal-d3">
             <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
@@ -915,32 +941,32 @@
         <div class="premium-inner">
           <div class="section-header reveal">
             <span class="section-label">Premium</span>
-            <h2 class="section-title light" id="premium-heading">Blessed &mdash; Go deeper</h2>
+            <h2 class="section-title light" id="premium-heading">Blessed &mdash; subscription</h2>
             <div class="divider"></div>
             <br />
-            <p class="section-body" style="color: rgba(255,255,255,0.6);">ChristBay comes with 150 reflections included from the start. Upgrade to Blessed to unlock all 15 categories, expanded features, and an additional 300 reflections. Top up any time &mdash; no subscription required.</p>
+            <p class="section-body" style="color: rgba(255,255,255,0.6);">Start free with <strong>12 Reflections</strong> to explore ChristBay. <strong>Blessed</strong> is a subscription: every billing month you receive <strong>100 Reflections</strong> while active, plus full access to every premium-only experience &mdash; all 15 categories, Ask Father ChristBay, and every feature that is marked locked in the App for free users. Cancel anytime in the App Store or Google Play. Optional top-up packs add Reflections in one-time purchases when you need more.</p>
           </div>
           <div class="premium-tiers reveal">
             <div class="tier-card">
-              <h3>ChristBay</h3>
-              <p>Everything you need to begin a sincere daily devotional practice, included with your purchase.</p>
+              <h3>Free</h3>
+              <p>Download ChristBay and begin your walk with a sincere, ad-free core experience.</p>
               <ul class="tier-features">
-                <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> 150 reflections included</li>
-                <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Daily scripture &amp; reflection</li>
-                <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Prayer journal</li>
-                <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Faith journey tracking</li>
+                <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> <strong>12 Reflections</strong> to get started</li>
+                <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Daily scripture &amp; guided sessions (per Reflection cost)</li>
+                <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Prayer journal &amp; faith journey</li>
+                <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Starter category access (full library requires Blessed)</li>
                 <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Completely ad-free</li>
               </ul>
             </div>
             <div class="tier-card featured">
               <div class="tier-badge">Blessed</div>
               <h3>Blessed</h3>
-              <p>An in-app upgrade for those called to go further in their daily devotional practice.</p>
+              <p>Auto-renewing subscription for everyone who wants the full ChristBay experience.</p>
               <ul class="tier-features">
-                <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Everything in ChristBay</li>
-                <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> 300 additional reflections</li>
-                <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Unlocks all 15 categories</li>
-                <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Expanded features</li>
+                <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> <strong>100 Reflections every billing month</strong> while subscribed</li>
+                <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Unlocks <strong>all 15 categories</strong> &amp; every feature shown as locked in the App</li>
+                <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> <strong>Ask Father ChristBay</strong> &amp; other premium-only tools</li>
+                <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Expanded devotionals &amp; series as released</li>
                 <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Priority support</li>
               </ul>
             </div>
@@ -948,7 +974,7 @@
           <div class="packs-block reveal">
             <div class="packs-block-header">
               <p class="packs-title">Top-up Reflections</p>
-              <p class="packs-subtitle">Top up your reflections whenever you need more. One-time purchase &mdash; no subscription, no auto-renewal.</p>
+              <p class="packs-subtitle">Optional one-time packs when you want more Reflections beyond your monthly Blessed allowance or free balance. No subscription tied to packs &mdash; billing is handled by Apple or Google at purchase.</p>
             </div>
             <div class="packs-grid">
               <div class="pack-card">
@@ -985,11 +1011,11 @@
         <div class="faq-list" role="list">
           <div class="faq-item reveal" role="listitem">
             <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-1" id="faq-btn-1">
-              Is ChristBay a subscription?
+              Is ChristBay free? What is Blessed?
               <svg class="faq-chevron" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
             </button>
             <div class="faq-answer" id="faq-answer-1" role="region" aria-labelledby="faq-btn-1">
-              <div class="faq-answer-inner">ChristBay is a one-time purchase that includes 150 reflections from the start. Blessed is a separate in-app upgrade that unlocks all 15 categories, expanded features, and adds 300 more reflections. You can also top up your reflections at any time in bundles of 100, 200, or 400 &mdash; all one-time purchases with no subscription and no auto-renewal.</div>
+              <div class="faq-answer-inner">ChristBay is <strong>free to download</strong>. Every account receives <strong>12 Reflections</strong> to explore guided sessions and other experiences that use Reflections. <strong>Blessed</strong> is an <strong>auto-renewing subscription</strong>: while you are subscribed, you receive <strong>100 Reflections per billing month</strong> and full access to every feature that is locked for free users &mdash; including all 15 devotional categories and Ask Father ChristBay. Manage or cancel Blessed anytime in the App Store or Google Play subscriptions settings. Optional Reflection top-up packs are separate one-time purchases.</div>
             </div>
           </div>
           <div class="faq-item reveal reveal-d1" role="listitem">
@@ -998,16 +1024,25 @@
               <svg class="faq-chevron" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
             </button>
             <div class="faq-answer" id="faq-answer-2" role="region" aria-labelledby="faq-btn-2">
-              <div class="faq-answer-inner">ChristBay 2.0 includes 15 curated devotional categories: Daily Devotion, The Psalms, Paul&rsquo;s Letters, The Gospels, Proverbs &amp; Wisdom, Sermon on the Mount, Genesis &amp; Creation, The Prophets, Acts &amp; Early Church, Parables of Jesus, Revelation &amp; Hope, Prayer &amp; Worship, Faith &amp; Grace, Love &amp; Compassion, and Courage &amp; Strength. The base app gives you access to select categories, while Blessed unlocks all 15.</div>
+              <div class="faq-answer-inner">ChristBay 2.0 includes 15 curated devotional categories: Daily Devotion, The Psalms, Paul&rsquo;s Letters, The Gospels, Proverbs &amp; Wisdom, Sermon on the Mount, Genesis &amp; Creation, The Prophets, Acts &amp; Early Church, Parables of Jesus, Revelation &amp; Hope, Prayer &amp; Worship, Faith &amp; Grace, Love &amp; Compassion, and Courage &amp; Strength. Free accounts can access a starter set; <strong>Blessed unlocks the full library</strong> for every category.</div>
             </div>
           </div>
           <div class="faq-item reveal reveal-d2" role="listitem">
             <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-3" id="faq-btn-3">
-              How do reflections work?
+              How do Reflections work?
               <svg class="faq-chevron" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
             </button>
             <div class="faq-answer" id="faq-answer-3" role="region" aria-labelledby="faq-btn-3">
-              <div class="faq-answer-inner">Reflections are the currency of depth in ChristBay. Your purchase includes 150 reflections to get you started. Upgrading to Blessed adds a further 300 reflections and unlocks all 15 categories. When you need more, you can purchase top-up bundles of 100, 200, or 400 reflections &mdash; each a one-time purchase with no recurring charges.</div>
+              <div class="faq-answer-inner">Reflections are the in-app balance for depth experiences: guided reflection sessions, Ask Father ChristBay, and other premium flows may each cost a stated number of Reflections before you begin. Daily scripture reading, journaling, and many organising features do not use Reflections in the same way &mdash; check the App for the exact cost of each action. <strong>Free accounts start with 12 Reflections.</strong> <strong>Blessed</strong> adds <strong>100 Reflections each subscription month</strong> while you remain subscribed. You can also buy optional top-up packs (e.g. 100, 200, or 400 Reflections) as one-time purchases when you need more.</div>
+            </div>
+          </div>
+          <div class="faq-item reveal" role="listitem">
+            <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-3b" id="faq-btn-3b">
+              What is Ask Father ChristBay?
+              <svg class="faq-chevron" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-answer" id="faq-answer-3b" role="region" aria-labelledby="faq-btn-3b">
+              <div class="faq-answer-inner"><strong>Ask Father ChristBay</strong> is an in-app spiritual Q&amp;A experience: you can bring questions of faith and receive scripture-grounded responses and follow-up prompts. It uses Reflections per conversation according to limits shown inside the App, and is part of the premium feature set unlocked with <strong>Blessed</strong>. It is a companion for reflection, not pastoral counselling or emergency care &mdash; seek your local church and qualified professionals for those needs.</div>
             </div>
           </div>
           <div class="faq-item reveal" role="listitem">

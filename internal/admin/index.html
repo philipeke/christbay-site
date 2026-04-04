@@ -763,6 +763,17 @@
             <p>Use a period label that matches your books (e.g. <span class="mono">2026-04</span>). Refresh the snapshot before month-end close so totals match what you file.</p>
           </div>
 
+          <div class="card settings-block panel-section">
+            <h3>Praktiskt att veta</h3>
+            <ul class="checklist" style="list-style:disc;padding-left:1.2rem;margin:0">
+              <li><strong>Avstämning:</strong> Kolumnen <span class="mono">Uses</span> ska stämmas mot er källa (t.ex. app analytics, backend eller butiksrapport). Exporten är en ögonblicksbild — inte revisionssäker historik om ni inte arkiverar filen per tillfälle.</li>
+              <li><strong>Period-etiketten</strong> styr bara filnamn och metadata i filen. Den ändrar inget i API eller i användarnas appar.</li>
+              <li><strong>Återstående</strong> (Remaining) beräknas som <em>max − använda</em> när koden har tak; annars tomt / obegränsat.</li>
+              <li><strong>Join URL</strong> är den publika länken till <span class="mono">/join/?code=…</span> — användbar i intern dokumentation och partnermail (dela aldrig hemliga listor publikt).</li>
+              <li><strong>Arkiv:</strong> Spara CSV/JSON med datum i mappstruktur (t.ex. <span class="mono">2026/Q2/referral-pay/</span>) och begränsa åtkomst internt.</li>
+            </ul>
+          </div>
+
           <div class="panel-section">
             <h2 class="panel-section-title">Before you export</h2>
             <ol class="checklist">
@@ -788,6 +799,10 @@
               <div class="pay-preview-card">
                 <div class="lbl">Codes in API</div>
                 <div class="val" id="pay-preview-total">—</div>
+              </div>
+              <div class="pay-preview-card">
+                <div class="lbl">Capped / Unlimited</div>
+                <div class="val" id="pay-preview-caps" style="font-size:1.15rem">—</div>
               </div>
             </div>
             <p class="pay-preview-meta" id="pay-preview-fetched">Not loaded yet.</p>
@@ -874,6 +889,7 @@
 
           <div class="card settings-block panel-section">
             <h3>Column reference</h3>
+            <p class="hint">CSV och JSON innehåller samma logiska fält. JSON har dessutom <span class="mono">exportSchemaVersion</span>, <span class="mono">sourceOrigin</span> och beräknade fält per kod.</p>
             <div class="table-wrap">
               <table class="column-ref">
                 <thead>
@@ -881,8 +897,12 @@
                 </thead>
                 <tbody>
                   <tr><td class="mono">Code</td><td>Referral code (normalized).</td></tr>
-                  <tr><td class="mono">Uses</td><td>Redemption count from the server.</td></tr>
-                  <tr><td class="mono">Max uses / Unlimited</td><td>Cap if any; “unlimited” when no cap.</td></tr>
+                  <tr><td class="mono">Label</td><td>Human-readable campaign or partner name.</td></tr>
+                  <tr><td class="mono">Uses</td><td>Redemption count from the server at export time.</td></tr>
+                  <tr><td class="mono">Max uses / Unlimited</td><td>Cap if any; “unlimited” when no cap (0 = unlimited in admin).</td></tr>
+                  <tr><td class="mono">Remaining uses</td><td>Computed: max − uses when capped; empty when unlimited.</td></tr>
+                  <tr><td class="mono">Join URL</td><td>Full HTTPS URL to <span class="mono">/join/?code=…</span> on this site.</td></tr>
+                  <tr><td class="mono">Active</td><td>Whether the code accepts new redemptions (yes/no).</td></tr>
                   <tr><td class="mono">Expires</td><td>UTC timestamp if set.</td></tr>
                   <tr><td class="mono">Internal note</td><td>Admin-only note from the API.</td></tr>
                   <tr><td class="mono">Created</td><td>Code creation time if provided.</td></tr>
@@ -1124,19 +1144,30 @@ function formatCodeCreatedIso(c) {
   if (!c || c.createdAt == null) return '';
   try { return new Date(c.createdAt).toISOString(); } catch (_) { return String(c.createdAt); }
 }
+function formatRemainingUsesCell(c) {
+  const maxU = c.maxUses || 0;
+  if (maxU === 0) return '';
+  return String(Math.max(0, maxU - (c.useCount || 0)));
+}
 function buildPayExportCsv(codes, periodLabel, delim) {
   delim = delim || ',';
   const joinCells = function(cells) { return cells.map(function(x) { return csvCell(x, delim); }).join(delim); };
   const gen = new Date().toISOString();
   const pl = periodLabel || gen.slice(0, 7);
+  const origin = typeof window !== 'undefined' ? window.location.origin : '';
   const lines = [];
   lines.push('# ChristBay Referral Pay Export');
   lines.push('#');
+  lines.push('# Export schema: v2 (Remaining uses + Join URL)');
   lines.push('# Generated: ' + gen);
   lines.push('# Period label: ' + pl);
+  lines.push('# Site origin: ' + origin);
   lines.push('# Publisher: OakDev & AI AB — ChristBay (internal)');
   lines.push('');
-  lines.push(joinCells(['Code', 'Label', 'Uses', 'Max uses', 'Unlimited', 'Active', 'Expires (UTC)', 'Internal note', 'Created (UTC)']));
+  lines.push(joinCells([
+    'Code', 'Label', 'Uses', 'Max uses', 'Unlimited', 'Remaining uses', 'Active',
+    'Expires (UTC)', 'Internal note', 'Created (UTC)', 'Join URL'
+  ]));
   (codes || []).forEach(function(c) {
     const maxU = c.maxUses || 0;
     const unlimited = maxU === 0;
@@ -1146,10 +1177,12 @@ function buildPayExportCsv(codes, periodLabel, delim) {
       c.useCount ?? 0,
       unlimited ? '' : maxU,
       unlimited ? 'yes' : 'no',
+      formatRemainingUsesCell(c),
       c.active ? 'yes' : 'no',
       formatCodeExpiresIso(c),
       c.note || '',
-      formatCodeCreatedIso(c)
+      formatCodeCreatedIso(c),
+      joinUrl(c.code)
     ]));
   });
   return lines.join('\r\n');
@@ -1157,11 +1190,13 @@ function buildPayExportCsv(codes, periodLabel, delim) {
 
 function buildPayExportJson(codes, periodLabel) {
   const pl = periodLabel || new Date().toISOString().slice(0, 7);
+  const origin = typeof window !== 'undefined' ? window.location.origin : '';
   return JSON.stringify({
-    version: 1,
+    exportSchemaVersion: 2,
     kind: 'christbay_pay_export',
     periodLabel: pl,
     generatedAt: new Date().toISOString(),
+    sourceOrigin: origin,
     publisher: 'OakDev & AI AB — ChristBay (internal)',
     rowCount: (codes || []).length,
     codes: (codes || []).map(function(c) {
@@ -1172,10 +1207,12 @@ function buildPayExportJson(codes, periodLabel) {
         useCount: c.useCount ?? 0,
         maxUses: maxU,
         unlimited: maxU === 0,
+        remainingUses: maxU === 0 ? null : Math.max(0, maxU - (c.useCount || 0)),
         active: !!c.active,
         expiresAt: formatCodeExpiresIso(c) || null,
         note: c.note || '',
-        createdAt: formatCodeCreatedIso(c) || null
+        createdAt: formatCodeCreatedIso(c) || null,
+        joinUrl: joinUrl(c.code)
       };
     })
   }, null, 2);
@@ -1205,9 +1242,17 @@ function updatePayPreviewFromSnapshot() {
   const codes = _payExportSnapshot.codes || [];
   const filtered = applyPayFiltersSort(codes);
   const uses = filtered.reduce(function(s, c) { return s + (c.useCount || 0); }, 0);
+  let capped = 0;
+  let unlim = 0;
+  filtered.forEach(function(c) {
+    if ((c.maxUses || 0) > 0) capped++;
+    else unlim++;
+  });
   document.getElementById('pay-preview-rows').textContent = String(filtered.length);
   document.getElementById('pay-preview-uses').textContent = String(uses);
   document.getElementById('pay-preview-total').textContent = String(codes.length);
+  const capEl = document.getElementById('pay-preview-caps');
+  if (capEl) capEl.textContent = capped + ' / ' + unlim;
   const t = _payExportSnapshot.fetchedAt;
   document.getElementById('pay-preview-fetched').textContent = t
     ? 'Last snapshot: ' + t.toLocaleString() + ' — ' + codes.length + ' code(s) from API. Preview uses filters below.'
@@ -1672,14 +1717,14 @@ async function downloadSamplePayPdf() {
   }
 
   page.drawText('Pay export — sample report', { x: left, y: y, size: 14, font: fontBold, color: navy });
-  y -= 20;
-  page.drawText('Period: 2026-Q2 · Example data only · Layout & branding preview', { x: left, y: y, size: 9, font, color: muted });
-  y -= 32;
+  y -= 18;
+  page.drawText('Period: 2026-Q2 · Exempeldata · Schema v2 (Remaining + Join URL i CSV/JSON)', { x: left, y: y, size: 8.5, font, color: muted });
+  y -= 28;
 
   const kpis = [
-    { label: 'Active codes (sample)', value: '12' },
-    { label: 'Total uses (sample)', value: '148' },
-    { label: 'Package', value: 'Preview' }
+    { label: 'Aktiva koder (exempel)', value: '12' },
+    { label: 'Summa användningar (exempel)', value: '148' },
+    { label: 'Capped / Unlimited', value: '8 / 4' }
   ];
   const g = 12;
   const boxW = (W - left * 2 - g * 2) / 3;
@@ -1697,49 +1742,88 @@ async function downloadSamplePayPdf() {
       borderWidth: 0.75
     });
     page.drawText(k.label, { x: x + 10, y: by + boxH - 14, size: 7, font, color: muted });
-    page.drawText(k.value, { x: x + 10, y: by + 16, size: 17, font: fontBold, color: navy });
+    page.drawText(k.value, { x: x + 10, y: by + 16, size: 16, font: fontBold, color: navy });
   });
-  y -= boxH + 22;
+  y -= boxH + 20;
 
-  page.drawText('Sample referral rows', { x: left, y: y, size: 11, font: fontBold, color: navy });
-  y -= 18;
+  page.drawText('Exempel — referralrader (samma kolumner som CSV v2)', { x: left, y: y, size: 10, font: fontBold, color: navy });
+  y -= 16;
 
-  const colW = [108, 232, 54, 82];
-  const labels = ['Code', 'Label', 'Uses', 'Status'];
+  const colW = [54, 102, 28, 28, 28, 56, 46];
+  const labels = ['Code', 'Label', 'Uses', 'Max', 'Rem', 'Expires', 'Status'];
   const th = 20;
-  const tw = colW[0] + colW[1] + colW[2] + colW[3];
+  const tw = colW.reduce(function(a, b) { return a + b; }, 0);
   page.drawRectangle({ x: left, y: y - th, width: tw, height: th, color: navy });
   let cx = left;
   labels.forEach(function(t, i) {
-    page.drawText(t, { x: cx + 6, y: y - th + 6, size: 8, font: fontBold, color: rgb(1, 1, 1) });
+    page.drawText(t, { x: cx + 4, y: y - th + 6, size: 7, font: fontBold, color: rgb(1, 1, 1) });
     cx += colW[i];
   });
   y -= th;
 
   const sampleRows = [
-    ['FAITH-2026', 'Spring campaign', '42', 'Active'],
-    ['EASTER-Q2', 'Partner · OakDev', '31', 'Active'],
-    ['GROW-7K2L', 'Organic / social', '18', 'Active'],
-    ['LEGACY-01', 'Archive (sample)', '0', 'Inactive']
+    ['FAITH-2026', 'Spring campaign', '42', '500', '458', '2026-12-31', 'Active'],
+    ['EASTER-Q2', 'Partner OakDev', '31', '100', '69', '2026-06-30', 'Active'],
+    ['GROW-7K2L', 'Organic / social', '18', '0', '-', '-', 'Active'],
+    ['LEGACY-01', 'Archive (sample)', '0', '50', '50', '2025-01-01', 'Inactive']
   ];
-  const rh = 17;
+  const rh = 16;
   sampleRows.forEach(function(row, ri) {
     cx = left;
     row.forEach(function(cell, ci) {
       const bg = ri % 2 === 0 ? rgb(1, 1, 1) : rgb(0.985, 0.985, 0.982);
       page.drawRectangle({ x: cx, y: y - rh, width: colW[ci], height: rh, color: bg });
-      page.drawText(String(cell), { x: cx + 5, y: y - rh + 5, size: 8, font, color: navy });
+      page.drawText(String(cell), { x: cx + 3, y: y - rh + 4, size: 6.5, font, color: navy });
       cx += colW[ci];
     });
     y -= rh;
   });
 
+  y -= 12;
+  page.drawText('Rem = återstående vid tak. Max 0 + Rem "-" = obegränsad kod (samma som i admin).', { x: left, y: y, size: 7, font, color: muted });
+  y -= 22;
+
+  const page2 = pdfDoc.addPage([W, H]);
+  let y2 = H - 48;
+  page2.drawRectangle({ x: 0, y: H - 28, width: W, height: 28, color: navy });
+  page2.drawText('Bilaga — avstämning & sign-off (exempel)', { x: left, y: y2, size: 14, font: fontBold, color: navy });
+  y2 -= 22;
+  page2.drawText('Intern användning — kopiera innehåll till era egna mallar vid behov.', { x: left, y: y2, size: 8.5, font, color: muted });
+  y2 -= 28;
+
+  const bullets = [
+    'Jämför summan av Uses med vald period i er rapport (butik, backend eller ekonomi).',
+    'Kontrollera koder med låg Rem (få platser kvar) innan kampanjslut.',
+    'Join URL i exporten ska matcha er publicerade domän (samma som denna admin).',
+    'Spara filen med versionsdatum i filnamn om ni kör flera exporter samma dag.'
+  ];
+  bullets.forEach(function(b) {
+    page2.drawText('• ' + b, { x: left, y: y2, size: 9, font, color: navy, maxWidth: W - 96 });
+    y2 -= 36;
+  });
+  y2 -= 8;
+  page2.drawLine({ start: { x: left, y: y2 }, end: { x: W - left, y: y2 }, thickness: 0.45, color: line });
+  y2 -= 22;
+  page2.drawText('Sign-off (fylls i för hand)', { x: left, y: y2, size: 11, font: fontBold, color: navy });
+  y2 -= 20;
+  ['Exporterad av: ________________________________________________',
+    'Granskad av: _________________________________________________',
+    'Datum / tid: ________________________________________________',
+    'Anteckning / avvikelse: ______________________________________'].forEach(function(line) {
+    page2.drawText(line, { x: left, y: y2, size: 9, font, color: navy });
+    y2 -= 26;
+  });
+  y2 -= 20;
+  page2.drawText('OakDev & AI AB · Org.nr / VAT enligt faktura · christbay.oakdev.app', { x: left, y: y2, size: 7.5, font, color: muted });
+  y2 -= 12;
+  page2.drawText('ChristBay — Walk in the Word. Grow in grace.', { x: left, y: y2, size: 7.5, font, color: rgb(0.55, 0.6, 0.68) });
+  y2 -= 12;
+  page2.drawText('Sida 2 av 2', { x: W - left - 72, y: y2, size: 7, font, color: muted });
+
   y -= 18;
   page.drawLine({ start: { x: left, y: y }, end: { x: W - left, y: y }, thickness: 0.45, color: line });
-  y -= 16;
-  page.drawText('OakDev & AI AB · Internal use only · Sample PDF — not for filing', { x: left, y: y, size: 7.5, font, color: muted });
-  y -= 12;
-  page.drawText('ChristBay — Walk in the Word. Grow in grace.', { x: left, y: y, size: 7.5, font, color: rgb(0.55, 0.6, 0.68) });
+  y -= 14;
+  page.drawText('Sida 1 av 2 · Sample PDF — ej bokföringsunderlag · OakDev & AI AB', { x: left, y: y, size: 7, font, color: muted });
 
   const out = await pdfDoc.save();
   downloadBlob(new Blob([out], { type: 'application/pdf' }), 'christbay-pay-export-sample.pdf');
