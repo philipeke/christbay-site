@@ -933,14 +933,13 @@ onAuthStateChanged(auth, async function(user) {
   if (!user) { showGate('login'); return; }
   try {
     const snap = await getDoc(doc(db, 'christbay_admins', user.email.toLowerCase()));
-    if (!snap.exists()) {
-      _pendingMsg = { text: 'Your account does not have admin access. Contact OakDev to be added.', ok: false, email: user.email };
+    if (snap.exists() && snap.data().active === false) {
+      _pendingMsg = { text: 'Your account has been deactivated. Contact OakDev.', ok: false, email: user.email };
       await signOut(auth);
-      // showGate will be called by the null onAuthStateChanged trigger, which picks up _pendingMsg
       return;
     }
+    // No document = not yet provisioned; Cloud Function will enforce access via 403
   } catch (err) {
-    // Firestore check failed — backend will still enforce access via 403
     console.warn('Firestore admin check:', err.code || err.message);
   }
   openApp(user);
