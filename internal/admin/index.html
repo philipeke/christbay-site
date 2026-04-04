@@ -818,17 +818,18 @@ const gateEl  = document.getElementById('gate');
 const appEl   = document.getElementById('app');
 const gateMsg = document.getElementById('gate-msg');
 
+let _pendingMsg = null; // { text, ok, email } — survives the signOut→onAuthStateChanged race
+
 function showGateMsg(text, ok) {
   gateMsg.innerHTML = text ? '<div class="msg ' + (ok ? 'msg-ok' : 'msg-error') + '">' + escapeHtml(text) + '</div>' : '';
 }
 
 function showGate(view, prefillEmail) {
   view         = view || 'login';
-  prefillEmail = prefillEmail || '';
+  prefillEmail = prefillEmail || (_pendingMsg && _pendingMsg.email) || '';
   gateEl.style.display = '';
   appEl.style.display  = 'none';
   appEl.setAttribute('aria-hidden', 'true');
-  showGateMsg('', true);
 
   const titleEl = document.getElementById('gate-title');
   const leadEl  = document.getElementById('gate-lead');
@@ -873,6 +874,14 @@ function showGate(view, prefillEmail) {
       e.preventDefault();
       showGate('login', document.getElementById('gate-email').value);
     });
+  }
+
+  // Flush any message that survived a signOut→onAuthStateChanged cycle
+  if (_pendingMsg) {
+    showGateMsg(_pendingMsg.text, _pendingMsg.ok);
+    _pendingMsg = null;
+  } else {
+    showGateMsg('', true);
   }
 }
 
@@ -925,9 +934,9 @@ onAuthStateChanged(auth, async function(user) {
   try {
     const snap = await getDoc(doc(db, 'christbay_admins', user.email.toLowerCase()));
     if (!snap.exists()) {
-      showGateMsg('Your account does not have admin access. Contact OakDev to be added.', false);
+      _pendingMsg = { text: 'Your account does not have admin access. Contact OakDev to be added.', ok: false, email: user.email };
       await signOut(auth);
-      showGate('login', user.email);
+      // showGate will be called by the null onAuthStateChanged trigger, which picks up _pendingMsg
       return;
     }
   } catch (err) {
