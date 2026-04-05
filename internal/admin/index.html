@@ -302,7 +302,13 @@
       font-weight: 700;
       font-size: 1rem;
     }
-    .topbar-brand img { width: 28px; height: 28px; border-radius: 6px; }
+    .topbar-brand img {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 2px solid #ffffff;
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.12);
+    }
     .topbar-badge {
       font-size: 0.65rem;
       font-weight: 700;
@@ -586,8 +592,8 @@
       height: 36px;
       object-fit: cover;
       border-radius: 50%;
-      border: 2px solid #ffffff;
-      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.95);
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.18);
       opacity: 1;
     }
     .footer-brand-name {
@@ -765,13 +771,13 @@
           </div>
 
           <div class="card settings-block panel-section">
-            <h3>Praktiskt att veta</h3>
+            <h3>Good to know</h3>
             <ul class="checklist" style="list-style:disc;padding-left:1.2rem;margin:0">
-              <li><strong>Avstämning:</strong> Kolumnen <span class="mono">Uses</span> ska stämmas mot er källa (t.ex. app analytics, backend eller butiksrapport). Exporten är en ögonblicksbild — inte revisionssäker historik om ni inte arkiverar filen per tillfälle.</li>
-              <li><strong>Period-etiketten</strong> styr bara filnamn och metadata i filen. Den ändrar inget i API eller i användarnas appar.</li>
-              <li><strong>Återstående</strong> (Remaining) beräknas som <em>max − använda</em> när koden har tak; annars tomt / obegränsat.</li>
-              <li><strong>Join URL</strong> är den publika länken till <span class="mono">/join/?code=…</span> — användbar i intern dokumentation och partnermail (dela aldrig hemliga listor publikt).</li>
-              <li><strong>Arkiv:</strong> Spara CSV/JSON med datum i mappstruktur (t.ex. <span class="mono">2026/Q2/referral-pay/</span>) och begränsa åtkomst internt.</li>
+              <li><strong>Reconciliation:</strong> The <span class="mono">Uses</span> column should be reconciled against <em>your</em> source of truth (e.g. app analytics, backend tallies, or store reports). The export is a <strong>point-in-time snapshot</strong> — not revision-safe history unless you archive each file when you generate it.</li>
+              <li><strong>Period label</strong> only drives the <strong>filename and in-file metadata</strong>. It does not change the API or anything in end users&rsquo; apps.</li>
+              <li><strong>Remaining</strong> is computed as <em>max − used</em> when the code has a cap; otherwise it is empty / unlimited.</li>
+              <li><strong>Join URL</strong> is the public link to <span class="mono">/join/?code=…</span> on this site — useful in internal docs and partner emails. Never publish secret bulk lists or admin-only data publicly.</li>
+              <li><strong>Archiving:</strong> Store CSV/JSON exports under a dated folder structure (e.g. <span class="mono">2026/Q2/referral-pay/</span>) and restrict access to internal staff only.</li>
             </ul>
           </div>
 
@@ -890,7 +896,7 @@
 
           <div class="card settings-block panel-section">
             <h3>Column reference</h3>
-            <p class="hint">CSV och JSON innehåller samma logiska fält. JSON har dessutom <span class="mono">exportSchemaVersion</span>, <span class="mono">sourceOrigin</span> och beräknade fält per kod.</p>
+            <p class="hint">CSV and JSON share the same logical fields. JSON also includes <span class="mono">exportSchemaVersion</span>, <span class="mono">sourceOrigin</span>, and per-code computed fields.</p>
             <div class="table-wrap">
               <table class="column-ref">
                 <thead>
@@ -1100,7 +1106,7 @@ async function apiFetch(path, opts = {}) {
   const text = await res.text();
   if (res.status === 403) {
     console.error('[admin] 403', text);
-    showAppError('Åtkomst nekad (403). UID: ' + (user.uid || '?') + ' — Email: ' + (user.email || '?') + (text ? ' — Svar: ' + text : ''));
+    showAppError('Access denied (403). UID: ' + (user.uid || '?') + ' — Email: ' + (user.email || '?') + (text ? ' — Response: ' + text : ''));
     return null;
   }
   if (!res.ok) throw new Error(apiErrorMessage(res.status, text));
@@ -1719,12 +1725,12 @@ async function downloadSamplePayPdf() {
 
   page.drawText('Pay export — sample report', { x: left, y: y, size: 14, font: fontBold, color: navy });
   y -= 18;
-  page.drawText('Period: 2026-Q2 · Exempeldata · Schema v2 (Remaining + Join URL i CSV/JSON)', { x: left, y: y, size: 8.5, font, color: muted });
+  page.drawText('Period: 2026-Q2 · Sample data · Schema v2 (Remaining + Join URL in CSV/JSON)', { x: left, y: y, size: 8.5, font, color: muted });
   y -= 28;
 
   const kpis = [
-    { label: 'Aktiva koder (exempel)', value: '12' },
-    { label: 'Summa användningar (exempel)', value: '148' },
+    { label: 'Active codes (sample)', value: '12' },
+    { label: 'Total uses (sample)', value: '148' },
     { label: 'Capped / Unlimited', value: '8 / 4' }
   ];
   const g = 12;
@@ -1747,7 +1753,7 @@ async function downloadSamplePayPdf() {
   });
   y -= boxH + 20;
 
-  page.drawText('Exempel — referralrader (samma kolumner som CSV v2)', { x: left, y: y, size: 10, font: fontBold, color: navy });
+  page.drawText('Sample — referral rows (same columns as CSV v2)', { x: left, y: y, size: 10, font: fontBold, color: navy });
   y -= 16;
 
   const colW = [54, 102, 28, 28, 28, 56, 46];
@@ -1781,22 +1787,22 @@ async function downloadSamplePayPdf() {
   });
 
   y -= 12;
-  page.drawText('Rem = återstående vid tak. Max 0 + Rem "-" = obegränsad kod (samma som i admin).', { x: left, y: y, size: 7, font, color: muted });
+  page.drawText('Rem = remaining when capped. Max 0 + Rem "-" = unlimited code (same rules as in admin).', { x: left, y: y, size: 7, font, color: muted });
   y -= 22;
 
   const page2 = pdfDoc.addPage([W, H]);
   let y2 = H - 48;
   page2.drawRectangle({ x: 0, y: H - 28, width: W, height: 28, color: navy });
-  page2.drawText('Bilaga — avstämning & sign-off (exempel)', { x: left, y: y2, size: 14, font: fontBold, color: navy });
+  page2.drawText('Appendix — reconciliation & sign-off (sample)', { x: left, y: y2, size: 14, font: fontBold, color: navy });
   y2 -= 22;
-  page2.drawText('Intern användning — kopiera innehåll till era egna mallar vid behov.', { x: left, y: y2, size: 8.5, font, color: muted });
+  page2.drawText('Internal use — copy into your own templates if needed.', { x: left, y: y2, size: 8.5, font, color: muted });
   y2 -= 28;
 
   const bullets = [
-    'Jämför summan av Uses med vald period i er rapport (butik, backend eller ekonomi).',
-    'Kontrollera koder med låg Rem (få platser kvar) innan kampanjslut.',
-    'Join URL i exporten ska matcha er publicerade domän (samma som denna admin).',
-    'Spara filen med versionsdatum i filnamn om ni kör flera exporter samma dag.'
+    'Compare the sum of Uses with the same period in your report (store, backend, or finance).',
+    'Review codes with low Rem (few redemptions left) before a campaign ends.',
+    'Join URLs in the export must match your published domain (same as this admin site).',
+    'Add a version date or time to the filename if you run multiple exports on the same day.'
   ];
   bullets.forEach(function(b) {
     page2.drawText('• ' + b, { x: left, y: y2, size: 9, font, color: navy, maxWidth: W - 96 });
@@ -1805,26 +1811,26 @@ async function downloadSamplePayPdf() {
   y2 -= 8;
   page2.drawLine({ start: { x: left, y: y2 }, end: { x: W - left, y: y2 }, thickness: 0.45, color: line });
   y2 -= 22;
-  page2.drawText('Sign-off (fylls i för hand)', { x: left, y: y2, size: 11, font: fontBold, color: navy });
+  page2.drawText('Sign-off (complete by hand)', { x: left, y: y2, size: 11, font: fontBold, color: navy });
   y2 -= 20;
-  ['Exporterad av: ________________________________________________',
-    'Granskad av: _________________________________________________',
-    'Datum / tid: ________________________________________________',
-    'Anteckning / avvikelse: ______________________________________'].forEach(function(line) {
+  ['Exported by: _________________________________________________',
+    'Reviewed by: ________________________________________________',
+    'Date / time: ________________________________________________',
+    'Notes / variance: ____________________________________________'].forEach(function(line) {
     page2.drawText(line, { x: left, y: y2, size: 9, font, color: navy });
     y2 -= 26;
   });
   y2 -= 20;
-  page2.drawText('OakDev & AI AB · Org.nr / VAT enligt faktura · christbay.oakdev.app', { x: left, y: y2, size: 7.5, font, color: muted });
+  page2.drawText('OakDev & AI AB · Company reg. no. / VAT per invoice · christbay.oakdev.app', { x: left, y: y2, size: 7.5, font, color: muted });
   y2 -= 12;
   page2.drawText('ChristBay — Walk in the Word. Grow in grace.', { x: left, y: y2, size: 7.5, font, color: rgb(0.55, 0.6, 0.68) });
   y2 -= 12;
-  page2.drawText('Sida 2 av 2', { x: W - left - 72, y: y2, size: 7, font, color: muted });
+  page2.drawText('Page 2 of 2', { x: W - left - 72, y: y2, size: 7, font, color: muted });
 
   y -= 18;
   page.drawLine({ start: { x: left, y: y }, end: { x: W - left, y: y }, thickness: 0.45, color: line });
   y -= 14;
-  page.drawText('Sida 1 av 2 · Sample PDF — ej bokföringsunderlag · OakDev & AI AB', { x: left, y: y, size: 7, font, color: muted });
+  page.drawText('Page 1 of 2 · Sample PDF — not accounting evidence · OakDev & AI AB', { x: left, y: y, size: 7, font, color: muted });
 
   const out = await pdfDoc.save();
   downloadBlob(new Blob([out], { type: 'application/pdf' }), 'christbay-pay-export-sample.pdf');
