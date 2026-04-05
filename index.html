@@ -12,6 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/assets/css/site-nav.css" />
 
   <style>
     :root {
@@ -65,65 +66,6 @@
     .skip-link:focus { top: 1rem; }
 
     .container { width: 100%; max-width: var(--max-width); margin: 0 auto; padding: 0 1.5rem; }
-
-    /* ============================================================
-       Header / Navigation
-    ============================================================ */
-    .site-header {
-      position: sticky; top: 0; z-index: 100;
-      background: rgba(13, 21, 38, 0.92);
-      backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
-      border-bottom: 1px solid rgba(201, 168, 76, 0.12);
-    }
-    .nav-inner {
-      display: flex; align-items: center; justify-content: space-between;
-      height: 64px; max-width: var(--max-width); margin: 0 auto; padding: 0 1.5rem;
-    }
-    .nav-brand { display: flex; align-items: center; gap: 0.625rem; }
-    .nav-brand img {
-      width: 32px; height: 32px; object-fit: cover;
-      border-radius: 50%;
-      border: 1px solid rgba(255, 255, 255, 0.95);
-      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.18);
-    }
-    .nav-brand-name { font-size: 1.0625rem; font-weight: 700; color: var(--white); letter-spacing: -0.01em; }
-    .nav-links { display: flex; align-items: center; gap: 1.75rem; }
-    .nav-links a {
-      font-size: 0.875rem; font-weight: 500;
-      color: rgba(255, 255, 255, 0.7); transition: color var(--transition);
-    }
-    .nav-links a:hover { color: var(--white); }
-    .nav-dropdown { position: relative; }
-    .nav-cta {
-      background: var(--gold); color: var(--navy-deep);
-      padding: 0.5rem 1.25rem; border-radius: 100px;
-      font-weight: 600; font-size: 0.8125rem;
-      border: none; cursor: pointer;
-      transition: background var(--transition), transform var(--transition);
-    }
-    .nav-cta:hover { background: var(--gold-light); transform: translateY(-1px); }
-    .nav-dropdown-menu {
-      position: absolute; top: 100%; right: 0; margin-top: 0.5rem;
-      background: var(--navy-light); border: 1px solid rgba(201, 168, 76, 0.2);
-      border-radius: 8px; min-width: 170px;
-      box-shadow: 0 8px 24px rgba(26, 39, 68, 0.25);
-      opacity: 0; visibility: hidden; transform: translateY(-8px);
-      transition: opacity var(--transition), visibility var(--transition), transform var(--transition);
-      z-index: 1000; overflow: hidden;
-    }
-    .nav-dropdown-menu.open { opacity: 1; visibility: visible; transform: translateY(0); }
-    .nav-dropdown-item {
-      display: flex; align-items: center; gap: 0.75rem;
-      padding: 0.75rem 1rem; color: var(--white);
-      font-size: 0.875rem; font-weight: 500;
-      transition: background var(--transition), color var(--transition);
-    }
-    .nav-dropdown-item:hover { background: rgba(201, 168, 76, 0.15); color: var(--gold-light); }
-    .nav-dropdown-item svg { flex-shrink: 0; }
-    @media (max-width: 600px) {
-      .nav-links { gap: 1rem; }
-      .nav-links a.nav-text { display: none; }
-    }
 
     /* ============================================================
        Hero
@@ -254,7 +196,7 @@
       display: flex; gap: 2rem 2.5rem; flex-wrap: wrap; justify-content: center; margin-top: 4rem;
       padding-top: 2.5rem; border-top: 1px solid rgba(255, 255, 255, 0.08);
     }
-    .hero-stat { text-align: center; flex: 0 1 auto; min-width: 7.5rem; max-width: 11rem; }
+    .hero-stat { text-align: center; flex: 0 1 auto; min-width: 7.5rem; max-width: 12.5rem; }
     .hero-stat-value { font-size: 1.75rem; font-weight: 800; color: #ffffff; letter-spacing: -0.03em; }
     .hero-stat-label { font-size: 0.75rem; color: #ffffff; font-weight: 500; margin-top: 0.125rem; }
     @media (max-width: 520px) {
@@ -292,7 +234,7 @@
        What's New (2.0 Highlights)
     ============================================================ */
     .whats-new { background: var(--white); }
-    .new-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .new-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
     .new-card {
       position: relative; background: var(--warm-white);
       border: 1px solid var(--border); border-radius: var(--radius-lg);
@@ -321,7 +263,7 @@
       background: rgba(201, 168, 76, 0.15); color: var(--gold);
       padding: 0.2rem 0.5rem; border-radius: 4px; margin-bottom: 0.75rem;
     }
-    @media (max-width: 900px) { .new-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 1100px) { .new-grid { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 520px) { .new-grid { grid-template-columns: 1fr; } }
 
     /* ============================================================
@@ -699,11 +641,11 @@
         <span class="nav-brand-name">ChristBay</span>
       </a>
       <div class="nav-links">
-        <a href="#features" class="nav-text">Features</a>
-        <a href="#premium" class="nav-text">Premium</a>
+        <a href="/#features" class="nav-text">Features</a>
+        <a href="/#premium" class="nav-text">Premium</a>
         <a href="/support/" class="nav-text">Support</a>
         <div class="nav-dropdown">
-          <button class="nav-cta" id="download-toggle" aria-expanded="false" aria-haspopup="true" aria-label="Download options">
+          <button type="button" class="nav-cta" id="download-toggle" aria-expanded="false" aria-haspopup="true" aria-label="Download options">
             Download
           </button>
           <div class="nav-dropdown-menu" id="download-menu">
@@ -760,6 +702,7 @@
             <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
           </a>
         </div>
+        <!-- 121 = number of app_*.arb files / AppLocalizations.supportedLocales (each locale can be a regional variant, e.g. en_US vs en_GB) -->
         <div class="hero-stats">
           <div class="hero-stat">
             <p class="hero-stat-value">12</p>
@@ -768,6 +711,10 @@
           <div class="hero-stat">
             <p class="hero-stat-value">100</p>
             <p class="hero-stat-label">Reflections / Month (Blessed)</p>
+          </div>
+          <div class="hero-stat">
+            <p class="hero-stat-value">121</p>
+            <p class="hero-stat-label">UI locales (incl. regional variants)</p>
           </div>
           <div class="hero-stat">
             <p class="hero-stat-value">2</p>
@@ -794,7 +741,7 @@
           <h2 class="section-title" id="new-heading">ChristBay 2.0 &mdash; A Deeper Walk</h2>
           <div class="divider centered"></div>
           <br />
-          <p class="section-body">Version 2.0 refines the whole stack: how you move between scripture and prayer, how Reflections and Blessed work together, and how the library grows with you. Three headlines below &mdash; each one unpacks a bigger story on the rest of this page.</p>
+          <p class="section-body">Version 2.0 refines the whole stack: how you move between scripture and prayer, how Reflections and Blessed work together, and how the library grows with you. Localization is built in seriously: <strong>121</strong> separate UI locales (one per translation file) &mdash; that includes <em>regional</em> variants of the same language where it matters (e.g. English for the US, UK, Australia; several Spanish and Arabic forms; Chinese scripts and regions). Highlights below &mdash; each one unpacks a bigger story on the rest of this page.</p>
         </div>
         <div class="new-grid">
           <article class="new-card reveal">
@@ -812,6 +759,14 @@
             <span class="new-tag">Enhanced</span>
             <h3>Structured Daily Practice</h3>
             <p>Reminders, streaks, and a clear home path mean you spend seconds getting to scripture &mdash; not hunting through menus. The App nudges you toward consistency without turning faith into a scoreboard.</p>
+          </article>
+          <article class="new-card reveal reveal-d3">
+            <div class="new-card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            </div>
+            <span class="new-tag">Global</span>
+            <h3>121 UI locales worldwide</h3>
+            <p>The app ships <strong>121</strong> locale packs &mdash; one translation file each in the source tree. That is <strong>not</strong> the same as &ldquo;121 unrelated languages&rdquo;: many packs are <strong>regional variants</strong> of the same language (e.g. English for the US, UK, and Australia; Spanish and Arabic for different countries; Chinese scripts and regions), so wording matches what readers expect.</p>
           </article>
           <article class="new-card reveal reveal-d4">
             <div class="new-card-icon" aria-hidden="true">

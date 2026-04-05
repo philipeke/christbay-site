@@ -10,6 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/assets/css/site-nav.css" />
   <style>
     :root {
       --navy:           #1a2744;
@@ -47,28 +48,6 @@
     ============================================================ */
     .skip-link{position:absolute;top:-120px;left:1rem;background:var(--navy);color:var(--white);padding:.5rem 1rem;border-radius:var(--radius-sm);font-size:.875rem;font-weight:600;z-index:9999;transition:top var(--transition)}
     .skip-link:focus{top:1rem}
-
-    /* ============================================================
-       Header / Nav (aligned with index.html landing)
-    ============================================================ */
-    .site-header{position:sticky;top:0;z-index:100;background:rgba(13,21,38,.92);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid rgba(201,168,76,.12)}
-    .nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px;max-width:var(--max-width);margin:0 auto;padding:0 1.5rem}
-    .nav-brand{display:flex;align-items:center;gap:.625rem}
-    .nav-brand img{width:32px;height:32px;object-fit:cover;border-radius:50%;border:1px solid rgba(255,255,255,.95);box-shadow:0 0 0 1px rgba(0,0,0,.18)}
-    .nav-brand-name{font-size:1.0625rem;font-weight:700;color:var(--white);letter-spacing:-.01em}
-    .nav-links{display:flex;align-items:center;gap:1.75rem}
-    .nav-links a{font-size:.875rem;font-weight:500;color:rgba(255,255,255,.7);transition:color var(--transition)}
-    .nav-links a:hover{color:var(--white)}
-    .nav-links a.nav-text[aria-current="page"]{color:var(--white);font-weight:600}
-    .nav-dropdown{position:relative}
-    .nav-cta{background:var(--gold);color:var(--navy-deep);padding:.5rem 1.25rem;border-radius:100px;font-weight:600;font-size:.8125rem;border:none;cursor:pointer;font-family:inherit;transition:background var(--transition),transform var(--transition)}
-    .nav-cta:hover{background:var(--gold-light);transform:translateY(-1px)}
-    .nav-dropdown-menu{position:absolute;top:100%;right:0;margin-top:.5rem;background:var(--navy-light);border:1px solid rgba(201,168,76,.2);border-radius:8px;min-width:170px;box-shadow:0 8px 24px rgba(26,39,68,.25);opacity:0;visibility:hidden;transform:translateY(-8px);transition:opacity var(--transition),visibility var(--transition),transform var(--transition);z-index:1000;overflow:hidden}
-    .nav-dropdown-menu.open{opacity:1;visibility:visible;transform:translateY(0)}
-    .nav-dropdown-item{display:flex;align-items:center;gap:.75rem;padding:.75rem 1rem;color:var(--white);font-size:.875rem;font-weight:500;transition:background var(--transition),color var(--transition)}
-    .nav-dropdown-item:hover{background:rgba(201,168,76,.15);color:var(--gold-light)}
-    .nav-dropdown-item svg{flex-shrink:0}
-    @media(max-width:600px){.nav-links{gap:1rem}.nav-links a.nav-text{display:none}}
 
     /* ============================================================
        Hero
