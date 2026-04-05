@@ -132,7 +132,7 @@
       position: relative;
       background: linear-gradient(160deg, var(--navy-darker) 0%, var(--navy-deep) 30%, var(--navy) 60%, var(--navy-light) 100%);
       color: #ffffff; text-align: center;
-      padding: 7rem 1.5rem 9rem; overflow: hidden;
+      padding: 7rem 1.5rem 0; overflow: hidden;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
@@ -144,13 +144,18 @@
         radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.02) 0%, transparent 60%);
       pointer-events: none;
     }
-    .hero::after {
-      content: ''; position: absolute; bottom: 0; left: 0; right: 0;
-      height: 120px;
-      background: linear-gradient(to bottom, transparent, var(--warm-white));
-      pointer-events: none;
+    .hero-content {
+      position: relative; z-index: 1; max-width: 720px; margin: 0 auto;
+      padding-bottom: 9rem;
     }
-    .hero-content { position: relative; z-index: 1; max-width: 720px; margin: 0 auto; }
+    .hero-wave {
+      display: block;
+      width: 100%;
+      height: clamp(44px, 7vw, 72px);
+      margin-bottom: -1px;
+      color: var(--white);
+    }
+    .hero-wave path { fill: currentColor; }
     .hero-logo-wrap {
       position: relative; display: flex; align-items: center;
       justify-content: center; margin: 0 auto 2.5rem;
@@ -253,7 +258,8 @@
     .hero-stat-value { font-size: 1.75rem; font-weight: 800; color: #ffffff; letter-spacing: -0.03em; }
     .hero-stat-label { font-size: 0.75rem; color: #ffffff; font-weight: 500; margin-top: 0.125rem; }
     @media (max-width: 520px) {
-      .hero { padding: 5rem 1.5rem 7rem; }
+      .hero { padding: 5rem 1.5rem 0; }
+      .hero-content { padding-bottom: 7rem; }
       .hero-stats { gap: 1.5rem; flex-wrap: wrap; }
     }
 
@@ -773,6 +779,9 @@
           </div>
         </div>
       </div>
+      <svg class="hero-wave" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 48" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+        <path d="M0 24 C 240 6 480 42 720 24 C 960 6 1200 42 1440 24 L 1440 48 L 0 48 Z" />
+      </svg>
     </section>
 
     <!-- ============================================================
