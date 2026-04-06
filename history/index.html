@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="The story of ChristBay — from fifteen reflection doors to a full daily Christian companion. Store description and what is new in version 2.0." />
+  <meta name="robots" content="index, follow" />
+  <title>Our Story &amp; History — ChristBay</title>
+  <link rel="icon" type="image/png" href="/assets/brand.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/assets/css/site-nav.css" />
+  <style>
+    :root {
+      --navy:           #1a2744;
+      --navy-light:     #243355;
+      --navy-deep:      #121d35;
+      --navy-darker:    #0d1526;
+      --gold:           #c9a84c;
+      --gold-light:     #dfc980;
+      --gold-subtle:    #f5edcc;
+      --warm-white:     #f9f7f4;
+      --cream:          #f0ece4;
+      --white:          #ffffff;
+      --text-primary:   #1a2744;
+      --text-secondary: #4a5a7a;
+      --text-muted:     #7a8ba5;
+      --border:         #e0dbd0;
+      --shadow-md:      0 4px 16px rgba(26,39,68,.10);
+      --radius:         12px;
+      --radius-sm:      8px;
+      --radius-lg:      20px;
+      --transition:     0.25s ease;
+      --max-width:      1100px;
+      --read-width:     42rem;
+    }
+    *,*::before,*::after{{box-sizing:border-box;margin:0;padding:0}}
+    html{{scroll-behavior:smooth;font-size:16px}}
+    body{{font-family:'Inter',system-ui,-apple-system,BlinkMacSystemFont,sans-serif;background:var(--warm-white);color:var(--text-primary);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}}
+    a{{color:inherit;text-decoration:none}}
+    ul{{list-style:none}}
+
+    .skip-link{{position:absolute;top:-120px;left:1rem;background:var(--navy);color:var(--white);padding:.5rem 1rem;border-radius:var(--radius-sm);font-size:.875rem;font-weight:600;z-index:9999;transition:top var(--transition)}}
+    .skip-link:focus{{top:1rem}}
+
+    .container{{width:100%;max-width:var(--max-width);margin:0 auto;padding:0 1.5rem}}
+    .story-narrow{{max-width:var(--read-width);margin:0 auto}}
+
+    .page-hero{{background:linear-gradient(160deg,var(--navy-darker) 0%,var(--navy-deep) 35%,var(--navy) 70%,var(--navy-light) 100%);color:var(--white);text-align:center;padding:5.5rem 1.5rem 5rem;position:relative;overflow:hidden}}
+    .page-hero::before{{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 55% at 20% 30%,rgba(201,168,76,.09) 0%,transparent 55%),radial-gradient(ellipse 55% 65% at 85% 70%,rgba(201,168,76,.06) 0%,transparent 55%);pointer-events:none}}
+    .page-hero-inner{{position:relative;z-index:1;max-width:36rem;margin:0 auto}}
+    .page-hero-label{{display:inline-block;font-size:.6875rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-light);margin-bottom:1rem}}
+    .page-hero h1{{font-size:clamp(2rem,4.5vw,3.25rem);font-weight:800;letter-spacing:-.035em;line-height:1.12;margin-bottom:1.125rem}}
+    .page-hero h1 em{{font-style:normal;color:var(--gold-light)}}
+    .page-hero-lead{{font-size:1.0625rem;color:rgba(255,255,255,.74);line-height:1.75;max-width:32rem;margin:0 auto 2rem}}
+    .hero-wave{{display:block;width:100%;height:clamp(40px,6vw,56px);margin-bottom:-1px;color:var(--cream)}}
+
+    .story-layout{{display:grid;grid-template-columns:minmax(0,220px) minmax(0,1fr);gap:3rem 3.5rem;align-items:start;padding:3.5rem 0 5.5rem}}
+    @media(max-width:900px){{.story-layout{{grid-template-columns:1fr;gap:2rem;padding:2.5rem 0 4.5rem}}}}
+
+    .story-toc{{position:sticky;top:84px}}
+    @media(max-width:900px){{.story-toc{{position:static;background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:1.375rem 1.25rem;box-shadow:var(--shadow-md)}}}}
+    .story-toc-title{{font-size:.6875rem;font-weight:700;letter-spacing:.11em;text-transform:uppercase;color:var(--text-muted);margin-bottom:.875rem}}
+    .story-toc a{{display:block;font-size:.8125rem;font-weight:500;color:var(--text-secondary);padding:.4rem .5rem;border-radius:var(--radius-sm);border-left:2px solid transparent;transition:color var(--transition),border-color var(--transition),background var(--transition);line-height:1.45}}
+    .story-toc a:hover{{color:var(--navy);border-left-color:var(--gold);background:rgba(201,168,76,.08)}}
+
+    .story-promo{{background:linear-gradient(180deg,var(--cream) 0%,var(--warm-white) 100%);padding:3.5rem 0 4rem;border-bottom:1px solid var(--border);scroll-margin-top:88px}}
+    .story-section{{padding:4rem 0;scroll-margin-top:88px}}
+    .story-section--paper{{background:var(--white)}}
+    .story-section--warm{{background:var(--warm-white)}}
+
+    .story-section-label{{font-size:.6875rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:.625rem}}
+    .story-h2{{font-size:clamp(1.5rem,2.8vw,2rem);font-weight:800;letter-spacing:-.03em;color:var(--navy);line-height:1.2;margin-bottom:1rem}}
+    .story-divider{{width:48px;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold-light));border-radius:2px;margin-bottom:1.75rem}}
+
+    .story-lede{{margin:0;padding:1.75rem 1.5rem 1.75rem 1.75rem;border-left:4px solid var(--gold);background:var(--white);border-radius:0 var(--radius-lg) var(--radius-lg) 0;box-shadow:var(--shadow-md)}}
+    .story-lede p{{font-family:Georgia,'Times New Roman',serif;font-size:clamp(1.125rem,2.2vw,1.35rem);font-style:italic;color:var(--text-primary);line-height:1.65;margin:0}}
+
+    .story-p{{font-size:1.015rem;color:var(--text-secondary);line-height:1.82;margin-bottom:1.125rem}}
+    .story-p:last-child{{margin-bottom:0}}
+
+    .story-cta{{padding:4rem 0 5rem;background:linear-gradient(135deg,var(--navy-deep),var(--navy));text-align:center}}
+    .story-cta-inner{{max-width:32rem;margin:0 auto;padding:0 1.5rem}}
+    .story-cta h2{{font-size:clamp(1.35rem,2.5vw,1.75rem);font-weight:700;color:var(--white);margin-bottom:.75rem;letter-spacing:-.02em}}
+    .story-cta p{{font-size:.9375rem;color:rgba(255,255,255,.65);line-height:1.7;margin-bottom:1.5rem}}
+    .story-cta-btns{{display:flex;flex-wrap:wrap;gap:.75rem;justify-content:center}}
+    .story-cta a{{display:inline-flex;align-items:center;gap:.5rem;background:var(--gold);color:var(--navy-deep);padding:.75rem 1.5rem;border-radius:100px;font-size:.9375rem;font-weight:600;transition:transform var(--transition),box-shadow var(--transition),background var(--transition)}}
+    .story-cta a:hover{{background:var(--gold-light);transform:translateY(-2px);box-shadow:0 8px 24px rgba(201,168,76,.3)}}
+    .story-cta a.secondary{{background:rgba(255,255,255,.12);color:var(--white);border:1px solid rgba(255,255,255,.35)}}
+    .story-cta a.secondary:hover{{background:rgba(255,255,255,.2);box-shadow:none}}
+
+    .site-footer{{background:#0b1220;color:rgba(255,255,255,.5);padding:4.5rem 1.5rem 2.5rem}}
+    .footer-inner{{max-width:var(--max-width);margin:0 auto}}
+    .footer-top{{display:flex;align-items:flex-start;justify-content:space-between;padding-bottom:2.5rem;border-bottom:1px solid rgba(255,255,255,.07);gap:2rem;flex-wrap:wrap}}
+    .footer-brand{{display:flex;align-items:center;gap:.625rem}}
+    .footer-brand img{{width:36px;height:36px;object-fit:cover;border-radius:50%;border:1px solid rgba(255,255,255,.95);box-shadow:0 0 0 1px rgba(0,0,0,.18)}}
+    .footer-brand-name{{font-size:1rem;font-weight:700;color:var(--white)}}
+    .footer-nav{{display:flex;gap:.5rem 2.25rem;flex-wrap:wrap;align-items:center}}
+    .footer-nav a{{font-size:.875rem;color:rgba(255,255,255,.45);transition:color var(--transition)}}
+    .footer-nav a:hover{{color:var(--white)}}
+    .footer-bottom{{padding-top:2rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.75rem}}
+    .footer-copyright{{font-size:.8125rem;color:rgba(255,255,255,.3)}}
+    .footer-tagline{{font-size:.8125rem;color:rgba(255,255,255,.2);font-style:italic}}
+
+    @media(prefers-reduced-motion:reduce){{*,*::before,*::after{{animation:none!important;transition:none!important}}}}
+  </style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to main content</a>
+
+<header class="site-header" role="banner">
+  <nav class="nav-inner" aria-label="Primary navigation">
+    <a href="/" class="nav-brand" aria-label="ChristBay — home">
+      <img src="/assets/brand.png" alt="" aria-hidden="true" />
+      <span class="nav-brand-name">ChristBay</span>
+    </a>
+    <div class="nav-links">
+      <a href="/#features" class="nav-text">Features</a>
+      <a href="/#premium" class="nav-text">Premium</a>
+      <a href="/history/" class="nav-text" aria-current="page">Our Story</a>
+      <a href="/support/" class="nav-text">Support</a>
+      <div class="nav-dropdown">
+        <button type="button" class="nav-cta" id="download-toggle" aria-expanded="false" aria-haspopup="true" aria-label="Download options">Download</button>
+        <div class="nav-dropdown-menu" id="download-menu">
+          <a href="https://apps.apple.com/se/app/christbay-daglig-reflektion/id6759575925" class="nav-dropdown-item" aria-label="Download on Apple App Store">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+            App Store
+          </a>
+          <a href="https://play.google.com/store/apps/details?id=com.oakdev.christbay" class="nav-dropdown-item" aria-label="Download on Google Play Store">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M3.609 1.814L13.792 12 3.609 22.186c-.386.387-.593.916-.593 1.465V1.349c0 .549.207 1.078.593 1.465zm10.908 10.911L21.268 24 3.609 1.814 14.517 12.722z"/></svg>
+            Google Play
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<main id="main">
+  <header class="page-hero" aria-labelledby="page-title">
+    <div class="page-hero-inner">
+      <p class="page-hero-label">ChristBay</p>
+      <h1 id="page-title">Our <em>story</em> &amp; history</h1>
+      <p class="page-hero-lead">From the first fifteen reflection doors to the fuller companion in version 2.0 — the same calm, Scripture-rooted heart, told in the words we share with the store and our community.</p>
+    </div>
+  </header>
+  <svg class="hero-wave" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 48" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+    <path fill="currentColor" d="M0 24 C 240 6 480 42 720 24 C 960 6 1200 42 1440 24 L 1440 48 L 0 48 Z" />
+  </svg>
+
+  <div class="container story-layout">
+    <nav class="story-toc" aria-label="On this page">
+      <p class="story-toc-title">On this page</p>
+      <a href="#promotional-text">Promotional</a>
+      <a href="#store-description">Store description</a>
+      <a href="#what-s-new-in-version-2-0">What&rsquo;s new in 2.0</a>
+    </nav>
+    <div class="story-article">
+      <section class="story-promo" id="promotional-text" aria-labelledby="promotional-text-heading">
+        <div class="container story-narrow">
+          <p class="story-section-label" id="promotional-text-heading">Promotional</p>
+          <blockquote class="story-lede">
+            <p>Scripture, prayer, guided reflection, Bible reading, trackers, and Christ-centered answers in one calm Christian app for everyday faith.</p>
+          </blockquote>
+        </div>
+      </section>
+      <section class="story-section story-section--paper" id="store-description" aria-labelledby="store-description-h2">
+        <div class="container story-narrow">
+          <p class="story-section-label">Story</p>
+          <h2 class="story-h2" id="store-description-h2">Store Description</h2>
+          <div class="story-divider" aria-hidden="true"></div>
+          <p class="story-p">ChristBay began as a quiet Christian reflection app built around AI and fifteen simple categories. That beginning still matters. The heart of ChristBay has always been the same: help people pause, breathe, return to Scripture, and find Christ-centered perspective in the middle of ordinary life. But ChristBay today has grown far beyond that first version. What started as a focused reflection tool has become a fuller Christian companion for daily faith, Scripture reading, prayer, worship, habit building, study, and spiritual formation.</p>
+          <p class="story-p">ChristBay is designed for people who want a calm, reverent place to return to throughout the day. Some users open the app in the morning for daily guidance before work. Some arrive at midday when stress, indecision, temptation, distraction, or discouragement has begun to speak more loudly than truth. Some come in the evening to reflect, pray, repent, give thanks, and rest before God. Others use ChristBay to read Scripture, keep track of prayer and Bible habits, save sermon notes, revisit heroes of faith, or walk through guided Christian tools that bring biblical wisdom into modern life. Whatever moment you are in, ChristBay is meant to help you step out of noise and back into a Christ-centered frame of mind.</p>
+          <p class="story-p">The original reflection experience is still here, and it is still one of the foundations of the app. ChristBay keeps the same reflection-door simplicity that made the earliest version meaningful: choose a category, receive a concise response shaped by Scripture, and carry that truth into the day. Those fifteen guided reflection paths remain central to the app and continue to speak into the situations people actually face. You can open Daily Guidance when you need clarity for the day ahead. You can choose Faith and Trust when you are walking through uncertainty. Prayer and Reflection offers a quieter posture for stillness before God. Hope in Difficult Times speaks into suffering without empty optimism. Forgiveness, Love and Compassion, Strength and Courage, Gratitude, Purpose and Calling, Family and Relationships, Peace and Anxiety Relief, Wisdom of Jesus, Humility and Character, Overcoming Temptation, and Evening Reflection each give you a different doorway into biblical perspective.</p>
+          <p class="story-p">That matters because ChristBay is not trying to bury its first strength under a pile of features. The app has expanded, but it has not forgotten why people came in the first place. The reflection doors are still quick to access, still simple to understand, and still shaped for real life. They are there when you do not want to search endlessly, overthink everything, or scroll through a crowded feed. You open the app, choose what your soul needs today, and receive a short, Scripture-rooted answer that helps you re-center.</p>
+          <p class="story-p">What has changed is everything around that core. ChristBay is now built as a more complete Christian ecosystem. Instead of feeling like a single-purpose tool, it now serves as a connected place for daily walk, study, prayer rhythm, worship, remembrance, and growth. The app now brings together Bible reading, spiritual tracking, prayer tools, guided formation features, Christian heritage content, music-centered reflection, and personal spiritual routines in one calm environment.</p>
+          <p class="story-p">One of the biggest parts of that growth is the Bible experience. ChristBay now gives you a dedicated Bible reading path, built around all sixty-six books of Scripture, chapter access, reading continuity, and translation support. This means ChristBay is no longer only a place where Scripture is quoted in short reflections. It is also a place where you can actually open the Word, read directly, continue where you left off, and build a visible rhythm of Bible engagement over time. For many users, that makes ChristBay more useful not just in moments of need, but in ongoing discipleship.</p>
+          <p class="story-p">The Bible experience is paired with Bible tracking, so reading is not reduced to vague intention. You can see progress, keep track of what you have read, continue your place, and build momentum through consistency. Instead of asking yourself whether you are &quot;doing better&quot; spiritually in a general sense, ChristBay helps you make progress visible. The point is not guilt or performance. The point is encouragement. Faith grows through repeated return, and ChristBay is built to support that rhythm in a gentle but clear way.</p>
+          <p class="story-p">Prayer has also grown into a much larger part of the app. ChristBay includes a dedicated prayer space, prayer tracking, and a prayer journal designed to hold both requests and answers. This turns prayer from something that disappears into memory into something that can be revisited, reflected on, and nurtured over time. You can capture the burdens you are carrying, name what you are asking God for, return to those requests later, and mark when prayers have been answered. Over time, this creates a record of dependence, gratitude, waiting, and God&#x27;s faithfulness in the details of life.</p>
+          <p class="story-p">ChristBay also includes a more immersive prayer and repentance experience through Let Go. This is one of the clearest examples of how the app has matured from a simple response tool into something more experiential. Let Go is designed as a quiet act of release and forgiveness. It helps you lay down what weighs on your heart, confess what needs to be brought before God, and receive a grace-centered message rooted in biblical truth. It is not just informational. It is devotional. It is built to slow you down and help you move from inner pressure toward surrender.</p>
+          <p class="story-p">For users who want more than short reflections, ChristBay now includes a richer layer of guided Christian tools. The app&#x27;s Connected Features are designed to take biblical truth into the texture of actual daily living. These are not random utilities added for novelty. They are structured around specific needs and situations. Right Now Faith Help gives quick grounding when emotion is running high. Sermon Companion helps turn Sunday teaching into weekday application. Prayer Accountability Circles, Memory Verse Trainer, and Decision Discernment move faith from inspiration into practice. Work and School Faith Mode helps users carry Christian integrity into ordinary environments. Apologetics Quick Answers offers help for common faith questions. Sacred Stillness provides grounding when life feels heavy. Family Discipleship supports home formation. Testimony Builder helps users structure and practice how they share what Christ has done in their lives.</p>
+          <p class="story-p">The Connected Features continue with Walk With Me Audio, Geo-Prayer Missions, Faith Challenges, Church Sync, and Worship Silent Mode. Together, these tools show the direction ChristBay has taken in version 2.0: not just a place for content consumption, but a place for active daily practice. Walk With Me Audio offers guided Scripture-prayer sessions for commutes, breaks, or prayer walks. Geo-Prayer Missions turns neighborhoods and nearby places into prayer opportunities. Faith Challenges create multi-day growth paths around themes like gratitude, forgiveness, and courage. Church Sync helps weekly reading and prayer stay connected to church life. Worship Silent Mode gives users a quieter, service-ready mode with fewer distractions and quick access to sermon notes and follow-along support.</p>
+          <p class="story-p">Study and formation content has expanded in the same way. ChristBay now includes dedicated areas for the Ten Commandments, the Beatitudes, fasting guidance, sermon notes, Christian quotes, heroes of faith, quizzes, and the Christian calendar. These additions matter because many Christians do not only want encouragement; they also want formation. They want places to revisit foundational teachings, absorb the shape of Christian virtue, remember the witness of believers who came before them, and reconnect with the larger story of the Church.</p>
+          <p class="story-p">The Ten Commandments section gives users space to move through the Decalogue with clarity and reflection. The Beatitudes section brings attention to Matthew 5 and the upside-down values of the Kingdom of God. The Fasting Guide offers a more structured way to approach an old spiritual discipline in a thoughtful Protestant Christian context. Sermon Notes helps users capture what God is teaching them before it disappears in the rush of the week. Christian Quotes gathers the voices of reformers, pastors, and believers who have spoken truth with weight, courage, and grace. Heroes of Faith puts the lives of remarkable Christians back into view, reminding users that holiness, courage, sacrifice, and endurance have names, faces, and stories.</p>
+          <p class="story-p">ChristBay also now includes a worship and sacred music space called Selah. This area of the app opens another part of Christian life that the first version did not touch. Selah brings together hymns, Psalms, worship instrumentals, and devotional requests in a way that supports pause, singing, meditation, and reflection. Instead of treating worship as an afterthought, ChristBay now gives it a place of its own. You can revisit classic Protestant hymns, read the Psalms, use instrumentals for singing or quiet prayer, and request devotional reflection on a hymn or psalm. This gives the app more depth, because it recognizes that Christian formation happens not only through information and answers, but also through worship, poetry, memory, and song.</p>
+          <p class="story-p">The Christian Calendar further expands that sense of spiritual time. ChristBay is no longer only about what the user happens to need right now. It also helps users live with awareness of seasons, feast days, meaningful dates, and the broader rhythms of Christian remembrance. This creates a stronger link between everyday life and the historical life of the Church. For users who want to feel less spiritually isolated and more connected to a wider tradition of worship and witness, that matters.</p>
+          <p class="story-p">Community-facing features have grown as well. ChristBay now includes a nearby church discovery experience, helping users find Christian churches with map and distance support. For people who are traveling, moving, or simply searching for a church community, this makes ChristBay more practically useful. The app can now serve not only as a private devotional space, but also as a bridge back toward gathered worship and embodied fellowship.</p>
+          <p class="story-p">Another major shift is personalization. In the first version, the app was essentially the same for everyone. Now ChristBay allows users to shape more of the experience around their actual season and spiritual focus. Personalization features include a display name, a spiritual character style, communication tone, spiritual focus, and a short summary about the user&#x27;s life or prayer needs. This helps the app feel more intentional and more companion-like without turning it into a social network or an identity performance platform. The goal is not self-expression for its own sake. The goal is to help the app serve the user&#x27;s spiritual life with more clarity, warmth, and relevance.</p>
+          <p class="story-p">Ask ChristBay takes that further. This feature allows users to type their own question and receive guidance shaped for their situation while remaining grounded in Scripture. This is especially valuable when none of the predefined categories fully capture what a person is carrying. Some days the need is not &quot;hope&quot; in a general sense. It is a question about conflict, waiting, work, grief, a difficult conversation, a relationship decision, a church experience, a temptation, or a crisis of confidence. Ask ChristBay exists for those moments. It extends the app&#x27;s original AI-guided reflection roots into a more mature, more personal experience. Voice input support also makes it easier to use when users want to speak instead of type.</p>
+          <p class="story-p">Language support has expanded dramatically as well. ChristBay now supports a broad international audience across more than one hundred locale options, making the app more accessible to users across countries, backgrounds, and language preferences. That growth reflects something important about the mission behind ChristBay: this is not intended to be a niche tool for one small group of English-speaking users only. It is being shaped as a calm, global Christian app that can travel with believers in many different contexts.</p>
+          <p class="story-p">The design direction has matured alongside the feature set. ChristBay still aims to feel calm, but it no longer feels minimal in a narrow sense. The app now includes a fuller dashboard, clearer navigation, visual tracking, richer surfaces, and a stronger sense of movement through the day. Daily verse presentation, prayer and Bible progress, quick actions, and the main-menu gateway all make it easier to move naturally through the app instead of treating it like a one-screen tool. ChristBay is still meant to be simple to use, but it now carries the substance of a deeper platform.</p>
+          <p class="story-p">That new structure makes ChristBay more useful across a full day of faith. In the morning, the app can help you begin with a verse, open the Bible, pray, and choose a guided reflection path before the noise of the day takes over. In the middle of the day, it can become a place to pause, reset, and return to truth through prayer, a short guidance response, a walk-with-me audio session, or a connected feature designed for stress, work, school, decision making, or emotional weight. In the evening, ChristBay becomes a place to review the day, write in a journal, revisit a prayer request, open Evening Reflection, read from Psalms, or use Let Go to place burdens before God. That broader daily usefulness is part of what makes ChristBay different now. It is not only for emergency moments. It is also for steady daily rhythm.</p>
+          <p class="story-p">The app also gives users more ways to save and return. Reflections do not need to vanish as soon as the moment passes. Sermon notes can be captured before they are forgotten. Prayer requests and answers can be revisited later. Bible reading can continue where it left off. Hymns, quotes, and heroes of faith can be reopened when needed. The experience is designed to support spiritual memory, not just spiritual reaction. That matters because Christian growth is often less about finding one powerful moment and more about returning to truth repeatedly over time. ChristBay supports that kind of return by helping users keep what mattered instead of losing it in the churn of the day.</p>
+          <p class="story-p">ChristBay is also intentional about tone. The app does not try to imitate social media, entertainment feeds, or trend-driven spirituality. It is designed to feel grounded, calm, and reverent. The words are meant to be accessible without becoming shallow. The visual atmosphere is meant to be strong without becoming loud. The guidance is meant to be warm without becoming vague. In a phone environment full of urgency, self-display, argument, and endless distraction, ChristBay tries to become the opposite kind of space: a quieter place where biblical truth can be encountered with less friction. For many users, that is not a minor design preference. It is one of the main reasons the app becomes a habit.</p>
+          <p class="story-p">The theological voice matters too. ChristBay is rooted in historic Protestant Christian conviction and treats Scripture as the final authority. That gives the app a clearer center. Grace is not presented as vague positivity. Christ is not reduced to symbolism. Prayer is not treated as a generic wellness exercise. The Bible is not handled as inspirational material detached from truth. ChristBay aims to be pastoral in tone but grounded in doctrine, gentle in presentation but serious about the Gospel, and honest about both suffering and hope. For users who want a Christian app that sounds recognizably Christian rather than merely spiritual, that matters.</p>
+          <p class="story-p">This grounding also shapes how ChristBay handles difficult themes. Hope is presented without denial. Forgiveness is presented without pretending it is easy. Temptation is spoken about with grace rather than shame. Peace is described as something rooted in the nearness of God, not just a breathing technique. Character formation is treated as slow discipleship, not self-optimization. Even when ChristBay offers short responses, it aims to carry a tone of biblical seriousness that respects the user&#x27;s spiritual life. That combination of brevity and weight is part of what made the first version work, and it remains part of the app now even as the product has become much broader.</p>
+          <p class="story-p">Another important part of ChristBay&#x27;s growth is that it now serves more kinds of Christian users without losing clarity. Some will use it primarily as a reflection and prayer app. Others will use it as a Bible and tracking app. Others will return most often for Selah, sermon notes, Christian quotes, or heritage content. Some will rely on Ask ChristBay and the connected premium tools. Some will use it during travel to find a nearby church. Some will use it to build daily household habits through family discipleship or worshipful routines. The app no longer assumes that every believer needs the exact same doorway on every day. It gives multiple kinds of entry without dissolving into confusion.</p>
+          <p class="story-p">That flexibility is especially helpful for people in changing seasons. A believer who opens ChristBay one month for grief and prayer may return the next month for Scripture habit building, then later for fasting guidance, sermon capture, or family devotion support. A student may begin with quick reflections, then start using Work and School Faith Mode, Bible tracking, and testimony tools. A parent may come first for calm encouragement, then later depend on prayer journaling, Selah, and family discipleship. A churchgoer may begin with the reflection doors, then gradually use sermon notes, church discovery, and Christian calendar features. ChristBay grows with the user more naturally now because it holds more of the Christian walk in one place.</p>
+          <p class="story-p">Privacy and personal dignity matter in that process. ChristBay is not designed as a noisy public platform. Much of what happens in the app belongs to a quieter part of life: prayer requests, questions, struggles, burdens, gratitude, repentance, reflection, and spiritual routine. The app is built to honor that tone. Users do not need to turn their spiritual life into public content in order to use ChristBay well. They can come privately, return often, and treat the app as a steady companion rather than a stage. For people who are tired of performative online environments, this becomes part of the product value.</p>
+          <p class="story-p">That matters for a very practical reason: many Christian apps solve one need at a time, and users end up juggling several different tools for reading Scripture, saving notes, writing prayers, finding reflection, revisiting hymns, or keeping track of spiritual habits. ChristBay is moving in the opposite direction. It is trying to gather many parts of daily Christian life into one coherent, quiet place. Not every user will use every section every day, and that is fine. The point is not to overwhelm. The point is to make it possible to stay inside one Christ-centered environment for more of your spiritual routine.</p>
+          <p class="story-p">ChristBay is especially useful for people who want faith support that fits real life instead of an idealized version of it. The app is built for everyday believers, not only for specialists, theologians, or people with unlimited time. It is built for the student trying to stay grounded at school. It is built for the parent who needs two calm minutes between responsibilities. It is built for the person sitting with anxiety, disappointment, temptation, or exhaustion. It is built for the believer who wants to read the Bible with more consistency. It is built for the user who wants a better prayer rhythm but needs structure. It is built for the person who wants help turning Sunday teaching into action on Tuesday. It is built for the Christian who wants a quieter phone and a stronger walk.</p>
+          <p class="story-p">At the same time, ChristBay is careful about what it is and what it is not. ChristBay is not a replacement for Scripture. It is not a replacement for church. It is not a replacement for pastoral care, discipleship, Christian friendship, or wise counsel from mature believers. It is a companion app. It is a place to pause, reflect, pray, read, track, remember, and return. It is there to support Christian life, not to replace the real means of grace God has given His people.</p>
+          <p class="story-p">That same clarity shapes the membership model. ChristBay keeps its core experience available through the Grace plan, because the app is built with the conviction that the Word of God should not be hidden behind a hard paywall. At the same time, the Blessed membership helps support the ministry and unlocks additional features, including subscriber-only tools such as Ask ChristBay, connected premium experiences, and full personalization. Blessed is not framed as access to Christianity itself. It is framed as a way to support ChristBay&#x27;s continued growth while opening additional layers of the product for users who want more.</p>
+          <p class="story-p">For users who stay on Grace, ChristBay still offers meaningful daily value. The reflection doors, core reading and prayer rhythms, and much of the app&#x27;s spiritual structure remain available. For users who choose Blessed, ChristBay opens into a deeper layer of guided answers, connected lifestyle tools, premium paths, and personalization. Either way, the app is designed to be an aid to faith, not a machine for pressure.</p>
+          <p class="story-p">Why do people choose ChristBay now? Some choose it because it is calmer than the rest of their phone. Some choose it because it gives short, Scripture-rooted content that respects their time without flattening the truth. Some choose it because it has grown beyond single-purpose inspiration and now helps with Bible reading, prayer tracking, journaling, worship, study, and Christian routine. Some choose it because they want one Christian space instead of several disconnected apps. Some choose it because they need a place where modern design and historic Christian grounding can live together without noise or trendiness taking over.</p>
+          <p class="story-p">ChristBay has grown from a first version with AI and fifteen category buttons into a much broader Christian app, but the mission has not changed. The app still exists to help users encounter biblical truth in daily life. The difference is that now it can serve that mission across more moments, more habits, more needs, and more parts of the Christian walk. Whether you want a short reflection, a chapter of Scripture, a prayer record, a sermon note, a hymn, a challenge, a tracker, a question answered through biblical guidance, or a quiet place to lay down what is heavy, ChristBay is built to meet you there with clarity and reverence.</p>
+          <p class="story-p">If you are looking for a Christian app that combines Scripture-rooted reflection, Bible reading, prayer tools, worship, study, habit tracking, and thoughtful daily guidance in one unified experience, ChristBay is ready for you. Open the app in the morning, return to it in the middle of the day, lean on it when life becomes noisy, and end the evening there in gratitude, confession, and peace. ChristBay is built to support a steadier walk with Christ, one quiet step at a time.</p>
+        </div>
+      </section>
+      <section class="story-section story-section--warm" id="what-s-new-in-version-2-0" aria-labelledby="what-s-new-in-version-2-0-h2">
+        <div class="container story-narrow">
+          <p class="story-section-label">Version 2.0</p>
+          <h2 class="story-h2" id="what-s-new-in-version-2-0-h2">What&#x27;s New in Version 2.0</h2>
+          <div class="story-divider" aria-hidden="true"></div>
+          <p class="story-p">ChristBay 2.0 is the biggest update in the history of the app.</p>
+          <p class="story-p">The earliest version of ChristBay was simple in the best way. You opened the app, tapped one of fifteen reflection categories, and received a concise Christian response designed to bring encouragement, biblical perspective, and calm into the day. That first experience was meaningful because it was focused. It gave people a fast way to step out of noise and into something more grounded. But it was also narrow by design. It was mainly about reflection. It helped in the moment, but it did not yet hold much of the wider Christian walk around that moment.</p>
+          <p class="story-p">Version 2.0 changes that.</p>
+          <p class="story-p">This release takes ChristBay from a reflections-first app into a much broader daily Christian companion. It is not a small feature drop, a light visual refresh, or a handful of add-ons around the edges. It is a full expansion of what ChristBay can be for the people who use it. The core heart remains the same: Scripture-rooted guidance, reverent design, and practical encouragement shaped by Christian truth. But now the app supports far more of the actual rhythm of faith. Reading. Prayer. Tracking. Journaling. Worship. Study. Reflection. Repentance. Personalization. Formation. Daily spiritual tools. And a much clearer sense of movement through the whole experience.</p>
+          <p class="story-p">One of the clearest changes in 2.0 is structural. ChristBay now feels like a fuller app instead of a single doorway. The old reflection core remains, but it now lives inside a larger environment built to support how believers actually move through a day or a week. There is a stronger home experience, a clearer navigation model, and a much more connected system of surfaces. Instead of feeling like you come into ChristBay only when you need one specific kind of answer, the app now invites you to stay for reading, prayer, tracking, worship, and ongoing spiritual habits.</p>
+          <p class="story-p">The new dashboard is a major part of that shift. Version 2.0 introduces a richer home experience that brings together daily verse context, progress signals, quick actions, and smoother entry points into the parts of the app users need most. Rather than pushing everyone straight into the same single-use flow, ChristBay now opens with a broader spiritual overview. That means daily life in the app feels more guided and less fragmented. You can see where you are, what you have been doing, and what you might want to return to next.</p>
+          <p class="story-p">The dashboard is also where Bible progress and prayer momentum become visible in a more integrated way. That is one of the deeper changes in 2.0: ChristBay no longer treats spiritual growth as something abstract. Version 2.0 introduces visible rhythm. Read today. Prayed today. Current streak. Connected feature activity. Recent consistency. These patterns now show up directly in the app experience, not as pressure, but as encouragement. The goal is not to turn faith into numbers. The goal is to help repeated practice become more tangible and therefore easier to continue.</p>
+          <p class="story-p">At the center of this updated navigation is the new main-menu gateway experience. ChristBay 2.0 organizes much more of the app around a unified entrance into the wider Christian life of the product. Instead of scattering features without a clear framework, 2.0 groups them into cleaner spiritual lanes: guidance and answers, Scripture and study, prayer and inner life, worship and Selah, community and mission, heritage and culture. This gives the app far more clarity. When users open ChristBay now, they are not guessing where things live. The app has a stronger internal map.</p>
+          <p class="story-p">The original reflection experience has not disappeared. In fact, version 2.0 preserves it intentionally. The fifteen reflection doors are still part of ChristBay and still matter. They remain one of the fastest ways to receive grounded Christian perspective when life is pressing in. The difference is that they now sit inside a much broader home. Daily Guidance, Faith and Trust, Prayer and Reflection, Hope in Difficult Times, Forgiveness, Love and Compassion, Strength and Courage, Gratitude, Purpose and Calling, Family and Relationships, Peace and Anxiety Relief, Wisdom of Jesus, Humility and Character, Overcoming Temptation, and Evening Reflection all remain available as part of the app&#x27;s identity. In 2.0, these are not relics from an earlier stage. They are the living front doors of the original ChristBay vision.</p>
+          <p class="story-p">What has changed is that those reflection doors are no longer the whole house.</p>
+          <p class="story-p">Version 2.0 introduces a dedicated Bible experience that dramatically expands what users can do inside ChristBay. You can now move through all sixty-six books of Scripture, open chapters directly, continue where you left off, and build a more concrete Bible reading rhythm over time. This is one of the most important changes in the update because it anchors ChristBay more explicitly in direct engagement with the Word. The app is no longer only a place that quotes Scripture in reflections. It is now a place where you can sit down and read.</p>
+          <p class="story-p">That Bible experience is supported by tracking. ChristBay 2.0 includes Bible progress visibility, reading continuation, and markers that help users see both momentum and return points. That means the app now supports Scripture habits over time instead of only isolated moments of encouragement. For people who wanted ChristBay to be part of ongoing spiritual formation rather than just occasional comfort, this is a major leap forward.</p>
+          <p class="story-p">Prayer has also received a major expansion in 2.0. ChristBay now includes a more developed prayer layer with dedicated prayer tools, prayer tracking, and a prayer journal. Users can record requests, revisit them later, reflect on what they are carrying, and mark when prayers have been answered. This brings a longer memory into the app. Prayer is no longer something that happens and disappears. ChristBay can now help hold that history with the user.</p>
+          <p class="story-p">The prayer tracker adds another important layer by making rhythm visible. Many believers want to pray more consistently but struggle to sense whether they are growing, drifting, or simply forgetting. Version 2.0 gives them a clearer picture without turning prayer into performance. The experience is meant to be supportive, not severe. It helps users notice continuity and return, which is often what growth actually looks like.</p>
+          <p class="story-p">One of the most distinctive new additions in 2.0 is Let Go, a dedicated repentance-and-grace experience designed around surrender, confession, and release. This is a strong example of the new direction of ChristBay. The app is no longer only informational. It is becoming more devotional and experiential. Let Go invites the user to name what is weighing on the heart, slow down, and move through a more immersive act of bringing burdens to the cross. It ends not in vague self-help language, but in grace-centered biblical reassurance. This feature gives ChristBay a spiritual tone that is deeper and more embodied than the first version.</p>
+          <p class="story-p">Version 2.0 also introduces a major connected-feature layer that turns ChristBay into a practical daily faith toolkit. The Connected Features hub brings together new guided experiences designed around real needs, not generic productivity ideas. These tools are built to help users carry biblical wisdom into emotion, memory, decision making, work, worship, family life, church life, testimony, and spiritual discipline.</p>
+          <p class="story-p">Right Now Faith Help is part of this new layer, offering fast support when someone feels anxious, angry, sad, tempted, grateful, lost, lonely, or afraid. It is one of the clearest examples of ChristBay&#x27;s move toward lived daily guidance. Sermon Companion helps users carry Sunday&#x27;s teaching into the week instead of losing it by Monday afternoon. Memory Verse Trainer adds repetition and retention. Decision Discernment helps users think through motives, waiting, counsel, faith, and fear before acting. Work and School Faith Mode helps bring Christian witness and integrity into ordinary public life.</p>
+          <p class="story-p">Version 2.0 also adds Apologetics Quick Answers, Sacred Stillness, Family Discipleship, and Testimony Builder. These features broaden ChristBay&#x27;s usefulness in a meaningful way. Users are not only receiving encouragement anymore. They are being given ways to practice, remember, articulate, and apply. Family Discipleship helps create quick devotion patterns in the home. Testimony Builder helps structure a clear Jesus-centered witness. Sacred Stillness offers grounding when life feels too heavy. These are the kinds of additions that move ChristBay from &quot;helpful app&quot; toward &quot;daily spiritual companion.&quot;</p>
+          <p class="story-p">The new connected layer continues with Walk With Me Audio, Geo-Prayer Missions, Faith Challenges, Church Sync, and Worship Silent Mode. Walk With Me Audio adds guided Scripture-prayer sessions for people who want ChristBay during a walk, commute, or break. Geo-Prayer Missions helps users pray for the neighborhoods and public places around them. Faith Challenges introduces multi-day habit-building paths around gratitude, forgiveness, courage, and growth. Church Sync adds a more week-to-week community dimension. Worship Silent Mode supports gathered settings with a quieter interface and quicker access to service-ready tools. Together these features show that 2.0 is not just broader in quantity; it is broader in vision.</p>
+          <p class="story-p">Study and Christian formation receive a major boost in this release too. Version 2.0 expands ChristBay with dedicated content areas for the Ten Commandments, the Beatitudes, fasting guidance, sermon notes, Christian quotes, heroes of faith, and Bible quiz experiences. Each one adds a different kind of depth. The Ten Commandments and Beatitudes sharpen moral and kingdom formation. The Fasting Guide brings structure to a discipline many believers want to practice but do not know how to begin. Sermon Notes helps users retain truth before the week washes it away. Christian Quotes and Heroes of Faith reconnect users with voices and witnesses beyond the present moment. Quiz features add review, testing, and learning in a lighter but still meaningful form.</p>
+          <p class="story-p">Version 2.0 also introduces Selah, a larger sacred-music and worship environment inside ChristBay. This is a significant change in the tone of the app. The first version was primarily text guidance. Selah adds a space for worshipful pause through hymns, Psalms, instrumentals, and devotional requests built around hymn or psalm reflection. This matters because Christian growth is not only driven by advice and explanation. It is also shaped by song, poetry, memory, beauty, and worship. Selah widens the emotional and devotional range of ChristBay in a way that feels both gentle and theologically fitting.</p>
+          <p class="story-p">The Christian Calendar is another important 2.0 addition. By bringing seasons, feast days, and meaningful moments of Christian remembrance into the app, ChristBay now helps users live with a broader awareness of sacred time. This makes the experience feel less disconnected from the historical life of the Church. The app begins to situate daily personal faith inside a larger communal and historic rhythm.</p>
+          <p class="story-p">Community and real-world connection grow in 2.0 as well. ChristBay now includes nearby church discovery so users can find churches with map, distance, and direction context. This may sound simple, but it marks an important shift. ChristBay is not only pointing inward toward private reflection anymore. It is also pointing outward toward gathered worship and embodied community. For an app built around Christian faith, that is a healthy expansion.</p>
+          <p class="story-p">Another major change in 2.0 is personalization. The earliest version of ChristBay was intentionally simple and mostly identical for everyone. In this release, users can now shape more of the app around their own walk. ChristBay 2.0 introduces a personalization profile with display name, character style, spiritual focus, communication tone, and personal summary. This gives the app a stronger sense of fit without making it noisy or overly social. It helps the app feel more attentive while staying calm and private.</p>
+          <p class="story-p">This personalization layer matters especially in relation to Ask ChristBay, one of the headline additions of 2.0. Ask ChristBay expands the original AI-guided roots of the app by allowing users to type their own question and receive a Scripture-shaped response tailored to their situation. Instead of only choosing from predefined categories, users can now bring their actual question into the app. This is a major leap for ChristBay because it transforms the product from a library of prepared pathways into a more responsive spiritual tool. Voice input support strengthens this further by letting users speak instead of type when they want a more natural flow.</p>
+          <p class="story-p">ChristBay 2.0 also expands the app&#x27;s language reach in a dramatic way. The product now supports a much wider international audience across more than one hundred locale options. That is not a cosmetic add-on. It changes who the app can serve and how accessible it is around the world. A calmer Christian app becomes much more meaningful when users can approach it in the language they actually live in.</p>
+          <p class="story-p">Membership and support systems have also evolved in this release. Version 2.0 introduces a clearer Blessed membership path, a stronger subscription presentation, referral-code support, donation options, and a more explicit explanation of how the free Grace experience and membership layer relate to each other. The app makes it clear that the core experience remains available because the team does not believe the Word of God should sit behind a total paywall. At the same time, Blessed now more clearly supports the ministry and unlocks subscriber-focused features such as Ask ChristBay, premium connected tools, and full personalization.</p>
+          <p class="story-p">The design system itself feels more mature in 2.0. Visual identity, motion, layout, and hierarchy are more coherent across the app. There is a stronger ChristBay atmosphere now: calmer but richer, more guided but not cluttered, more immersive without becoming heavy. The app feels less like a minimal prototype and more like a distinctive spiritual product with its own tone. That includes improved sectioning, more deliberate cards and surfaces, clearer pathways between features, and better continuity across dashboard, menu, content areas, and premium flows.</p>
+          <p class="story-p">Another important part of the 2.0 story is that the update does not treat feature expansion as an excuse for clutter. There is a visible design effort here to make the app broader without making it busier. The reflections experience remains easy to understand. The main menu groups tools by spiritual purpose. The dashboard keeps key actions close. The visual language stays recognizably ChristBay across reading, prayer, premium, and connected features. In other words, 2.0 is not just &quot;more screens.&quot; It is a stronger product system. That matters because users can only benefit from a large update if they can still understand where they are and what to do next.</p>
+          <p class="story-p">The update also brings a stronger sense of continuity between private devotion and practical daily life. In the old version, ChristBay mainly helped at the point of reflection. In 2.0, the product is much better at helping truth move into action. A sermon note can become a weekday application. A reflection can lead into Bible reading. A burden can move into prayer journaling. A moment of fear can move into Right Now Faith Help. A walk can become a guided Scripture session. A church service can be supported by Worship Silent Mode. A neighborhood can become a prayer field through Geo-Prayer Missions. This kind of flow is one of the hidden strengths of the update. The parts of the app now speak to each other more clearly.</p>
+          <p class="story-p">Version 2.0 also improves ChristBay&#x27;s identity as a Christian app for more than one kind of user. People who came for short reflections still have those reflection doors. People who want more direct Bible engagement now have a clearer reading path. People who want deeper routines can use trackers, journals, and multi-day challenges. People who care about Christian culture and memory can live in Selah, Heroes of Faith, Quotes, Quiz, and the Christian Calendar. People who want more personal guidance can use Ask ChristBay and personalization. The update does not force everyone into one path. It creates a wider spiritual house with multiple meaningful rooms.</p>
+          <p class="story-p">This matters especially for returning users who may have loved the original ChristBay but wanted more reason to come back every day. Version 2.0 answers that question in several ways at once. There is now more to revisit, more to build, more to track, more to remember, and more to practice. The app can now serve quick need and long-term rhythm at the same time. That is one of the strongest changes in the entire release. ChristBay is no longer only reactive. It can now be intentionally woven into routine.</p>
+          <p class="story-p">From a product direction standpoint, 2.0 also clarifies what ChristBay is trying to become. It is not trying to imitate generic wellness apps with Christian wording added later. It is not trying to become a loud social platform for religious content. And it is not trying to replace church, Scripture, or embodied discipleship. The app is positioning itself as a calm, Scripture-rooted companion for everyday Christian life. The 2.0 update makes that identity much more visible. It strengthens the theological center, broadens the practical usefulness, and deepens the devotional atmosphere all at once.</p>
+          <p class="story-p">The language expansion in this version is part of that same vision. By making ChristBay available across a far wider set of locale options, 2.0 signals that the app is being built for believers in many settings, not just one region or one default audience. A global language footprint changes how an app feels. It means more users can approach reflection, prayer, and study in the language they think and pray in. For a Christian product centered on Scripture-rooted guidance, that is not a side improvement. It is a mission-level one.</p>
+          <p class="story-p">The update also improves how users move through different parts of the app. Quick actions, consistent sectioning, and more discoverable entry points mean users spend less time hunting and more time engaging. In the earliest version, simplicity came partly from a lack of breadth. In 2.0, the challenge was different: preserve calm while greatly increasing scope. This release solves that by creating cleaner pathways instead of simply stacking features on top of one another.</p>
+          <p class="story-p">From a ministry perspective, 2.0 is also important because it makes ChristBay more usable across different moments of need. In the first version, the app was strongest when you needed one short, biblical reflection. In 2.0, ChristBay can now serve before, during, and after those moments. Before: daily verse, Bible reading, prayer setup, faith challenges, and sermon preparation. During: Ask ChristBay, Right Now Faith Help, Walk With Me Audio, Decision Discernment, Let Go. After: journaling, prayer tracking, saved notes, habit visibility, hymn and Psalm return, and more. The app has become more cyclical, more companion-like, and more able to stay with the user through the day.</p>
+          <p class="story-p">For longtime users, this update should feel familiar at the center and dramatically larger at the edges. ChristBay still speaks in the calm, Scripture-rooted voice that made the original version valuable. The app still believes in concise guidance, daily usefulness, and reverent design. But now there is more room to grow inside it. More ways to return. More parts of the Christian walk it can hold.</p>
+          <p class="story-p">For new users, 2.0 is the best entry point ChristBay has ever had. The app now explains itself more clearly through its structure. The dashboard communicates what matters. The main menu reveals the range of the product. The reflection doors remain easy to understand. Study, prayer, and worship features are no longer hidden behind a narrow initial concept. ChristBay now feels like a place you can build a rhythm in, not just visit occasionally.</p>
+          <p class="story-p">This is also one of the reasons the update matters beyond marketing language. Version 2.0 is not simply &quot;more content.&quot; It is a new stage of product identity. ChristBay is becoming a fuller Christian environment that helps users reflect, read, pray, track, learn, sing, remember, and keep walking. The update does not abandon the original AI-guided category experience. It fulfills it by placing it inside a more complete discipleship-shaped app.</p>
+          <p class="story-p">In practical terms, here is what version 2.0 means: a richer home experience, clearer navigation, preserved reflection doors, a full Bible layer, Bible tracking, prayer tracking, prayer journaling, immersive repentance and release, connected lifestyle features, sacred-music space through Selah, study tools, formation content, community discovery, personalization, Ask ChristBay, voice input, expanded language support, stronger membership paths, donation and referral support, and a much more mature visual system.</p>
+          <p class="story-p">That is why we are calling this a giant update. Because it is.</p>
+          <p class="story-p">ChristBay 2.0 takes the original app that began with AI and fifteen categories and grows it into something far more complete without losing the calm, Scripture-rooted heart that made it special. Whether you came to ChristBay for reflection, for prayer, for reading, for worship, for formation, or simply because you need a quieter place to return to God through your phone, version 2.0 gives you more of that life in one place than ever before.</p>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <section class="story-cta" aria-label="Download ChristBay">
+    <div class="story-cta-inner">
+      <h2>Walk with ChristBay today</h2>
+      <p>Download the app for iOS or Android and begin — or return to — a steadier rhythm of prayer, Scripture, and reflection.</p>
+      <div class="story-cta-btns">
+        <a href="https://apps.apple.com/se/app/christbay-daglig-reflektion/id6759575925">App Store</a>
+        <a href="https://play.google.com/store/apps/details?id=com.oakdev.christbay" class="secondary">Google Play</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer" role="contentinfo">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="/assets/brand.png" alt="ChristBay" />
+        <span class="footer-brand-name">ChristBay</span>
+      </div>
+      <nav class="footer-nav" aria-label="Footer links">
+        <a href="/privacy/">Privacy Policy</a>
+        <a href="/terms/">Terms of Use</a>
+        <a href="/support/">Support</a>
+        <a href="/history/" aria-current="page">Our Story</a>
+        <a href="/join/">Join with code</a>
+        <a href="/delete-account/">Delete Account</a>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copyright">&copy; 2026 OakDev &amp; AI AB. All rights reserved.</p>
+      <p class="footer-tagline">Walk in the Word. Grow in grace.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {{
+  var downloadToggle = document.getElementById('download-toggle');
+  var downloadMenu = document.getElementById('download-menu');
+  if (downloadToggle && downloadMenu) {{
+    downloadToggle.addEventListener('click', function (e) {{
+      e.preventDefault();
+      var isOpen = downloadMenu.classList.contains('open');
+      downloadMenu.classList.toggle('open');
+      downloadToggle.setAttribute('aria-expanded', !isOpen);
+    }});
+    document.addEventListener('click', function (e) {{
+      if (!downloadToggle.contains(e.target) && !downloadMenu.contains(e.target)) {{
+        downloadMenu.classList.remove('open');
+        downloadToggle.setAttribute('aria-expanded', 'false');
+      }}
+    }});
+    document.addEventListener('keydown', function (e) {{
+      if (e.key === 'Escape') {{
+        downloadMenu.classList.remove('open');
+        downloadToggle.setAttribute('aria-expanded', 'false');
+      }}
+    }});
+    downloadMenu.querySelectorAll('a').forEach(function (link) {{
+      link.addEventListener('click', function () {{
+        downloadMenu.classList.remove('open');
+        downloadToggle.setAttribute('aria-expanded', 'false');
+      }});
+    }});
+  }}
+}})();
+</script>
+</body>
+</html>
