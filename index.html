@@ -296,48 +296,72 @@
     @media (max-width: 800px) { .about-inner { grid-template-columns: 1fr; gap: 2.5rem; } }
 
     /* ============================================================
-       App showcase (device mockup)
+       App showcase (device mockup) — single card: image band + copy
     ============================================================ */
     .app-showcase {
       background: linear-gradient(180deg, var(--white) 0%, var(--warm-white) 100%);
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
     }
-    .app-showcase-inner {
-      display: grid;
-      grid-template-columns: minmax(0, 1.18fr) minmax(0, 1fr);
-      gap: 3rem 3.25rem;
-      align-items: center;
+    .app-showcase-stack {
+      max-width: 880px;
+      margin: 0 auto;
+    }
+    .app-showcase-intro {
+      text-align: center;
+      margin-bottom: 2.25rem;
+    }
+    .app-showcase-intro .divider {
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .app-showcase-panel {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      overflow: hidden;
+    }
+    .app-showcase-visual {
+      margin: 0;
+      padding: 2rem 1.75rem 1.5rem;
+      text-align: center;
+      background:
+        radial-gradient(ellipse 80% 90% at 50% 0%, rgba(201, 168, 76, 0.07) 0%, transparent 55%),
+        linear-gradient(180deg, var(--cream) 0%, var(--white) 72%);
+      border-bottom: 1px solid rgba(224, 219, 208, 0.85);
     }
     .app-showcase-device {
-      margin: 0;
-      justify-self: center;
+      margin: 0 auto;
       width: 100%;
-      max-width: min(680px, 100%);
+      max-width: min(640px, 100%);
     }
     .app-showcase-device img {
       width: 100%;
       height: auto;
-      max-width: min(400px, 100%);
+      max-width: 100%;
       margin: 0 auto;
       display: block;
-      border-radius: 12px;
-      filter: drop-shadow(0 28px 56px rgba(26, 39, 68, 0.2));
-    }
-    .app-showcase-device--phones img {
-      max-width: 100%;
       border-radius: 14px;
-      filter: drop-shadow(0 32px 56px rgba(26, 39, 68, 0.18));
+      filter: drop-shadow(0 28px 48px rgba(26, 39, 68, 0.16));
+    }
+    .app-showcase-copy {
+      padding: 2rem 2rem 2.5rem;
+    }
+    @media (min-width: 640px) {
+      .app-showcase-copy { padding: 2.25rem 2.75rem 2.75rem; }
+      .app-showcase-visual { padding: 2.25rem 2rem 1.75rem; }
     }
     .app-showcase-copy .section-body { max-width: none; }
     .app-showcase-lead {
       font-size: 1.0625rem;
       color: var(--text-secondary);
-      line-height: 1.75;
+      line-height: 1.78;
       margin-bottom: 1rem;
     }
+    .app-showcase-lead:last-of-type { margin-bottom: 0; }
     .app-showcase-list {
-      margin-top: 1.375rem;
+      margin-top: 1.5rem;
       display: flex;
       flex-direction: column;
       gap: 0.875rem;
@@ -345,7 +369,7 @@
     .app-showcase-list li {
       font-size: 0.9375rem;
       color: var(--text-secondary);
-      line-height: 1.65;
+      line-height: 1.68;
       padding-left: 1.5rem;
       position: relative;
     }
@@ -358,10 +382,6 @@
       height: 7px;
       border-radius: 50%;
       background: var(--gold);
-    }
-    @media (max-width: 900px) {
-      .app-showcase-inner { grid-template-columns: 1fr; text-align: center; }
-      .app-showcase-list { text-align: left; max-width: 540px; margin-left: auto; margin-right: auto; }
     }
 
     /* ============================================================
@@ -896,30 +916,33 @@
     ============================================================ -->
     <section class="app-showcase" id="app-preview" aria-labelledby="preview-heading">
       <div class="container">
-        <div class="app-showcase-inner">
-          <figure class="app-showcase-device app-showcase-device--phones reveal">
-            <img
-              src="/assets/phones.png"
-              alt="ChristBay on three phones — scripture, reflections, and journal in a calm interface"
-              width="2752"
-              height="1536"
-              loading="lazy"
-              decoding="async"
-            />
-          </figure>
-          <div class="app-showcase-copy reveal reveal-d2">
+        <div class="app-showcase-stack">
+          <header class="app-showcase-intro reveal">
             <span class="section-label">In your hand</span>
             <h2 class="section-title" id="preview-heading">The same quiet focus, pocket-sized</h2>
             <div class="divider"></div>
-            <br />
-            <p class="app-showcase-lead">ChristBay is built for the in-between moments &mdash; before the house wakes up, on the commute, or when you need ten minutes to reset your heart. Open the App, see where you left off, and step straight into scripture, a guided reflection, or a line in your journal &mdash; no feeds, no noise.</p>
-            <p class="app-showcase-lead">The home experience keeps the essentials upfront: your Reflection balance, today&rsquo;s verse, paths into the devotional library, shortcuts to Ask Father ChristBay (with Blessed), and your prayer journal. Settings stay out of the way until you need them.</p>
-            <ul class="app-showcase-list">
-              <li><strong>Readable at a glance.</strong> Generous type, calm spacing, and contrast tuned for early mornings and bedside reading.</li>
-              <li><strong>One-handed flow.</strong> Large touch targets and predictable navigation so you can stay in prayer without fiddling with the UI.</li>
-              <li><strong>Offline-friendly habits.</strong> Journal and revisit saved passages; the App syncs subscription status and fresh content when you&rsquo;re back online.</li>
-              <li><strong>Your platform.</strong> Download on the App Store or Google Play &mdash; same ChristBay identity, store-native purchases and restore flows.</li>
-            </ul>
+          </header>
+          <div class="app-showcase-panel reveal reveal-d2">
+            <figure class="app-showcase-visual app-showcase-device">
+              <img
+                src="/assets/phones.png"
+                alt="ChristBay on three phones — scripture, reflections, and journal in a calm interface"
+                width="2752"
+                height="1536"
+                loading="lazy"
+                decoding="async"
+              />
+            </figure>
+            <div class="app-showcase-copy">
+              <p class="app-showcase-lead">ChristBay is built for the in-between moments &mdash; before the house wakes up, on the commute, or when you need ten minutes to reset your heart. Open the App, see where you left off, and step straight into scripture, a guided reflection, or a line in your journal &mdash; no feeds, no noise.</p>
+              <p class="app-showcase-lead">The home experience keeps the essentials upfront: your Reflection balance, today&rsquo;s verse, paths into the devotional library, shortcuts to Ask Father ChristBay (with Blessed), and your prayer journal. Settings stay out of the way until you need them.</p>
+              <ul class="app-showcase-list">
+                <li><strong>Readable at a glance.</strong> Generous type, calm spacing, and contrast tuned for early mornings and bedside reading.</li>
+                <li><strong>One-handed flow.</strong> Large touch targets and predictable navigation so you can stay in prayer without fiddling with the UI.</li>
+                <li><strong>Offline-friendly habits.</strong> Journal and revisit saved passages; the App syncs subscription status and fresh content when you&rsquo;re back online.</li>
+                <li><strong>Your platform.</strong> Download on the App Store or Google Play &mdash; same ChristBay identity, store-native purchases and restore flows.</li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
