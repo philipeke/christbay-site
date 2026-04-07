@@ -160,15 +160,17 @@ TEMPLATE = """<!DOCTYPE html>
     .story-p{{font-size:1.015rem;color:var(--text-secondary);line-height:1.82;margin-bottom:1.125rem}}
     .story-p:last-child{{margin-bottom:0}}
 
-    .story-cta{{padding:4rem 0 5rem;background:linear-gradient(135deg,var(--navy-deep),var(--navy));text-align:center}}
-    .story-cta-inner{{max-width:32rem;margin:0 auto;padding:0 1.5rem}}
-    .story-cta h2{{font-size:clamp(1.35rem,2.5vw,1.75rem);font-weight:700;color:var(--white);margin-bottom:.75rem;letter-spacing:-.02em}}
-    .story-cta p{{font-size:.9375rem;color:rgba(255,255,255,.65);line-height:1.7;margin-bottom:1.5rem}}
-    .story-cta-btns{{display:flex;flex-wrap:wrap;gap:.75rem;justify-content:center}}
-    .story-cta a{{display:inline-flex;align-items:center;gap:.5rem;background:var(--gold);color:var(--navy-deep);padding:.75rem 1.5rem;border-radius:100px;font-size:.9375rem;font-weight:600;transition:transform var(--transition),box-shadow var(--transition),background var(--transition)}}
-    .story-cta a:hover{{background:var(--gold-light);transform:translateY(-2px);box-shadow:0 8px 24px rgba(201,168,76,.3)}}
-    .story-cta a.secondary{{background:rgba(255,255,255,.12);color:var(--white);border:1px solid rgba(255,255,255,.35)}}
-    .story-cta a.secondary:hover{{background:rgba(255,255,255,.2);box-shadow:none}}
+    .cta-banner{{background:linear-gradient(135deg,var(--navy-deep),var(--navy));padding:5rem 1.5rem;text-align:center;position:relative;overflow:hidden}}
+    .cta-banner::before{{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(201,168,76,.06) 0%,transparent 60%);pointer-events:none}}
+    .cta-inner{{position:relative;z-index:1;max-width:600px;margin:0 auto}}
+    .cta-inner h2{{font-size:clamp(1.75rem,3.5vw,2.25rem);font-weight:800;color:var(--white);margin-bottom:1rem;letter-spacing:-.02em}}
+    .cta-inner p{{font-size:1.0625rem;color:rgba(255,255,255,.65);margin-bottom:2rem;line-height:1.7}}
+    .cta-buttons{{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}}
+    .btn-store{{display:inline-flex;align-items:center;gap:.625rem;background:var(--white);color:var(--navy-deep);padding:.8125rem 1.625rem;border-radius:var(--radius-sm);font-weight:600;box-shadow:0 2px 16px rgba(0,0,0,.2);transition:transform var(--transition),box-shadow var(--transition)}}
+    .btn-store:hover{{transform:translateY(-2px);box-shadow:0 6px 28px rgba(0,0,0,.25)}}
+    .btn-store-text{{display:flex;flex-direction:column;align-items:flex-start;line-height:1.1}}
+    .btn-store-text span:first-child{{font-size:.6875rem;font-weight:400;opacity:.65}}
+    .btn-store-text span:last-child{{font-size:1rem;font-weight:700;letter-spacing:-.01em}}
 
     .site-footer{{background:#0b1220;color:rgba(255,255,255,.5);padding:4.5rem 1.5rem 2.5rem}}
     .footer-inner{{max-width:var(--max-width);margin:0 auto}}
@@ -242,13 +244,23 @@ TEMPLATE = """<!DOCTYPE html>
     </div>
   </div>
 
-  <section class="story-cta" aria-label="Download ChristBay">
-    <div class="story-cta-inner">
+  <section class="cta-banner" aria-label="Download call to action">
+    <div class="cta-inner">
       <h2>Walk with ChristBay today</h2>
       <p>Download the app for iOS or Android and begin — or return to — a steadier rhythm of prayer, Scripture, and reflection.</p>
-      <div class="story-cta-btns">
-        <a href="https://apps.apple.com/se/app/christbay-daglig-reflektion/id6759575925">App Store</a>
-        <a href="https://play.google.com/store/apps/details?id=com.oakdev.christbay" class="secondary">Google Play</a>
+      <div class="cta-buttons">
+        <a href="https://apps.apple.com/se/app/christbay-daglig-reflektion/id6759575925" class="btn-store" aria-label="Download on the App Store">
+          <svg viewBox="0 0 24 24" width="22" height="27" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+            <path fill="#1a2744" d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+          </svg>
+          <div class="btn-store-text"><span>Download on the</span><span>App Store</span></div>
+        </a>
+        <a href="https://play.google.com/store/apps/details?id=com.oakdev.christbay" class="btn-store" aria-label="Download on Google Play">
+          <svg viewBox="0 0 24 24" width="22" height="27" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+            <path fill="#1a2744" d="M3.609 1.814L13.792 12 3.609 22.186c-.386.387-.593.916-.593 1.465V1.349c0 .549.207 1.078.593 1.465zm10.908 10.911L21.268 24 3.609 1.814 14.517 12.722z"/>
+          </svg>
+          <div class="btn-store-text"><span>Download on</span><span>Google Play</span></div>
+        </a>
       </div>
     </div>
   </section>
