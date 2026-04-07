@@ -90,14 +90,25 @@
       position: relative; z-index: 1; max-width: 720px; margin: 0 auto;
       padding-bottom: 9rem;
     }
-    .hero-wave {
+    /* Soft transition to body — no hard SVG wave; layered fade reads calmer */
+    .hero-bottom {
       display: block;
       width: 100%;
-      height: clamp(44px, 7vw, 72px);
+      height: clamp(64px, 10vw, 112px);
       margin-bottom: -1px;
-      color: var(--white);
+      flex-shrink: 0;
+      background:
+        radial-gradient(ellipse 85% 100% at 50% 0%, rgba(255, 255, 255, 0.06) 0%, transparent 58%),
+        linear-gradient(
+          180deg,
+          rgba(13, 21, 38, 0) 0%,
+          rgba(18, 29, 53, 0.12) 12%,
+          rgba(26, 39, 68, 0.28) 32%,
+          rgba(240, 236, 228, 0.5) 58%,
+          rgba(249, 247, 244, 0.88) 78%,
+          #ffffff 100%
+        );
     }
-    .hero-wave path { fill: currentColor; }
     .hero-logo-wrap {
       position: relative; display: flex; align-items: center;
       justify-content: center; margin: 0 auto 2.5rem;
@@ -233,7 +244,11 @@
     /* ============================================================
        What's New (2.0 Highlights)
     ============================================================ */
-    .whats-new { background: var(--white); }
+    .whats-new {
+      background: var(--white);
+      /* Hairline gold at seam — ties hero to content without a heavy bar */
+      box-shadow: inset 0 1px 0 0 rgba(201, 168, 76, 0.22);
+    }
     .new-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
     .new-card {
       position: relative; background: var(--warm-white);
@@ -300,20 +315,29 @@
     }
     .app-showcase-inner {
       display: grid;
-      grid-template-columns: 1fr 1.08fr;
-      gap: 3rem 3.5rem;
+      grid-template-columns: minmax(0, 1.18fr) minmax(0, 1fr);
+      gap: 3rem 3.25rem;
       align-items: center;
     }
     .app-showcase-device {
       margin: 0;
       justify-self: center;
+      width: 100%;
+      max-width: min(680px, 100%);
     }
     .app-showcase-device img {
       width: 100%;
+      height: auto;
       max-width: min(400px, 100%);
       margin: 0 auto;
+      display: block;
       border-radius: 12px;
       filter: drop-shadow(0 28px 56px rgba(26, 39, 68, 0.2));
+    }
+    .app-showcase-device--phones img {
+      max-width: 100%;
+      border-radius: 14px;
+      filter: drop-shadow(0 32px 56px rgba(26, 39, 68, 0.18));
     }
     .app-showcase-copy .section-body { max-width: none; }
     .app-showcase-lead {
@@ -493,6 +517,51 @@
       pointer-events: none;
     }
     .premium-inner { position: relative; z-index: 1; }
+    .premium-intro-grid {
+      display: grid;
+      grid-template-columns: 1fr minmax(280px, 0.88fr);
+      gap: 2.5rem 3.25rem;
+      align-items: center;
+      margin-bottom: 3.25rem;
+    }
+    .premium-intro-copy .section-body { max-width: none; line-height: 1.78; }
+    .premium-intro-visual {
+      margin: 0;
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.04);
+      box-shadow:
+        0 24px 56px rgba(0, 0, 0, 0.38),
+        0 0 0 1px rgba(255, 255, 255, 0.1);
+    }
+    .premium-intro-visual::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      pointer-events: none;
+      box-shadow: inset 0 0 0 1px rgba(201, 168, 76, 0.28);
+    }
+    .premium-intro-visual img {
+      display: block;
+      width: 100%;
+      height: auto;
+      vertical-align: middle;
+    }
+    @media (max-width: 900px) {
+      .premium-intro-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        margin-bottom: 2.5rem;
+      }
+      .premium-intro-visual {
+        order: -1;
+        max-width: min(400px, 100%);
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
     .premium-tiers { display: grid; grid-template-columns: 1fr 1fr; gap: 1.375rem; margin-bottom: 3.75rem; }
     .tier-card {
       background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.11);
@@ -727,9 +796,7 @@
           </div>
         </div>
       </div>
-      <svg class="hero-wave" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 48" preserveAspectRatio="none" aria-hidden="true" focusable="false">
-        <path d="M0 24 C 240 6 480 42 720 24 C 960 6 1200 42 1440 24 L 1440 48 L 0 48 Z" />
-      </svg>
+      <div class="hero-bottom" aria-hidden="true"></div>
     </section>
 
     <!-- ============================================================
@@ -812,12 +879,12 @@
     <section class="app-showcase" id="app-preview" aria-labelledby="preview-heading">
       <div class="container">
         <div class="app-showcase-inner">
-          <figure class="app-showcase-device reveal">
+          <figure class="app-showcase-device app-showcase-device--phones reveal">
             <img
-              src="/assets/e92c86b7-f65b-4afa-86b3-941351bbbb13.png"
-              alt="ChristBay on iPhone — daily scripture, reflections, and journal in one calm screen"
-              width="900"
-              height="1800"
+              src="/assets/phones.png"
+              alt="ChristBay on three phones — scripture, reflections, and journal in a calm interface"
+              width="2752"
+              height="1536"
               loading="lazy"
               decoding="async"
             />
@@ -1101,12 +1168,24 @@
     <section class="premium-section" id="premium" aria-labelledby="premium-heading">
       <div class="container">
         <div class="premium-inner">
-          <div class="section-header reveal">
-            <span class="section-label">Premium</span>
-            <h2 class="section-title light" id="premium-heading">Blessed &mdash; subscription</h2>
-            <div class="divider"></div>
-            <br />
-            <p class="section-body" style="color: rgba(255,255,255,0.6);">Start free with <strong>12 Reflections</strong> to explore ChristBay. <strong>Blessed</strong> is a subscription: every billing month you receive <strong>100 Reflections</strong> while active, plus full access to every premium-only experience &mdash; Ask Father ChristBay, the full devotional library, and every feature that is marked locked in the App for free users. Cancel anytime in the App Store or Google Play. Optional top-up packs add Reflections in one-time purchases when you need more.</p>
+          <div class="premium-intro-grid reveal">
+            <div class="section-header premium-intro-copy">
+              <span class="section-label">Premium</span>
+              <h2 class="section-title light" id="premium-heading">Blessed &mdash; subscription</h2>
+              <div class="divider"></div>
+              <br />
+              <p class="section-body" style="color: rgba(255,255,255,0.65);">Start free with <strong>12 Reflections</strong> to explore ChristBay. <strong>Blessed</strong> is a subscription: every billing month you receive <strong>100 Reflections</strong> while active, plus full access to every premium-only experience &mdash; Ask Father ChristBay, the full devotional library, and every feature that is marked locked in the App for free users. Cancel anytime in the App Store or Google Play. Optional top-up packs add Reflections in one-time purchases when you need more.</p>
+            </div>
+            <figure class="premium-intro-visual">
+              <img
+                src="/assets/Gemini_Generated_Image_cpz8ubcpz8ubcpz8.png"
+                alt="ChristBay Blessed subscription"
+                width="1024"
+                height="1024"
+                loading="lazy"
+                decoding="async"
+              />
+            </figure>
           </div>
           <div class="premium-tiers reveal">
             <div class="tier-card">
