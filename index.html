@@ -528,53 +528,13 @@
     }
     .premium-inner { position: relative; z-index: 1; min-width: 0; }
     .premium-intro-grid {
-      display: grid;
-      grid-template-columns: 1fr minmax(280px, 0.88fr);
-      gap: 2.5rem 3.25rem;
-      align-items: center;
       margin-bottom: 3.25rem;
       min-width: 0;
     }
     .premium-intro-copy { min-width: 0; }
     .premium-intro-copy .section-body { max-width: none; line-height: 1.78; }
-    .premium-intro-visual {
-      margin: 0;
-      position: relative;
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      max-width: min(360px, 100%);
-      justify-self: center;
-      background: rgba(255, 255, 255, 0.04);
-      box-shadow:
-        0 24px 56px rgba(0, 0, 0, 0.38),
-        0 0 0 1px rgba(255, 255, 255, 0.1);
-    }
-    .premium-intro-visual::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      pointer-events: none;
-      box-shadow: inset 0 0 0 1px rgba(201, 168, 76, 0.28);
-    }
-    .premium-intro-visual img {
-      display: block;
-      width: 100%;
-      height: auto;
-      vertical-align: middle;
-    }
     @media (max-width: 900px) {
-      .premium-intro-grid {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-        margin-bottom: 2.5rem;
-      }
-      .premium-intro-visual {
-        order: -1;
-        max-width: min(320px, 100%);
-        margin-left: auto;
-        margin-right: auto;
-      }
+      .premium-intro-grid { margin-bottom: 2.5rem; }
     }
     .premium-tiers { display: grid; grid-template-columns: 1fr 1fr; gap: 1.375rem; margin-bottom: 3.75rem; }
     .tier-card {
@@ -1217,16 +1177,6 @@
               <br />
               <p class="section-body" style="color: rgba(255,255,255,0.65);">Start free with <strong>12 Reflections</strong> to explore ChristBay. <strong>Blessed</strong> is a subscription: every billing month you receive <strong>100 Reflections</strong> while active, plus full access to every premium-only experience &mdash; Ask Father ChristBay, the full devotional library, and every feature that is marked locked in the App for free users. Cancel anytime in the App Store or Google Play. Optional top-up packs add Reflections in one-time purchases when you need more.</p>
             </div>
-            <figure class="premium-intro-visual">
-              <img
-                src="/assets/Gemini_Generated_Image_cpz8ubcpz8ubcpz8.png"
-                alt="ChristBay Blessed subscription"
-                width="1024"
-                height="1024"
-                loading="lazy"
-                decoding="async"
-              />
-            </figure>
           </div>
           <div class="premium-tiers reveal">
             <div class="tier-card">
