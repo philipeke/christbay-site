@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Terms of Use for ChristBay — the rules and conditions that govern your use of the ChristBay app by OakDev &amp; AI AB." />
+  <meta name="description" content="Terms of Use for ChristBay, the rules and conditions that govern your use of the ChristBay app by OakDev &amp; AI AB." />
   <meta name="robots" content="index, follow" />
-  <title>Terms of Use — ChristBay</title>
+  <title>Terms of Use, ChristBay</title>
   <link rel="icon" type="image/png" href="/assets/brand.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -150,6 +150,39 @@
     @media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}
     @media print{.site-header,.toc,.skip-link{display:none}.doc-layout{display:block;padding:1rem 0}.policy-section{break-inside:avoid}body{background:white;color:black}}
   </style>
+
+<script>
+(function () {
+  var downloadToggle = document.getElementById('download-toggle');
+  var downloadMenu = document.getElementById('download-menu');
+  if (downloadToggle && downloadMenu) {
+    downloadToggle.addEventListener('click', function (e) {
+      e.preventDefault();
+      var isOpen = downloadMenu.classList.contains('open');
+      downloadMenu.classList.toggle('open');
+      downloadToggle.setAttribute('aria-expanded', !isOpen);
+    });
+    document.addEventListener('click', function (e) {
+      if (!downloadToggle.contains(e.target) && !downloadMenu.contains(e.target)) {
+        downloadMenu.classList.remove('open');
+        downloadToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        downloadMenu.classList.remove('open');
+        downloadToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+    downloadMenu.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', function () {
+        downloadMenu.classList.remove('open');
+        downloadToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+})();
+</script>
 </head>
 <body>
 
@@ -157,7 +190,7 @@
 
 <header class="site-header" role="banner">
   <nav class="nav-inner" aria-label="Primary navigation">
-    <a href="/" class="nav-brand" aria-label="ChristBay — home">
+    <a href="/" class="nav-brand" aria-label="ChristBay, home">
       <img src="/assets/brand.png" alt="" aria-hidden="true" />
       <span class="nav-brand-name">ChristBay</span>
     </a>
@@ -208,9 +241,9 @@
         <a href="#s5">5. Eligibility</a>
         <a href="#s6">6. The App &amp; Service</a>
         <a href="#s7">7. Free Access &amp; Starter Reflections</a>
-        <a href="#s8">8. Reflections — In-App Currency</a>
+        <a href="#s8">8. Reflections, In,App Currency</a>
         <a href="#s9">9. Blessed Subscription</a>
-        <a href="#s10">10. Top-Up Reflection Packs</a>
+        <a href="#s10">10. Top,Up Reflection Packs</a>
         <a href="#s11">11. Payments &amp; Apple</a>
         <a href="#s12">12. No Refunds Policy</a>
         <a href="#s13">13. Licence Grant</a>
@@ -223,7 +256,7 @@
         <a href="#s20">20. Account Deletion</a>
         <a href="#s21">21. Modifications to the Service</a>
         <a href="#s22">22. Availability &amp; Downtime</a>
-        <a href="#s23">23. Third-Party Services</a>
+        <a href="#s23">23. Third,Party Services</a>
         <a href="#s24">24. Disclaimers</a>
         <a href="#s25">25. Limitation of Liability</a>
         <a href="#s26">26. Indemnification</a>
@@ -243,7 +276,7 @@
     <div class="doc-content">
 
       <div class="policy-notice" role="note">
-        <p><strong>Plain language summary:</strong> By using ChristBay you agree to these terms. ChristBay is <strong>free to download</strong>; you receive <strong>12 Reflections</strong> to begin. The <strong>Blessed</strong> tier is an <strong>auto-renewing subscription</strong> that includes <strong>100 Reflections per billing month</strong> while active and unlocks every premium feature (including all 15 categories and Ask Father ChristBay). You may also buy optional <strong>Reflection top-up packs</strong> as one-time purchases. Payments are processed by Apple or Google. Your personal journal content is yours. Please use the App respectfully and within the boundaries described here.</p>
+        <p><strong>Plain language summary:</strong> By using ChristBay you agree to these terms. ChristBay is <strong>free to download</strong>; you receive <strong>12 Reflections</strong> to begin. The <strong>Blessed</strong> tier is an <strong>auto,renewing subscription</strong> that includes <strong>100 Reflections per billing month</strong> while active and unlocks every premium feature (including all 15 categories and Ask Father ChristBay). You may also buy optional <strong>Reflection top,up packs</strong> as one,time purchases. Payments are processed by Apple or Google. Your personal journal content is yours. Please use the App respectfully and within the boundaries described here.</p>
       </div>
 
       <!-- ===== 1. Introduction ===== -->
@@ -258,10 +291,10 @@
         <p><strong>If you do not agree to these Terms, you must not download, install, or use ChristBay.</strong></p>
 
         <h3>1.1 Purpose of the App</h3>
-        <p>ChristBay is a personal, ad-free devotional application for Protestant Christian faith practice. It provides daily scripture readings, guided reflection sessions, a private prayer journal, and faith journey tracking tools. The App is designed to support sincere personal devotion and is not intended as a replacement for community worship, pastoral counselling, or theological education.</p>
+        <p>ChristBay is a personal, ad,free devotional application for Protestant Christian faith practice. It provides daily scripture readings, guided reflection sessions, a private prayer journal, and faith journey tracking tools. The App is designed to support sincere personal devotion and is not intended as a replacement for community worship, pastoral counselling, or theological education.</p>
 
         <h3>1.2 Relationship to Other Documents</h3>
-        <p>These Terms should be read alongside our Privacy Policy (available at <a href="/privacy/" class="doc-link">/privacy/</a>). In the event of any conflict between these Terms and the Privacy Policy on matters of data protection, the Privacy Policy shall prevail. These Terms do not govern Apple's relationship with you — that is governed by Apple's own Media Services Terms and Conditions and applicable App Store policies.</p>
+        <p>These Terms should be read alongside our Privacy Policy (available at <a href="/privacy/" class="doc-link">/privacy/</a>). In the event of any conflict between these Terms and the Privacy Policy on matters of data protection, the Privacy Policy shall prevail. These Terms do not govern Apple's relationship with you, that is governed by Apple's own Media Services Terms and Conditions and applicable App Store policies.</p>
 
         <h3>1.3 Language</h3>
         <p>These Terms are written in English. In the event of any conflict between a translated version and the English version, the English version shall prevail.</p>
@@ -276,7 +309,7 @@
           <thead><tr><th>Field</th><th>Detail</th></tr></thead>
           <tbody>
             <tr><td>Legal entity name</td><td>OakDev &amp; AI AB</td></tr>
-            <tr><td>Legal form</td><td>Aktiebolag (AB) — Swedish limited liability company</td></tr>
+            <tr><td>Legal form</td><td>Aktiebolag (AB), Swedish limited liability company</td></tr>
             <tr><td>Country of incorporation</td><td>Sweden</td></tr>
             <tr><td>Registered office</td><td>Sweden (full registered address available upon request)</td></tr>
             <tr><td>Contact email</td><td><a href="mailto:hello@oakdev.app" class="doc-link">hello@oakdev.app</a></td></tr>
@@ -284,7 +317,7 @@
           </tbody>
         </table>
 
-        <p>By entering into these Terms, you represent that you are a natural person using the Service for your own personal, non-commercial devotional use, or that you have full legal authority to bind the entity on whose behalf you use the Service.</p>
+        <p>By entering into these Terms, you represent that you are a natural person using the Service for your own personal, non,commercial devotional use, or that you have full legal authority to bind the entity on whose behalf you use the Service.</p>
       </section>
 
       <!-- ===== 3. Definitions ===== -->
@@ -299,16 +332,16 @@
           <tbody>
             <tr><td>App</td><td>The ChristBay mobile application distributed by OakDev &amp; AI AB via the Apple App Store and Google Play.</td></tr>
             <tr><td>Service</td><td>The App and any related websites, features, content, or functionality provided by OakDev &amp; AI AB.</td></tr>
-            <tr><td>Reflections</td><td>The non-monetary, non-transferable in-app unit used within ChristBay to access guided reflection sessions, Ask Father ChristBay, and other experiences that display a Reflection cost before you begin. Reflections have no cash value and cannot be exchanged for money or transferred between accounts.</td></tr>
-            <tr><td>Blessed</td><td>The optional premium subscription within ChristBay. While active, it provides a recurring monthly grant of Reflections (currently 100 per billing month, subject to fair-use rules shown in the App), unlocks all premium-only features marked as locked for free users (including all 15 devotional categories and Ask Father ChristBay), and includes priority support.</td></tr>
+            <tr><td>Reflections</td><td>The non,monetary, non,transferable in,app unit used within ChristBay to access guided reflection sessions, Ask Father ChristBay, and other experiences that display a Reflection cost before you begin. Reflections have no cash value and cannot be exchanged for money or transferred between accounts.</td></tr>
+            <tr><td>Blessed</td><td>The optional premium subscription within ChristBay. While active, it provides a recurring monthly grant of Reflections (currently 100 per billing month, subject to fair,use rules shown in the App), unlocks all premium,only features marked as locked for free users (including all 15 devotional categories and Ask Father ChristBay), and includes priority support.</td></tr>
             <tr><td>Journal</td><td>The personal prayer and reflection journal feature within ChristBay where users may write private notes and entries.</td></tr>
             <tr><td>Content</td><td>All text, scripture passages, images, audio, design elements, software, features, and other material made available through the Service.</td></tr>
             <tr><td>User Content</td><td>Any text, notes, journal entries, annotations, or other material created by you within the App.</td></tr>
-            <tr><td>Apple</td><td>Apple Inc. and the Apple App Store platform through which ChristBay is distributed and through which in-app purchases are processed on iOS.</td></tr>
-            <tr><td>Google</td><td>Google LLC and the Google Play Store platform through which ChristBay is distributed and through which in-app purchases are processed on Android.</td></tr>
+            <tr><td>Apple</td><td>Apple Inc. and the Apple App Store platform through which ChristBay is distributed and through which in,app purchases are processed on iOS.</td></tr>
+            <tr><td>Google</td><td>Google LLC and the Google Play Store platform through which ChristBay is distributed and through which in,app purchases are processed on Android.</td></tr>
             <tr><td>Apple Terms</td><td>Apple's Media Services Terms and Conditions and all other applicable Apple policies, as updated from time to time.</td></tr>
-            <tr><td>Purchase</td><td>The act of acquiring in-app products through the App Store or Google Play, including the Blessed subscription, top-up Reflection packs, and any other products we offer.</td></tr>
-            <tr><td>Top-Up Pack</td><td>An optional one-time in-app purchase that adds a fixed number of Reflections (typically 100, 200, or 400) to your balance. Top-Up Packs do not auto-renew.</td></tr>
+            <tr><td>Purchase</td><td>The act of acquiring in,app products through the App Store or Google Play, including the Blessed subscription, top,up Reflection packs, and any other products we offer.</td></tr>
+            <tr><td>Top,Up Pack</td><td>An optional one,time in,app purchase that adds a fixed number of Reflections (typically 100, 200, or 400) to your balance. Top,Up Packs do not auto,renew.</td></tr>
             <tr><td>Intellectual Property Rights</td><td>All patents, trademarks, service marks, trade names, copyrights, database rights, design rights, moral rights, trade secrets, and any other form of proprietary right, whether registered or unregistered, worldwide.</td></tr>
             <tr><td>Governing Law</td><td>The laws of Sweden, including applicable EU law.</td></tr>
           </tbody>
@@ -325,7 +358,7 @@
           <li>When you download or install ChristBay from the Apple App Store or Google Play.</li>
           <li>When you launch the App for the first time and proceed past any onboarding screen.</li>
           <li>When you tap "Continue", "Agree", or any equivalent button presented during onboarding.</li>
-          <li>When you make any in-app purchase.</li>
+          <li>When you make any in,app purchase.</li>
           <li>When you use any feature of the Service.</li>
         </ol>
 
@@ -348,7 +381,7 @@
         <ul class="policy-list">
           <li><strong>Age:</strong> You must be at least 13 years old. If you are between 13 and the age of majority in your jurisdiction, you must have parental or guardian consent.</li>
           <li><strong>Device:</strong> You must own or lawfully control an iOS device capable of running the version of ChristBay you download.</li>
-          <li><strong>Store account:</strong> On iOS you must have a valid Apple ID; on Android you must have a valid Google account &mdash; to download the App and make in-app purchases.</li>
+          <li><strong>Store account:</strong> On iOS you must have a valid Apple ID; on Android you must have a valid Google account, to download the App and make in,app purchases.</li>
           <li><strong>Legal capacity:</strong> You must have the legal capacity to enter into a binding contract. Persons who have been previously suspended or removed from the Service by OakDev &amp; AI AB are not eligible to use the Service.</li>
           <li><strong>Compliance:</strong> You must not be located in a jurisdiction where the App or these Terms are prohibited by applicable law.</li>
         </ul>
@@ -365,12 +398,12 @@
         <ul class="policy-list">
           <li><strong>Daily Scripture:</strong> Curated daily scripture passages drawn from licensed Bible translations.</li>
           <li><strong>Guided Reflections:</strong> Structured devotional sessions that consume Reflections from your balance when you start eligible sessions. Each session is designed to guide sincere personal engagement with scripture and prayer.</li>
-          <li><strong>Ask Father ChristBay:</strong> An in-app spiritual Q&amp;A experience that consumes Reflections according to the limits and pricing shown before you send each conversation. Available only to users who have unlocked premium access (Blessed) or other entitlements described in the App.</li>
+          <li><strong>Ask Father ChristBay:</strong> An in,app spiritual Q&amp;A experience that consumes Reflections according to the limits and pricing shown before you send each conversation. Available only to users who have unlocked premium access (Blessed) or other entitlements described in the App.</li>
           <li><strong>Prayer Journal:</strong> A private journal where you can write personal prayer entries, spiritual notes, and reflections on your faith journey.</li>
           <li><strong>Faith Journey Tracking:</strong> Tools to track devotional consistency, streaks, and personal milestones.</li>
           <li><strong>Scripture Bookmarks:</strong> The ability to save and organise scripture passages for later reference.</li>
           <li><strong>Fifteen Devotional Categories:</strong> Themed series across scripture. Free accounts receive access to a starter set; the full catalogue requires an active Blessed subscription or other entitlement as shown in the App.</li>
-          <li><strong>Blessed (subscription):</strong> Unlocks every feature marked as premium or locked for free users, grants monthly Reflections while subscribed, and includes priority support &mdash; as described in Section 09.</li>
+          <li><strong>Blessed (subscription):</strong> Unlocks every feature marked as premium or locked for free users, grants monthly Reflections while subscribed, and includes priority support, as described in Section 09.</li>
         </ul>
 
         <h3>6.1 Nature of the Service</h3>
@@ -380,7 +413,7 @@
           <li>A pastoral counselling or spiritual direction service.</li>
           <li>A theological education platform or seminary resource.</li>
           <li>A mental health or crisis intervention service. If you are experiencing a mental health crisis, please contact a qualified professional or emergency service immediately.</li>
-          <li>An ecumenical or interfaith service — the App is designed specifically for Protestant Christian faith practice.</li>
+          <li>An ecumenical or interfaith service, the App is designed specifically for Protestant Christian faith practice.</li>
         </ul>
 
         <h3>6.2 No Guarantee of Outcomes</h3>
@@ -398,22 +431,22 @@
         <span class="section-number">Section 07</span>
         <h2 id="h7">Free Access &amp; Starter Reflections</h2>
 
-        <p>ChristBay is <strong>free to download and install</strong>. When you create an account (or start using the App in accordance with the onboarding flow we provide), you receive <strong>12 Reflections</strong> credited to your in-app balance so you can explore guided sessions and other Reflection-based experiences.</p>
+        <p>ChristBay is <strong>free to download and install</strong>. When you create an account (or start using the App in accordance with the onboarding flow we provide), you receive <strong>12 Reflections</strong> credited to your in,app balance so you can explore guided sessions and other Reflection,based experiences.</p>
 
         <h3>7.1 What Is Included Without Blessed</h3>
         <ul class="policy-list">
-          <li>A personal, non-exclusive, non-transferable licence to install and use ChristBay on devices associated with your Apple ID or Google account, subject to store rules.</li>
-          <li><strong>12 Reflections</strong> for use according to the in-app rules and pricing displayed before each experience.</li>
+          <li>A personal, non,exclusive, non,transferable licence to install and use ChristBay on devices associated with your Apple ID or Google account, subject to store rules.</li>
+          <li><strong>12 Reflections</strong> for use according to the in,app rules and pricing displayed before each experience.</li>
           <li>Access to core features that we designate as free, including daily scripture, the prayer journal, faith journey tracking, scripture bookmarks, and a <strong>starter subset</strong> of devotional categories.</li>
           <li>All routine updates and bug fixes for the App, where available for your device.</li>
-          <li>An entirely ad-free experience — no advertisements, ever.</li>
+          <li>An entirely ad,free experience, no advertisements, ever.</li>
         </ul>
 
         <h3>7.2 Premium Features</h3>
-        <p>Features marked as locked, premium, or requiring Blessed — including the full set of <strong>15 devotional categories</strong>, <strong>Ask Father ChristBay</strong>, and other tools shown behind a lock in the App — require an <strong>active Blessed subscription</strong> (or future entitlement we may offer). Detailed entitlements are always shown inside the App before you pay.</p>
+        <p>Features marked as locked, premium, or requiring Blessed, including the full set of <strong>15 devotional categories</strong>, <strong>Ask Father ChristBay</strong>, and other tools shown behind a lock in the App, require an <strong>active Blessed subscription</strong> (or future entitlement we may offer). Detailed entitlements are always shown inside the App before you pay.</p>
 
         <h3>7.3 Family Sharing &amp; Household Offers</h3>
-        <p>Where Apple Family Sharing or Google Play family libraries apply, use of ChristBay may be governed by Apple's or Google's terms. Each user profile typically maintains its own Reflection balance and journal — shared Reflections between family members are not guaranteed unless explicitly stated by the store.</p>
+        <p>Where Apple Family Sharing or Google Play family libraries apply, use of ChristBay may be governed by Apple's or Google's terms. Each user profile typically maintains its own Reflection balance and journal, shared Reflections between family members are not guaranteed unless explicitly stated by the store.</p>
 
         <h3>7.4 Promotions</h3>
         <p>From time to time we may offer promotional Reflection grants or trials. Any such offer is subject to the specific terms displayed in the App or the store at the time of the promotion.</p>
@@ -422,34 +455,34 @@
       <!-- ===== 8. Reflections ===== -->
       <section class="policy-section" id="s8" aria-labelledby="h8">
         <span class="section-number">Section 08</span>
-        <h2 id="h8">Reflections — In-App Currency</h2>
+        <h2 id="h8">Reflections, In,App Currency</h2>
 
-        <p>Reflections are the in-app unit used to access guided reflection sessions within ChristBay. Understanding how Reflections work is important before making any purchase.</p>
+        <p>Reflections are the in,app unit used to access guided reflection sessions within ChristBay. Understanding how Reflections work is important before making any purchase.</p>
 
         <div class="callout callout-important">
-          <p class="callout-title">Important — Reflections are not money</p>
-          <p>Reflections are a non-monetary, non-transferable in-app unit. They have <strong>no cash value</strong>, cannot be redeemed for money, cannot be transferred to another user or account, and are not refundable except as required by mandatory law or Apple's own refund policies. Reflections are a feature of the Service, not a financial instrument.</p>
+          <p class="callout-title">Important, Reflections are not money</p>
+          <p>Reflections are a non,monetary, non,transferable in,app unit. They have <strong>no cash value</strong>, cannot be redeemed for money, cannot be transferred to another user or account, and are not refundable except as required by mandatory law or Apple's own refund policies. Reflections are a feature of the Service, not a financial instrument.</p>
         </div>
 
         <h3>8.1 How You Receive Reflections</h3>
         <ul class="policy-list">
-          <li><strong>Free starter grant:</strong> <strong>12 Reflections</strong> are credited when you begin using ChristBay as a new user, subject to fair-use and anti-fraud checks.</li>
-          <li><strong>Blessed subscription:</strong> While your Blessed subscription is active, you receive <strong>100 Reflections per billing month</strong> (or the then-current amount shown in the App). Monthly grants are credited according to the schedule and rules displayed at purchase and may require an internet connection to validate your subscription status.</li>
-          <li><strong>Top-Up Packs:</strong> You may purchase additional Reflections in fixed packs (commonly 100, 200, or 400) as described in Section 10.</li>
+          <li><strong>Free starter grant:</strong> <strong>12 Reflections</strong> are credited when you begin using ChristBay as a new user, subject to fair,use and anti,fraud checks.</li>
+          <li><strong>Blessed subscription:</strong> While your Blessed subscription is active, you receive <strong>100 Reflections per billing month</strong> (or the then,current amount shown in the App). Monthly grants are credited according to the schedule and rules displayed at purchase and may require an internet connection to validate your subscription status.</li>
+          <li><strong>Top,Up Packs:</strong> You may purchase additional Reflections in fixed packs (commonly 100, 200, or 400) as described in Section 10.</li>
           <li><strong>Promotional credits:</strong> We may occasionally grant bonus Reflections; such credits are subject to any expiry or usage rules we communicate at the time.</li>
         </ul>
 
         <h3>8.2 How Reflections Are Consumed</h3>
-        <p>Reflections are deducted when you start experiences that require them — including guided reflection sessions, Ask Father ChristBay conversations, and any other flow that displays a Reflection cost before you confirm. The exact cost is shown in the App prior to deduction. Some actions (such as reading daily scripture, writing in the prayer journal, or revisiting completed content) may not consume Reflections, depending on the feature — always check the prompt shown on screen.</p>
+        <p>Reflections are deducted when you start experiences that require them, including guided reflection sessions, Ask Father ChristBay conversations, and any other flow that displays a Reflection cost before you confirm. The exact cost is shown in the App prior to deduction. Some actions (such as reading daily scripture, writing in the prayer journal, or revisiting completed content) may not consume Reflections, depending on the feature, always check the prompt shown on screen.</p>
 
         <h3>8.3 Reflection Balance</h3>
         <p>Your Reflection balance is associated with your device and, if applicable, your App account. Your balance is stored locally on your device. We are not responsible for loss of Reflection balance due to device loss, theft, damage, or iOS reinstallation, except where balance restoration is possible through purchase verification.</p>
 
         <h3>8.4 Restoring Reflections</h3>
-        <p>If you reinstall ChristBay or move to a new device, you may restore eligible entitlements (including Top-Up Packs and subscription status) through <strong>Restore Purchases</strong> on iOS or the equivalent flow on Android. We cannot restore Reflections that were already consumed through normal use of the App.</p>
+        <p>If you reinstall ChristBay or move to a new device, you may restore eligible entitlements (including Top,Up Packs and subscription status) through <strong>Restore Purchases</strong> on iOS or the equivalent flow on Android. We cannot restore Reflections that were already consumed through normal use of the App.</p>
 
         <h3>8.5 Expiry</h3>
-        <p>Unused Reflections from starter grants, monthly Blessed grants, and Top-Up Packs remain available while your account remains active and the App is used in accordance with these Terms, except where we communicate a specific expiry for a promotional credit. If you delete your account, your Reflection balance and subscription entitlements on our systems are removed as described in our Privacy Policy. If you delete the App without restoring your account, local balances may be lost.</p>
+        <p>Unused Reflections from starter grants, monthly Blessed grants, and Top,Up Packs remain available while your account remains active and the App is used in accordance with these Terms, except where we communicate a specific expiry for a promotional credit. If you delete your account, your Reflection balance and subscription entitlements on our systems are removed as described in our Privacy Policy. If you delete the App without restoring your account, local balances may be lost.</p>
 
         <h3>8.6 No Transfer or Sale</h3>
         <p>You may not sell, transfer, give, trade, or otherwise dispose of Reflections to any other user or person. Any attempt to do so is void and may result in suspension or termination of your access to the Service. We reserve the right to revoke Reflections obtained through unauthorised means.</p>
@@ -460,14 +493,14 @@
         <span class="section-number">Section 09</span>
         <h2 id="h9">Blessed Subscription</h2>
 
-        <p>The "<strong>Blessed</strong>" tier is an optional <strong>auto-renewing subscription</strong> processed through the Apple App Store or Google Play. It unlocks the full ChristBay experience described in the App at the time you subscribe.</p>
+        <p>The "<strong>Blessed</strong>" tier is an optional <strong>auto,renewing subscription</strong> processed through the Apple App Store or Google Play. It unlocks the full ChristBay experience described in the App at the time you subscribe.</p>
 
         <h3>9.1 What Blessed Includes</h3>
         <p>While your Blessed subscription is active and in good standing, you receive:</p>
         <ul class="policy-list">
           <li><strong>Monthly Reflections:</strong> Currently <strong>100 Reflections per billing month</strong>, credited according to the rules shown in the App (amount may change for new subscribers after notice, but not for your current paid period without compliance with store rules).</li>
           <li><strong>Full category library:</strong> Access to <strong>all 15 devotional categories</strong> and any additional series we classify as premium.</li>
-          <li><strong>Premium features:</strong> Every feature marked as locked or premium for free users — including <strong>Ask Father ChristBay</strong> and other tools listed in the App.</li>
+          <li><strong>Premium features:</strong> Every feature marked as locked or premium for free users, including <strong>Ask Father ChristBay</strong> and other tools listed in the App.</li>
           <li><strong>Priority support:</strong> Support requests from Blessed subscribers are prioritised in our queue.</li>
         </ul>
 
@@ -477,8 +510,8 @@
         <h3>9.3 Price Changes</h3>
         <p>We may change Blessed pricing or monthly Reflection grants for <strong>new</strong> subscribers. For existing subscribers, any price change follows Apple or Google rules (including advance notice where required).</p>
 
-        <h3>9.4 Future Features &amp; Add-Ons</h3>
-        <p>We may add new Blessed benefits over time. We may also offer separate one-time purchases (for example, large Reflection top-ups) that do not replace your subscription. We will describe any material change inside the App.</p>
+        <h3>9.4 Future Features &amp; Add,Ons</h3>
+        <p>We may add new Blessed benefits over time. We may also offer separate one,time purchases (for example, large Reflection top,ups) that do not replace your subscription. We will describe any material change inside the App.</p>
 
         <h3>9.5 Restoration</h3>
         <p>If you reinstall ChristBay or change devices, restore your subscription through <strong>Restore Purchases</strong> (iOS) or the equivalent Google Play flow. Your subscription is tied to the store account you used to purchase Blessed.</p>
@@ -490,32 +523,32 @@
       <!-- ===== 10. Top-Up Packs ===== -->
       <section class="policy-section" id="s10" aria-labelledby="h10">
         <span class="section-number">Section 10</span>
-        <h2 id="h10">Top-Up Reflection Packs</h2>
+        <h2 id="h10">Top,Up Reflection Packs</h2>
 
-        <p>If you exhaust your Reflection balance and wish to continue engaging with guided reflection sessions, you may optionally purchase Top-Up Reflection Packs.</p>
+        <p>If you exhaust your Reflection balance and wish to continue engaging with guided reflection sessions, you may optionally purchase Top,Up Reflection Packs.</p>
 
         <h3>10.1 Available Packs</h3>
-        <table class="def-table" aria-label="Top-Up Reflection Packs">
+        <table class="def-table" aria-label="Top,Up Reflection Packs">
           <thead><tr><th>Pack</th><th>Reflections Added</th><th>Purchase Type</th></tr></thead>
           <tbody>
-            <tr><td>Small Pack</td><td>100 Reflections</td><td>One-time purchase — no auto-renewal</td></tr>
-            <tr><td>Medium Pack</td><td>200 Reflections</td><td>One-time purchase — no auto-renewal</td></tr>
-            <tr><td>Large Pack</td><td>400 Reflections</td><td>One-time purchase — no auto-renewal</td></tr>
+            <tr><td>Small Pack</td><td>100 Reflections</td><td>One,time purchase, no auto,renewal</td></tr>
+            <tr><td>Medium Pack</td><td>200 Reflections</td><td>One,time purchase, no auto,renewal</td></tr>
+            <tr><td>Large Pack</td><td>400 Reflections</td><td>One,time purchase, no auto,renewal</td></tr>
           </tbody>
         </table>
         <p>Exact pricing for each pack is displayed within the App and is subject to change. Prices are shown in your local currency as determined by your App Store region.</p>
 
         <h3>10.2 Distinction from Blessed</h3>
-        <p>Top-Up Packs are <strong>one-time purchases</strong>. They do <strong>not</strong> replace the Blessed subscription: they simply increase your Reflection balance. They do not auto-renew. Your Blessed subscription, by contrast, renews until cancelled as described in Section 09.</p>
+        <p>Top,Up Packs are <strong>one,time purchases</strong>. They do <strong>not</strong> replace the Blessed subscription: they simply increase your Reflection balance. They do not auto,renew. Your Blessed subscription, by contrast, renews until cancelled as described in Section 09.</p>
 
         <h3>10.3 Delivery of Reflections</h3>
-        <p>Reflections from a Top-Up Pack are added to your in-app balance immediately upon successful purchase verification by Apple or Google. If Reflections are not credited within a reasonable time after purchase, please contact us at hello@oakdev.app and we will investigate.</p>
+        <p>Reflections from a Top,Up Pack are added to your in,app balance immediately upon successful purchase verification by Apple or Google. If Reflections are not credited within a reasonable time after purchase, please contact us at hello@oakdev.app and we will investigate.</p>
 
         <h3>10.4 Accumulation</h3>
-        <p>There is no stated cap on your Reflection balance. You may hold Reflections from multiple Top-Up Packs simultaneously. Reflections from different packs and from your App purchase all accumulate in the same balance.</p>
+        <p>There is no stated cap on your Reflection balance. You may hold Reflections from multiple Top,Up Packs simultaneously. Reflections from different packs and from your App purchase all accumulate in the same balance.</p>
 
-        <h3>10.5 Restoration of Top-Up Packs</h3>
-        <p>Unused Reflections from Top-Up Packs may be restorable via "Restore Purchases" in certain circumstances, subject to Apple's receipt validation. However, <strong>consumed Reflections from Top-Up Packs cannot be restored</strong>. We recommend backing up your device regularly to preserve your balance state.</p>
+        <h3>10.5 Restoration of Top,Up Packs</h3>
+        <p>Unused Reflections from Top,Up Packs may be restorable via "Restore Purchases" in certain circumstances, subject to Apple's receipt validation. However, <strong>consumed Reflections from Top,Up Packs cannot be restored</strong>. We recommend backing up your device regularly to preserve your balance state.</p>
       </section>
 
       <!-- ===== 11. Payments ===== -->
@@ -523,7 +556,7 @@
         <span class="section-number">Section 11</span>
         <h2 id="h11">Payments &amp; Apple</h2>
 
-        <p>In-app purchases related to ChristBay — including the <strong>Blessed subscription</strong> and <strong>Top-Up Reflection Packs</strong> — are processed exclusively through the <strong>Apple App Store</strong> (on iOS) or <strong>Google Play</strong> (on Android) using each platform's payment infrastructure.</p>
+        <p>In,app purchases related to ChristBay, including the <strong>Blessed subscription</strong> and <strong>Top,Up Reflection Packs</strong> , are processed exclusively through the <strong>Apple App Store</strong> (on iOS) or <strong>Google Play</strong> (on Android) using each platform's payment infrastructure.</p>
 
         <h3>11.1 Apple and Google as Merchants of Record</h3>
         <p>Apple Inc. or Google LLC (as applicable) acts as the merchant of record for purchases on their respective platforms. This means:</p>
@@ -541,7 +574,7 @@
         <p>The price displayed in the App Store or Google Play may or may not include applicable taxes depending on your jurisdiction and the platform's tax collection practices. Any applicable taxes (including VAT/GST) are collected and remitted by the platform in accordance with applicable law. OakDev &amp; AI AB does not collect taxes directly from users.</p>
 
         <h3>11.4 Failed Transactions</h3>
-        <p>If a purchase fails due to payment method issues, insufficient funds, or other reasons, you will not receive the associated product (Blessed subscription renewal, Top-Up Pack, or other in-app item). Please resolve any payment issues with Apple, Google, or your financial institution and attempt the purchase again.</p>
+        <p>If a purchase fails due to payment method issues, insufficient funds, or other reasons, you will not receive the associated product (Blessed subscription renewal, Top,Up Pack, or other in,app item). Please resolve any payment issues with Apple, Google, or your financial institution and attempt the purchase again.</p>
 
         <h3>11.5 Platform Terms Govern Payment</h3>
         <p>By making a purchase through ChristBay, you also agree to the applicable store's terms (Apple Media Services Terms or Google Play Terms of Service, as relevant). In any dispute regarding a payment transaction, the store's policies and records shall be authoritative as to the fact of the transaction.</p>
@@ -552,7 +585,7 @@
         <span class="section-number">Section 12</span>
         <h2 id="h12">No Refunds Policy</h2>
 
-        <p>All purchases made through ChristBay are <strong>generally non-refundable</strong>, consistent with Apple App Store and Google Play policies for digital content, subscriptions, and in-app purchases.</p>
+        <p>All purchases made through ChristBay are <strong>generally non,refundable</strong>, consistent with Apple App Store and Google Play policies for digital content, subscriptions, and in,app purchases.</p>
 
         <div class="callout callout-warning">
           <p class="callout-title">Please purchase carefully</p>
@@ -566,10 +599,10 @@
         <p>Each platform evaluates refund requests under its own policies. OakDev &amp; AI AB has limited ability to influence those decisions.</p>
 
         <h3>12.2 Exceptions and Mandatory Rights</h3>
-        <p>Notwithstanding the general no-refunds policy, you may have mandatory cancellation and refund rights under applicable consumer protection law that cannot be excluded, including:</p>
+        <p>Notwithstanding the general no,refunds policy, you may have mandatory cancellation and refund rights under applicable consumer protection law that cannot be excluded, including:</p>
         <ul class="policy-list">
           <li><strong>Swedish consumer law:</strong> Under Swedish law (Konsumentköplag and Distansavtalslagen), you may have the right to withdraw from a purchase of digital content within 14 days of purchase, unless digital delivery has already begun with your consent and acknowledgement that you forfeit your right of withdrawal upon delivery.</li>
-          <li><strong>EU consumer rights:</strong> Where the EU Consumer Rights Directive applies, you have a 14-day cooling-off period for distance purchases unless you have expressly consented to immediate delivery and acknowledged forfeiture of the right of withdrawal.</li>
+          <li><strong>EU consumer rights:</strong> Where the EU Consumer Rights Directive applies, you have a 14,day cooling,off period for distance purchases unless you have expressly consented to immediate delivery and acknowledged forfeiture of the right of withdrawal.</li>
           <li><strong>Other jurisdictions:</strong> Applicable local consumer protection laws may provide additional or different refund rights that we are required to honour.</li>
         </ul>
         <p>Nothing in these Terms limits or excludes any rights you have under mandatory consumer protection law that cannot lawfully be limited or excluded.</p>
@@ -583,19 +616,19 @@
         <span class="section-number">Section 13</span>
         <h2 id="h13">Licence Grant</h2>
 
-        <p>Subject to your compliance with these Terms, OakDev &amp; AI AB grants you a limited, non-exclusive, non-transferable, non-sublicensable, revocable personal licence to:</p>
+        <p>Subject to your compliance with these Terms, OakDev &amp; AI AB grants you a limited, non,exclusive, non,transferable, non,sublicensable, revocable personal licence to:</p>
         <ul class="policy-list">
           <li>Download and install ChristBay on mobile devices that you own or lawfully control, using the Apple ID or Google account permitted by the store.</li>
-          <li>Access and use the Service for your own personal, non-commercial devotional purposes.</li>
+          <li>Access and use the Service for your own personal, non,commercial devotional purposes.</li>
           <li>Access and use any Blessed features you have unlocked through a valid Blessed subscription or other entitlement verified by the store.</li>
-          <li>Access and use guided reflection sessions and other Reflection-based experiences in exchange for Reflections from your balance.</li>
+          <li>Access and use guided reflection sessions and other Reflection,based experiences in exchange for Reflections from your balance.</li>
         </ul>
 
         <h3>13.1 Scope of the Licence</h3>
-        <p>This licence is <strong>personal</strong> — it is granted to you individually and may not be shared with or transferred to any other person. The licence is <strong>non-commercial</strong> — you may not use the Service or its Content for any commercial purpose without our prior written consent. The licence is <strong>revocable</strong> — we may terminate or suspend it if you breach these Terms.</p>
+        <p>This licence is <strong>personal</strong> , it is granted to you individually and may not be shared with or transferred to any other person. The licence is <strong>non,commercial</strong> , you may not use the Service or its Content for any commercial purpose without our prior written consent. The licence is <strong>revocable</strong> , we may terminate or suspend it if you breach these Terms.</p>
 
         <h3>13.2 No Ownership of App</h3>
-        <p>Subscribing to Blessed or buying Top-Up Packs does not transfer ownership of the App or any Content to you. You own the licence described in this Section, not the software itself. All title and ownership in ChristBay remains with OakDev &amp; AI AB and its licensors.</p>
+        <p>Subscribing to Blessed or buying Top,Up Packs does not transfer ownership of the App or any Content to you. You own the licence described in this Section, not the software itself. All title and ownership in ChristBay remains with OakDev &amp; AI AB and its licensors.</p>
 
         <h3>13.3 Store Rules</h3>
         <p>On Apple devices, this licence is subject to Apple's usage rules in Apple's Media Services Terms. On Android devices, use is subject to Google Play's terms. In any conflict between this licence and the applicable store's rules, the store's rules govern on that platform.</p>
@@ -616,11 +649,11 @@
           <li>Writing personal prayer journal entries and reflection notes for your own use.</li>
           <li>Bookmarking and saving scripture passages for personal reference.</li>
           <li>Tracking your personal faith journey and devotional streaks.</li>
-          <li>Sharing content from the App (e.g., scripture passages) in a personal, non-commercial context, subject to any licence restrictions on the underlying content.</li>
+          <li>Sharing content from the App (e.g., scripture passages) in a personal, non,commercial context, subject to any licence restrictions on the underlying content.</li>
         </ul>
 
         <h3>14.1 Sincere Devotional Use</h3>
-        <p>ChristBay is designed for sincere personal devotional use in the context of Protestant Christian faith. While we warmly welcome all users who engage in good faith with the content, we ask that you use the App in a spirit consistent with its purpose — prayerful, thoughtful engagement with scripture and reflection.</p>
+        <p>ChristBay is designed for sincere personal devotional use in the context of Protestant Christian faith. While we warmly welcome all users who engage in good faith with the content, we ask that you use the App in a spirit consistent with its purpose, prayerful, thoughtful engagement with scripture and reflection.</p>
       </section>
 
       <!-- ===== 15. Prohibited Conduct ===== -->
@@ -636,7 +669,7 @@
           <li><strong>Modify:</strong> Modify, adapt, translate, or create derivative works of the App or any Content without our express written permission.</li>
           <li><strong>Circumvent security:</strong> Bypass, disable, or interfere with any technical protection measures, security controls, digital rights management systems, or other security features of the App.</li>
           <li><strong>Automate access:</strong> Use scripts, bots, scrapers, crawlers, or any automated tools to access, extract, or interact with the Service.</li>
-          <li><strong>Tamper with balances:</strong> Attempt to artificially inflate, manipulate, or otherwise improperly modify your Reflection balance or any other in-app data through technical means, jailbreaking, or otherwise.</li>
+          <li><strong>Tamper with balances:</strong> Attempt to artificially inflate, manipulate, or otherwise improperly modify your Reflection balance or any other in,app data through technical means, jailbreaking, or otherwise.</li>
           <li><strong>Distribute unauthorised copies:</strong> Copy, redistribute, or make the App available to any third party other than through Apple's Family Sharing feature where applicable.</li>
           <li><strong>Jailbreaking:</strong> Use ChristBay on a jailbroken or otherwise modified iOS device in a manner that circumvents Apple's or our security controls or licence restrictions.</li>
         </ul>
@@ -645,7 +678,7 @@
         <ul class="policy-list">
           <li><strong>Commercial exploitation:</strong> Use the Service or Content for any commercial purpose, including selling access to the App, reselling Reflections, or charging others for access to your account.</li>
           <li><strong>Competitive use:</strong> Use the Service or Content to build, train, or inform a competing product or service without our prior written consent.</li>
-          <li><strong>AI training:</strong> Use any Content from the Service to train, fine-tune, evaluate, or otherwise develop artificial intelligence or machine learning models without our prior written consent.</li>
+          <li><strong>AI training:</strong> Use any Content from the Service to train, fine,tune, evaluate, or otherwise develop artificial intelligence or machine learning models without our prior written consent.</li>
           <li><strong>Data mining:</strong> Systematically extract Content from the Service for any commercial purpose.</li>
         </ul>
 
@@ -654,7 +687,7 @@
           <li><strong>Unlawful use:</strong> Use the Service for any purpose that is unlawful under applicable law, or in any manner that infringes the rights of others.</li>
           <li><strong>Impersonation:</strong> Impersonate any person or entity, including OakDev &amp; AI AB, its employees, or any other user.</li>
           <li><strong>Fraud:</strong> Engage in any fraudulent conduct in connection with the Service, including fraudulent purchase disputes, false identity claims, or misrepresentation.</li>
-          <li><strong>Violation of third-party rights:</strong> Use the Service in a manner that infringes the intellectual property rights, privacy rights, or other rights of any third party.</li>
+          <li><strong>Violation of third,party rights:</strong> Use the Service in a manner that infringes the intellectual property rights, privacy rights, or other rights of any third party.</li>
         </ul>
 
         <h3>15.4 Consequences of Violation</h3>
@@ -672,7 +705,7 @@
         <p>You retain full ownership of all User Content you create within ChristBay. We claim no ownership of your personal journal entries, prayer notes, or annotations. Your User Content belongs to you.</p>
 
         <h3>16.2 Licence to Store and Display</h3>
-        <p>By creating User Content within ChristBay, you grant OakDev &amp; AI AB a limited, non-exclusive, worldwide, royalty-free licence solely to store, process, and display your User Content back to you for the purpose of operating the Service. This licence does not include any right to use, display, publish, share, or commercialise your User Content in any way beyond what is necessary to provide the Service to you.</p>
+        <p>By creating User Content within ChristBay, you grant OakDev &amp; AI AB a limited, non,exclusive, worldwide, royalty,free licence solely to store, process, and display your User Content back to you for the purpose of operating the Service. This licence does not include any right to use, display, publish, share, or commercialise your User Content in any way beyond what is necessary to provide the Service to you.</p>
 
         <h3>16.3 Privacy of User Content</h3>
         <p>Your journal entries and personal notes are stored locally on your device by default. We do not read, review, or access your User Content. Your User Content is not used to train AI models, for analytics, or for any purpose other than displaying it back to you. For full details on how User Content is stored and protected, see our <a href="/privacy/" class="doc-link">Privacy Policy</a>.</p>
@@ -694,7 +727,7 @@
         <span class="section-number">Section 17</span>
         <h2 id="h17">Intellectual Property</h2>
 
-        <p>All Intellectual Property Rights in and to the Service — including the App software, design, user interface, branding, graphics, icons, feature names (including "ChristBay" and "Blessed"), and any original Content created by OakDev &amp; AI AB — are owned exclusively by OakDev &amp; AI AB or its licensors.</p>
+        <p>All Intellectual Property Rights in and to the Service, including the App software, design, user interface, branding, graphics, icons, feature names (including "ChristBay" and "Blessed"), and any original Content created by OakDev &amp; AI AB, are owned exclusively by OakDev &amp; AI AB or its licensors.</p>
 
         <h3>17.1 Trademarks</h3>
         <p>The names "ChristBay", "OakDev", "OakDev &amp; AI AB", "Blessed", and any associated logos and brand elements are trademarks or trade names of OakDev &amp; AI AB. You may not use any of our trademarks, service marks, trade names, or logos without our prior written consent. Nothing in these Terms grants you any right to use our trademarks in any manner.</p>
@@ -703,7 +736,7 @@
         <p>The App software, its source code, design elements, original text, and all other original Content are protected by copyright law. Unauthorised copying, reproduction, distribution, modification, or public display of any part of the Service is strictly prohibited and may constitute copyright infringement under Swedish law, EU law, and applicable international treaties.</p>
 
         <h3>17.3 Feedback</h3>
-        <p>If you provide us with feedback, suggestions, bug reports, or ideas regarding the Service ("<strong>Feedback</strong>"), you grant OakDev &amp; AI AB a perpetual, irrevocable, worldwide, royalty-free, fully paid-up licence to use, incorporate, and commercialise such Feedback in any way, without any obligation to compensate you or to keep such Feedback confidential. You represent that your Feedback does not infringe any third-party rights.</p>
+        <p>If you provide us with feedback, suggestions, bug reports, or ideas regarding the Service ("<strong>Feedback</strong>"), you grant OakDev &amp; AI AB a perpetual, irrevocable, worldwide, royalty,free, fully paid,up licence to use, incorporate, and commercialise such Feedback in any way, without any obligation to compensate you or to keep such Feedback confidential. You represent that your Feedback does not infringe any third,party rights.</p>
 
         <h3>17.4 No Other Rights</h3>
         <p>Except for the limited personal licence expressly granted in Section 13, nothing in these Terms grants you any Intellectual Property Rights in or to the Service, the Content, or any other OakDev &amp; AI AB property. All rights not expressly granted are reserved by OakDev &amp; AI AB.</p>
@@ -720,7 +753,7 @@
         <p>You may:</p>
         <ul class="policy-list">
           <li>Read, meditate on, and memorise scripture passages displayed within the App for personal devotional purposes.</li>
-          <li>Share brief scripture quotations (typically up to 500 verses or 25% of a Bible book, whichever is less) in a personal, non-commercial context, provided that you include the translation abbreviation (e.g., "NIV", "ESV") in any quotation.</li>
+          <li>Share brief scripture quotations (typically up to 500 verses or 25% of a Bible book, whichever is less) in a personal, non,commercial context, provided that you include the translation abbreviation (e.g., "NIV", "ESV") in any quotation.</li>
         </ul>
 
         <h3>18.2 Prohibited Scripture Use</h3>
@@ -762,17 +795,17 @@
 
         <p>You may delete your account and request the removal of your personal data at any time. The process and consequences of account deletion are described in full in Section 17 of our <a href="/privacy/" class="doc-link">Privacy Policy</a>.</p>
 
-        <h3>20.1 In-App Deletion</h3>
+        <h3>20.1 In,App Deletion</h3>
         <p>You can delete all locally stored App data (including journal entries, session history, and settings) from within the App at <em>Settings → Privacy → Delete All Data</em>. This action is immediate and irreversible.</p>
 
         <h3>20.2 Full Account Deletion</h3>
-        <p>To request full deletion of any server-side account data associated with you, visit <a href="/delete-account/" class="doc-link">/delete-account/</a> or email <a href="mailto:hello@oakdev.app" class="doc-link">hello@oakdev.app</a> with the subject "Account Deletion Request".</p>
+        <p>To request full deletion of any server,side account data associated with you, visit <a href="/delete-account/" class="doc-link">/delete,account/</a> or email <a href="mailto:hello@oakdev.app" class="doc-link">hello@oakdev.app</a> with the subject "Account Deletion Request".</p>
 
         <h3>20.3 Effect on Entitlements</h3>
-        <p>Deleting your account will result in the permanent loss of your Reflection balance, server-side Blessed subscription verification, and all personal data we hold. <strong>Deleted Reflection balances cannot be restored after account deletion.</strong> Apple and Google maintain their own purchase records; you may still manage or cancel an active subscription through the store, and re-linking a subscription after creating a new account is subject to store rules.</p>
+        <p>Deleting your account will result in the permanent loss of your Reflection balance, server,side Blessed subscription verification, and all personal data we hold. <strong>Deleted Reflection balances cannot be restored after account deletion.</strong> Apple and Google maintain their own purchase records; you may still manage or cancel an active subscription through the store, and re,linking a subscription after creating a new account is subject to store rules.</p>
 
         <h3>20.4 Uninstalling the App</h3>
-        <p>Uninstalling ChristBay from your device without submitting a deletion request does not constitute account deletion and does not trigger deletion of any server-side data. Your locally stored data (journal, settings) will be deleted from your device upon uninstallation, subject to any iCloud backup you have enabled.</p>
+        <p>Uninstalling ChristBay from your device without submitting a deletion request does not constitute account deletion and does not trigger deletion of any server,side data. Your locally stored data (journal, settings) will be deleted from your device upon uninstallation, subject to any iCloud backup you have enabled.</p>
       </section>
 
       <!-- ===== 21. Modifications to the Service ===== -->
@@ -789,7 +822,7 @@
         <p>We may change the number of Reflections required to access specific reflection sessions in future updates. Any such changes will be clearly communicated within the App before they take effect. Changes to Reflection costs will not retroactively affect sessions already underway or Reflections already consumed.</p>
 
         <h3>21.3 Changes to Pricing</h3>
-        <p>We may change the price of the Blessed subscription, Top-Up Packs, or future products at any time for <strong>new</strong> purchases, subject to Apple and Google rules for notifying existing subscribers. Completed purchases are not retroactively repriced.</p>
+        <p>We may change the price of the Blessed subscription, Top,Up Packs, or future products at any time for <strong>new</strong> purchases, subject to Apple and Google rules for notifying existing subscribers. Completed purchases are not retroactively repriced.</p>
 
         <h3>21.4 Discontinuation of Features</h3>
         <p>We may discontinue specific features of the Service at any time with reasonable notice where practicable. If a feature that materially changes the value of Blessed is discontinued, we will make reasonable efforts to provide affected subscribers with an appropriate remedy, which may include alternative features, additional Reflections, or other reasonable compensation at our discretion.</p>
@@ -806,13 +839,13 @@
         <p>We strive to make ChristBay available to you reliably and consistently. However, we do not guarantee uninterrupted access to the Service.</p>
 
         <h3>22.1 Scheduled Maintenance</h3>
-        <p>We may take the Service (or server-side components of it) offline for scheduled maintenance. Where practicable, we will provide advance notice of significant scheduled maintenance. Core offline features (journal, previously downloaded content) remain available during any server maintenance period.</p>
+        <p>We may take the Service (or server,side components of it) offline for scheduled maintenance. Where practicable, we will provide advance notice of significant scheduled maintenance. Core offline features (journal, previously downloaded content) remain available during any server maintenance period.</p>
 
         <h3>22.2 Unplanned Outages</h3>
-        <p>Server-side components of the Service (such as purchase verification and, in the future, optional cloud sync) may experience unplanned outages due to technical failures, third-party service issues, or causes beyond our reasonable control. We are not liable for any loss or inconvenience resulting from unplanned outages.</p>
+        <p>Server,side components of the Service (such as purchase verification and, in the future, optional cloud sync) may experience unplanned outages due to technical failures, third,party service issues, or causes beyond our reasonable control. We are not liable for any loss or inconvenience resulting from unplanned outages.</p>
 
         <h3>22.3 Force Majeure</h3>
-        <p>We are not responsible for any failure to perform or delay in performance of our obligations under these Terms caused by events beyond our reasonable control, including but not limited to: acts of God; natural disasters; fire; flood; epidemic or pandemic; acts of government or regulatory authority; war; civil unrest; strikes; third-party service failures (including Apple's App Store or infrastructure); or widespread internet outages.</p>
+        <p>We are not responsible for any failure to perform or delay in performance of our obligations under these Terms caused by events beyond our reasonable control, including but not limited to: acts of God; natural disasters; fire; flood; epidemic or pandemic; acts of government or regulatory authority; war; civil unrest; strikes; third,party service failures (including Apple's App Store or infrastructure); or widespread internet outages.</p>
 
         <h3>22.4 App Store &amp; Google Play Dependency</h3>
         <p>The availability of ChristBay depends on Apple and Google continuing to distribute the App and on each platform's infrastructure. OakDev &amp; AI AB is not responsible for removal from a store, outages, or policy changes that affect availability or functionality.</p>
@@ -821,21 +854,21 @@
       <!-- ===== 23. Third-Party Services ===== -->
       <section class="policy-section" id="s23" aria-labelledby="h23">
         <span class="section-number">Section 23</span>
-        <h2 id="h23">Third-Party Services</h2>
+        <h2 id="h23">Third,Party Services</h2>
 
         <p>ChristBay integrates with platform services from Apple (App Store, StoreKit, push notifications, Sign in with Apple) and Google (Google Play, Play Billing, Firebase where applicable). Your use of those services is subject to each provider's terms.</p>
 
         <h3>23.1 Apple</h3>
-        <p>Apple's Media Services Terms and Conditions govern your use of the App Store and purchases on iOS. Apple may be a third-party beneficiary of these Terms under Apple's standard App Store agreement. OakDev &amp; AI AB is not responsible for Apple's acts or omissions.</p>
+        <p>Apple's Media Services Terms and Conditions govern your use of the App Store and purchases on iOS. Apple may be a third,party beneficiary of these Terms under Apple's standard App Store agreement. OakDev &amp; AI AB is not responsible for Apple's acts or omissions.</p>
 
         <h3>23.2 Google</h3>
         <p>Google Play's Terms of Service govern distribution and purchases on Android. OakDev &amp; AI AB is not responsible for Google's acts or omissions.</p>
 
-        <h3>23.3 No Third-Party Beneficiaries</h3>
-        <p>Except where the applicable store agreement expressly provides otherwise, these Terms do not create third-party beneficiary rights.</p>
+        <h3>23.3 No Third,Party Beneficiaries</h3>
+        <p>Except where the applicable store agreement expressly provides otherwise, these Terms do not create third,party beneficiary rights.</p>
 
-        <h3>23.4 Links to Third-Party Sites</h3>
-        <p>The Service may contain links to third-party websites or resources. We provide these links for convenience only and do not endorse, control, or take responsibility for the content, privacy practices, or availability of any linked third-party site or resource. You access linked third-party sites at your own risk and subject to their own terms.</p>
+        <h3>23.4 Links to Third,Party Sites</h3>
+        <p>The Service may contain links to third,party websites or resources. We provide these links for convenience only and do not endorse, control, or take responsibility for the content, privacy practices, or availability of any linked third,party site or resource. You access linked third,party sites at your own risk and subject to their own terms.</p>
       </section>
 
       <hr class="policy-divider" aria-hidden="true" />
@@ -852,7 +885,7 @@
         <ul class="policy-list">
           <li><strong>Merchantability:</strong> We make no warranty that the Service is of satisfactory quality or fit for a particular purpose.</li>
           <li><strong>Fitness for purpose:</strong> We make no warranty that ChristBay will meet your specific spiritual, devotional, or personal requirements.</li>
-          <li><strong>Accuracy:</strong> While we strive for accuracy in all devotional content, scripture presentation, and App functionality, we do not warrant that the Service will be error-free, accurate, or complete at all times.</li>
+          <li><strong>Accuracy:</strong> While we strive for accuracy in all devotional content, scripture presentation, and App functionality, we do not warrant that the Service will be error,free, accurate, or complete at all times.</li>
           <li><strong>Uninterrupted access:</strong> We do not warrant that the Service will be available, uninterrupted, secure, or free of technical faults at all times.</li>
           <li><strong>Theological accuracy:</strong> The devotional and reflective content within ChristBay represents one perspective within Protestant Christian tradition. It is provided for personal devotional encouragement and should not be treated as definitive theological or doctrinal teaching.</li>
         </ul>
@@ -903,7 +936,7 @@
         <ul class="policy-list">
           <li>Your breach of any provision of these Terms.</li>
           <li>Your use of the Service in violation of applicable law or the rights of any third party.</li>
-          <li>Any User Content you create that infringes third-party rights or violates applicable law.</li>
+          <li>Any User Content you create that infringes third,party rights or violates applicable law.</li>
           <li>Any dispute between you and any third party related to your use of the Service.</li>
           <li>Your fraud, gross negligence, or wilful misconduct.</li>
         </ul>
@@ -917,7 +950,7 @@
         <span class="section-number">Section 27</span>
         <h2 id="h27">Governing Law</h2>
 
-        <p>These Terms, and any non-contractual obligations arising out of or in connection with them, are governed by and shall be construed in accordance with the laws of <strong>Sweden</strong>, without regard to its conflict of laws principles, and subject to applicable EU law.</p>
+        <p>These Terms, and any non,contractual obligations arising out of or in connection with them, are governed by and shall be construed in accordance with the laws of <strong>Sweden</strong>, without regard to its conflict of laws principles, and subject to applicable EU law.</p>
 
         <h3>27.1 Applicable Swedish and EU Law</h3>
         <p>The following laws are among those applicable to these Terms and your use of the Service:</p>
@@ -941,7 +974,7 @@
         <p>We believe that most disagreements can be resolved through direct communication. We encourage you to contact us first before initiating any formal proceedings.</p>
 
         <h3>28.1 Informal Resolution</h3>
-        <p>If you have a dispute with us arising from these Terms or your use of the Service, please contact us at <a href="mailto:hello@oakdev.app" class="doc-link">hello@oakdev.app</a> with a description of the dispute and your proposed resolution. We will make a good-faith effort to resolve your complaint promptly, typically within 30 days of receiving it.</p>
+        <p>If you have a dispute with us arising from these Terms or your use of the Service, please contact us at <a href="mailto:hello@oakdev.app" class="doc-link">hello@oakdev.app</a> with a description of the dispute and your proposed resolution. We will make a good,faith effort to resolve your complaint promptly, typically within 30 days of receiving it.</p>
 
         <h3>28.2 Jurisdiction</h3>
         <p>If a dispute cannot be resolved informally, you agree that any legal action or proceeding arising from or relating to these Terms or the Service shall be brought exclusively in the competent courts of Sweden. You hereby consent to the personal jurisdiction of and venue in the Swedish courts for this purpose.</p>
@@ -970,7 +1003,7 @@
         </ul>
 
         <h3>29.2 Minor Changes</h3>
-        <p>For minor, non-material updates (such as clarifications, typographical corrections, or contact information updates), we will update the "Last Updated" date without necessarily providing advance notice.</p>
+        <p>For minor, non,material updates (such as clarifications, typographical corrections, or contact information updates), we will update the "Last Updated" date without necessarily providing advance notice.</p>
 
         <h3>29.3 Your Acceptance</h3>
         <p>Your continued use of ChristBay after the effective date of any updated Terms constitutes your acceptance of those updated Terms. If you do not agree to the updated Terms, you must stop using the Service. If updated Terms would materially reduce your rights as a consumer in a way not permitted by applicable mandatory law, you may have the right to terminate your agreement and seek a remedy under applicable consumer law.</p>
@@ -979,7 +1012,7 @@
         <table class="def-table" aria-label="Terms of Use version history">
           <thead><tr><th>Version</th><th>Date</th><th>Summary</th></tr></thead>
           <tbody>
-            <tr><td>2.0</td><td>April 5, 2026</td><td>Updated for free starter Reflections, Blessed as a subscription (100 Reflections per billing month), Ask Father ChristBay, Google Play, and Reflection top-up packs.</td></tr>
+            <tr><td>2.0</td><td>April 5, 2026</td><td>Updated for free starter Reflections, Blessed as a subscription (100 Reflections per billing month), Ask Father ChristBay, Google Play, and Reflection top,up packs.</td></tr>
             <tr><td>1.0</td><td>February 24, 2026</td><td>Initial publication of Terms of Use for ChristBay Version 1.0.</td></tr>
           </tbody>
         </table>
@@ -1028,11 +1061,11 @@
             <tr><td>General enquiries about these Terms</td><td><a href="mailto:hello@oakdev.app" class="doc-link">hello@oakdev.app</a></td></tr>
             <tr><td>Purchase issues &amp; entitlement queries</td><td><a href="mailto:hello@oakdev.app" class="doc-link">hello@oakdev.app</a></td></tr>
             <tr><td>Refund requests</td><td><em>reportaproblem.apple.com</em> (Apple only)</td></tr>
-            <tr><td>Account &amp; data deletion</td><td><a href="/delete-account/" class="doc-link">/delete-account/</a> or <a href="mailto:hello@oakdev.app" class="doc-link">hello@oakdev.app</a></td></tr>
+            <tr><td>Account &amp; data deletion</td><td><a href="/delete-account/" class="doc-link">/delete,account/</a> or <a href="mailto:hello@oakdev.app" class="doc-link">hello@oakdev.app</a></td></tr>
             <tr><td>Privacy matters</td><td><a href="/privacy/" class="doc-link">/privacy/</a> or <a href="mailto:hello@oakdev.app" class="doc-link">hello@oakdev.app</a></td></tr>
             <tr><td>Support</td><td><a href="/support/" class="doc-link">/support/</a> or <a href="mailto:hello@oakdev.app" class="doc-link">hello@oakdev.app</a></td></tr>
-            <tr><td>Legal enquiries</td><td><a href="mailto:hello@oakdev.app" class="doc-link">hello@oakdev.app</a> — subject: "Legal"</td></tr>
-            <tr><td>IP / copyright concerns</td><td><a href="mailto:hello@oakdev.app" class="doc-link">hello@oakdev.app</a> — subject: "IP Notice"</td></tr>
+            <tr><td>Legal enquiries</td><td><a href="mailto:hello@oakdev.app" class="doc-link">hello@oakdev.app</a> , subject: "Legal"</td></tr>
+            <tr><td>IP / copyright concerns</td><td><a href="mailto:hello@oakdev.app" class="doc-link">hello@oakdev.app</a> , subject: "IP Notice"</td></tr>
           </tbody>
         </table>
 
@@ -1044,7 +1077,7 @@
           <p class="callout-title">A note from us</p>
           <p>We wrote these Terms as plainly and fairly as we could. They exist to protect both you and us, and to set clear expectations. If anything here is unclear, or if you believe something is unfair, please reach out to us directly at <a href="mailto:hello@oakdev.app" class="doc-link">hello@oakdev.app</a>. We would rather resolve a concern directly than have it become a dispute.</p>
           <p>Thank you for choosing ChristBay. May your time in the Word be fruitful.</p>
-          <p style="margin-top:.625rem"><em>— OakDev &amp; AI AB</em></p>
+          <p style="margin-top:.625rem"><em>, OakDev &amp; AI AB</em></p>
         </div>
       </section>
 
@@ -1075,33 +1108,318 @@
   </div>
 </footer>
 
+<style>
+    :root {
+      --navy:           #1a2744;
+      --navy-light:     #243355;
+      --navy-deep:      #121d35;
+      --gold:           #c9a84c;
+      --gold-light:     #dfc980;
+      --gold-subtle:    #f5edcc;
+      --warm-white:     #f9f7f4;
+      --cream:          #f0ece4;
+      --white:          #ffffff;
+      --text-primary:   #1a2744;
+      --text-secondary: #4a5a7a;
+      --text-muted:     #7a8ba5;
+      --border:         #e0dbd0;
+      --shadow-sm:      0 1px 3px rgba(26,39,68,.08);
+      --shadow-md:      0 4px 16px rgba(26,39,68,.10);
+      --radius:         12px;
+      --radius-sm:      8px;
+      --transition:     0.25s ease;
+      --max-width:      1100px;
+      --doc-max-width:  800px;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;font-size:16px}
+    body{font-family:'Inter',system-ui,-apple-system,BlinkMacSystemFont,sans-serif;background:var(--warm-white);color:var(--text-primary);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+    img{max-width:100%;height:auto;display:block}
+    a{color:inherit;text-decoration:none}
+    ul{list-style:none}
+
+    /* Skip link */
+    .skip-link{position:absolute;top:-120px;left:1rem;background:var(--navy);color:var(--white);padding:.5rem 1rem;border-radius:var(--radius-sm);font-size:.875rem;font-weight:600;z-index:9999;transition:top var(--transition)}
+    .skip-link:focus{top:1rem}
+
+    /* Page hero */
+    .page-hero{background:linear-gradient(155deg,var(--navy-deep) 0%,var(--navy) 55%,var(--navy-light) 100%);color:var(--white);text-align:center;padding:5rem 1.5rem 4rem;position:relative;overflow:hidden}
+    .page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 20% 40%,rgba(201,168,76,.07) 0%,transparent 60%),radial-gradient(ellipse 50% 60% at 80% 60%,rgba(201,168,76,.05) 0%,transparent 60%);pointer-events:none}
+    .page-hero-inner{position:relative;z-index:1;max-width:var(--doc-max-width);margin:0 auto}
+    .page-hero-label{display:inline-block;font-size:.75rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-light);margin-bottom:1rem}
+    .page-hero h1{font-size:clamp(2rem,4vw,3rem);font-weight:700;letter-spacing:-.03em;line-height:1.15;margin-bottom:1.25rem;color:var(--white)}
+    .page-hero-meta{display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem 1.5rem;font-size:.875rem;color:rgba(255,255,255,.65)}
+    .page-hero-meta span{display:flex;align-items:center;gap:.375rem}
+    .dot{width:4px;height:4px;border-radius:50%;background:rgba(201,168,76,.6);display:inline-block}
+
+    /* Document layout */
+    .doc-layout{max-width:var(--max-width);margin:0 auto;padding:4rem 1.5rem 6rem;display:grid;grid-template-columns:260px 1fr;gap:3.5rem;align-items:start}
+    @media(max-width:900px){.doc-layout{grid-template-columns:1fr;gap:2rem;padding:2.5rem 1.5rem 5rem}}
+
+    /* TOC */
+    .toc{position:sticky;top:84px}
+    @media(max-width:900px){.toc{position:static;background:var(--cream);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem}}
+    .toc-title{font-size:.6875rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:1rem}
+    .toc-list{display:flex;flex-direction:column;gap:.125rem}
+    .toc-list a{font-size:.8125rem;font-weight:500;color:var(--text-secondary);padding:.375rem .625rem;border-radius:var(--radius-sm);border-left:2px solid transparent;transition:color var(--transition),border-color var(--transition),background var(--transition);display:block;line-height:1.4}
+    .toc-list a:hover,.toc-list a.active{color:var(--navy);border-left-color:var(--gold);background:rgba(201,168,76,.07)}
+    .toc-list .toc-sub{padding-left:1.25rem;font-size:.75rem;color:var(--text-muted)}
+    .toc-list .toc-sub:hover,.toc-list .toc-sub.active{color:var(--text-secondary)}
+    .toc-contact-box{margin-top:2rem;padding:1rem 1.125rem;background:linear-gradient(135deg,rgba(201,168,76,.10) 0%,rgba(201,168,76,.04) 100%);border:1px solid rgba(201,168,76,.25);border-radius:var(--radius)}
+    .toc-contact-box p{font-size:.75rem;color:var(--text-secondary);line-height:1.5;margin-bottom:.5rem}
+    .toc-contact-box a{font-size:.8125rem;font-weight:600;color:var(--gold);text-decoration:underline;text-underline-offset:2px}
+    @media(max-width:900px){.toc-contact-box{display:none}}
+
+    /* Doc content */
+    .doc-content{min-width:0}
+    .policy-notice{background:linear-gradient(135deg,rgba(201,168,76,.12) 0%,rgba(201,168,76,.04) 100%);border:1px solid rgba(201,168,76,.3);border-left:4px solid var(--gold);border-radius:var(--radius);padding:1.25rem 1.5rem;margin-bottom:3rem}
+    .policy-notice p{font-size:.875rem;color:var(--text-secondary);line-height:1.6}
+    .policy-notice p strong{color:var(--text-primary)}
+    .policy-section{margin-bottom:3.5rem;scroll-margin-top:90px}
+    .policy-section:last-child{margin-bottom:0}
+    .section-number{display:inline-block;font-size:.6875rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem}
+    .policy-section h2{font-size:clamp(1.25rem,2.5vw,1.625rem);font-weight:700;letter-spacing:-.025em;color:var(--navy);margin-bottom:1.25rem;padding-bottom:.75rem;border-bottom:1px solid var(--border);line-height:1.3}
+    .policy-section h3{font-size:1.0625rem;font-weight:600;color:var(--navy);margin-top:2rem;margin-bottom:.75rem;line-height:1.35}
+    .policy-section h4{font-size:.9375rem;font-weight:600;color:var(--text-primary);margin-top:1.5rem;margin-bottom:.5rem}
+    .policy-section p{font-size:.9375rem;color:var(--text-secondary);line-height:1.75;margin-bottom:1rem}
+    .policy-section p:last-child{margin-bottom:0}
+    .policy-section p strong{color:var(--text-primary);font-weight:600}
+    .policy-section p em{font-style:italic;color:var(--text-primary)}
+
+    /* Lists */
+    .policy-list{margin:.75rem 0 1rem;padding-left:0;list-style:none;display:flex;flex-direction:column;gap:.5rem}
+    .policy-list li{font-size:.9375rem;color:var(--text-secondary);line-height:1.7;padding-left:1.375rem;position:relative}
+    .policy-list li::before{content:'';position:absolute;left:0;top:.62em;width:6px;height:6px;border-radius:50%;background:var(--gold)}
+    .policy-list li strong{color:var(--text-primary);font-weight:600}
+    .policy-list-ordered{margin:.75rem 0 1rem;padding-left:0;list-style:none;counter-reset:pol;display:flex;flex-direction:column;gap:.625rem}
+    .policy-list-ordered li{font-size:.9375rem;color:var(--text-secondary);line-height:1.7;padding-left:2rem;position:relative;counter-increment:pol}
+    .policy-list-ordered li::before{content:counter(pol)".";position:absolute;left:0;top:0;font-size:.8125rem;font-weight:700;color:var(--gold);min-width:1.5rem}
+    .policy-list-ordered li strong{color:var(--text-primary);font-weight:600}
+
+    /* Tables */
+    .def-table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.875rem}
+    .def-table th{text-align:left;padding:.625rem 1rem;background:var(--navy);color:var(--white);font-weight:600;font-size:.8125rem;letter-spacing:.02em}
+    .def-table th:first-child{border-radius:var(--radius-sm) 0 0 0}
+    .def-table th:last-child{border-radius:0 var(--radius-sm) 0 0}
+    .def-table td{padding:.625rem 1rem;border-bottom:1px solid var(--border);color:var(--text-secondary);vertical-align:top;line-height:1.6}
+    .def-table td:first-child{font-weight:600;color:var(--text-primary);white-space:nowrap;width:30%}
+    .def-table tr:last-child td{border-bottom:none}
+    .def-table tr:nth-child(odd) td{background:rgba(240,236,228,.35)}
+    @media(max-width:600px){
+      .def-table,.def-table tbody,.def-table tr,.def-table td{display:block;width:100%}
+      .def-table thead{display:none}
+      .def-table td{border-bottom:none;padding:.5rem .75rem}
+      .def-table td:first-child{font-size:.75rem;text-transform:uppercase;letter-spacing:.05em;color:var(--gold);padding-bottom:.125rem;white-space:normal;width:100%}
+      .def-table tr{border:1px solid var(--border);border-radius:var(--radius-sm);margin-bottom:.75rem;overflow:hidden;padding:.25rem 0;background:var(--white)}
+    }
+
+    /* Callouts */
+    .callout{border-radius:var(--radius);padding:1.25rem 1.5rem;margin:1.5rem 0}
+    .callout-info{background:rgba(26,39,68,.04);border:1px solid rgba(26,39,68,.10);border-left:4px solid var(--navy-light)}
+    .callout-important{background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.25);border-left:4px solid var(--gold)}
+    .callout-warning{background:rgba(180,60,40,.05);border:1px solid rgba(180,60,40,.15);border-left:4px solid #b43c28}
+    .callout-title{font-size:.8125rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.625rem;color:var(--text-primary)}
+    .callout p{font-size:.875rem;color:var(--text-secondary);line-height:1.7;margin-bottom:0}
+    .callout p+p{margin-top:.625rem}
+    .callout p strong{color:var(--text-primary)}
+
+    /* Divider */
+    .policy-divider{border:none;border-top:1px solid var(--border);margin:3rem 0}
+
+    /* Links */
+    .doc-link{color:var(--navy);font-weight:500;text-decoration:underline;text-underline-offset:2px;transition:color var(--transition)}
+    .doc-link:hover{color:var(--gold)}
+
+    /* Footer (same as index.html) */
+    .site-footer{background:#0b1220;color:rgba(255,255,255,.5);padding:4.5rem 1.5rem 2.5rem}
+    .footer-inner{max-width:var(--max-width);margin:0 auto}
+    .footer-top{display:flex;align-items:flex-start;justify-content:space-between;padding-bottom:2.5rem;border-bottom:1px solid rgba(255,255,255,.07);gap:2rem;flex-wrap:wrap}
+    .footer-brand{display:flex;align-items:center;gap:.625rem}
+    .footer-brand img{width:36px;height:36px;object-fit:cover;border-radius:50%;border:1px solid rgba(255,255,255,.95);box-shadow:0 0 0 1px rgba(0,0,0,.18);opacity:1}
+    .footer-brand-name{font-size:1rem;font-weight:700;color:var(--white)}
+    .footer-nav{display:flex;gap:.5rem 2.25rem;flex-wrap:wrap;align-items:center}
+    .footer-nav a{font-size:.875rem;color:rgba(255,255,255,.45);transition:color var(--transition)}
+    .footer-nav a:hover{color:var(--white)}
+    .footer-bottom{padding-top:2rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.75rem}
+    .footer-copyright{font-size:.8125rem;color:rgba(255,255,255,.3)}
+    .footer-tagline{font-size:.8125rem;color:rgba(255,255,255,.2);font-style:italic}
+
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}
+    @media print{.site-header,.toc,.skip-link{display:none}.doc-layout{display:block;padding:1rem 0}.policy-section{break-inside:avoid}body{background:white;color:black}}
+  </style>
+
 <script>
-(function(){
-  'use strict';
-  var sections = document.querySelectorAll('.policy-section[id]');
-  var tocLinks = document.querySelectorAll('.toc-list a');
-  if('IntersectionObserver' in window && sections.length && tocLinks.length){
-    var obs = new IntersectionObserver(function(entries){
-      entries.forEach(function(e){
-        if(e.isIntersecting){
-          var id = e.target.getAttribute('id');
-          tocLinks.forEach(function(l){
-            l.classList.toggle('active', l.getAttribute('href')==='#'+id);
-          });
-        }
-      });
-    },{rootMargin:'-20% 0px -70% 0px',threshold:0});
-    sections.forEach(function(s){ obs.observe(s); });
-  }
-  tocLinks.forEach(function(link){
-    link.addEventListener('click',function(e){
-      var id = this.getAttribute('href').replace('#','');
-      var t = document.getElementById(id);
-      if(t){ e.preventDefault(); t.scrollIntoView({behavior:'smooth',block:'start'}); t.setAttribute('tabindex','-1'); t.focus({preventScroll:true}); }
+(function () {
+  var downloadToggle = document.getElementById('download-toggle');
+  var downloadMenu = document.getElementById('download-menu');
+  if (downloadToggle && downloadMenu) {
+    downloadToggle.addEventListener('click', function (e) {
+      e.preventDefault();
+      var isOpen = downloadMenu.classList.contains('open');
+      downloadMenu.classList.toggle('open');
+      downloadToggle.setAttribute('aria-expanded', !isOpen);
     });
-  });
-}());
+    document.addEventListener('click', function (e) {
+      if (!downloadToggle.contains(e.target) && !downloadMenu.contains(e.target)) {
+        downloadMenu.classList.remove('open');
+        downloadToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        downloadMenu.classList.remove('open');
+        downloadToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+    downloadMenu.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', function () {
+        downloadMenu.classList.remove('open');
+        downloadToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+})();
 </script>
+<style>
+    :root {
+      --navy:           #1a2744;
+      --navy-light:     #243355;
+      --navy-deep:      #121d35;
+      --gold:           #c9a84c;
+      --gold-light:     #dfc980;
+      --gold-subtle:    #f5edcc;
+      --warm-white:     #f9f7f4;
+      --cream:          #f0ece4;
+      --white:          #ffffff;
+      --text-primary:   #1a2744;
+      --text-secondary: #4a5a7a;
+      --text-muted:     #7a8ba5;
+      --border:         #e0dbd0;
+      --shadow-sm:      0 1px 3px rgba(26,39,68,.08);
+      --shadow-md:      0 4px 16px rgba(26,39,68,.10);
+      --radius:         12px;
+      --radius-sm:      8px;
+      --transition:     0.25s ease;
+      --max-width:      1100px;
+      --doc-max-width:  800px;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;font-size:16px}
+    body{font-family:'Inter',system-ui,-apple-system,BlinkMacSystemFont,sans-serif;background:var(--warm-white);color:var(--text-primary);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+    img{max-width:100%;height:auto;display:block}
+    a{color:inherit;text-decoration:none}
+    ul{list-style:none}
+
+    /* Skip link */
+    .skip-link{position:absolute;top:-120px;left:1rem;background:var(--navy);color:var(--white);padding:.5rem 1rem;border-radius:var(--radius-sm);font-size:.875rem;font-weight:600;z-index:9999;transition:top var(--transition)}
+    .skip-link:focus{top:1rem}
+
+    /* Page hero */
+    .page-hero{background:linear-gradient(155deg,var(--navy-deep) 0%,var(--navy) 55%,var(--navy-light) 100%);color:var(--white);text-align:center;padding:5rem 1.5rem 4rem;position:relative;overflow:hidden}
+    .page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 20% 40%,rgba(201,168,76,.07) 0%,transparent 60%),radial-gradient(ellipse 50% 60% at 80% 60%,rgba(201,168,76,.05) 0%,transparent 60%);pointer-events:none}
+    .page-hero-inner{position:relative;z-index:1;max-width:var(--doc-max-width);margin:0 auto}
+    .page-hero-label{display:inline-block;font-size:.75rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-light);margin-bottom:1rem}
+    .page-hero h1{font-size:clamp(2rem,4vw,3rem);font-weight:700;letter-spacing:-.03em;line-height:1.15;margin-bottom:1.25rem;color:var(--white)}
+    .page-hero-meta{display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem 1.5rem;font-size:.875rem;color:rgba(255,255,255,.65)}
+    .page-hero-meta span{display:flex;align-items:center;gap:.375rem}
+    .dot{width:4px;height:4px;border-radius:50%;background:rgba(201,168,76,.6);display:inline-block}
+
+    /* Document layout */
+    .doc-layout{max-width:var(--max-width);margin:0 auto;padding:4rem 1.5rem 6rem;display:grid;grid-template-columns:260px 1fr;gap:3.5rem;align-items:start}
+    @media(max-width:900px){.doc-layout{grid-template-columns:1fr;gap:2rem;padding:2.5rem 1.5rem 5rem}}
+
+    /* TOC */
+    .toc{position:sticky;top:84px}
+    @media(max-width:900px){.toc{position:static;background:var(--cream);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem}}
+    .toc-title{font-size:.6875rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:1rem}
+    .toc-list{display:flex;flex-direction:column;gap:.125rem}
+    .toc-list a{font-size:.8125rem;font-weight:500;color:var(--text-secondary);padding:.375rem .625rem;border-radius:var(--radius-sm);border-left:2px solid transparent;transition:color var(--transition),border-color var(--transition),background var(--transition);display:block;line-height:1.4}
+    .toc-list a:hover,.toc-list a.active{color:var(--navy);border-left-color:var(--gold);background:rgba(201,168,76,.07)}
+    .toc-list .toc-sub{padding-left:1.25rem;font-size:.75rem;color:var(--text-muted)}
+    .toc-list .toc-sub:hover,.toc-list .toc-sub.active{color:var(--text-secondary)}
+    .toc-contact-box{margin-top:2rem;padding:1rem 1.125rem;background:linear-gradient(135deg,rgba(201,168,76,.10) 0%,rgba(201,168,76,.04) 100%);border:1px solid rgba(201,168,76,.25);border-radius:var(--radius)}
+    .toc-contact-box p{font-size:.75rem;color:var(--text-secondary);line-height:1.5;margin-bottom:.5rem}
+    .toc-contact-box a{font-size:.8125rem;font-weight:600;color:var(--gold);text-decoration:underline;text-underline-offset:2px}
+    @media(max-width:900px){.toc-contact-box{display:none}}
+
+    /* Doc content */
+    .doc-content{min-width:0}
+    .policy-notice{background:linear-gradient(135deg,rgba(201,168,76,.12) 0%,rgba(201,168,76,.04) 100%);border:1px solid rgba(201,168,76,.3);border-left:4px solid var(--gold);border-radius:var(--radius);padding:1.25rem 1.5rem;margin-bottom:3rem}
+    .policy-notice p{font-size:.875rem;color:var(--text-secondary);line-height:1.6}
+    .policy-notice p strong{color:var(--text-primary)}
+    .policy-section{margin-bottom:3.5rem;scroll-margin-top:90px}
+    .policy-section:last-child{margin-bottom:0}
+    .section-number{display:inline-block;font-size:.6875rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem}
+    .policy-section h2{font-size:clamp(1.25rem,2.5vw,1.625rem);font-weight:700;letter-spacing:-.025em;color:var(--navy);margin-bottom:1.25rem;padding-bottom:.75rem;border-bottom:1px solid var(--border);line-height:1.3}
+    .policy-section h3{font-size:1.0625rem;font-weight:600;color:var(--navy);margin-top:2rem;margin-bottom:.75rem;line-height:1.35}
+    .policy-section h4{font-size:.9375rem;font-weight:600;color:var(--text-primary);margin-top:1.5rem;margin-bottom:.5rem}
+    .policy-section p{font-size:.9375rem;color:var(--text-secondary);line-height:1.75;margin-bottom:1rem}
+    .policy-section p:last-child{margin-bottom:0}
+    .policy-section p strong{color:var(--text-primary);font-weight:600}
+    .policy-section p em{font-style:italic;color:var(--text-primary)}
+
+    /* Lists */
+    .policy-list{margin:.75rem 0 1rem;padding-left:0;list-style:none;display:flex;flex-direction:column;gap:.5rem}
+    .policy-list li{font-size:.9375rem;color:var(--text-secondary);line-height:1.7;padding-left:1.375rem;position:relative}
+    .policy-list li::before{content:'';position:absolute;left:0;top:.62em;width:6px;height:6px;border-radius:50%;background:var(--gold)}
+    .policy-list li strong{color:var(--text-primary);font-weight:600}
+    .policy-list-ordered{margin:.75rem 0 1rem;padding-left:0;list-style:none;counter-reset:pol;display:flex;flex-direction:column;gap:.625rem}
+    .policy-list-ordered li{font-size:.9375rem;color:var(--text-secondary);line-height:1.7;padding-left:2rem;position:relative;counter-increment:pol}
+    .policy-list-ordered li::before{content:counter(pol)".";position:absolute;left:0;top:0;font-size:.8125rem;font-weight:700;color:var(--gold);min-width:1.5rem}
+    .policy-list-ordered li strong{color:var(--text-primary);font-weight:600}
+
+    /* Tables */
+    .def-table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.875rem}
+    .def-table th{text-align:left;padding:.625rem 1rem;background:var(--navy);color:var(--white);font-weight:600;font-size:.8125rem;letter-spacing:.02em}
+    .def-table th:first-child{border-radius:var(--radius-sm) 0 0 0}
+    .def-table th:last-child{border-radius:0 var(--radius-sm) 0 0}
+    .def-table td{padding:.625rem 1rem;border-bottom:1px solid var(--border);color:var(--text-secondary);vertical-align:top;line-height:1.6}
+    .def-table td:first-child{font-weight:600;color:var(--text-primary);white-space:nowrap;width:30%}
+    .def-table tr:last-child td{border-bottom:none}
+    .def-table tr:nth-child(odd) td{background:rgba(240,236,228,.35)}
+    @media(max-width:600px){
+      .def-table,.def-table tbody,.def-table tr,.def-table td{display:block;width:100%}
+      .def-table thead{display:none}
+      .def-table td{border-bottom:none;padding:.5rem .75rem}
+      .def-table td:first-child{font-size:.75rem;text-transform:uppercase;letter-spacing:.05em;color:var(--gold);padding-bottom:.125rem;white-space:normal;width:100%}
+      .def-table tr{border:1px solid var(--border);border-radius:var(--radius-sm);margin-bottom:.75rem;overflow:hidden;padding:.25rem 0;background:var(--white)}
+    }
+
+    /* Callouts */
+    .callout{border-radius:var(--radius);padding:1.25rem 1.5rem;margin:1.5rem 0}
+    .callout-info{background:rgba(26,39,68,.04);border:1px solid rgba(26,39,68,.10);border-left:4px solid var(--navy-light)}
+    .callout-important{background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.25);border-left:4px solid var(--gold)}
+    .callout-warning{background:rgba(180,60,40,.05);border:1px solid rgba(180,60,40,.15);border-left:4px solid #b43c28}
+    .callout-title{font-size:.8125rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.625rem;color:var(--text-primary)}
+    .callout p{font-size:.875rem;color:var(--text-secondary);line-height:1.7;margin-bottom:0}
+    .callout p+p{margin-top:.625rem}
+    .callout p strong{color:var(--text-primary)}
+
+    /* Divider */
+    .policy-divider{border:none;border-top:1px solid var(--border);margin:3rem 0}
+
+    /* Links */
+    .doc-link{color:var(--navy);font-weight:500;text-decoration:underline;text-underline-offset:2px;transition:color var(--transition)}
+    .doc-link:hover{color:var(--gold)}
+
+    /* Footer (same as index.html) */
+    .site-footer{background:#0b1220;color:rgba(255,255,255,.5);padding:4.5rem 1.5rem 2.5rem}
+    .footer-inner{max-width:var(--max-width);margin:0 auto}
+    .footer-top{display:flex;align-items:flex-start;justify-content:space-between;padding-bottom:2.5rem;border-bottom:1px solid rgba(255,255,255,.07);gap:2rem;flex-wrap:wrap}
+    .footer-brand{display:flex;align-items:center;gap:.625rem}
+    .footer-brand img{width:36px;height:36px;object-fit:cover;border-radius:50%;border:1px solid rgba(255,255,255,.95);box-shadow:0 0 0 1px rgba(0,0,0,.18);opacity:1}
+    .footer-brand-name{font-size:1rem;font-weight:700;color:var(--white)}
+    .footer-nav{display:flex;gap:.5rem 2.25rem;flex-wrap:wrap;align-items:center}
+    .footer-nav a{font-size:.875rem;color:rgba(255,255,255,.45);transition:color var(--transition)}
+    .footer-nav a:hover{color:var(--white)}
+    .footer-bottom{padding-top:2rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.75rem}
+    .footer-copyright{font-size:.8125rem;color:rgba(255,255,255,.3)}
+    .footer-tagline{font-size:.8125rem;color:rgba(255,255,255,.2);font-style:italic}
+
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}
+    @media print{.site-header,.toc,.skip-link{display:none}.doc-layout{display:block;padding:1rem 0}.policy-section{break-inside:avoid}body{background:white;color:black}}
+  </style>
+
 <script>
 (function () {
   var downloadToggle = document.getElementById('download-toggle');

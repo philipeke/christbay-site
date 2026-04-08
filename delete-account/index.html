@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Delete your ChristBay account and personal data. OakDev &amp; AI AB is committed to your privacy rights under GDPR and Swedish data protection law." />
   <meta name="robots" content="index, follow" />
-  <title>Delete Account — ChristBay</title>
+  <title>Delete Account, ChristBay</title>
   <link rel="icon" type="image/png" href="/assets/brand.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -235,6 +235,39 @@
     @media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}
     @media print{.site-header,.skip-link{display:none}body{background:white;color:black}}
   </style>
+
+<script>
+(function () {
+  var downloadToggle = document.getElementById('download-toggle');
+  var downloadMenu = document.getElementById('download-menu');
+  if (downloadToggle && downloadMenu) {
+    downloadToggle.addEventListener('click', function (e) {
+      e.preventDefault();
+      var isOpen = downloadMenu.classList.contains('open');
+      downloadMenu.classList.toggle('open');
+      downloadToggle.setAttribute('aria-expanded', !isOpen);
+    });
+    document.addEventListener('click', function (e) {
+      if (!downloadToggle.contains(e.target) && !downloadMenu.contains(e.target)) {
+        downloadMenu.classList.remove('open');
+        downloadToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        downloadMenu.classList.remove('open');
+        downloadToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+    downloadMenu.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', function () {
+        downloadMenu.classList.remove('open');
+        downloadToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+})();
+</script>
 </head>
 <body>
 
@@ -242,7 +275,7 @@
 
 <header class="site-header" role="banner">
   <nav class="nav-inner" aria-label="Primary navigation">
-    <a href="/" class="nav-brand" aria-label="ChristBay — home">
+    <a href="/" class="nav-brand" aria-label="ChristBay, home">
       <img src="/assets/brand.png" alt="" aria-hidden="true" />
       <span class="nav-brand-name">ChristBay</span>
     </a>
@@ -272,7 +305,7 @@
   <div class="page-hero-inner">
     <span class="page-hero-label">Your Data &amp; Privacy Rights</span>
     <h1>Delete Your Account</h1>
-    <p class="page-hero-sub">You have the right to request deletion of your account and personal data at any time — no questions asked, no barriers. We will honour your request promptly.</p>
+    <p class="page-hero-sub">You have the right to request deletion of your account and personal data at any time, no questions asked, no barriers. We will honour your request promptly.</p>
   </div>
 </div>
 
@@ -291,7 +324,7 @@
       <div class="rights-banner-body">
         <h2>Your Privacy Rights</h2>
         <p>ChristBay is committed to protecting your privacy and complying with applicable data protection laws, including the <strong>EU General Data Protection Regulation (GDPR)</strong>, the <strong>Swedish Data Protection Act (2018:218)</strong>, and international privacy standards. You have the right to request deletion of your account and personal data at any time.</p>
-        <p>This right is guaranteed under <strong>GDPR Article 17 (Right to Erasure)</strong>, also known as the "Right to be Forgotten". OakDev &amp; AI AB, as your data controller, is legally bound to fulfil verified deletion requests promptly and completely — subject only to limited, legally required retention obligations. Read our full <a href="/privacy/">Privacy Policy</a> for complete details.</p>
+        <p>This right is guaranteed under <strong>GDPR Article 17 (Right to Erasure)</strong>, also known as the "Right to be Forgotten". OakDev &amp; AI AB, as your data controller, is legally bound to fulfil verified deletion requests promptly and completely, subject only to limited, legally required retention obligations. Read our full <a href="/privacy/">Privacy Policy</a> for complete details.</p>
       </div>
     </div>
 
@@ -311,11 +344,11 @@
         <div class="method-card method-primary">
           <span class="method-badge badge-recommended">
             <svg viewBox="0 0 24 24" aria-hidden="true" width="12" height="12" stroke="currentColor" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-            Recommended — instant
+            Recommended, instant
           </span>
           <h3>Delete in the App</h3>
-          <p>The fastest way. Deletes all local data immediately and sends an automatic account deletion request to our servers — no email required.</p>
-          <div class="method-steps" aria-label="In-app deletion steps">
+          <p>The fastest way. Deletes all local data immediately and sends an automatic account deletion request to our servers, no email required.</p>
+          <div class="method-steps" aria-label="In,app deletion steps">
             <div class="method-step">
               <div class="step-num" aria-hidden="true">1</div>
               <span>Open <strong>ChristBay</strong> on your phone</span>
@@ -334,7 +367,7 @@
             </div>
             <div class="method-step">
               <div class="step-num" aria-hidden="true">5</div>
-              <span>Tap <strong>Confirm</strong> in the dialog that appears. Done — deletion begins immediately.</span>
+              <span>Tap <strong>Confirm</strong> in the dialog that appears. Done, deletion begins immediately.</span>
             </div>
           </div>
           <a href="#" class="method-cta cta-primary" aria-label="Open ChristBay to delete your account">
@@ -347,7 +380,7 @@
         <div class="method-card method-secondary">
           <span class="method-badge badge-alt">
             <svg viewBox="0 0 24 24" aria-hidden="true" width="12" height="12" stroke="currentColor" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            Alternative — via email
+            Alternative, via email
           </span>
           <h3>Request by Email</h3>
           <p>If you no longer have access to the App, or prefer to request deletion directly, email us and we will handle the full deletion manually.</p>
@@ -383,7 +416,7 @@
 
       <div class="callout callout-warning">
         <p class="callout-title">Deletion is permanent</p>
-        <p><strong>This action cannot be undone.</strong> Once your account and personal data are deleted, your prayer journal entries, reflection history, Reflection balance, and personal settings are permanently destroyed and cannot be recovered. Your server-side Blessed subscription verification will be removed; <strong>cancel any active subscription</strong> in the App Store or Google Play if you do not want to be charged for future periods. Store purchase records are separate from our systems. Please ensure you wish to proceed before confirming deletion.</p>
+        <p><strong>This action cannot be undone.</strong> Once your account and personal data are deleted, your prayer journal entries, reflection history, Reflection balance, and personal settings are permanently destroyed and cannot be recovered. Your server,side Blessed subscription verification will be removed; <strong>cancel any active subscription</strong> in the App Store or Google Play if you do not want to be charged for future periods. Store purchase records are separate from our systems. Please ensure you wish to proceed before confirming deletion.</p>
       </div>
     </div>
 
@@ -415,12 +448,12 @@
                 <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
                 Permanently deleted
               </span>
-              &nbsp;Removed from device immediately on in-app deletion. Removed from any server-side storage within 30 days of request.
+              &nbsp;Removed from device immediately on in,app deletion. Removed from any server,side storage within 30 days of request.
             </td>
             <td>Immediate (local) · 30 days (server)</td>
           </tr>
           <tr>
-            <td>Account identifier &amp; authentication data (e.g., Apple Sign-In token)</td>
+            <td>Account identifier &amp; authentication data (e.g., Apple Sign,In token)</td>
             <td>
               <span class="tag tag-deleted" aria-label="Permanently deleted">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
@@ -442,7 +475,7 @@
             <td>Immediate (local) · 30 days (server)</td>
           </tr>
           <tr>
-            <td>Blessed subscription verification (server-side)</td>
+            <td>Blessed subscription verification (server,side)</td>
             <td>
               <span class="tag tag-deleted" aria-label="Permanently deleted">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
@@ -459,7 +492,7 @@
                 <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
                 Permanently deleted
               </span>
-              &nbsp;Removed from device immediately upon in-app deletion.
+              &nbsp;Removed from device immediately upon in,app deletion.
             </td>
             <td>Immediate (local)</td>
           </tr>
@@ -491,17 +524,17 @@
               <span class="tag tag-retained" aria-label="Retained (anonymised)">
                 Retained (anonymised only)
               </span>
-              &nbsp;Any analytics data linked to your pseudonymous identifier is de-linked and absorbed into aggregate totals. No personally identifiable information is retained.
+              &nbsp;Any analytics data linked to your pseudonymous identifier is de,linked and absorbed into aggregate totals. No personally identifiable information is retained.
             </td>
-            <td>De-linked within 30 days</td>
+            <td>De,linked within 30 days</td>
           </tr>
           <tr>
             <td>Purchase transaction records (receipt tokens, transaction IDs, product IDs, dates)</td>
             <td>
               <span class="tag tag-restricted" aria-label="Retained (legally required, restricted processing)">
-                Retained — legally required
+                Retained, legally required
               </span>
-              &nbsp;Retained for <strong>7 years</strong> from purchase date as required by the Swedish Accounting Act (Bokföringslag 1999:1078). Processing is strictly restricted to legal compliance only — not used for any other purpose.
+              &nbsp;Retained for <strong>7 years</strong> from purchase date as required by the Swedish Accounting Act (Bokföringslag 1999:1078). Processing is strictly restricted to legal compliance only, not used for any other purpose.
             </td>
             <td>7 years (accounting law)</td>
           </tr>
@@ -509,9 +542,9 @@
             <td>Encrypted system backup copies</td>
             <td>
               <span class="tag tag-restricted" aria-label="Automatically overwritten">
-                Auto-overwritten
+                Auto,overwritten
               </span>
-              &nbsp;Encrypted backups are automatically rotated on a 30-day cycle. Your data will be fully purged from backup systems within 60 days of your deletion request.
+              &nbsp;Encrypted backups are automatically rotated on a 30,day cycle. Your data will be fully purged from backup systems within 60 days of your deletion request.
             </td>
             <td>Within 60 days of request</td>
           </tr>
@@ -519,7 +552,7 @@
       </table>
 
       <div class="callout callout-info" style="margin-top:1.5rem">
-        <p><strong>Why we retain purchase records:</strong> Swedish accounting law (Bokföringslag 1999:1078) requires companies to retain financial transaction records for 7 years. This is a mandatory legal obligation and cannot be waived. The retained records consist only of Apple-provided transaction identifiers and product codes — not your name, journal content, or any other personal data. Processing of these records is restricted strictly to legal compliance.</p>
+        <p><strong>Why we retain purchase records:</strong> Swedish accounting law (Bokföringslag 1999:1078) requires companies to retain financial transaction records for 7 years. This is a mandatory legal obligation and cannot be waived. The retained records consist only of Apple,provided transaction identifiers and product codes, not your name, journal content, or any other personal data. Processing of these records is restricted strictly to legal compliance.</p>
       </div>
     </div>
 
@@ -543,7 +576,7 @@
           </div>
           <p class="timeline-time">Immediately</p>
           <p class="timeline-title">Local data deleted</p>
-          <p class="timeline-desc">If you used the in-app deletion flow, all data stored locally on your device — your prayer journal, reflection history, Reflection balance, bookmarks, and settings — is permanently erased from your phone at this moment.</p>
+          <p class="timeline-desc">If you used the in,app deletion flow, all data stored locally on your device, your prayer journal, reflection history, Reflection balance, bookmarks, and settings, is permanently erased from your phone at this moment.</p>
         </div>
 
         <div class="timeline-item">
@@ -560,8 +593,8 @@
             <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
           </div>
           <p class="timeline-time">Within 30 days</p>
-          <p class="timeline-title">Server-side deletion complete</p>
-          <p class="timeline-desc">All personal data held in our active systems is permanently deleted: your account identifier, authentication data (including Sign-In tokens), server-side Reflection balance, Blessed subscription flags, push notification token, and support correspondence. You will receive a confirmation email when this is complete.</p>
+          <p class="timeline-title">Server,side deletion complete</p>
+          <p class="timeline-desc">All personal data held in our active systems is permanently deleted: your account identifier, authentication data (including Sign,In tokens), server,side Reflection balance, Blessed subscription flags, push notification token, and support correspondence. You will receive a confirmation email when this is complete.</p>
         </div>
 
         <div class="timeline-item">
@@ -570,7 +603,7 @@
           </div>
           <p class="timeline-time">Within 60 days</p>
           <p class="timeline-title">Backup purge complete</p>
-          <p class="timeline-desc">Encrypted system backup copies (retained for disaster recovery) are automatically rotated on a 30-day cycle. Your data will be fully purged from all backup systems within 60 days of your deletion request, leaving no trace in any of our infrastructure.</p>
+          <p class="timeline-desc">Encrypted system backup copies (retained for disaster recovery) are automatically rotated on a 30,day cycle. Your data will be fully purged from all backup systems within 60 days of your deletion request, leaving no trace in any of our infrastructure.</p>
         </div>
 
         <div class="timeline-item">
@@ -579,7 +612,7 @@
           </div>
           <p class="timeline-time">Ongoing for up to 7 years</p>
           <p class="timeline-title">Transaction records retained (legally required only)</p>
-          <p class="timeline-desc">Purchase transaction records (Apple receipt tokens, transaction IDs, product IDs, purchase dates) are retained in a restricted, access-controlled environment for 7 years from the date of purchase, as required by the Swedish Accounting Act. These records are not used for any purpose other than legal compliance, and access is limited to legally authorised personnel only.</p>
+          <p class="timeline-desc">Purchase transaction records (Apple receipt tokens, transaction IDs, product IDs, purchase dates) are retained in a restricted, access,controlled environment for 7 years from the date of purchase, as required by the Swedish Accounting Act. These records are not used for any purpose other than legal compliance, and access is limited to legally authorised personnel only.</p>
         </div>
 
       </div>
@@ -620,7 +653,7 @@
             <svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
           </div>
           <h3>Right to Erasure</h3>
-          <p>The right described on this page — to have your personal data permanently deleted from our systems.</p>
+          <p>The right described on this page, to have your personal data permanently deleted from our systems.</p>
         </div>
 
         <div class="right-card" role="listitem">
@@ -636,7 +669,7 @@
             <svg viewBox="0 0 24 24"><polyline points="8 17 12 21 16 17"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.88 18.09A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.29"/></svg>
           </div>
           <h3>Right to Portability</h3>
-          <p>You can request a machine-readable export of the personal data we hold about you in our systems.</p>
+          <p>You can request a machine,readable export of the personal data we hold about you in our systems.</p>
         </div>
 
         <div class="right-card" role="listitem">
@@ -672,8 +705,8 @@
           </button>
           <div class="faq-answer" id="faq-a1" role="region" aria-labelledby="faq-q1">
             <div class="faq-answer-inner">
-              <p>Deleting your account removes our server-side record of your subscription status. It does <strong>not</strong> automatically cancel billing with Apple or Google. To stop future charges, cancel the subscription in your <strong>App Store or Google Play subscriptions</strong> settings.</p>
-              <p>If you reinstall ChristBay later, you may be able to re-link an active store subscription or restore purchases according to the store's rules — but this is not guaranteed by OakDev &amp; AI AB.</p>
+              <p>Deleting your account removes our server,side record of your subscription status. It does <strong>not</strong> automatically cancel billing with Apple or Google. To stop future charges, cancel the subscription in your <strong>App Store or Google Play subscriptions</strong> settings.</p>
+              <p>If you reinstall ChristBay later, you may be able to re,link an active store subscription or restore purchases according to the store's rules, but this is not guaranteed by OakDev &amp; AI AB.</p>
             </div>
           </div>
         </div>
@@ -685,7 +718,7 @@
           </button>
           <div class="faq-answer" id="faq-a2" role="region" aria-labelledby="faq-q2">
             <div class="faq-answer-inner">
-              <p>Refund requests go through the store that charged you — <strong>Apple</strong> (iOS) or <strong>Google Play</strong> (Android). OakDev &amp; AI AB does not process refunds directly.</p>
+              <p>Refund requests go through the store that charged you , <strong>Apple</strong> (iOS) or <strong>Google Play</strong> (Android). OakDev &amp; AI AB does not process refunds directly.</p>
               <ul>
                 <li><strong>Apple:</strong> Visit <strong>reportaproblem.apple.com</strong>, sign in, select the ChristBay purchase, and request a refund.</li>
                 <li><strong>Google Play:</strong> Open Play Store → Payments &amp; subscriptions → ChristBay → Request a refund, or use Google's help flow for Play purchases.</li>
@@ -702,8 +735,8 @@
           </button>
           <div class="faq-answer" id="faq-a3" role="region" aria-labelledby="faq-q3">
             <div class="faq-answer-inner">
-              <p>Your prayer journal entries are stored locally on your device. Upon in-app deletion, they are immediately and permanently erased from your phone. They cannot be recovered by OakDev &amp; AI AB under any circumstances.</p>
-              <p>If you have cloud backup enabled on your device, a backup copy of your journal may exist in your personal iCloud (iOS) or Google One/Drive (Android) backup. This backup data is entirely outside our control — we do not have access to it. To remove it: on iOS, go to <em>iPhone Settings → [Your Name] → iCloud → Manage Storage → Backups → ChristBay</em>; on Android, manage app backup data through <em>Settings → Google → Backup</em>.</p>
+              <p>Your prayer journal entries are stored locally on your device. Upon in,app deletion, they are immediately and permanently erased from your phone. They cannot be recovered by OakDev &amp; AI AB under any circumstances.</p>
+              <p>If you have cloud backup enabled on your device, a backup copy of your journal may exist in your personal iCloud (iOS) or Google One/Drive (Android) backup. This backup data is entirely outside our control, we do not have access to it. To remove it: on iOS, go to <em>iPhone Settings → [Your Name] → iCloud → Manage Storage → Backups → ChristBay</em>; on Android, manage app backup data through <em>Settings → Google → Backup</em>.</p>
             </div>
           </div>
         </div>
@@ -715,8 +748,8 @@
           </button>
           <div class="faq-answer" id="faq-a4" role="region" aria-labelledby="faq-q4">
             <div class="faq-answer-inner">
-              <p>No. If you used ChristBay without creating an account, then all your data is stored locally on your device only. You can delete all of it instantly: open the App, tap <strong>Settings</strong>, scroll to the bottom, and tap <strong>Delete Account</strong> — or simply uninstall the App from your phone.</p>
-              <p>If you did create an account (using Sign in with Apple), use the in-app deletion flow or email us at <a href="mailto:hello@oakdev.app">hello@oakdev.app</a> to have your server-side account data removed as well.</p>
+              <p>No. If you used ChristBay without creating an account, then all your data is stored locally on your device only. You can delete all of it instantly: open the App, tap <strong>Settings</strong>, scroll to the bottom, and tap <strong>Delete Account</strong> , or simply uninstall the App from your phone.</p>
+              <p>If you did create an account (using Sign in with Apple), use the in,app deletion flow or email us at <a href="mailto:hello@oakdev.app">hello@oakdev.app</a> to have your server,side account data removed as well.</p>
             </div>
           </div>
         </div>
@@ -728,7 +761,7 @@
           </button>
           <div class="faq-answer" id="faq-a5" role="region" aria-labelledby="faq-q5">
             <div class="faq-answer-inner">
-              <p>We will acknowledge your email request within <strong>5 business days</strong>. We may ask you to verify your identity to protect your account from unauthorised deletion. Once verified, we will complete the server-side deletion within <strong>30 days</strong> and send you a confirmation email. Encrypted backup copies will be fully purged within <strong>60 days</strong>.</p>
+              <p>We will acknowledge your email request within <strong>5 business days</strong>. We may ask you to verify your identity to protect your account from unauthorised deletion. Once verified, we will complete the server,side deletion within <strong>30 days</strong> and send you a confirmation email. Encrypted backup copies will be fully purged within <strong>60 days</strong>.</p>
               <p>Under the GDPR, we are legally required to complete verified erasure requests within one calendar month (extendable by a further two months for complex requests). We aim to process all requests well within this timeframe.</p>
             </div>
           </div>
@@ -741,8 +774,8 @@
           </button>
           <div class="faq-answer" id="faq-a6" role="region" aria-labelledby="faq-q6">
             <div class="faq-answer-inner">
-              <p>Swedish accounting law (Bokföringslag 1999:1078) requires all companies to retain financial transaction records for 7 years from the date of the transaction. This is a mandatory legal obligation — we cannot lawfully delete these records earlier, even if requested.</p>
-              <p>The retained records consist only of Apple-provided data: transaction identifiers, product codes, and purchase dates. They do not include your name, your journal content, or any other personal data. Access to these records is strictly restricted to legally authorised personnel for the sole purpose of legal compliance, and they are not used for any other purpose.</p>
+              <p>Swedish accounting law (Bokföringslag 1999:1078) requires all companies to retain financial transaction records for 7 years from the date of the transaction. This is a mandatory legal obligation, we cannot lawfully delete these records earlier, even if requested.</p>
+              <p>The retained records consist only of Apple,provided data: transaction identifiers, product codes, and purchase dates. They do not include your name, your journal content, or any other personal data. Access to these records is strictly restricted to legally authorised personnel for the sole purpose of legal compliance, and they are not used for any other purpose.</p>
             </div>
           </div>
         </div>
@@ -754,8 +787,8 @@
           </button>
           <div class="faq-answer" id="faq-a7" role="region" aria-labelledby="faq-q7">
             <div class="faq-answer-inner">
-              <p>Yes. After your account is deleted, you are free to reinstall ChristBay and create a new account at any time. As a new user, you would receive the standard <strong>12 starter Reflections</strong> for free accounts. You may be able to restore eligible store purchases (Blessed subscription, Top-Up Packs) via the store's restore flow, subject to Apple or Google policies.</p>
-              <p>Your deleted journal entries, reflection history, and previous settings cannot be restored — only the purchase entitlements may be recoverable via Apple.</p>
+              <p>Yes. After your account is deleted, you are free to reinstall ChristBay and create a new account at any time. As a new user, you would receive the standard <strong>12 starter Reflections</strong> for free accounts. You may be able to restore eligible store purchases (Blessed subscription, Top,Up Packs) via the store's restore flow, subject to Apple or Google policies.</p>
+              <p>Your deleted journal entries, reflection history, and previous settings cannot be restored, only the purchase entitlements may be recoverable via Apple.</p>
             </div>
           </div>
         </div>
@@ -784,7 +817,7 @@
     <div class="contact-strip" role="complementary" aria-label="Contact us">
       <div class="contact-strip-body">
         <h3>Still have questions?</h3>
-        <p>We're a small, accessible team. Reach out directly and we'll respond personally — usually within one business day.</p>
+        <p>We're a small, accessible team. Reach out directly and we'll respond personally, usually within one business day.</p>
       </div>
       <div class="contact-strip-actions">
         <a href="mailto:hello@oakdev.app?subject=Account%20Deletion%20Request&body=Hello%20OakDev%20%26%20AI%20AB%2C%0A%0AI%20would%20like%20to%20request%20the%20deletion%20of%20my%20ChristBay%20account%20and%20all%20associated%20personal%20data.%0A%0AApple%20ID%20email%20or%20transaction%20ID%3A%20%5BPlease%20enter%20here%5D%0A%0AThank%20you." class="btn btn-gold">
@@ -824,32 +857,488 @@
   </div>
 </footer>
 
-<script>
-(function(){
-  'use strict';
+<style>
+    :root {
+      --navy:           #1a2744;
+      --navy-light:     #243355;
+      --navy-deep:      #121d35;
+      --gold:           #c9a84c;
+      --gold-light:     #dfc980;
+      --gold-subtle:    #f5edcc;
+      --warm-white:     #f9f7f4;
+      --cream:          #f0ece4;
+      --white:          #ffffff;
+      --text-primary:   #1a2744;
+      --text-secondary: #4a5a7a;
+      --text-muted:     #7a8ba5;
+      --border:         #e0dbd0;
+      --red:            #c0392b;
+      --red-light:      #f9eaea;
+      --red-border:     #e8b4b0;
+      --green:          #1d6a3a;
+      --green-light:    #eaf4ee;
+      --shadow-sm:      0 1px 3px rgba(26,39,68,.08);
+      --shadow-md:      0 4px 16px rgba(26,39,68,.10);
+      --shadow-lg:      0 8px 32px rgba(26,39,68,.14);
+      --radius:         12px;
+      --radius-sm:      8px;
+      --transition:     0.25s ease;
+      --max-width:      1100px;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;font-size:16px}
+    body{font-family:'Inter',system-ui,-apple-system,BlinkMacSystemFont,sans-serif;background:var(--warm-white);color:var(--text-primary);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+    img{max-width:100%;height:auto;display:block}
+    a{color:inherit;text-decoration:none}
+    ul{list-style:none}
 
-  /* FAQ accordion */
-  var questions = document.querySelectorAll('.faq-question');
-  questions.forEach(function(btn){
-    btn.addEventListener('click', function(){
-      var isOpen = this.getAttribute('aria-expanded') === 'true';
-      /* close all */
-      questions.forEach(function(b){
-        b.setAttribute('aria-expanded','false');
-        var ans = document.getElementById(b.getAttribute('aria-controls'));
-        if(ans) ans.style.maxHeight = '0';
-      });
-      /* open clicked if it was closed */
-      if(!isOpen){
-        this.setAttribute('aria-expanded','true');
-        var answer = document.getElementById(this.getAttribute('aria-controls'));
-        if(answer) answer.style.maxHeight = answer.scrollHeight + 'px';
+    /* Skip link */
+    .skip-link{position:absolute;top:-120px;left:1rem;background:var(--navy);color:var(--white);padding:.5rem 1rem;border-radius:var(--radius-sm);font-size:.875rem;font-weight:600;z-index:9999;transition:top var(--transition)}
+    .skip-link:focus{top:1rem}
+
+    /* Page hero */
+    .page-hero{background:linear-gradient(155deg,var(--navy-deep) 0%,var(--navy) 55%,var(--navy-light) 100%);color:var(--white);text-align:center;padding:5rem 1.5rem 4rem;position:relative;overflow:hidden}
+    .page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 20% 40%,rgba(201,168,76,.07) 0%,transparent 60%),radial-gradient(ellipse 50% 60% at 80% 60%,rgba(201,168,76,.05) 0%,transparent 60%);pointer-events:none}
+    .page-hero-inner{position:relative;z-index:1;max-width:680px;margin:0 auto}
+    .page-hero-label{display:inline-block;font-size:.75rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-light);margin-bottom:1rem}
+    .page-hero h1{font-size:clamp(2rem,4vw,3rem);font-weight:700;letter-spacing:-.03em;line-height:1.15;margin-bottom:1.125rem;color:var(--white)}
+    .page-hero-sub{font-size:1rem;color:rgba(255,255,255,.72);line-height:1.7;max-width:560px;margin:0 auto}
+
+    /* ============================================================
+       Main layout
+    ============================================================ */
+    .page-body{max-width:var(--max-width);margin:0 auto;padding:4rem 1.5rem 6rem}
+
+    /* ============================================================
+       Privacy Rights Banner
+    ============================================================ */
+    .rights-banner{background:linear-gradient(135deg,rgba(201,168,76,.13) 0%,rgba(201,168,76,.04) 100%);border:1px solid rgba(201,168,76,.28);border-left:5px solid var(--gold);border-radius:var(--radius);padding:2rem 2rem 2rem 1.75rem;margin-bottom:4rem;display:flex;gap:1.25rem;align-items:flex-start}
+    .rights-banner-icon{flex-shrink:0;width:44px;height:44px;background:rgba(201,168,76,.15);border-radius:50%;display:flex;align-items:center;justify-content:center}
+    .rights-banner-icon svg{width:22px;height:22px;stroke:var(--gold);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+    .rights-banner-body h2{font-size:1rem;font-weight:700;color:var(--text-primary);margin-bottom:.5rem;letter-spacing:-.01em}
+    .rights-banner-body p{font-size:.9rem;color:var(--text-secondary);line-height:1.7;margin:0}
+    .rights-banner-body p+p{margin-top:.5rem}
+    .rights-banner-body a{color:var(--navy);font-weight:500;text-decoration:underline;text-underline-offset:2px;transition:color var(--transition)}
+    .rights-banner-body a:hover{color:var(--gold)}
+    @media(max-width:600px){.rights-banner{flex-direction:column;gap:.875rem}}
+
+    /* ============================================================
+       Two-column action layout
+    ============================================================ */
+    .action-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:4rem}
+    @media(max-width:760px){.action-grid{grid-template-columns:1fr}}
+
+    .method-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;display:flex;flex-direction:column;box-shadow:var(--shadow-sm);transition:box-shadow var(--transition)}
+    .method-card:hover{box-shadow:var(--shadow-md)}
+
+    .method-card.method-primary{border-color:rgba(26,39,68,.18);border-top:4px solid var(--navy)}
+    .method-card.method-secondary{border-top:4px solid var(--gold)}
+
+    .method-badge{display:inline-flex;align-items:center;gap:.375rem;font-size:.6875rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.3rem .75rem;border-radius:100px;margin-bottom:1.25rem}
+    .method-badge.badge-recommended{background:rgba(26,39,68,.08);color:var(--navy)}
+    .method-badge.badge-alt{background:rgba(201,168,76,.12);color:#8a6a10}
+
+    .method-card h3{font-size:1.125rem;font-weight:700;color:var(--text-primary);margin-bottom:.625rem;letter-spacing:-.02em}
+    .method-card p{font-size:.9rem;color:var(--text-secondary);line-height:1.7;margin-bottom:1.25rem}
+
+    .method-steps{display:flex;flex-direction:column;gap:.625rem;margin-bottom:1.75rem}
+    .method-step{display:flex;align-items:flex-start;gap:.75rem;font-size:.875rem;color:var(--text-secondary);line-height:1.6}
+    .step-num{flex-shrink:0;width:24px;height:24px;border-radius:50%;background:var(--navy);color:var(--white);font-size:.6875rem;font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:.1rem}
+    .method-card.method-secondary .step-num{background:var(--gold);color:var(--navy-deep)}
+    .method-step span strong{color:var(--text-primary)}
+
+    .method-cta{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.75rem 1.5rem;border-radius:100px;font-size:.875rem;font-weight:600;transition:background var(--transition),transform var(--transition),box-shadow var(--transition);width:100%;text-align:center;margin-top:auto}
+    .method-cta svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+    .cta-primary{background:var(--navy);color:var(--white)}
+    .cta-primary:hover{background:var(--navy-light);transform:translateY(-1px);box-shadow:0 4px 14px rgba(26,39,68,.25)}
+    .cta-secondary{background:transparent;color:var(--navy);border:1.5px solid var(--navy)}
+    .cta-secondary:hover{background:var(--navy);color:var(--white);transform:translateY(-1px)}
+
+    /* ============================================================
+       Data table section
+    ============================================================ */
+    .section-block{margin-bottom:4rem}
+    .section-block-header{margin-bottom:1.75rem}
+    .section-block-label{display:inline-block;font-size:.6875rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:.375rem}
+    .section-block-header h2{font-size:clamp(1.25rem,2.5vw,1.625rem);font-weight:700;letter-spacing:-.025em;color:var(--navy);line-height:1.3}
+    .section-block-header p{font-size:.9375rem;color:var(--text-secondary);line-height:1.7;margin-top:.625rem}
+
+    /* Data fate table */
+    .data-table{width:100%;border-collapse:collapse;font-size:.875rem}
+    .data-table th{text-align:left;padding:.625rem 1rem;background:var(--navy);color:var(--white);font-weight:600;font-size:.8125rem;letter-spacing:.02em}
+    .data-table th:first-child{border-radius:var(--radius-sm) 0 0 0}
+    .data-table th:last-child{border-radius:0 var(--radius-sm) 0 0}
+    .data-table td{padding:.75rem 1rem;border-bottom:1px solid var(--border);color:var(--text-secondary);vertical-align:top;line-height:1.6}
+    .data-table td:first-child{font-weight:600;color:var(--text-primary);width:35%}
+    .data-table tr:last-child td{border-bottom:none}
+    .data-table tr:nth-child(odd) td{background:rgba(240,236,228,.35)}
+
+    .tag{display:inline-flex;align-items:center;gap:.3rem;font-size:.75rem;font-weight:600;padding:.2rem .625rem;border-radius:100px;white-space:nowrap}
+    .tag-deleted{background:var(--red-light);color:var(--red);border:1px solid var(--red-border)}
+    .tag-retained{background:rgba(201,168,76,.12);color:#7a5c10;border:1px solid rgba(201,168,76,.3)}
+    .tag-restricted{background:rgba(26,39,68,.07);color:var(--navy-light);border:1px solid rgba(26,39,68,.15)}
+    .tag svg{width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+
+    @media(max-width:640px){
+      .data-table,.data-table tbody,.data-table tr,.data-table td{display:block;width:100%}
+      .data-table thead{display:none}
+      .data-table td{border-bottom:none;padding:.5rem .875rem}
+      .data-table td:first-child{font-size:.75rem;text-transform:uppercase;letter-spacing:.05em;color:var(--gold);padding-bottom:.125rem;width:100%}
+      .data-table tr{border:1px solid var(--border);border-radius:var(--radius-sm);margin-bottom:.75rem;overflow:hidden;padding:.375rem 0;background:var(--white)}
+    }
+
+    /* ============================================================
+       Timeline
+    ============================================================ */
+    .timeline{position:relative;padding-left:2.5rem}
+    .timeline::before{content:'';position:absolute;left:.75rem;top:.5rem;bottom:.5rem;width:2px;background:linear-gradient(to bottom,var(--navy) 0%,rgba(201,168,76,.3) 100%)}
+    .timeline-item{position:relative;margin-bottom:2rem}
+    .timeline-item:last-child{margin-bottom:0}
+    .timeline-dot{position:absolute;left:-2.5rem;top:.25rem;width:1.5rem;height:1.5rem;border-radius:50%;background:var(--navy);border:3px solid var(--warm-white);display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 2px var(--navy)}
+    .timeline-dot svg{width:10px;height:10px;stroke:var(--white);fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+    .timeline-time{font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);margin-bottom:.25rem}
+    .timeline-title{font-size:.9375rem;font-weight:600;color:var(--text-primary);margin-bottom:.25rem}
+    .timeline-desc{font-size:.875rem;color:var(--text-secondary);line-height:1.65}
+
+    /* ============================================================
+       Rights grid
+    ============================================================ */
+    .rights-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+    @media(max-width:800px){.rights-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:500px){.rights-grid{grid-template-columns:1fr}}
+
+    .right-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:1.375rem 1.25rem}
+    .right-card-icon{width:38px;height:38px;border-radius:var(--radius-sm);background:rgba(26,39,68,.06);display:flex;align-items:center;justify-content:center;margin-bottom:1rem}
+    .right-card-icon svg{width:20px;height:20px;stroke:var(--navy);fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+    .right-card h3{font-size:.9375rem;font-weight:700;color:var(--text-primary);margin-bottom:.375rem}
+    .right-card p{font-size:.8125rem;color:var(--text-secondary);line-height:1.65}
+
+    /* ============================================================
+       FAQ accordion
+    ============================================================ */
+    .faq-list{display:flex;flex-direction:column;gap:.75rem}
+    .faq-item{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+    .faq-question{width:100%;background:transparent;border:none;padding:1.125rem 1.25rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;cursor:pointer;text-align:left;font-family:inherit;font-size:.9375rem;font-weight:600;color:var(--text-primary);transition:background var(--transition)}
+    .faq-question:hover{background:rgba(240,236,228,.5)}
+    .faq-question[aria-expanded="true"]{background:rgba(26,39,68,.04)}
+    .faq-icon{flex-shrink:0;width:22px;height:22px;border-radius:50%;background:rgba(26,39,68,.07);display:flex;align-items:center;justify-content:center;transition:background var(--transition),transform var(--transition)}
+    .faq-icon svg{width:12px;height:12px;stroke:var(--navy);fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;transition:transform var(--transition)}
+    .faq-question[aria-expanded="true"] .faq-icon{background:var(--navy)}
+    .faq-question[aria-expanded="true"] .faq-icon svg{stroke:var(--white);transform:rotate(180deg)}
+    .faq-answer{max-height:0;overflow:hidden;transition:max-height .35s ease}
+    .faq-answer-inner{padding:.125rem 1.25rem 1.25rem}
+    .faq-answer-inner p{font-size:.9rem;color:var(--text-secondary);line-height:1.75}
+    .faq-answer-inner p+p{margin-top:.75rem}
+    .faq-answer-inner a{color:var(--navy);font-weight:500;text-decoration:underline;text-underline-offset:2px}
+    .faq-answer-inner a:hover{color:var(--gold)}
+    .faq-answer-inner ul{margin:.5rem 0;display:flex;flex-direction:column;gap:.375rem}
+    .faq-answer-inner ul li{font-size:.875rem;color:var(--text-secondary);padding-left:1.25rem;position:relative;line-height:1.65}
+    .faq-answer-inner ul li::before{content:'';position:absolute;left:0;top:.6em;width:5px;height:5px;border-radius:50%;background:var(--gold)}
+
+    /* ============================================================
+       Contact strip
+    ============================================================ */
+    .contact-strip{background:linear-gradient(135deg,var(--navy-deep) 0%,var(--navy) 100%);border-radius:var(--radius);padding:2.5rem 2rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap}
+    .contact-strip-body h3{font-size:1.125rem;font-weight:700;color:var(--white);margin-bottom:.375rem}
+    .contact-strip-body p{font-size:.9rem;color:rgba(255,255,255,.65);line-height:1.6}
+    .contact-strip-actions{display:flex;gap:.75rem;flex-wrap:wrap;flex-shrink:0}
+    .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.75rem 1.5rem;border-radius:100px;font-size:.875rem;font-weight:600;transition:background var(--transition),transform var(--transition)}
+    .btn svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+    .btn-gold{background:var(--gold);color:var(--navy-deep)}
+    .btn-gold:hover{background:var(--gold-light);transform:translateY(-1px)}
+    .btn-outline-white{background:transparent;color:var(--white);border:1.5px solid rgba(255,255,255,.35)}
+    .btn-outline-white:hover{background:rgba(255,255,255,.1);transform:translateY(-1px)}
+
+    /* Callout */
+    .callout{border-radius:var(--radius);padding:1.25rem 1.5rem;margin:1.5rem 0}
+    .callout-warning{background:rgba(192,57,43,.05);border:1px solid rgba(192,57,43,.18);border-left:4px solid var(--red)}
+    .callout-info{background:rgba(26,39,68,.04);border:1px solid rgba(26,39,68,.10);border-left:4px solid var(--navy-light)}
+    .callout p{font-size:.875rem;color:var(--text-secondary);line-height:1.7;margin:0}
+    .callout p strong{color:var(--text-primary)}
+    .callout-title{font-size:.8125rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.5rem;color:var(--text-primary)}
+
+    /* doc-link */
+    .doc-link{color:var(--navy);font-weight:500;text-decoration:underline;text-underline-offset:2px;transition:color var(--transition)}
+    .doc-link:hover{color:var(--gold)}
+
+    /* Divider */
+    .section-divider{border:none;border-top:1px solid var(--border);margin:4rem 0}
+
+    /* Footer (same as index.html) */
+    .site-footer{background:#0b1220;color:rgba(255,255,255,.5);padding:4.5rem 1.5rem 2.5rem}
+    .footer-inner{max-width:var(--max-width);margin:0 auto}
+    .footer-top{display:flex;align-items:flex-start;justify-content:space-between;padding-bottom:2.5rem;border-bottom:1px solid rgba(255,255,255,.07);gap:2rem;flex-wrap:wrap}
+    .footer-brand{display:flex;align-items:center;gap:.625rem}
+    .footer-brand img{width:36px;height:36px;object-fit:cover;border-radius:50%;border:1px solid rgba(255,255,255,.95);box-shadow:0 0 0 1px rgba(0,0,0,.18);opacity:1}
+    .footer-brand-name{font-size:1rem;font-weight:700;color:var(--white)}
+    .footer-nav{display:flex;gap:.5rem 2.25rem;flex-wrap:wrap;align-items:center}
+    .footer-nav a{font-size:.875rem;color:rgba(255,255,255,.45);transition:color var(--transition)}
+    .footer-nav a:hover{color:var(--white)}
+    .footer-bottom{padding-top:2rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.75rem}
+    .footer-copyright{font-size:.8125rem;color:rgba(255,255,255,.3)}
+    .footer-tagline{font-size:.8125rem;color:rgba(255,255,255,.2);font-style:italic}
+
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}
+    @media print{.site-header,.skip-link{display:none}body{background:white;color:black}}
+  </style>
+
+<script>
+(function () {
+  var downloadToggle = document.getElementById('download-toggle');
+  var downloadMenu = document.getElementById('download-menu');
+  if (downloadToggle && downloadMenu) {
+    downloadToggle.addEventListener('click', function (e) {
+      e.preventDefault();
+      var isOpen = downloadMenu.classList.contains('open');
+      downloadMenu.classList.toggle('open');
+      downloadToggle.setAttribute('aria-expanded', !isOpen);
+    });
+    document.addEventListener('click', function (e) {
+      if (!downloadToggle.contains(e.target) && !downloadMenu.contains(e.target)) {
+        downloadMenu.classList.remove('open');
+        downloadToggle.setAttribute('aria-expanded', 'false');
       }
     });
-  });
-
-}());
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        downloadMenu.classList.remove('open');
+        downloadToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+    downloadMenu.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', function () {
+        downloadMenu.classList.remove('open');
+        downloadToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+})();
 </script>
+<style>
+    :root {
+      --navy:           #1a2744;
+      --navy-light:     #243355;
+      --navy-deep:      #121d35;
+      --gold:           #c9a84c;
+      --gold-light:     #dfc980;
+      --gold-subtle:    #f5edcc;
+      --warm-white:     #f9f7f4;
+      --cream:          #f0ece4;
+      --white:          #ffffff;
+      --text-primary:   #1a2744;
+      --text-secondary: #4a5a7a;
+      --text-muted:     #7a8ba5;
+      --border:         #e0dbd0;
+      --red:            #c0392b;
+      --red-light:      #f9eaea;
+      --red-border:     #e8b4b0;
+      --green:          #1d6a3a;
+      --green-light:    #eaf4ee;
+      --shadow-sm:      0 1px 3px rgba(26,39,68,.08);
+      --shadow-md:      0 4px 16px rgba(26,39,68,.10);
+      --shadow-lg:      0 8px 32px rgba(26,39,68,.14);
+      --radius:         12px;
+      --radius-sm:      8px;
+      --transition:     0.25s ease;
+      --max-width:      1100px;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;font-size:16px}
+    body{font-family:'Inter',system-ui,-apple-system,BlinkMacSystemFont,sans-serif;background:var(--warm-white);color:var(--text-primary);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+    img{max-width:100%;height:auto;display:block}
+    a{color:inherit;text-decoration:none}
+    ul{list-style:none}
+
+    /* Skip link */
+    .skip-link{position:absolute;top:-120px;left:1rem;background:var(--navy);color:var(--white);padding:.5rem 1rem;border-radius:var(--radius-sm);font-size:.875rem;font-weight:600;z-index:9999;transition:top var(--transition)}
+    .skip-link:focus{top:1rem}
+
+    /* Page hero */
+    .page-hero{background:linear-gradient(155deg,var(--navy-deep) 0%,var(--navy) 55%,var(--navy-light) 100%);color:var(--white);text-align:center;padding:5rem 1.5rem 4rem;position:relative;overflow:hidden}
+    .page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 20% 40%,rgba(201,168,76,.07) 0%,transparent 60%),radial-gradient(ellipse 50% 60% at 80% 60%,rgba(201,168,76,.05) 0%,transparent 60%);pointer-events:none}
+    .page-hero-inner{position:relative;z-index:1;max-width:680px;margin:0 auto}
+    .page-hero-label{display:inline-block;font-size:.75rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-light);margin-bottom:1rem}
+    .page-hero h1{font-size:clamp(2rem,4vw,3rem);font-weight:700;letter-spacing:-.03em;line-height:1.15;margin-bottom:1.125rem;color:var(--white)}
+    .page-hero-sub{font-size:1rem;color:rgba(255,255,255,.72);line-height:1.7;max-width:560px;margin:0 auto}
+
+    /* ============================================================
+       Main layout
+    ============================================================ */
+    .page-body{max-width:var(--max-width);margin:0 auto;padding:4rem 1.5rem 6rem}
+
+    /* ============================================================
+       Privacy Rights Banner
+    ============================================================ */
+    .rights-banner{background:linear-gradient(135deg,rgba(201,168,76,.13) 0%,rgba(201,168,76,.04) 100%);border:1px solid rgba(201,168,76,.28);border-left:5px solid var(--gold);border-radius:var(--radius);padding:2rem 2rem 2rem 1.75rem;margin-bottom:4rem;display:flex;gap:1.25rem;align-items:flex-start}
+    .rights-banner-icon{flex-shrink:0;width:44px;height:44px;background:rgba(201,168,76,.15);border-radius:50%;display:flex;align-items:center;justify-content:center}
+    .rights-banner-icon svg{width:22px;height:22px;stroke:var(--gold);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+    .rights-banner-body h2{font-size:1rem;font-weight:700;color:var(--text-primary);margin-bottom:.5rem;letter-spacing:-.01em}
+    .rights-banner-body p{font-size:.9rem;color:var(--text-secondary);line-height:1.7;margin:0}
+    .rights-banner-body p+p{margin-top:.5rem}
+    .rights-banner-body a{color:var(--navy);font-weight:500;text-decoration:underline;text-underline-offset:2px;transition:color var(--transition)}
+    .rights-banner-body a:hover{color:var(--gold)}
+    @media(max-width:600px){.rights-banner{flex-direction:column;gap:.875rem}}
+
+    /* ============================================================
+       Two-column action layout
+    ============================================================ */
+    .action-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:4rem}
+    @media(max-width:760px){.action-grid{grid-template-columns:1fr}}
+
+    .method-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;display:flex;flex-direction:column;box-shadow:var(--shadow-sm);transition:box-shadow var(--transition)}
+    .method-card:hover{box-shadow:var(--shadow-md)}
+
+    .method-card.method-primary{border-color:rgba(26,39,68,.18);border-top:4px solid var(--navy)}
+    .method-card.method-secondary{border-top:4px solid var(--gold)}
+
+    .method-badge{display:inline-flex;align-items:center;gap:.375rem;font-size:.6875rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.3rem .75rem;border-radius:100px;margin-bottom:1.25rem}
+    .method-badge.badge-recommended{background:rgba(26,39,68,.08);color:var(--navy)}
+    .method-badge.badge-alt{background:rgba(201,168,76,.12);color:#8a6a10}
+
+    .method-card h3{font-size:1.125rem;font-weight:700;color:var(--text-primary);margin-bottom:.625rem;letter-spacing:-.02em}
+    .method-card p{font-size:.9rem;color:var(--text-secondary);line-height:1.7;margin-bottom:1.25rem}
+
+    .method-steps{display:flex;flex-direction:column;gap:.625rem;margin-bottom:1.75rem}
+    .method-step{display:flex;align-items:flex-start;gap:.75rem;font-size:.875rem;color:var(--text-secondary);line-height:1.6}
+    .step-num{flex-shrink:0;width:24px;height:24px;border-radius:50%;background:var(--navy);color:var(--white);font-size:.6875rem;font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:.1rem}
+    .method-card.method-secondary .step-num{background:var(--gold);color:var(--navy-deep)}
+    .method-step span strong{color:var(--text-primary)}
+
+    .method-cta{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.75rem 1.5rem;border-radius:100px;font-size:.875rem;font-weight:600;transition:background var(--transition),transform var(--transition),box-shadow var(--transition);width:100%;text-align:center;margin-top:auto}
+    .method-cta svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+    .cta-primary{background:var(--navy);color:var(--white)}
+    .cta-primary:hover{background:var(--navy-light);transform:translateY(-1px);box-shadow:0 4px 14px rgba(26,39,68,.25)}
+    .cta-secondary{background:transparent;color:var(--navy);border:1.5px solid var(--navy)}
+    .cta-secondary:hover{background:var(--navy);color:var(--white);transform:translateY(-1px)}
+
+    /* ============================================================
+       Data table section
+    ============================================================ */
+    .section-block{margin-bottom:4rem}
+    .section-block-header{margin-bottom:1.75rem}
+    .section-block-label{display:inline-block;font-size:.6875rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:.375rem}
+    .section-block-header h2{font-size:clamp(1.25rem,2.5vw,1.625rem);font-weight:700;letter-spacing:-.025em;color:var(--navy);line-height:1.3}
+    .section-block-header p{font-size:.9375rem;color:var(--text-secondary);line-height:1.7;margin-top:.625rem}
+
+    /* Data fate table */
+    .data-table{width:100%;border-collapse:collapse;font-size:.875rem}
+    .data-table th{text-align:left;padding:.625rem 1rem;background:var(--navy);color:var(--white);font-weight:600;font-size:.8125rem;letter-spacing:.02em}
+    .data-table th:first-child{border-radius:var(--radius-sm) 0 0 0}
+    .data-table th:last-child{border-radius:0 var(--radius-sm) 0 0}
+    .data-table td{padding:.75rem 1rem;border-bottom:1px solid var(--border);color:var(--text-secondary);vertical-align:top;line-height:1.6}
+    .data-table td:first-child{font-weight:600;color:var(--text-primary);width:35%}
+    .data-table tr:last-child td{border-bottom:none}
+    .data-table tr:nth-child(odd) td{background:rgba(240,236,228,.35)}
+
+    .tag{display:inline-flex;align-items:center;gap:.3rem;font-size:.75rem;font-weight:600;padding:.2rem .625rem;border-radius:100px;white-space:nowrap}
+    .tag-deleted{background:var(--red-light);color:var(--red);border:1px solid var(--red-border)}
+    .tag-retained{background:rgba(201,168,76,.12);color:#7a5c10;border:1px solid rgba(201,168,76,.3)}
+    .tag-restricted{background:rgba(26,39,68,.07);color:var(--navy-light);border:1px solid rgba(26,39,68,.15)}
+    .tag svg{width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+
+    @media(max-width:640px){
+      .data-table,.data-table tbody,.data-table tr,.data-table td{display:block;width:100%}
+      .data-table thead{display:none}
+      .data-table td{border-bottom:none;padding:.5rem .875rem}
+      .data-table td:first-child{font-size:.75rem;text-transform:uppercase;letter-spacing:.05em;color:var(--gold);padding-bottom:.125rem;width:100%}
+      .data-table tr{border:1px solid var(--border);border-radius:var(--radius-sm);margin-bottom:.75rem;overflow:hidden;padding:.375rem 0;background:var(--white)}
+    }
+
+    /* ============================================================
+       Timeline
+    ============================================================ */
+    .timeline{position:relative;padding-left:2.5rem}
+    .timeline::before{content:'';position:absolute;left:.75rem;top:.5rem;bottom:.5rem;width:2px;background:linear-gradient(to bottom,var(--navy) 0%,rgba(201,168,76,.3) 100%)}
+    .timeline-item{position:relative;margin-bottom:2rem}
+    .timeline-item:last-child{margin-bottom:0}
+    .timeline-dot{position:absolute;left:-2.5rem;top:.25rem;width:1.5rem;height:1.5rem;border-radius:50%;background:var(--navy);border:3px solid var(--warm-white);display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 2px var(--navy)}
+    .timeline-dot svg{width:10px;height:10px;stroke:var(--white);fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+    .timeline-time{font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);margin-bottom:.25rem}
+    .timeline-title{font-size:.9375rem;font-weight:600;color:var(--text-primary);margin-bottom:.25rem}
+    .timeline-desc{font-size:.875rem;color:var(--text-secondary);line-height:1.65}
+
+    /* ============================================================
+       Rights grid
+    ============================================================ */
+    .rights-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+    @media(max-width:800px){.rights-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:500px){.rights-grid{grid-template-columns:1fr}}
+
+    .right-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:1.375rem 1.25rem}
+    .right-card-icon{width:38px;height:38px;border-radius:var(--radius-sm);background:rgba(26,39,68,.06);display:flex;align-items:center;justify-content:center;margin-bottom:1rem}
+    .right-card-icon svg{width:20px;height:20px;stroke:var(--navy);fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+    .right-card h3{font-size:.9375rem;font-weight:700;color:var(--text-primary);margin-bottom:.375rem}
+    .right-card p{font-size:.8125rem;color:var(--text-secondary);line-height:1.65}
+
+    /* ============================================================
+       FAQ accordion
+    ============================================================ */
+    .faq-list{display:flex;flex-direction:column;gap:.75rem}
+    .faq-item{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+    .faq-question{width:100%;background:transparent;border:none;padding:1.125rem 1.25rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;cursor:pointer;text-align:left;font-family:inherit;font-size:.9375rem;font-weight:600;color:var(--text-primary);transition:background var(--transition)}
+    .faq-question:hover{background:rgba(240,236,228,.5)}
+    .faq-question[aria-expanded="true"]{background:rgba(26,39,68,.04)}
+    .faq-icon{flex-shrink:0;width:22px;height:22px;border-radius:50%;background:rgba(26,39,68,.07);display:flex;align-items:center;justify-content:center;transition:background var(--transition),transform var(--transition)}
+    .faq-icon svg{width:12px;height:12px;stroke:var(--navy);fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;transition:transform var(--transition)}
+    .faq-question[aria-expanded="true"] .faq-icon{background:var(--navy)}
+    .faq-question[aria-expanded="true"] .faq-icon svg{stroke:var(--white);transform:rotate(180deg)}
+    .faq-answer{max-height:0;overflow:hidden;transition:max-height .35s ease}
+    .faq-answer-inner{padding:.125rem 1.25rem 1.25rem}
+    .faq-answer-inner p{font-size:.9rem;color:var(--text-secondary);line-height:1.75}
+    .faq-answer-inner p+p{margin-top:.75rem}
+    .faq-answer-inner a{color:var(--navy);font-weight:500;text-decoration:underline;text-underline-offset:2px}
+    .faq-answer-inner a:hover{color:var(--gold)}
+    .faq-answer-inner ul{margin:.5rem 0;display:flex;flex-direction:column;gap:.375rem}
+    .faq-answer-inner ul li{font-size:.875rem;color:var(--text-secondary);padding-left:1.25rem;position:relative;line-height:1.65}
+    .faq-answer-inner ul li::before{content:'';position:absolute;left:0;top:.6em;width:5px;height:5px;border-radius:50%;background:var(--gold)}
+
+    /* ============================================================
+       Contact strip
+    ============================================================ */
+    .contact-strip{background:linear-gradient(135deg,var(--navy-deep) 0%,var(--navy) 100%);border-radius:var(--radius);padding:2.5rem 2rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap}
+    .contact-strip-body h3{font-size:1.125rem;font-weight:700;color:var(--white);margin-bottom:.375rem}
+    .contact-strip-body p{font-size:.9rem;color:rgba(255,255,255,.65);line-height:1.6}
+    .contact-strip-actions{display:flex;gap:.75rem;flex-wrap:wrap;flex-shrink:0}
+    .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.75rem 1.5rem;border-radius:100px;font-size:.875rem;font-weight:600;transition:background var(--transition),transform var(--transition)}
+    .btn svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+    .btn-gold{background:var(--gold);color:var(--navy-deep)}
+    .btn-gold:hover{background:var(--gold-light);transform:translateY(-1px)}
+    .btn-outline-white{background:transparent;color:var(--white);border:1.5px solid rgba(255,255,255,.35)}
+    .btn-outline-white:hover{background:rgba(255,255,255,.1);transform:translateY(-1px)}
+
+    /* Callout */
+    .callout{border-radius:var(--radius);padding:1.25rem 1.5rem;margin:1.5rem 0}
+    .callout-warning{background:rgba(192,57,43,.05);border:1px solid rgba(192,57,43,.18);border-left:4px solid var(--red)}
+    .callout-info{background:rgba(26,39,68,.04);border:1px solid rgba(26,39,68,.10);border-left:4px solid var(--navy-light)}
+    .callout p{font-size:.875rem;color:var(--text-secondary);line-height:1.7;margin:0}
+    .callout p strong{color:var(--text-primary)}
+    .callout-title{font-size:.8125rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.5rem;color:var(--text-primary)}
+
+    /* doc-link */
+    .doc-link{color:var(--navy);font-weight:500;text-decoration:underline;text-underline-offset:2px;transition:color var(--transition)}
+    .doc-link:hover{color:var(--gold)}
+
+    /* Divider */
+    .section-divider{border:none;border-top:1px solid var(--border);margin:4rem 0}
+
+    /* Footer (same as index.html) */
+    .site-footer{background:#0b1220;color:rgba(255,255,255,.5);padding:4.5rem 1.5rem 2.5rem}
+    .footer-inner{max-width:var(--max-width);margin:0 auto}
+    .footer-top{display:flex;align-items:flex-start;justify-content:space-between;padding-bottom:2.5rem;border-bottom:1px solid rgba(255,255,255,.07);gap:2rem;flex-wrap:wrap}
+    .footer-brand{display:flex;align-items:center;gap:.625rem}
+    .footer-brand img{width:36px;height:36px;object-fit:cover;border-radius:50%;border:1px solid rgba(255,255,255,.95);box-shadow:0 0 0 1px rgba(0,0,0,.18);opacity:1}
+    .footer-brand-name{font-size:1rem;font-weight:700;color:var(--white)}
+    .footer-nav{display:flex;gap:.5rem 2.25rem;flex-wrap:wrap;align-items:center}
+    .footer-nav a{font-size:.875rem;color:rgba(255,255,255,.45);transition:color var(--transition)}
+    .footer-nav a:hover{color:var(--white)}
+    .footer-bottom{padding-top:2rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.75rem}
+    .footer-copyright{font-size:.8125rem;color:rgba(255,255,255,.3)}
+    .footer-tagline{font-size:.8125rem;color:rgba(255,255,255,.2);font-style:italic}
+
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}
+    @media print{.site-header,.skip-link{display:none}body{background:white;color:black}}
+  </style>
+
 <script>
 (function () {
   var downloadToggle = document.getElementById('download-toggle');

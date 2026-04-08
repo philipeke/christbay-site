@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex, nofollow" />
   <meta name="description" content="ChristBay internal referral administration." />
-  <title>Admin — Referrals — ChristBay</title>
+  <title>Admin, Referrals, ChristBay</title>
   <link rel="icon" type="image/png" href="/assets/brand.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -562,7 +562,7 @@
       .nav-btn.active { border-left: none; box-shadow: inset 0 0 0 2px var(--gold); }
     }
 
-    /* Site footer — same visual as index.html */
+    /* Site footer, same visual as index.html */
     .site-footer {
       background: #0b1220;
       color: rgba(255, 255, 255, 0.5);
@@ -695,7 +695,7 @@
       <main class="main" id="main">
         <section class="panel active" id="panel-dashboard" aria-labelledby="dash-title">
           <h1 class="page-title" id="dash-title">Dashboard</h1>
-          <p class="page-desc">High-level metrics from the live API. Use the sidebar to move between overview, codes, finance export, and settings.</p>
+          <p class="page-desc">High,level metrics from the live API. Use the sidebar to move between overview, codes, finance export, and settings.</p>
           <div class="stat-grid">
             <div class="stat-card">
               <div class="stat-label">Total codes</div>
@@ -764,20 +764,20 @@
 
         <section class="panel" id="panel-pay-export" aria-labelledby="pay-title">
           <h1 class="page-title" id="pay-title">Pay export</h1>
-          <p class="page-desc">Finance-ready exports from the live referral API — CSV or JSON, with filters and a clear filing period. Nothing leaves your session except the file you download.</p>
+          <p class="page-desc">Finance,ready exports from the live referral API, CSV or JSON, with filters and a clear filing period. Nothing leaves your session except the file you download.</p>
 
           <div class="pay-export-brand">
             <p class="pay-export-eyebrow">Close package</p>
-            <p>Use a period label that matches your books (e.g. <span class="mono">2026-04</span>). Refresh the snapshot before month-end close so totals match what you file.</p>
+            <p>Use a period label that matches your books (e.g. <span class="mono">2026-04</span>). Refresh the snapshot before month,end close so totals match what you file.</p>
           </div>
 
           <div class="card settings-block panel-section">
             <h3>Good to know</h3>
             <ul class="checklist" style="list-style:disc;padding-left:1.2rem;margin:0">
-              <li><strong>Reconciliation:</strong> The <span class="mono">Uses</span> column should be reconciled against <em>your</em> source of truth (e.g. app analytics, backend tallies, or store reports). The export is a <strong>point-in-time snapshot</strong> — not revision-safe history unless you archive each file when you generate it.</li>
-              <li><strong>Period label</strong> only drives the <strong>filename and in-file metadata</strong>. It does not change the API or anything in end users&rsquo; apps.</li>
+              <li><strong>Reconciliation:</strong> The <span class="mono">Uses</span> column should be reconciled against <em>your</em> source of truth (e.g. app analytics, backend tallies, or store reports). The export is a <strong>point,in,time snapshot</strong>, not revision,safe history unless you archive each file when you generate it.</li>
+              <li><strong>Period label</strong> only drives the <strong>filename and in,file metadata</strong>. It does not change the API or anything in end users&rsquo; apps.</li>
               <li><strong>Remaining</strong> is computed as <em>max − used</em> when the code has a cap; otherwise it is empty / unlimited.</li>
-              <li><strong>Join URL</strong> is the public link to <span class="mono">/join/?code=…</span> on this site — useful in internal docs and partner emails. Never publish secret bulk lists or admin-only data publicly.</li>
+              <li><strong>Join URL</strong> is the public link to <span class="mono">/join/?code=…</span> on this site, useful in internal docs and partner emails. Never publish secret bulk lists or admin,only data publicly.</li>
               <li><strong>Archiving:</strong> Store CSV/JSON exports under a dated folder structure (e.g. <span class="mono">2026/Q2/referral-pay/</span>) and restrict access to internal staff only.</li>
             </ul>
           </div>
@@ -798,19 +798,19 @@
             <div class="pay-preview-grid" role="group" aria-label="Export preview figures">
               <div class="pay-preview-card">
                 <div class="lbl">Rows (after filters)</div>
-                <div class="val" id="pay-preview-rows">—</div>
+                <div class="val" id="pay-preview-rows">,</div>
               </div>
               <div class="pay-preview-card">
                 <div class="lbl">Sum of uses</div>
-                <div class="val" id="pay-preview-uses">—</div>
+                <div class="val" id="pay-preview-uses">,</div>
               </div>
               <div class="pay-preview-card">
                 <div class="lbl">Codes in API</div>
-                <div class="val" id="pay-preview-total">—</div>
+                <div class="val" id="pay-preview-total">,</div>
               </div>
               <div class="pay-preview-card">
                 <div class="lbl">Capped / Unlimited</div>
-                <div class="val" id="pay-preview-caps" style="font-size:1.15rem">—</div>
+                <div class="val" id="pay-preview-caps" style="font-size:1.15rem">,</div>
               </div>
             </div>
             <p class="pay-preview-meta" id="pay-preview-fetched">Not loaded yet.</p>
@@ -838,7 +838,7 @@
               <div class="field" style="margin-bottom:0">
                 <label for="pay-sort">Row order in file</label>
                 <select id="pay-sort" style="width:100%;padding:0.65rem 0.85rem;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--warm-white)">
-                  <option value="code">Code (A–Z)</option>
+                  <option value="code">Code (A,Z)</option>
                   <option value="created">Newest first (created)</option>
                   <option value="uses">Most uses first</option>
                 </select>
@@ -867,10 +867,10 @@
                 </select>
               </div>
               <div class="field" style="margin-bottom:0">
-                <label for="pay-bom">Excel UTF-8</label>
+                <label for="pay-bom">Excel UTF,8</label>
                 <select id="pay-bom" style="width:100%;padding:0.65rem 0.85rem;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--warm-white)">
                   <option value="yes">BOM on (recommended for Excel)</option>
-                  <option value="no">No BOM (plain UTF-8)</option>
+                  <option value="no">No BOM (plain UTF,8)</option>
                 </select>
               </div>
             </div>
@@ -888,7 +888,7 @@
 
           <div class="card settings-block panel-section">
             <h3>Sample PDF (layout preview)</h3>
-            <p class="hint">Fictitious codes and numbers — for design review only. Uses the circular ChristBay brand mark from <code class="mono" style="font-size:0.8rem">/assets/brand.png</code>. Not for accounting filing.</p>
+            <p class="hint">Fictitious codes and numbers, for design review only. Uses the circular ChristBay brand mark from <code class="mono" style="font-size:0.8rem">/assets/brand.png</code>. Not for accounting filing.</p>
             <div id="pay-pdf-msg"></div>
             <div class="toolbar" style="flex-wrap:wrap">
               <button type="button" class="btn btn-secondary btn-sm" id="btn-pay-sample-pdf"><span class="btn-export-tag btn-export-tag--pdf">PDF</span> Download sample PDF</button>
@@ -897,7 +897,7 @@
 
           <div class="card settings-block panel-section">
             <h3>Column reference</h3>
-            <p class="hint">CSV and JSON share the same logical fields. JSON also includes <span class="mono">exportSchemaVersion</span>, <span class="mono">sourceOrigin</span>, and per-code computed fields.</p>
+            <p class="hint">CSV and JSON share the same logical fields. JSON also includes <span class="mono">exportSchemaVersion</span>, <span class="mono">sourceOrigin</span>, and per,code computed fields.</p>
             <div class="table-wrap">
               <table class="column-ref">
                 <thead>
@@ -905,14 +905,14 @@
                 </thead>
                 <tbody>
                   <tr><td class="mono">Code</td><td>Referral code (normalized).</td></tr>
-                  <tr><td class="mono">Label</td><td>Human-readable campaign or partner name.</td></tr>
+                  <tr><td class="mono">Label</td><td>Human,readable campaign or partner name.</td></tr>
                   <tr><td class="mono">Uses</td><td>Redemption count from the server at export time.</td></tr>
                   <tr><td class="mono">Max uses / Unlimited</td><td>Cap if any; “unlimited” when no cap (0 = unlimited in admin).</td></tr>
                   <tr><td class="mono">Remaining uses</td><td>Computed: max − uses when capped; empty when unlimited.</td></tr>
                   <tr><td class="mono">Join URL</td><td>Full HTTPS URL to <span class="mono">/join/?code=…</span> on this site.</td></tr>
                   <tr><td class="mono">Active</td><td>Whether the code accepts new redemptions (yes/no).</td></tr>
                   <tr><td class="mono">Expires</td><td>UTC timestamp if set.</td></tr>
-                  <tr><td class="mono">Internal note</td><td>Admin-only note from the API.</td></tr>
+                  <tr><td class="mono">Internal note</td><td>Admin,only note from the API.</td></tr>
                   <tr><td class="mono">Created</td><td>Code creation time if provided.</td></tr>
                 </tbody>
               </table>
@@ -1108,7 +1108,7 @@ async function apiFetch(path, opts = {}) {
   const text = await res.text();
   if (res.status === 403) {
     console.error('[admin] 403', text);
-    showAppError('Access denied (403). UID: ' + (user.uid || '?') + ' — Email: ' + (user.email || '?') + (text ? ' — Response: ' + text : ''));
+    showAppError('Access denied (403). UID: ' + (user.uid || '?') + ', Email: ' + (user.email || '?') + (text ? ', Response: ' + text : ''));
     return null;
   }
   if (!res.ok) throw new Error(apiErrorMessage(res.status, text));
@@ -1122,7 +1122,7 @@ function showAppError(text) {
 }
 
 function normalizeCode(s) { return (s || '').trim().toUpperCase().replace(/[^A-Z0-9-]/g, ''); }
-/** UI: 0 = unlimited. API requires a positive integer — omit field when unlimited. */
+/** UI: 0 = unlimited. API requires a positive integer, omit field when unlimited. */
 function maxUsesForApi(raw) {
   const n = parseInt(raw, 10);
   if (!Number.isFinite(n) || n < 0) return undefined;
@@ -1171,7 +1171,7 @@ function buildPayExportCsv(codes, periodLabel, delim) {
   lines.push('# Generated: ' + gen);
   lines.push('# Period label: ' + pl);
   lines.push('# Site origin: ' + origin);
-  lines.push('# Publisher: OakDev & AI AB — ChristBay (internal)');
+  lines.push('# Publisher: OakDev & AI AB, ChristBay (internal)');
   lines.push('');
   lines.push(joinCells([
     'Code', 'Label', 'Uses', 'Max uses', 'Unlimited', 'Remaining uses', 'Active',
@@ -1206,7 +1206,7 @@ function buildPayExportJson(codes, periodLabel) {
     periodLabel: pl,
     generatedAt: new Date().toISOString(),
     sourceOrigin: origin,
-    publisher: 'OakDev & AI AB — ChristBay (internal)',
+    publisher: 'OakDev & AI AB, ChristBay (internal)',
     rowCount: (codes || []).length,
     codes: (codes || []).map(function(c) {
       const maxU = c.maxUses || 0;
@@ -1264,7 +1264,7 @@ function updatePayPreviewFromSnapshot() {
   if (capEl) capEl.textContent = capped + ' / ' + unlim;
   const t = _payExportSnapshot.fetchedAt;
   document.getElementById('pay-preview-fetched').textContent = t
-    ? 'Last snapshot: ' + t.toLocaleString() + ' — ' + codes.length + ' code(s) from API. Preview uses filters below.'
+    ? 'Last snapshot: ' + t.toLocaleString() + ', ' + codes.length + ' code(s) from API. Preview uses filters below.'
     : 'Not loaded yet. Click “Refresh snapshot”.';
 }
 function friendlyAuthError(err) {
@@ -1523,7 +1523,7 @@ function refreshStats() {
   document.getElementById('stat-total').textContent  = _cache.length;
   document.getElementById('stat-active').textContent = a;
   document.getElementById('stat-uses').textContent   = u;
-  document.getElementById('stat-month').textContent  = '\u2014';
+  document.getElementById('stat-month').textContent  = ',';
 }
 
 function renderCodesTable(codes) {
@@ -1536,7 +1536,7 @@ function renderCodesTable(codes) {
   rows.forEach(c => {
     const max  = c.maxUses || 0;
     const uses = (c.useCount || 0) + (max > 0 ? ' / ' + max : '');
-    const exp  = c.expiresAt ? new Date(c.expiresAt).toLocaleDateString() : '\u2014';
+    const exp  = c.expiresAt ? new Date(c.expiresAt).toLocaleDateString() : ',';
     const tr   = document.createElement('tr');
     tr.innerHTML = '<td class="mono">' + escapeHtml(c.code) + '</td><td>' + escapeHtml(c.label || '') + '</td><td>' + uses + '</td><td>' + exp + '</td><td><span class="pill ' + (c.active ? 'pill-on' : 'pill-off') + '">' + (c.active ? 'Active' : 'Inactive') + '</span></td>';
     const td = document.createElement('td');
@@ -1658,7 +1658,7 @@ document.getElementById('qa-join').addEventListener('click', function() {
 });
 
 function renderActivity() {
-  document.getElementById('activity-list').innerHTML = '<p style="color:var(--text-muted);padding:16px 0">Activity feed coming soon \u2014 individual code stats via GET /:code/stats.</p>';
+  document.getElementById('activity-list').innerHTML = '<p style="color:var(--text-muted);padding:16px 0">Activity feed coming soon, individual code stats via GET /:code/stats.</p>';
 }
 
 function downloadBlob(blob, name) {
@@ -1725,7 +1725,7 @@ async function downloadSamplePayPdf() {
     y -= 40;
   }
 
-  page.drawText('Pay export — sample report', { x: left, y: y, size: 14, font: fontBold, color: navy });
+  page.drawText('Pay export, sample report', { x: left, y: y, size: 14, font: fontBold, color: navy });
   y -= 18;
   page.drawText('Period: 2026-Q2 · Sample data · Schema v2 (Remaining + Join URL in CSV/JSON)', { x: left, y: y, size: 8.5, font, color: muted });
   y -= 28;
@@ -1755,7 +1755,7 @@ async function downloadSamplePayPdf() {
   });
   y -= boxH + 20;
 
-  page.drawText('Sample — referral rows (same columns as CSV v2)', { x: left, y: y, size: 10, font: fontBold, color: navy });
+  page.drawText('Sample, referral rows (same columns as CSV v2)', { x: left, y: y, size: 10, font: fontBold, color: navy });
   y -= 16;
 
   const colW = [54, 102, 28, 28, 28, 56, 46];
@@ -1795,9 +1795,9 @@ async function downloadSamplePayPdf() {
   const page2 = pdfDoc.addPage([W, H]);
   let y2 = H - 48;
   page2.drawRectangle({ x: 0, y: H - 28, width: W, height: 28, color: navy });
-  page2.drawText('Appendix — reconciliation & sign-off (sample)', { x: left, y: y2, size: 14, font: fontBold, color: navy });
+  page2.drawText('Appendix, reconciliation & sign,off (sample)', { x: left, y: y2, size: 14, font: fontBold, color: navy });
   y2 -= 22;
-  page2.drawText('Internal use — copy into your own templates if needed.', { x: left, y: y2, size: 8.5, font, color: muted });
+  page2.drawText('Internal use, copy into your own templates if needed.', { x: left, y: y2, size: 8.5, font, color: muted });
   y2 -= 28;
 
   const bullets = [
@@ -1813,7 +1813,7 @@ async function downloadSamplePayPdf() {
   y2 -= 8;
   page2.drawLine({ start: { x: left, y: y2 }, end: { x: W - left, y: y2 }, thickness: 0.45, color: line });
   y2 -= 22;
-  page2.drawText('Sign-off (complete by hand)', { x: left, y: y2, size: 11, font: fontBold, color: navy });
+  page2.drawText('Sign,off (complete by hand)', { x: left, y: y2, size: 11, font: fontBold, color: navy });
   y2 -= 20;
   ['Exported by: _________________________________________________',
     'Reviewed by: ________________________________________________',
@@ -1825,14 +1825,14 @@ async function downloadSamplePayPdf() {
   y2 -= 20;
   page2.drawText('OakDev & AI AB · Company reg. no. / VAT per invoice · christbay.oakdev.app', { x: left, y: y2, size: 7.5, font, color: muted });
   y2 -= 12;
-  page2.drawText('ChristBay — Walk in the Word. Grow in grace.', { x: left, y: y2, size: 7.5, font, color: rgb(0.55, 0.6, 0.68) });
+  page2.drawText('ChristBay, Walk in the Word. Grow in grace.', { x: left, y: y2, size: 7.5, font, color: rgb(0.55, 0.6, 0.68) });
   y2 -= 12;
   page2.drawText('Page 2 of 2', { x: W - left - 72, y: y2, size: 7, font, color: muted });
 
   y -= 18;
   page.drawLine({ start: { x: left, y: y }, end: { x: W - left, y: y }, thickness: 0.45, color: line });
   y -= 14;
-  page.drawText('Page 1 of 2 · Sample PDF — not accounting evidence · OakDev & AI AB', { x: left, y: y, size: 7, font, color: muted });
+  page.drawText('Page 1 of 2 · Sample PDF, not accounting evidence · OakDev & AI AB', { x: left, y: y, size: 7, font, color: muted });
 
   const out = await pdfDoc.save();
   downloadBlob(new Blob([out], { type: 'application/pdf' }), 'christbay-pay-export-sample.pdf');
